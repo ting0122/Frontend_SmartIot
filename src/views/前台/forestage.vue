@@ -71,19 +71,35 @@ export default {
 .background{
     width: 100%;
     height: 100dvh;
-    background-color: #636774;
+    // background-color: #636774;
+    background-image: url(../../img/slightly.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
     .ipad{
         position: fixed;
         left: 50%;
         top: 50%;
         margin-top: -550px;
-        margin-left: -800px;
+        margin-left: -760px;
         width: 1600px;
         height: 1100px;
-        border: 1px solid black;
-        background-image: url(../../img/ipad.png);
+        // position: relative;
+        // border: 1px solid black;
+        background-image: url(../../img/ipad2.png);
         background-repeat: no-repeat;
         background-size: contain;
+        .showArea{
+            position: absolute;
+            width: 1060px;
+            height: 800px;
+            // border: 1px solid #b1b1b1;
+            background-color: #b1b1b1;
+            top: 50%;
+            left: 50%;
+            margin-top: -404px;
+            margin-left: -575px;
+        }
     }
 
 }
