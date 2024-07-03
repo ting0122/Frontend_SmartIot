@@ -22,7 +22,7 @@ export default {
     },
     props: [
         //這邊接收父也就是vue頁面傳來想生成的陣列
-        "tabsPresent" ,
+        "tabsPresent",
         "tabsName"
     ],
 
@@ -35,7 +35,7 @@ export default {
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
             }
-            
+
             console.log(document.getElementById(tabName))
             document.getElementById(tabName).style.display = "block";
             this.isActive = tabName;
@@ -53,8 +53,8 @@ export default {
         <!-- 父vue頁面傳來需要幾個內頁，v-for的是頁籤名稱 -->
         <div class="tabs">
             <button v-for="(item, index) in this.tabsPresent" class="tablink"
-                :class="{ 'active': isActive === tabsName[index] }"
-                @click="openTab(this.tabsName[index])">{{ item }}</button>
+                :class="{ 'active': isActive === tabsName[index] }" @click="openTab(this.tabsName[index])">{{ item
+                }}</button>
             <button class="addnew">
                 新增設備
                 <i class="fa-solid fa-circle-plus"></i>
@@ -67,18 +67,22 @@ export default {
 @import '@/assets/main.scss';
 
 .tabArea {
+<<<<<<< HEAD
     position: absolute;
     bottom: 20px;
+=======
+>>>>>>> origin/HEAD
 
     .tabs {
-        display: flex; 
+        display: flex;
         align-items: center;
         width: 700px;
         height: 65px;
         border-radius: 30px;
         margin: auto;
-        background-color:$dark03;
+        background-color: $dark03;
         padding-left: 14px;
+
         .tablink {
             width: 120px;
             height: 45px;
@@ -90,7 +94,7 @@ export default {
             font-size: 18px;
             line-height: 38px;
             color: $black1;
-    
+
             &.active {
                 background-color: $dark01;
                 width: 120px;
@@ -98,7 +102,8 @@ export default {
                 border-radius: 50px;
             }
         }
-        .addnew{
+
+        .addnew {
             display: flex;
             align-items: center;
             width: 200px;
@@ -112,7 +117,8 @@ export default {
             line-height: 28px;
             color: $black1;
             border-left: 1px solid $black1;
-            i{
+
+            i {
                 font-size: 42px;
                 margin-left: 27px;
                 color: $dark01;
@@ -128,11 +134,7 @@ export default {
         margin-bottom: 20px;
         background-color: $dark02;
     }
-    
- 
+
+
 }
-
-
-
-
 </style>

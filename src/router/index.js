@@ -6,9 +6,20 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+<<<<<<< HEAD
       name: 'Forestage',
       component: () => import('../views/前台/Forestage.vue')
     }
+=======
+      name: 'ForeStage',
+      component: () => import('../views/前台/ForeStage.vue')
+    },
+    {
+      path: '/BackStage',
+      name: 'BackStage',
+      component: () => import('../views/後台/BackStage.vue')
+    },
+>>>>>>> origin/HEAD
   ]
 })
 
