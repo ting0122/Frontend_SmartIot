@@ -1,6 +1,8 @@
 <script>
 import BackBookMark from '@/components/BackBookMark.vue';
 import BackSpaceManagement from '@/components/後台內頁/BackSpaceManagement.vue';
+import DeviceManagement from '@/components/後台內頁/DeviceManagement.vue';
+import HistoricalRecord from '@/components/後台內頁/HistoricalRecord.vue';
 export default {
     data() {
         return {
@@ -24,7 +26,9 @@ export default {
     },
     components: {
         BackBookMark,
-        BackSpaceManagement
+        BackSpaceManagement,
+        DeviceManagement,
+        HistoricalRecord
     },
 
     methods: {
@@ -36,33 +40,30 @@ export default {
 
 <template>
 
-        <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
-        <!-- 這邊透過父傳子 父是這個vue傳想要幾個內頁給BookMark BookMark會v-for傳過去的這個陣列並生成插槽 -->
-        <BackBookMark :tabsPresent="this.tabsArray.buttonName" :tabsName="this.tabsArray.tabsNumber">
-            <!-- 子BookMark會v-for我們所需要的插槽數量出來 -->
-            <!-- 下面template接收插槽並放入你所想要顯示的內頁資料 -->
-            <template v-slot:tab1>
+    <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
+    <!-- 這邊透過父傳子 父是這個vue傳想要幾個內頁給BookMark BookMark會v-for傳過去的這個陣列並生成插槽 -->
+    <BackBookMark :tabsPresent="this.tabsArray.buttonName" :tabsName="this.tabsArray.tabsNumber">
+        <!-- 子BookMark會v-for我們所需要的插槽數量出來 -->
+        <!-- 下面template接收插槽並放入你所想要顯示的內頁資料 -->
+        <template v-slot:tab1>
             <BackSpaceManagement />
-            </template>
-            <template v-slot:tab2>
+        </template>
+        <template v-slot:tab2>
+            <DeviceManagement />
+        </template>
+        <template v-slot:tab3>
+            <HistoricalRecord />
+        </template>
+        <template v-slot:tab4>
 
-            </template>
-            <template v-slot:tab3>
+        </template>
+        <template v-slot:tab5>
 
-            </template>
-            <template v-slot:tab4>
+        </template>
 
-            </template>
-            <template v-slot:tab5>
-
-            </template>
-
-        </BackBookMark>
+    </BackBookMark>
 
 
 </template>
 
-<style scoped lang="scss">
-
-
-</style>
+<style scoped lang="scss"></style>

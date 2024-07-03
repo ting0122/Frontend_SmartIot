@@ -1,7 +1,6 @@
 <script>
-import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
-import Switch from '@/components/Switch.vue';
 import Idle from '@/components/Idle.vue';
+import Using from '@/components/Using.vue';
 export default {
     data() {
         return {
@@ -18,9 +17,8 @@ export default {
 
     },
     components: {
-        CreateAndDeleteButton,
-        Switch,
-        Idle
+        Idle,
+        Using
     },
 
     methods: {
@@ -30,18 +28,16 @@ export default {
 </script>
 
 <template>
-    <div class="devices">
-        <CreateAndDeleteButton />
-        <div class="device" v-for="(div, index) in divArr" :key="index">
-            <div class="switch">
-                <Switch :id="'on-' +index" />
-            </div>
+    <div class="historyArea">
+        <Using />
+        <div class="history" v-for="(div, index) in divArr">
+            <div class="historyName"></div>
+            <div class="historyCurve"></div>
         </div>
         <Idle />
-        <div class="device" v-for="(div, index) in divArr" :key="index">
-            <div class="switch">
-                <Switch :id="'off-' +index" />
-            </div>
+        <div class="history" v-for="(div, index) in divArr">
+            <div class="historyName"></div>
+            <div class="historyCurve"></div>
         </div>
     </div>
 </template>
@@ -53,17 +49,14 @@ $dark03: #b0b0b0;
 $white: #FDFDFB;
 $black: #878787;
 
-.devices {
-    width: 1189px;
+.historyArea {
+    width: 1200px;
     height: 926px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-direction: column;
     overflow-y: auto;
-
     &::-webkit-scrollbar {
         width: 7px;
-
     }
 
     &::-webkit-scrollbar-button {
@@ -82,18 +75,22 @@ $black: #878787;
     }
 }
 
-.device {
-    width: 250px;
-    height: 150px;
-    background: $dark03;
-    border-radius: 35px;
-    margin: 10px 0;
-    position: relative;
-
-    .switch {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-    }
+.history {
+    width: 1170px;
+    margin: 0 0 20px 0;
+    display: flex;
 }
+.historyName {
+    width: 20%;
+    height: 107px;
+    border-radius: 35px 0 0 35px;
+    background: $dark03;
+}
+.historyCurve{
+    width:80%;
+    height: 107px;
+    border-radius: 0 35px 35px 0 ;
+    background: $dark02;
+}
+
 </style>

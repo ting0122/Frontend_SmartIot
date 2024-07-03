@@ -38,6 +38,11 @@ export default {
 </template>
 
 <style scoped lang="scss">
+$dark01:#e2e2e2;
+$dark02:#c4c4c4;
+$dark03:#b0b0b0;
+$white:#FDFDFB;
+$black:#878787;
 .buttonArea {
     width: 1189px;
     height: 112px;
@@ -55,12 +60,12 @@ justify-content: center;
     .line {
         width: 924px;
         height: 0;
-        border: solid 1px white;
+        border: solid 1px $white;
     }
     p{
         font-size: 20px;
         font-weight: 500;
-        color: white;
+        color: $white;
     }
 }
 
@@ -75,10 +80,11 @@ button {
     height: 40px;
     width: 40px;
 
-    background: #D9D9D9;
+    background: $dark03;
     border-radius: 50%;
     border: none;
-    color: white;
+    outline: none;
+    color: $white;
     font-size: 26px;
 }
 </style>
