@@ -64,6 +64,8 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@import '@/assets/main.scss';
+
 .tabArea {
     
     .tabs {
@@ -73,7 +75,7 @@ export default {
         height: 65px;
         border-radius: 30px;
         margin: auto;
-        background-color: #888888;
+        background-color:$dark03;
         padding-left: 14px;
         .tablink {
             width: 120px;
@@ -85,9 +87,10 @@ export default {
             padding: 0 20px;
             font-size: 18px;
             line-height: 38px;
+            color: $black1;
     
             &.active {
-                background-color: #ccc;
+                background-color: $dark01;
                 width: 120px;
                 height: 45px;
                 border-radius: 50px;
@@ -105,11 +108,12 @@ export default {
             padding-left: 35px;
             font-size: 18px;
             line-height: 28px;
-            border-left: 1px solid black;
+            color: $black1;
+            border-left: 1px solid $black1;
             i{
                 font-size: 42px;
                 margin-left: 27px;
-                color: #ffffff;
+                color: $dark01;
             }
         }
     }

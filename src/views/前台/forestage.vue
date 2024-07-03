@@ -74,6 +74,8 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@import '@/assets/main.scss';
+    
 .background{
     width: 100%;
     height: 100dvh;
@@ -99,7 +101,7 @@ export default {
             width: 1060px;
             height: 800px;
             // border: 1px solid #b1b1b1;
-            background-color: #b1b1b1;
+            background-color: $black;
             top: 50%;
             left: 50%;
             margin-top: -404px;
@@ -107,12 +109,12 @@ export default {
             .up{
                 width: 100%;
                 height: 88%;
-                border: 1px solid #f03838;
+                
             }
             .down{
                 width: 100%;
                 height: 12%;
-                border: 1px solid #b1b1b1;
+                
             }
         }
     }
