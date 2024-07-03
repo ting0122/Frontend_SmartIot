@@ -65,50 +65,49 @@ $dark03:#b0b0b0;
 $white:#FDFDFB;
 $black:#878787;
 .tabArea {
-    height: 1080px;
-    width: 1920px;
+    height: 968px;
+    width: 1700px;
     display: flex;
-    padding: 112px 220px 0 220px;
+    padding: 112px 0 0 220px;
     margin: 0 auto;
     background: $black;
-}
-
-
-.tabs {
-    height: 926px;
-    width: 232.6px;
-    // margin-top: 112px;
-    background-color: $dark03;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.tablink {
-    width: 172px;
-    height: 80px;
-    font-size: 26px;
-    font-weight: 500px;
-    background-color: $dark03;
-    color: $white;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    border-radius: 45px;
-
-    &.active {
-        background-color: #6e5656;
+    .tabs {
+        height: 926px;
+        width: 232.6px;
+        background-color: $dark03;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .tablink {
+        width: 172px;
+        height: 80px;
+        font-size: 26px;
+        font-weight: 500px;
+        background-color: $dark03;
+        color: $white;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        border-radius: 45px;
+    
+        &.active {
+            background-color: #6e5656;
+        }
+    }
+    /* 頁籤內容 */
+    .tabcontent {
+        display: none;
+        padding-left: 27.4px;
+        // position: relative;
     }
 }
 
-/* 頁籤內容 */
-.tabcontent {
-    display: none;
-    padding-left: 27.4px;
-    // position: relative;
-}
+
+
+
 /* 顯示選中的頁籤內容 */
 .show {
     display: block;

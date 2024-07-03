@@ -16,7 +16,7 @@ export default {
         };
     },
     created() {
-        console.log("123")
+        
     },
     mounted() {
 
@@ -45,19 +45,19 @@ export default {
     <BackBookMark :tabsPresent="this.tabsArray.buttonName" :tabsName="this.tabsArray.tabsNumber">
         <!-- 子BookMark會v-for我們所需要的插槽數量出來 -->
         <!-- 下面template接收插槽並放入你所想要顯示的內頁資料 -->
-        <template v-slot:tab1>
+        <template class="tab" v-slot:tab1>
             <BackSpaceManagement />
         </template>
-        <template v-slot:tab2>
+        <template class="tab" v-slot:tab2>
             <DeviceManagement />
         </template>
-        <template v-slot:tab3>
+        <template class="tab" v-slot:tab3>
             <HistoricalRecord />
         </template>
-        <template v-slot:tab4>
+        <template class="tab" v-slot:tab4>
 
         </template>
-        <template v-slot:tab5>
+        <template class="tab" v-slot:tab5>
 
         </template>
 
@@ -66,4 +66,8 @@ export default {
 
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+// .tab{
+//     padding: 112px 220px 0 220px;
+// }
+</style>
