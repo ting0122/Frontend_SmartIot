@@ -51,6 +51,10 @@ export default {
             <button v-for="(item, index) in this.tabsPresent" class="tablink"
                 :class="{ 'active': isActive === tabsName[index] }"
                 @click="openTab(this.tabsName[index])">{{ item }}</button>
+            <button class="addnew">
+                新增設備
+                <i class="fa-solid fa-circle-plus"></i>
+            </button>
         </div>
         <!-- 同樣父vue頁面傳來需要幾個內頁 v-for插槽出來-->
         <div v-for="(item, index) in this.tabsName" :id="item" class="tabcontent">
@@ -60,38 +64,72 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@import '@/assets/main.scss';
+
 .tabArea {
-    display: flex;
-}
-
-
-
-.tablink {
-    background-color: #f2f2f2;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-size: 18px;
-
-    &.active {
-        background-color: #ccc;
+    
+    .tabs {
+        display: flex; 
+        align-items: center;
+        width: 700px;
+        height: 65px;
+        border-radius: 30px;
+        margin: auto;
+        background-color:$dark03;
+        padding-left: 14px;
+        .tablink {
+            width: 120px;
+            height: 45px;
+            margin-right: 2px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0 20px;
+            font-size: 18px;
+            line-height: 38px;
+            color: $black1;
+    
+            &.active {
+                background-color: $dark01;
+                width: 120px;
+                height: 45px;
+                border-radius: 50px;
+            }
+        }
+        .addnew{
+            display: flex;
+            align-items: center;
+            width: 200px;
+            height: 28px;
+            margin-left: 15px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding-left: 35px;
+            font-size: 18px;
+            line-height: 28px;
+            color: $black1;
+            border-left: 1px solid $black1;
+            i{
+                font-size: 42px;
+                margin-left: 27px;
+                color: $dark01;
+            }
+        }
     }
+
+    /* 頁籤內容 */
+    .tabcontent {
+        width: 85%;
+        display: none;
+        padding: 100px 10% 100px 15%;
+        position: relative;
+    }
+    
+ 
 }
 
-/* 頁籤內容 */
-.tabcontent {
-    width: 85%;
-    display: none;
-    padding: 100px 10% 100px 15%;
-    position: relative;
-}
-.tabs {
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-}
-/* 顯示選中的頁籤內容 */
-.show {
-    display: block;
-}
+
+
+
 </style>
