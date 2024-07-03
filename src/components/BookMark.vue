@@ -46,6 +46,10 @@ export default {
 
 <template>
     <div class="tabArea">
+        <!-- 同樣父vue頁面傳來需要幾個內頁 v-for插槽出來-->
+        <div v-for="(item, index) in this.tabsName" :id="item" class="tabcontent">
+            <slot :name="item"></slot>
+        </div>
         <!-- 父vue頁面傳來需要幾個內頁，v-for的是頁籤名稱 -->
         <div class="tabs">
             <button v-for="(item, index) in this.tabsPresent" class="tablink"
@@ -56,10 +60,6 @@ export default {
                 <i class="fa-solid fa-circle-plus"></i>
             </button>
         </div>
-        <!-- 同樣父vue頁面傳來需要幾個內頁 v-for插槽出來-->
-        <div v-for="(item, index) in this.tabsName" :id="item" class="tabcontent">
-            <slot :name="item"></slot>
-        </div>
     </div>
 </template>
 
@@ -67,7 +67,9 @@ export default {
 @import '@/assets/main.scss';
 
 .tabArea {
-    
+    position: absolute;
+    bottom: 20px;
+
     .tabs {
         display: flex; 
         align-items: center;
@@ -120,10 +122,11 @@ export default {
 
     /* 頁籤內容 */
     .tabcontent {
-        width: 85%;
+        width: 1060px;
+        height: 695px;
         display: none;
-        padding: 100px 10% 100px 15%;
-        position: relative;
+        margin-bottom: 20px;
+        background-color: $dark02;
     }
     
  

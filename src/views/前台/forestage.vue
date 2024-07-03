@@ -1,5 +1,6 @@
 <script>
 import BookMark from '@/components/BookMark.vue';
+import NormalDisplayScreen from '@/components/前台頁籤/NormalDisplayScreen.vue';
 export default {
     data() {
         return {
@@ -22,7 +23,8 @@ export default {
 
     },
     components: {
-        BookMark
+        BookMark,
+        NormalDisplayScreen
     },
 
     methods: {
@@ -36,34 +38,30 @@ export default {
     <div class="background">
         <div class="ipad">
             <div class="showArea">
-                <div class="up">
-
-                </div>
-                <div class="down">
+                <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
+                <!-- 這邊透過父傳子 父是這個vue傳想要幾個內頁給BookMark BookMark會v-for傳過去的這個陣列並生成插槽 -->
+                <BookMark :tabsPresent="this.tabsArray.buttonName" :tabsName="this.tabsArray.tabsNumber">
+                    <!-- 子BookMark會v-for我們所需要的插槽數量出來 -->
+                    <!-- 下面template接收插槽並放入你所想要顯示的內頁資料 -->
+                    <template v-slot:tab1>
+                        <Yuhh/>
+                    </template>
+                    <template v-slot:tab2>
+        
+                    </template>
+                    <template v-slot:tab3>
+        
+                    </template>
+                    <template v-slot:tab4>
+        
+                    </template>
+                    <template v-slot:tab5>
+        
+                    </template>
+        
+                </BookMark>              
                     
-                    <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
-                    <!-- 這邊透過父傳子 父是這個vue傳想要幾個內頁給BookMark BookMark會v-for傳過去的這個陣列並生成插槽 -->
-                    <BookMark :tabsPresent="this.tabsArray.buttonName" :tabsName="this.tabsArray.tabsNumber">
-                        <!-- 子BookMark會v-for我們所需要的插槽數量出來 -->
-                        <!-- 下面template接收插槽並放入你所想要顯示的內頁資料 -->
-                        <template v-slot:tab1>
-                            
-                        </template>
-                        <template v-slot:tab2>
-        
-                        </template>
-                        <template v-slot:tab3>
-        
-                        </template>
-                        <template v-slot:tab4>
-        
-                        </template>
-                        <template v-slot:tab5>
-        
-                        </template>
-        
-                    </BookMark>
-                </div>
+                    
             </div>
         </div>
         
@@ -106,16 +104,8 @@ export default {
             left: 50%;
             margin-top: -404px;
             margin-left: -575px;
-            .up{
-                width: 100%;
-                height: 88%;
-                
-            }
-            .down{
-                width: 100%;
-                height: 12%;
-                
-            }
+            
+        
         }
     }
 
