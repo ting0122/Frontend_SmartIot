@@ -59,11 +59,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-$dark01:#e2e2e2;
-$dark02:#c4c4c4;
-$dark03:#b0b0b0;
-$white:#FDFDFB;
-$black:#878787;
+@import '@/assets/main.scss';
 .tabArea {
     height: 968px;
     width: 1700px;

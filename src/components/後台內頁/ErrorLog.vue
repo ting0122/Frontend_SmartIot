@@ -1,7 +1,5 @@
 <script>
-import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
-import Idle from '@/components/Idle.vue';
-import DeviceOrRoomDiv from '@/components/DeviceOrRoomDiv.vue';
+import CategoryButton from '@/components/CategoryButton.vue';
 export default {
     data() {
         return {
@@ -18,9 +16,7 @@ export default {
 
     },
     components: {
-        CreateAndDeleteButton,
-        Idle,
-        DeviceOrRoomDiv
+        CategoryButton
     },
 
     methods: {
@@ -30,28 +26,27 @@ export default {
 </script>
 
 <template>
-    <div class="devices">
-        <CreateAndDeleteButton />
-        <!-- <DeviceOrRoomDiv :name="'使用中'"/> -->
-        <Idle />
-        <DeviceOrRoomDiv :name="'閒置中'"/>
+    <div class="area">
+        <CategoryButton/>
+        <div class="lineArea">
+            <p>設備故障紀錄</p>
+            <div class="line"></div>
+        </div>
+        <div class="history" v-for="(div, index) in divArr">
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
-
-.devices {
-    width: 1189px;
+.area {
+    width: 1200px;
     height: 926px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-direction: column;
     overflow-y: auto;
-
     &::-webkit-scrollbar {
         width: 7px;
-
     }
 
     &::-webkit-scrollbar-button {
@@ -69,19 +64,30 @@ export default {
         border-radius: 15px;
     }
 }
+.lineArea {
+    width: 1040px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-.device {
-    width: 250px;
-    height: 150px;
+    .line {
+        width: 924px;
+        height: 0;
+        border: solid 1px $white;
+    }
+
+    p {
+        font-size: 20px;
+        font-weight: 500;
+        color: $white;
+    }
+}
+.history {
+    width: 1170px;
+    height: 57px;
+    margin: 0 0 20px 0;
     background: $dark03;
     border-radius: 35px;
-    margin: 10px 0;
-    position: relative;
-
-    .switch {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-    }
 }
 </style>

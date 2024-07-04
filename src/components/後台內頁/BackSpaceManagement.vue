@@ -2,15 +2,16 @@
 import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
 import Switch from '@/components/Switch.vue';
 import Energy from '@/components/Energy.vue';
-
+import CreateRoom from '@/components/CreateRoom.vue';
 export default {
     data() {
         return {
-            divArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+            divArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            
         };
     },
     created() {
-
+        this.searchRoom()
     },
     mounted() {
 
@@ -21,60 +22,71 @@ export default {
     components: {
         CreateAndDeleteButton,
         Switch,
-        Energy
+        Energy,
+        CreateRoom
     },
 
     methods: {
-
+        searchRoom() {
+            fetch("http://localhost:8080/rooms", {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify()
+            })
+                // .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                })
+        },
     }
 };
 </script>
 
 <template>
     <Energy />
-    <CreateAndDeleteButton />
+    <CreateRoom />
     <div class="rooms">
+        <CreateAndDeleteButton />
         <div class="room" v-for="(div, index) in divArr" :key="index">
-            <div class="switch">
-                <Switch :id="'on-' +index" />
-            </div>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-
-$dark01:#e2e2e2;
-$dark02:#c4c4c4;
-$dark03:#b0b0b0;
-$white:#FDFDFB;
-$black:#878787;
+@import '@/assets/main.scss';
 
 
-.rooms{
+.rooms {
     width: 1189px;
-    height: 497px;
+    height: 609px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     overflow-y: auto;
+
     &::-webkit-scrollbar {
         width: 7px;
-        
+
     }
+
     &::-webkit-scrollbar-button {
-        background: transparent; 
+        background: transparent;
     }
+
     &::-webkit-scrollbar-thumb {
         background: black;
         border-radius: 15px;
-        
+
     }
+
     &::-webkit-scrollbar-track {
         background: #ffffff;
         border-radius: 15px;
     }
 }
+
 .room {
     width: 250px;
     height: 150px;
