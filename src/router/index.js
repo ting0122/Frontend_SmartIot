@@ -6,6 +6,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+
+
       name: 'ForeStage',
       component: () => import('../views/前台/ForeStage.vue')
     },
@@ -23,3 +25,4 @@ const router = createRouter({
 })
 
 export default router
+ 
