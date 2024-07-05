@@ -1,9 +1,11 @@
 <script>
-
+//sweetalert2提示窗套件
+import Swal from 'sweetalert2'
 export default {
     data() {
         return {
             isActive: "",
+            deviceTypes: ['冷氣', '電燈', '空氣清淨機','除濕機'] // 模擬設備類型
         };
     },
     created() {
@@ -40,6 +42,44 @@ export default {
             document.getElementById(tabName).style.display = "block";
             this.isActive = tabName;
         },
+        // 顯示新增設備的彈窗
+        showAddDeviceModal() {
+            this.openTab('tab2');  // 切換到設備列表頁籤
+            Swal.fire({
+                title: '新增設備',
+                html: `
+                    <div class="arr">
+                    <select id="deviceType" class="swal2-input-select">
+                        ${this.deviceTypes.map(type => `<option value="${type}">${type}</option>`).join('')}
+                    </select>
+                    <input type="text" id="deviceName" class="swal2-input" placeholder="設備名稱">
+                    </div>
+                `,
+                showCloseButton: true, //右上叉叉按鈕
+                confirmButtonText: '新增',
+                customClass: {
+                    popup: 'swal2-custom-popup' // 自定義樣式
+                },
+                preConfirm: () => {
+                    const deviceId = Swal.getPopup().querySelector('#deviceId').value;
+                    const deviceType = Swal.getPopup().querySelector('#deviceType').value;
+                    const deviceName = Swal.getPopup().querySelector('#deviceName').value;
+                    if (!deviceId || !deviceType || !deviceName) {
+                        Swal.showValidationMessage(`請輸入完整的設備資訊`);
+                    }
+                    return { deviceId, deviceType, deviceName };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.addDevice(result.value);
+                }
+            });
+        },
+        // 新增設備的方法，這裡可以加入邏輯來處理設備新增
+        addDevice(device) {
+            console.log('新增的設備資訊：', device);
+            // 這裡可以加入新增設備的邏輯，例如將設備資訊發送到伺服器或更新本地狀態
+        }
     }
 };
 </script>
@@ -55,7 +95,7 @@ export default {
             <button v-for="(item, index) in this.tabsPresent" class="tablink"
                 :class="{ 'active': isActive === tabsName[index] }" @click="openTab(this.tabsName[index])">{{ item
                 }}</button>
-            <button class="addnew">
+            <button class="addnew" @click="showAddDeviceModal">
                 新增設備
                 <i class="fa-solid fa-circle-plus"></i>
             </button>
