@@ -67,11 +67,6 @@ export default {
 @import '@/assets/main.scss';
 
 .tabArea {
-<<<<<<< HEAD
-    position: absolute;
-    bottom: 20px;
-=======
->>>>>>> origin/HEAD
 
     .tabs {
         display: flex;
@@ -132,7 +127,7 @@ export default {
         height: 695px;
         display: none;
         margin-bottom: 20px;
-        background-color: $dark02;
+        // background-color: $dark02;
     }
 
 

@@ -44,50 +44,48 @@ export default {
 </template>
 
 <style scoped lang="scss">
-$dark01:#e2e2e2;
-$dark02:#c4c4c4;
-$dark03:#b0b0b0;
-$white:#FDFDFB;
-$black:#878787;
+@import '@/assets/main.scss';
+
+
 .slideThree {
-    width: 80px;
-    height: 26px;
-    background: #333;
+    width: 69px;
+    height: 34px;
+    background: $black1;
     position: relative;
     border-radius: 50px;
     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
 
     &:before {
         content: 'OFF';
-        color: #ffffff;
+        color: $white;
         position: absolute;
-        right: 10px;
+        right: 9px;
         z-index: 0;
-        font: 12px/26px Arial, sans-serif;
+        font: 12px/34px Arial, sans-serif;
         font-weight: bold;
         text-shadow: 1px 1px 0px rgba(255, 255, 255, .15);
     }
 
     &:after {
         content: 'ON';
-        color: rgb(255, 255, 255);
+        color: $white;
         position: absolute;
         left: 10px;
         z-index: 0;
-        font: 12px/26px Arial, sans-serif;
+        font: 12px/34px Arial, sans-serif;
         font-weight: bold;
     }
 
     label {
         display: block;
-        width: 34px;
-        height: 20px;
+        width: 30px;
+        height: 28px;
         cursor: pointer;
         position: absolute;
         top: 3px;
         left: 3px;
         z-index: 1;
-        background: #fcfff4;
+        background: $white;
         background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
         border-radius: 50px;
         transition: all 0.4s ease;
@@ -98,7 +96,7 @@ $black:#878787;
         visibility: hidden;
 
         &:checked+label {
-            left: 43px;
+            left: 36px;
         }
     }
 }

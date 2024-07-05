@@ -2,4 +2,16 @@
   margin: 0;
   border: 0;
   box-shadow: none;
+}
+
+p {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+span {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+h2 {
+  font-family: "Noto Sans TC", sans-serif;
 }/*# sourceMappingURL=main.css.map */
