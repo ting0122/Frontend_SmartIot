@@ -1,5 +1,7 @@
 <!-- 前台-首頁-左上角公告-元件 -->
 <script>
+//sweetalert2提示窗套件
+import Swal from 'sweetalert2'
 export default {
     data() {
         return {
@@ -19,8 +21,22 @@ export default {
     },
     methods: {
         //點擊切換expanded的ture/false屬性
+        // toggleContent(index) {
+        // this.annArr[index].expanded = !this.annArr[index].expanded;
+        // }
         toggleContent(index) {
-        this.annArr[index].expanded = !this.annArr[index].expanded;
+            const announcement = this.annArr[index];
+                Swal.fire({
+                    title: announcement.title,
+                    html: `<p><strong>公告時間：</strong>${announcement.time}</p><p>${announcement.content}</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                    popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
         }
     }
  
@@ -43,7 +59,7 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
-    
+
 .outArea{
     width: 541px;
     height: 268px;
@@ -113,5 +129,6 @@ export default {
         }
     }
 }
+
 
 </style>

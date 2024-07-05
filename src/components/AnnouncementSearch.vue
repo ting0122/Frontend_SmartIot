@@ -1,11 +1,17 @@
 <!-- 前台-公告列表搜尋-元件 -->
 <script>
+// vue3-datepicker製作日曆用
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
     data() {
         return {
-            
+            dateRange: null,  //儲存日期區間
         };
+    },
+    components : {
+        VueDatePicker,   //日曆用
     },
    
 };
@@ -18,8 +24,12 @@ export default {
                 <input type="text" placeholder="設備名稱">
             </div>
             <div class="start_date">
-                <input type="date" class="date">
-                <i class="fa-regular fa-calendar"></i>
+                <VueDatePicker 
+                v-model="dateRange" 
+                range format="yyyy-MM-dd" 
+                style="width: 260px" />
+                <!-- <input type="date" class="date">
+                <i class="fa-regular fa-calendar"></i> -->
             </div>
             <button class="seach_list" >搜尋</button>
 

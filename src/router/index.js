@@ -6,15 +6,13 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-
-
       name: 'ForeStage',
       component: () => import('../views/前台/forestage.vue')
     },
     {
       path: '/BackStage',
       name: 'BackStage',
-      component: () => import('../views/後台/BackStage.vue')
+      component: () => import('../views/後台/backstage.vue')
     },
     {
       path: '/RoomConsole',

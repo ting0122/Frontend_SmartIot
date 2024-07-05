@@ -1,13 +1,19 @@
 <!-- 前台-故障設備搜尋-元件 -->
 <script>
+// vue3-datepicker製作日曆用
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
     data() {
         return {
-            
+            dateRange: null, //儲存日期區間
         };
     },
-   
+    components : {
+        VueDatePicker,  //日曆用
+    },
+    
 };
 </script>
 
@@ -27,10 +33,14 @@ export default {
                 </select>
             </div>
             <div class="start_date">
-                <input type="date"  class="date">
-                <i class="fa-regular fa-calendar"></i>
+                <VueDatePicker 
+                v-model="dateRange" 
+                range format="yyyy-MM-dd" 
+                style="width: 260px" />
+                <!-- <input type="date"  class="date"> -->
+                <!-- <i class="fa-regular fa-calendar"></i> -->
             </div>
-            <button class="seach_list"  >搜尋</button>
+            <button class="seach_list" >搜尋</button>
 
         </div>
        
@@ -88,32 +98,34 @@ export default {
                 margin-left: 20px;
                 position: relative;
 
-                i {
-                    position: absolute;
-                    right: 10px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    width: 20px;
-                    height: 20px;
-                    color: $white;
-                    background: transparent; /* 自定义图标颜色 */
-                    pointer-events: none;
-                }
-                .date{
-                    width: 150px;
-                    height: 35px;
-                    border-radius: 30px;
-                    padding-left: 9px;
-                    padding-right: 10px;
-                    color: $white;
-                    background-color: $dark02;
-                    border: 0;
-                    outline:none;
-                }
-                ::-webkit-calendar-picker-indicator {
-                    opacity: 0; /* 圖示設為透明 */
-                }
-                }
+                // i {
+                //     position: absolute;
+                //     right: 10px;
+                //     top: 50%;
+                //     transform: translateY(-50%);
+                //     width: 20px;
+                //     height: 20px;
+                //     color: $white;
+                //     background: transparent; /* 自定义图标颜色 */
+                //     pointer-events: none;
+                // }
+                //原版input樣式
+                // .date{
+                //     width: 300px;
+                //     height: 35px;
+                //     border-radius: 30px;
+                //     padding-left: 9px;
+                //     padding-right: 10px;
+                //     color: $white;
+                //     background-color: $dark02;
+                //     border: 0;
+                //     outline:none; 
+                // }
+                // ::-webkit-calendar-picker-indicator {
+                //     opacity: 0; /* 圖示設為透明 */
+                // }
+            
+            }
             .seach_list{
                 width: 60px;
                 height: 35px;
@@ -124,11 +136,11 @@ export default {
                 background-color: $dark02;
                 color: $white;
             }
+         
             
-
         }
         
-
     }
+    
 
 </style>
