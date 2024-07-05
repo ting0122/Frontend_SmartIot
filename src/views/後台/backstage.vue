@@ -3,6 +3,7 @@ import BackBookMark from '@/components/BackBookMark.vue';
 import BackSpaceManagement from '@/components/後台內頁/BackSpaceManagement.vue';
 import DeviceManagement from '@/components/後台內頁/DeviceManagement.vue';
 import HistoricalRecord from '@/components/後台內頁/HistoricalRecord.vue';
+import ErrorLog from '@/components/後台內頁/ErrorLog.vue';
 export default {
     data() {
         return {
@@ -28,7 +29,8 @@ export default {
         BackBookMark,
         BackSpaceManagement,
         DeviceManagement,
-        HistoricalRecord
+        HistoricalRecord,
+        ErrorLog
     },
 
     methods: {
@@ -55,10 +57,7 @@ export default {
             <HistoricalRecord />
         </template>
         <template class="tab" v-slot:tab4>
-
-        </template>
-        <template class="tab" v-slot:tab5>
-
+            <ErrorLog/>
         </template>
 
     </BackBookMark>

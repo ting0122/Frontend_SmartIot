@@ -1,6 +1,7 @@
 <script>
 import Idle from '@/components/Idle.vue';
 import Using from '@/components/Using.vue';
+import CategoryButton from '@/components/CategoryButton.vue';
 export default {
     data() {
         return {
@@ -18,7 +19,8 @@ export default {
     },
     components: {
         Idle,
-        Using
+        Using,
+        CategoryButton
     },
 
     methods: {
@@ -29,6 +31,7 @@ export default {
 
 <template>
     <div class="historyArea">
+        <CategoryButton/>
         <Using />
         <div class="history" v-for="(div, index) in divArr">
             <div class="historyName"></div>
@@ -43,11 +46,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-$dark01: #e2e2e2;
-$dark02: #c4c4c4;
-$dark03: #b0b0b0;
-$white: #FDFDFB;
-$black: #878787;
+@import '@/assets/main.scss';
 
 .historyArea {
     width: 1200px;

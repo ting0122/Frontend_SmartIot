@@ -32,14 +32,11 @@ export default {
 </script>
 
 <template>
-
-
-
+    
     <div class="slideThree">
         <input type="checkbox"  :id="id"  />
         <label :for="id"></label>
     </div>
-
 
 </template>
 

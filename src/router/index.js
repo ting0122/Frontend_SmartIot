@@ -9,14 +9,18 @@ const router = createRouter({
 
 
       name: 'ForeStage',
-      component: () => import('../views/前台/ForeStage.vue')
+      component: () => import('../views/前台/forestage.vue')
     },
     {
       path: '/BackStage',
       name: 'BackStage',
       component: () => import('../views/後台/BackStage.vue')
     },
-
+    {
+      path: '/RoomConsole',
+      name: 'RoomConsole',
+      component: () => import('../views/後台/RoomConsole.vue')
+    },
   ]
 })
 

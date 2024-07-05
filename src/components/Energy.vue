@@ -30,11 +30,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-$dark01:#e2e2e2;
-$dark02:#c4c4c4;
-$dark03:#b0b0b0;
-$white:#FDFDFB;
-$black:#878787;
+@import '@/assets/main.scss';
 .stateDiv {
     width: 1189px;
     height: 316px;
