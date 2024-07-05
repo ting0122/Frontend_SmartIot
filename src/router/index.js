@@ -9,7 +9,7 @@ const router = createRouter({
 
 
       name: 'ForeStage',
-      component: () => import('../views/前台/ForeStage.vue')
+      component: () => import('../views/前台/forestage.vue')
     },
     {
       path: '/BackStage',
