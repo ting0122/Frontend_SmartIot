@@ -15,10 +15,10 @@ export default {
     <div class="search_big_area">
         <div class="left">
             <div class="name" >
-                <input type="text" v-model="this.name" placeholder="設備名稱">
+                <input type="text" placeholder="設備名稱">
             </div>
             <div class="start_date">
-                <input type="date" v-model="this.start_date" class="date">
+                <input type="date" class="date">
                 <i class="fa-regular fa-calendar"></i>
             </div>
             <button class="seach_list" >搜尋</button>
