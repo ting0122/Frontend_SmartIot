@@ -167,7 +167,6 @@ export default {
         height: 695px;
         display: none;
         margin-bottom: 20px;
-        // background-color: $dark02;
     }
 
 

@@ -1,3 +1,4 @@
+<!-- 後台-首頁-入口 -->
 <script>
 import BackBookMark from '@/components/BackBookMark.vue';
 import BackSpaceManagement from '@/components/後台內頁/BackSpaceManagement.vue';
@@ -26,11 +27,11 @@ export default {
 
     },
     components: {
-        BackBookMark,
-        BackSpaceManagement,
-        DeviceManagement,
-        HistoricalRecord,
-        ErrorLog
+        BackBookMark,  //後台頁籤
+        BackSpaceManagement,  //空間管理
+        DeviceManagement,  //設備管理
+        HistoricalRecord,  //歷史紀錄
+        ErrorLog,  //錯誤紀錄
     },
 
     methods: {
@@ -41,32 +42,52 @@ export default {
 </script>
 
 <template>
+    <div class="background">
+        <div class="showArea">
+            <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
+            <!-- 這邊透過父傳子 父是這個vue傳想要幾個內頁給BookMark BookMark會v-for傳過去的這個陣列並生成插槽 -->
+            <BackBookMark :tabsPresent="this.tabsArray.buttonName" :tabsName="this.tabsArray.tabsNumber">
+                <!-- 子BookMark會v-for我們所需要的插槽數量出來 -->
+                <!-- 下面template接收插槽並放入你所想要顯示的內頁資料 -->
+                <template class="tab" v-slot:tab1>
+                    <BackSpaceManagement />
+                </template>
+                <template class="tab" v-slot:tab2>
+                    <DeviceManagement />
+                </template>
+                <template class="tab" v-slot:tab3>
+                    <HistoricalRecord />
+                </template>
+                <template class="tab" v-slot:tab4>
+                    <ErrorLog/>
+                </template>
+        
+            </BackBookMark>
 
-    <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
-    <!-- 這邊透過父傳子 父是這個vue傳想要幾個內頁給BookMark BookMark會v-for傳過去的這個陣列並生成插槽 -->
-    <BackBookMark :tabsPresent="this.tabsArray.buttonName" :tabsName="this.tabsArray.tabsNumber">
-        <!-- 子BookMark會v-for我們所需要的插槽數量出來 -->
-        <!-- 下面template接收插槽並放入你所想要顯示的內頁資料 -->
-        <template class="tab" v-slot:tab1>
-            <BackSpaceManagement />
-        </template>
-        <template class="tab" v-slot:tab2>
-            <DeviceManagement />
-        </template>
-        <template class="tab" v-slot:tab3>
-            <HistoricalRecord />
-        </template>
-        <template class="tab" v-slot:tab4>
-            <ErrorLog/>
-        </template>
+        </div>
 
-    </BackBookMark>
+    </div>
 
 
 </template>
 
 <style scoped lang="scss">
-// .tab{
-//     padding: 112px 220px 0 220px;
-// }
+@import '@/assets/main.scss';
+
+    .background{
+        width: 100%;
+        height: 100dvh;
+        background: $black;
+        position: relative;
+        .showArea{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -475px;
+            margin-left: -750px;
+            width: 1500px;
+            height: 950px;
+            border: 1px solid black;
+        }
+    }
 </style>

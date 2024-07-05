@@ -61,15 +61,11 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 .tabArea {
-    height: 968px;
-    width: 1700px;
+    height: 100%;
     display: flex;
-    padding: 112px 0 0 220px;
-    margin: 0 auto;
-    background: $black;
     .tabs {
-        height: 926px;
-        width: 232.6px;
+        height: 100%;
+        width: 233px;
         background-color: $dark03;
         border-radius: 25px;
         display: flex;
@@ -78,10 +74,9 @@ export default {
         align-items: center;
     }
     .tablink {
-        width: 172px;
-        height: 80px;
-        font-size: 26px;
-        font-weight: 500px;
+        width: 152px;
+        height: 70px;
+        font-size: 23px;
         background-color: $dark03;
         color: $white;
         border: none;
@@ -90,14 +85,14 @@ export default {
         border-radius: 45px;
     
         &.active {
-            background-color: #6e5656;
+            background-color: $dark02;
         }
     }
     /* 頁籤內容 */
     .tabcontent {
         display: none;
-        padding-left: 27.4px;
-        // position: relative;
+        padding-left: 28px;
+       
     }
 }
 
