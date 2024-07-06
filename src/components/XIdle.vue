@@ -1,5 +1,5 @@
 <script>
-
+//棄用
 export default {
     data() {
         return {

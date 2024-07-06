@@ -92,7 +92,8 @@ button {
     border: none;
     outline: none;
     color: $white;
-    font-size: 26px;
+    font-size: 20px;
     line-height: 45px;
+    
 }
 </style>
