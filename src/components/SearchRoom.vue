@@ -24,19 +24,7 @@ export default {
     },
 
     methods: {
-        // createRoom() {
-        //     fetch("http://localhost:8080/rooms", {
-        //         method: "post",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify(this.createObj)
-        //     })
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             console.log(data)
-        //         })
-        // },
+        
     }
 };
 </script>
@@ -49,7 +37,16 @@ export default {
             <option value="使用中">使用中</option>
             <option value="閒置中">閒置中</option>
         </select>
-        <!-- <label for=""><input type="text" v-model="this.createObj.name" placeholder="空間名稱"></label> -->
+        <select name="" id="" v-model="this.createObj.type" >
+            <option value="">空間類型</option>
+            <option value="公司">公司</option>
+            <option value="會議室">會議室</option>
+            <option value="公共區域">公共區域</option>
+            <option value="機房">機房</option>
+            <option value="廁所">廁所</option>
+            <option value="教室">教室</option>
+            <option value="其他">其他</option>
+        </select>
         <button @click="this.createRoom()">搜尋</button>
     </div>
 </template>
@@ -61,11 +58,10 @@ export default {
     width: 100%;
     height: 100px;
     background: $dark03;
-    border-radius: 25px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 23px;
+    margin-top: 1px;
     
     select{
         width: 155px;

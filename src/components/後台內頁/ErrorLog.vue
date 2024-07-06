@@ -1,5 +1,5 @@
 <script>
-import CategoryButton from '@/components/CategoryButton.vue';
+import CategoryButton from '@/components/XCategoryButton.vue';
 export default {
     data() {
         return {

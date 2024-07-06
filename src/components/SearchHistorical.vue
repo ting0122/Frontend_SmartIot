@@ -24,33 +24,32 @@ export default {
     },
 
     methods: {
-        createRoom() {
-            fetch("http://localhost:8080/rooms", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(this.createObj)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                })
-        },
+        
     }
 };
 </script>
 
 <template>
     <div class="createRoom">
-        <label for=""><input type="text" v-model="this.createObj.area" placeholder="空間編號"></label>
+        <label for=""><input type="text" v-model="this.createObj.area" placeholder="設備名稱"></label>
         <select name="" id="" v-model="this.createObj.type" >
-            <option value="">空間類型</option>
-            <option value="會議室">會議室</option>
-            <option value="公共空間">公共空間</option>
+            <option value="">設備使用狀態</option>
+            <option value="使用中">使用中</option>
+            <option value="閒置中">閒置中</option>
         </select>
-        <label for=""><input type="text" v-model="this.createObj.name" placeholder="空間名稱"></label>
-        <button @click="this.createRoom()">新增</button>
+        <select name="" id="" v-model="this.createObj.type" >
+            <option value="">空間編號</option>
+            <option value="使用中">601</option>
+            <option value="閒置中">602</option>
+        </select>
+        <select name="" id="" v-model="this.createObj.type" >
+            <option value="">設備類型</option>
+            <option value="公司">冷氣</option>
+            <option value="會議室">電燈</option>
+            <option value="公共區域">空氣清淨機</option>
+            <option value="機房">除濕機</option>
+        </select>
+        <button @click="this.createRoom()">搜尋</button>
     </div>
 </template>
 
@@ -59,15 +58,15 @@ export default {
 
 .createRoom {
     width: 100%;
-    height: 100px;
+    height: 123px;
     background: $dark03;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 1px;
+    border-radius: 25px 25px 0 0 ;
     
     select{
-        width: 126px;
+        width: 155px;
         height: 40px;
         font-size: 16px;
         border: none;

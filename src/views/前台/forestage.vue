@@ -82,7 +82,6 @@ export default {
 .background{
     width: 100%;
     height: 100dvh;
-    // background-color: #636774;
     background-image: url(../../img/slightly.jpg);
     background-repeat: no-repeat;
     background-size: cover;

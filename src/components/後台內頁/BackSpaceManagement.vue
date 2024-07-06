@@ -8,7 +8,7 @@ export default {
     data() {
         return {
             divArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            
+            showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
         };
     },
     created() {
@@ -42,6 +42,13 @@ export default {
                     console.log(data)
                 })
         },
+        //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
+        toggleCreateRoom() {
+            this.showCreateRoom = true;
+        },
+        toggleSearchRoom() {
+            this.showCreateRoom = false;
+        }
     }
 };
 </script>
@@ -49,11 +56,16 @@ export default {
 <template>
     <div class="outarr">
         <Energy />
-        <CreateRoom />
-        <!-- <SearchRoom/> -->
-        <CreateAndDeleteButton />
+        <!-- 根據 showCreateRoom 的值決定顯示 CreateRoom 或 SearchRoom 组件 -->
+        <CreateRoom v-if="showCreateRoom" />
+        <SearchRoom v-else /> 
+        <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
+        <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" />
         <div class="rooms">
             <div class="room" v-for="(div, index) in divArr" :key="index">
+                <div class="switch">
+                    <Switch :id="'on-' +index" />
+                </div>
             </div>
         </div>
 
@@ -69,7 +81,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items:end;
+    border-radius: 25px;
     border: 1px solid black;
+    background-color: $dark02;
     .rooms {
         width: 100%;
         height: 609px;
@@ -77,21 +91,22 @@ export default {
         flex-wrap: wrap;
         justify-content: space-evenly;
         overflow-y: auto;
-    
+        // background-color: $dark01;
+        border: 1px solid black;
         &::-webkit-scrollbar {
             width: 10px;
-    
+            
         }
     
         &::-webkit-scrollbar-button {
             background: transparent;
-            height: 6px;
+            height: 10px;
         }
     
         &::-webkit-scrollbar-thumb {
             background: $black1;
             border-radius: 15px;
-    
+            
         }
     
         &::-webkit-scrollbar-track {
@@ -101,17 +116,17 @@ export default {
     }
     
     .room {
-        width: 283px;
+        width: 282px;
         height: 150px;
         background: $dark03;
         border-radius: 25px;
-        margin: 10px 0;
+        margin: 20px 0 0 0 ;
         position: relative;
     
         .switch {
             position: absolute;
-            right: 10px;
-            top: 10px;
+            right: 18px;
+            top: 15px;
         }
     }
 

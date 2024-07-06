@@ -19,7 +19,13 @@ export default {
     },
 
     methods: {
-
+        // 按鈕被點擊時通知父層並觸發父層方法
+        handleAddClick() {
+            this.$emit('add-click');
+        },
+        handleSearchClick() {
+            this.$emit('search-click');
+        }
     }
 };
 </script>
@@ -27,13 +33,16 @@ export default {
 <template>
     <div class="buttonArea">
         <div class="lineArea">
-            <p>所有空間</p>
+            <slot name="text">
+                <p>所有空間</p>
+            </slot>    
             <div class="line"></div>
         </div>
         <div class="createAndDeleteButton">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            
+            <button><i class="fa-solid fa-magnifying-glass" @click="handleSearchClick"></i></button>
             <button><i class="fa-solid fa-trash-can"></i></button>
-            <button><i class="fa-solid fa-circle-plus"></i></button>
+            <button><i class="fa-solid fa-circle-plus" @click="handleAddClick"></i></button>
         </div>
     </div>
 </template>
@@ -63,7 +72,7 @@ justify-content: center;
         font-size: 20px;
         color: $white;
         padding-left: 10px;
-        padding-bottom: 5px
+        padding-bottom: 6px
     }
 }
 
@@ -72,7 +81,7 @@ justify-content: center;
     height: 40px;
     display: flex;
     justify-content: space-between;
-    margin-right: 32px;
+    margin-right: 36px;
 
 }
 button {
