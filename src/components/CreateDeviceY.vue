@@ -43,13 +43,20 @@ export default {
 
 <template>
     <div class="createRoom">
-        <label for=""><input type="text" v-model="this.createObj.area" placeholder="空間編號"></label>
+        <label for=""><input type="text" v-model="this.createObj.area" placeholder="設備名稱"></label>
         <select name="" id="" v-model="this.createObj.type" >
-            <option value="">空間類型</option>
-            <option value="會議室">會議室</option>
-            <option value="公共空間">公共空間</option>
+            <option value="">設備類型</option>
+            <option value="冷氣">冷氣</option>
+            <option value="電燈">電燈</option>
+            <option value="空氣清淨機">空氣清淨機</option>
+            <option value="除濕機">除濕機</option>
         </select>
-        <label for=""><input type="text" v-model="this.createObj.name" placeholder="空間名稱"></label>
+        <select name="" id="" v-model="this.createObj.type" >
+            <option value="">所屬空間</option>
+            <option value="601">601</option>
+            <option value="602">602</option>
+            <option value="603">603</option>
+        </select>
         <button @click="this.createRoom()">新增</button>
     </div>
 </template>
@@ -59,12 +66,12 @@ export default {
 
 .createRoom {
     width: 100%;
-    height: 100px;
+    height: 123px;
     background: $dark03;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 1px;
+    border-radius: 25px 25px 0 0 ;
     
     select{
         width: 126px;

@@ -3,11 +3,12 @@ import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
 import Switch from '@/components/Switch.vue';
 import Energy from '@/components/Energy.vue';
 import CreateRoom from '@/components/CreateRoom.vue';
+import SearchRoom from '@/components/SearchRoom.vue';
 export default {
     data() {
         return {
             divArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            
+            showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
         };
     },
     created() {
@@ -23,7 +24,8 @@ export default {
         CreateAndDeleteButton,
         Switch,
         Energy,
-        CreateRoom
+        CreateRoom,
+        SearchRoom
     },
 
     methods: {
@@ -40,65 +42,93 @@ export default {
                     console.log(data)
                 })
         },
+        //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
+        toggleCreateRoom() {
+            this.showCreateRoom = true;
+        },
+        toggleSearchRoom() {
+            this.showCreateRoom = false;
+        }
     }
 };
 </script>
 
 <template>
-    <Energy />
-    <CreateRoom />
-    <div class="rooms">
-        <CreateAndDeleteButton />
-        <div class="room" v-for="(div, index) in divArr" :key="index">
+    <div class="outarr">
+        <Energy />
+        <!-- 根據 showCreateRoom 的值決定顯示 CreateRoom 或 SearchRoom 组件 -->
+        <CreateRoom v-if="showCreateRoom" />
+        <SearchRoom v-else /> 
+        <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
+        <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" />
+        <div class="rooms">
+            <div class="room" v-for="(div, index) in divArr" :key="index">
+                <div class="switch">
+                    <Switch :id="'on-' +index" />
+                </div>
+            </div>
         </div>
+
     </div>
 </template>
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 
-
-.rooms {
-    width: 1189px;
-    height: 609px;
+.outarr{
+    width: 1238px;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    overflow-y: auto;
-
-    &::-webkit-scrollbar {
-        width: 7px;
-
+    flex-direction: column;
+    align-items:end;
+    border-radius: 25px;
+    border: 1px solid black;
+    background-color: $dark02;
+    .rooms {
+        width: 100%;
+        height: 609px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        overflow-y: auto;
+        // background-color: $dark01;
+        border: 1px solid black;
+        &::-webkit-scrollbar {
+            width: 10px;
+            
+        }
+    
+        &::-webkit-scrollbar-button {
+            background: transparent;
+            height: 10px;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background: $black1;
+            border-radius: 15px;
+            
+        }
+    
+        &::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 15px;
+        }
+    }
+    
+    .room {
+        width: 282px;
+        height: 150px;
+        background: $dark03;
+        border-radius: 25px;
+        margin: 20px 0 0 0 ;
+        position: relative;
+    
+        .switch {
+            position: absolute;
+            right: 18px;
+            top: 15px;
+        }
     }
 
-    &::-webkit-scrollbar-button {
-        background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: black;
-        border-radius: 15px;
-
-    }
-
-    &::-webkit-scrollbar-track {
-        background: #ffffff;
-        border-radius: 15px;
-    }
-}
-
-.room {
-    width: 250px;
-    height: 150px;
-    background: $dark03;
-    border-radius: 35px;
-    margin: 10px 0;
-    position: relative;
-
-    .switch {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-    }
 }
 </style>

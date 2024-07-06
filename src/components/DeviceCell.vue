@@ -25,7 +25,6 @@ export default {
             <p class="id">{{ data.id }}</p>
             <i class="fa-regular fa-snowflake"></i>
             <p>{{ data.type }}</p>
-        
             <span>{{ data.mane }}</span>
         </div>
 

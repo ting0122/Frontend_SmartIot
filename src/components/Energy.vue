@@ -32,9 +32,9 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 .stateDiv {
-    width: 1189px;
+    width: 100%;
     height: 316px;
     background-color:$dark03;
-    border-radius: 45px;
+    border-radius: 25px 25px 0 0;
 }
 </style>

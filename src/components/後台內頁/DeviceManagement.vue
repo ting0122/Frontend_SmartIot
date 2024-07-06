@@ -2,10 +2,13 @@
 import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
 import Idle from '@/components/Idle.vue';
 import DeviceOrRoomDiv from '@/components/DeviceOrRoomDiv.vue';
+import SearchDevice from '@/components/SearchDevice.vue';
+import CreateDeviceY from '@/components/CreateDeviceY.vue';
 export default {
     data() {
         return {
             divArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
         };
     },
     created() {
@@ -20,53 +23,59 @@ export default {
     components: {
         CreateAndDeleteButton,
         Idle,
-        DeviceOrRoomDiv
+        DeviceOrRoomDiv,
+        SearchDevice,
+        CreateDeviceY
     },
 
     methods: {
-
+        //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
+        toggleCreateRoom() {
+            this.showCreateRoom = true;
+        },
+        toggleSearchRoom() {
+            this.showCreateRoom = false;
+        }
     }
 };
 </script>
 
 <template>
-    <div class="devices">
-        <CreateAndDeleteButton />
-        <!-- <DeviceOrRoomDiv :name="'使用中'"/> -->
-        <Idle />
-        <DeviceOrRoomDiv :name="'閒置中'"/>
+    <div class="outarr">
+        <!-- 根據 showCreateRoom 的值決定顯示 CreateRoom 或 SearchRoom 组件 -->
+        <CreateDeviceY v-if="showCreateRoom"/>
+        <SearchDevice v-else/>
+        <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
+        <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom">
+            <template #text >
+                <p class="text">所有設備</p>
+            </template>
+        </CreateAndDeleteButton>
+        <div class="deviceDiv">
+            <DeviceOrRoomDiv :name="'閒置中'"/>
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 
-.devices {
-    width: 1189px;
-    height: 926px;
+.outarr {
+    width: 1238px;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    overflow-y: auto;
+    flex-direction: column;
+    align-items:end;
+    border-radius: 25px;
+    border: 1px solid black;
+    background-color: $dark02;
 
-    &::-webkit-scrollbar {
-        width: 7px;
-
-    }
-
-    &::-webkit-scrollbar-button {
-        background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: black;
-        border-radius: 15px;
-
-    }
-
-    &::-webkit-scrollbar-track {
-        background: #ffffff;
-        border-radius: 15px;
+    
+    .text{
+        font-size: 20px;
+        color: $white;
+        padding-left: 10px;
+        padding-bottom: 6px
     }
 }
 
