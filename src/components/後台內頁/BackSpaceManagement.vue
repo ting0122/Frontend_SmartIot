@@ -7,7 +7,8 @@ import SearchRoom from '@/components/SearchRoom.vue';
 export default {
     data() {
         return {
-            divArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            dataArr: [{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"公司",roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"公司",roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"公司",roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"公司",roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"}],
+
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
         };
     },
@@ -18,7 +19,15 @@ export default {
 
     },
     computed: {
-
+        //用來隱藏超出指定長度的空間名稱內容
+        truncatedContent() {
+            return this.dataArr.map(data => {
+                return {
+                    ...data,
+                    truncatedContent: data.roommane.length > 9 ? data.roommane.slice(0, 9) + '...' : data.roommane
+                };
+            });
+        }
     },
     components: {
         CreateAndDeleteButton,
@@ -62,9 +71,13 @@ export default {
         <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
         <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" />
         <div class="rooms">
-            <div class="room" v-for="(div, index) in divArr" :key="index">
+            <div class="room" v-for="(data, index) in truncatedContent" :key="index">
                 <div class="switch">
                     <Switch :id="'on-' +index" />
+                </div>
+                <p>{{ data.area }}-{{ data.type }}</p>
+                <div class="area">
+                    <span>{{ data.truncatedContent }}</span>
                 </div>
             </div>
         </div>
@@ -127,6 +140,16 @@ export default {
             position: absolute;
             right: 18px;
             top: 15px;
+        }
+        p{
+            margin: 50px 20px 0 30px;
+            font-size: 16px;
+        }
+        .area{
+            margin: 0 20px 0 30px;
+            font-size: 20px;
+            font-weight: 600;
+            color:$black1;
         }
     }
 

@@ -3,7 +3,7 @@ import Switch from '@/components/Switch.vue';
 export default {
     data() {
         return {
-            divArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,],
+            dataArr:[{id:203154,type:"冷氣",mane:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",mane:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"}]
         };
     },
     created() {
@@ -13,7 +13,15 @@ export default {
 
     },
     computed: {
-
+        //用來隱藏超出指定長度的空間名稱內容
+        truncatedContent() {
+            return this.dataArr.map(data => {
+                return {
+                    ...data,
+                    truncatedContent: data.roommane.length > 9 ? data.roommane.slice(0, 9) + '...' : data.roommane
+                };
+            });
+        }
     },
     components: {
         Switch
@@ -30,9 +38,15 @@ export default {
 
 <template>
     <div class="out">
-        <div class="room" v-for="(div, index) in divArr" :key="index">
+        <div class="room" v-for="(data, index) in truncatedContent" :key="index">
             <div class="switch">
                 <Switch :id="this.name + index" />
+            </div>
+            <p class="id">{{ data.id }}</p>
+            <p>{{ data.type }}</p>
+            <i class="fa-regular fa-snowflake"></i>
+            <div class="area">
+                <p>{{ data.area }}-{{ data.truncatedContent }}</p>
             </div>
         </div>
 
@@ -78,11 +92,39 @@ export default {
         margin: 20px 0 0 0 ;
         position: relative;
         
-        
         .switch {
             position: absolute;
             right: 18px;
             top: 15px;
+        }
+        i{
+            font-size: 50px;
+            color: $dark01;
+            margin-left: 43%;
+            margin-top: -40px;
+        }
+        .id{
+            margin-top: 10px
+        }
+        p{
+            margin: 0px 20px 0 30px;
+            font-size: 16px;
+        }
+        
+        .area{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            border-radius: 0 0 25px 25px;
+            background-color: $dark01;
+            p{
+                margin: 0;
+                font-size: 20px;
+                line-height: 50px;
+                display: flex;
+                justify-content: center;
+            }
         }
     }
 }
