@@ -1,6 +1,6 @@
 <script>
 import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
-import Idle from '@/components/Idle.vue';
+import Idle from '@/components/XIdle.vue';
 import DeviceOrRoomDiv from '@/components/DeviceOrRoomDiv.vue';
 import SearchDevice from '@/components/SearchDevice.vue';
 import CreateDeviceY from '@/components/CreateDeviceY.vue';

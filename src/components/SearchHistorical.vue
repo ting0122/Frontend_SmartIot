@@ -37,11 +37,13 @@ export default {
             <option value="使用中">使用中</option>
             <option value="閒置中">閒置中</option>
         </select>
-        <select name="" id="" v-model="this.createObj.type" >
-            <option value="">空間編號</option>
-            <option value="使用中">601</option>
-            <option value="閒置中">602</option>
-        </select>
+        <slot name="roomid">
+            <select name="" id="" v-model="this.createObj.type" >
+                <option value="">空間編號</option>
+                <option value="使用中">601</option>
+                <option value="閒置中">602</option>
+            </select>
+        </slot>
         <select name="" id="" v-model="this.createObj.type" >
             <option value="">設備類型</option>
             <option value="公司">冷氣</option>

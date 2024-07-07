@@ -1,13 +1,13 @@
 <script>
 import Energy from '@/components/Energy.vue';
-import CreateDevice from '@/components/CreateDevice.vue';
+import CreateDeviceY from '@/components/CreateDeviceY.vue';
 import CreateAndDeleteButtonNoUsing from '@/components/CreateAndDeleteButtonNoUsing.vue';
-import Using from '@/components/Using.vue';
-import Idle from '@/components/Idle.vue';
+import Switch from '@/components/Switch.vue';
+
 export default {
     data() {
         return {
-            divArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            dataArr:[{id:203154,type:"冷氣",name:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",name:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"}]
         };
     },
     created() {
@@ -21,10 +21,11 @@ export default {
     },
     components: {
         Energy,
-        CreateDevice,
+        CreateDeviceY,
         CreateAndDeleteButtonNoUsing,
-        Using,
-        Idle
+        Switch
+      
+      
     },
 
     methods: {
@@ -34,58 +35,159 @@ export default {
 </script>
 
 <template>
-    <Energy />
-    <div class="frontArea">
-        <div class="roomTitle">
-            <p><span>601</span><span>會議室</span></p>
-            <CreateAndDeleteButtonNoUsing />
+    <div class="outarr">
+
+        <div class="energy">
+            <Energy />  
         </div>
-        <div class="CreateDevice">
-            <CreateDevice />
-        </div>
-        <div class="roomState">
-            <Using />
-            <div class="device" v-for="(div, index) in divArr" :key="index">
-                <div class="switch">
-                    <Switch :id="'on-' + index" />
-                </div>
+        <div class="headerArea">
+            <div class="roomtitle">
+                <h2>602-會議室</h2><p>南方麒麟股份有限公司嘶嘶嘶嘶</p>
             </div>
-            <Idle/>
+            <CreateDeviceY>
+                <template #roomid>
+                   <p></p>
+                </template>
+            </CreateDeviceY>
+            <div class="botton">    
+                <CreateAndDeleteButtonNoUsing />
+            </div> 
+            <div class="out">
+                <div class="room" v-for="(data, index) in dataArr" :key="index">
+                    <div class="switch">
+                        <Switch :id="this.name + index" />
+                    </div>
+                    <p class="id">{{ data.id }}</p>
+                    <p>{{ data.type }}</p>
+                    <i class="fa-regular fa-snowflake"></i>
+                    <div class="area">
+                        <p>{{ data.name}}</p>
+                    </div>
+                </div>
+
+            </div>
+            
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
-
-.frontArea {
-    height: 586px;
-    width: 1189px;
-    background: $dark03;
-    margin-top: 25px;
-    border-radius: 35px;
-}
-
-.roomTitle {
-    height: 100px;
-    width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    p {
-        font-size: 32px;
-        font-weight: 500;
-        color: $white;
-    }
-}
-
-.CreateDevice {
-    width: 1189px;
+.outarr{
+    width: 1238px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items:end;
+    border-radius: 25px;
+    border: 1px solid black;
+
+    .energy{
+        width: 100%;
+        height: 341px;
+        background-color:$dark03;
+        border-radius: 25px;
+    }
+
+    .headerArea {
+        height: 120px;
+        width: 100%;
+        background: $dark03;  
+        margin-top: 25px;
+        border-radius: 25px;
+        position: relative;
+        padding-top: 20px;
+        .botton {
+            position: absolute;
+            right: 0;
+            top: 62px;
+        }
+        .roomtitle{
+            position: absolute;
+            display: flex;
+            align-items: center;
+            top: 10px;
+            left: 35px;
+            color: $black1;
+            p{
+                display: block;
+                font-size: 20px;
+                margin-left: 20px;
+            }
+        }
+        .out{
+            width: 100%;
+            height: 439px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            overflow-y: auto;
+            border: 1px solid black;
+            border-radius: 0 0 25px 25px;
+            &::-webkit-scrollbar {
+                width: 10px;
+            
+            }
+            
+            &::-webkit-scrollbar-button {
+                background: transparent;
+                height: 10px;
+            }
+            
+            &::-webkit-scrollbar-thumb {
+                background: $black1;
+                border-radius: 15px;
+            
+            }
+            
+            &::-webkit-scrollbar-track {
+                background:transparent;
+                border-radius: 15px;
+            }
+            .room {
+                width: 282px;
+                height: 150px;
+                background: $dark03;
+                border-radius: 25px;
+                margin: 20px 0 0 0 ;
+                position: relative;
+                
+                .switch {
+                    position: absolute;
+                    right: 18px;
+                    top: 15px;
+                }
+                i{
+                    font-size: 50px;
+                    color: $dark01;
+                    margin-left: 43%;
+                    margin-top: -40px;
+                }
+                .id{
+                    margin-top: 10px
+                }
+                p{
+                    margin: 0px 20px 0 30px;
+                    font-size: 16px;
+                }
+                .area{
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    height: 50px;
+                    border-radius: 0 0 25px 25px;
+                    background-color: $dark01;
+                    p{
+                        margin: 0;
+                        font-size: 20px;
+                        line-height: 50px;
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+
 }
 </style>
