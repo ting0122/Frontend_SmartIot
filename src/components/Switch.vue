@@ -23,7 +23,8 @@ export default {
 
     },
     props: [
-        "id"
+        "id",
+        "checked"
     ]
         
     
@@ -34,7 +35,7 @@ export default {
 <template>
     
     <div class="slideThree">
-        <input type="checkbox"  :id="id"  />
+        <input type="checkbox"  :id="id" :checked="checked" />
         <label :for="id"></label>
     </div>
 
@@ -90,7 +91,7 @@ export default {
     }
 
     input[type=checkbox] {
-        visibility: hidden;
+        // visibility: hidden;
 
         &:checked+label {
             left: 36px;

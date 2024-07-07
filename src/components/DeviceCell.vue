@@ -13,7 +13,7 @@ export default {
     
     },
     created() {
-        this.searchRoom();
+        // this.searchRoom();
     },
     methods: {
         searchRoom() {
