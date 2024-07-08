@@ -61,7 +61,11 @@ export default {
                 <template class="tab" v-slot:tab4>
                     <ErrorLog/>
                 </template>
+                <template #re>
+                    <p></p>
+                </template>
         
+               
             </BackBookMark>
 
         </div>

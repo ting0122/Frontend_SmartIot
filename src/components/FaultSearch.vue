@@ -62,14 +62,15 @@ export default {
             .name{
                 input{
                     width: 110px;
-                    height: 35px;
-                    border-radius: 30px;
-                    padding-left: 13px;
+                    height: 40px;
+                    border-radius: 35px;
+                    padding-left: 20px;
                     padding-right: 10px;
                     color: $white;
                     background-color: $dark02;
                     border: 0;
                     outline:none;
+                    font-size: 16px;
                 }
                 ::placeholder {
                     color: $white;
@@ -80,15 +81,16 @@ export default {
                 i{
                     font-style: normal;
                     margin-left: 10px;
-                    font-size: 14px;
+                    font-size: 16px;
                     color: $white;
                 }
                 select{
                     width: 100px;
-                    height: 35px;
-                    border-radius: 30px;
-                    padding-left: 5px;
+                    height: 40px;
+                    border-radius: 35px;
+                    padding-left: 10px;
                     color: $white;
+                    font-size: 16px;
                     background-color: $dark02;
                     border: 0;
                     outline:none;
@@ -96,7 +98,12 @@ export default {
             }
             .start_date{
                 margin-left: 20px;
-                position: relative;
+                width: 260px;
+                border-radius: 35px;
+                display: flex;
+                justify-content: center;
+                align-items: center;  
+                background-color: $dark02;
 
                 // i {
                 //     position: absolute;
@@ -128,10 +135,11 @@ export default {
             }
             .seach_list{
                 width: 60px;
-                height: 35px;
-                border-radius: 30px;
+                height: 40px;
+                border-radius: 35px;
                 border-width: 0;
                 margin-left: 20px;
+                font-size: 16px;
                 cursor: pointer;
                 background-color: $dark02;
                 color: $white;

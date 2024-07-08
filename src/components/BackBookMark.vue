@@ -49,12 +49,20 @@ export default {
         <div class="tabs">
             <button v-for="(item, index) in this.tabsPresent" class="tablink"
                 :class="{ 'active': isActive === tabsName[index] }"
-                @click="openTab(this.tabsName[index])">{{ item }}</button>
+                @click="openTab(this.tabsName[index])">{{ item }}
+            </button>
         </div>
         <!-- 同樣父vue頁面傳來需要幾個內頁 v-for插槽出來-->
         <div v-for="(item, index) in this.tabsName" :id="item" class="tabcontent">
             <slot :name="item"></slot>
         </div>
+        <slot name="re" >
+            <RouterLink to="/BackStage" >
+                <button class="re">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </RouterLink>
+        </slot>
     </div>
 </template>
 
@@ -63,6 +71,7 @@ export default {
 .tabArea {
     height: 100%;
     display: flex;
+    position: relative;
     .tabs {
         height: 100%;
         width: 233px;
@@ -94,10 +103,18 @@ export default {
         padding-left: 28px;
        
     }
+    .re{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        font-size: 18px;
+        bottom: 0;
+        left: 0;
+        background-color:$dark01 ;
+        cursor: pointer;
+    }
 }
-
-
-
 
 /* 顯示選中的頁籤內容 */
 .show {

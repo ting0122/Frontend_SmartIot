@@ -31,7 +31,14 @@ export default {
 
 <template>
     <div class="out">
-        <SearchHistorical/>
+        <div class="roomtitle">
+                <h2>602-會議室</h2><p>南方麒麟股份有限公司嘶嘶嘶嘶</p>
+        </div>
+        <SearchHistorical>
+            <template #roomid>
+                <p></p>
+            </template>
+        </SearchHistorical>
         <div class="down">
             <div class="history" v-for="(div, index) in divArr">
                 <div class="historyName"></div>
@@ -48,17 +55,32 @@ export default {
 
 .out {
     width: 1238px;
-    height: 100%;
+    height: 910px;
     display: flex;
     flex-direction: column;
     align-items:end;
     border-radius: 25px;
     border: 1px solid black;
-    
+    padding-top: 40px;
+    position: relative;
+    background-color: $dark03;
+    .roomtitle{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        top: 25px;
+        left: 35px;
+        color: $black1;
+        p{
+            display: block;
+            font-size: 20px;
+            margin-left: 20px;
+        }
+    }
 }
 .down{
     width: 100%;
-    height: 825px;
+    height: 100%;
     overflow-y: auto;
     border: 1px solid black;
     border-radius: 0 0 25px 25px;

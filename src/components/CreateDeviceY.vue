@@ -1,5 +1,4 @@
 <script>
-
 export default {
     data() {
         return {
@@ -51,12 +50,14 @@ export default {
             <option value="air_purifier">空氣清淨機</option>
             <option value="dehumidifier">除濕機</option>
         </select>
-        <select name="" id="" v-model="this.createObj.type" >
-            <option value="">所屬空間</option>
-            <option value="601">601</option>
-            <option value="602">602</option>
-            <option value="603">603</option>
-        </select>
+        <slot name="roomid">
+            <select name="" id="" v-model="this.createObj.type" >
+                <option value="">所屬空間</option>
+                <option value="601">601</option>
+                <option value="602">602</option>
+                <option value="603">603</option>
+            </select>
+        </slot>
         <button @click="this.createRoom()">新增</button>
     </div>
 </template>
@@ -72,7 +73,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     border-radius: 25px 25px 0 0 ;
-    
+    // border: 1px solid black;
     select{
         width: 126px;
         height: 40px;

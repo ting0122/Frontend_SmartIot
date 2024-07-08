@@ -2,6 +2,8 @@
 import location from '@/stores/location';
 import { mapState, mapActions } from 'pinia';
 import Switch from '@/components/Switch.vue';
+import ForestageSearchDevice from '@/components/ForestageSearchDevice.vue';
+
 export default {
     data() {
         return {
@@ -21,6 +23,8 @@ export default {
     },
     computed: {
         ...mapState(location, ['dataArr']),
+        ForestageSearchDevice
+    
     },
     methods: {
         ...mapActions(location, ['deviceStatus','searchRoom']),
@@ -33,6 +37,11 @@ export default {
 <template>
 
     <div class="down">
+        <ForestageSearchDevice>
+            <template #roomid>
+                <p></p>
+            </template>
+        </ForestageSearchDevice>
         <div class="oo">
             <div class="outArea" v-for="(data, index) in dataArr.devices" :key="index">
                 <div >
@@ -58,36 +67,35 @@ export default {
 .down {
     width: 900px;
     height: 650px;
-    padding: 27px 0px 16px 50px;
-    overflow-y: auto;
-
-    &::-webkit-scrollbar {
-        width: 13px;
-
-    }
-
-    &::-webkit-scrollbar-button {
-        background: transparent;
-        height: 30px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: $black1;
-        border-radius: 15px;
-
-    }
-
-    &::-webkit-scrollbar-track {
-        background: transparent;
-        border-radius: 15px;
-    }
-
-    .oo {
+    padding: 27px 0px 16px 50px;  
+    
+    .oo{
+        height: 598px;
         display: flex;
         flex-wrap: wrap;
         padding-left: 82px;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+            width: 13px;
 
-        .outArea {
+        }
+
+        &::-webkit-scrollbar-button {
+            background: transparent;
+            height: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $black1;
+            border-radius: 15px;
+
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 15px;
+        }
+        .outArea{
             position: relative;
             width: 250px;
             height: 200px;
