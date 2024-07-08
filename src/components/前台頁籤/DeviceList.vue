@@ -1,5 +1,6 @@
 <script>
 import Switch from '@/components/Switch.vue';
+import ForestageSearchDevice from '@/components/ForestageSearchDevice.vue';
 
 export default {
     data() {
@@ -14,6 +15,7 @@ export default {
     },
     components: {
         Switch,
+        ForestageSearchDevice
     
     },
     methods: {
@@ -39,10 +41,15 @@ export default {
 <template>
     
     <div class="down">
+        <ForestageSearchDevice>
+            <template #roomid>
+                <p></p>
+            </template>
+        </ForestageSearchDevice>
         <div class="oo">
             <div class="outArea" v-for="(data, index) in dataArr" :key="index">
                 <div class="switch">
-                        <Switch :id="index" />
+                    <Switch :id="index" />
                 </div>
                 <p class="id">{{ data.id }}</p>
                 <i class="fa-regular fa-snowflake"></i>
@@ -64,31 +71,33 @@ export default {
     width: 900px;
     height: 650px;
     padding: 27px 0px 16px 50px;  
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-        width: 13px;
-
-    }
-
-    &::-webkit-scrollbar-button {
-        background: transparent;
-        height: 30px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: $black1;
-        border-radius: 15px;
-
-    }
-
-    &::-webkit-scrollbar-track {
-        background: transparent;
-        border-radius: 15px;
-    }
+    
     .oo{
+        height: 598px;
         display: flex;
         flex-wrap: wrap;
         padding-left: 82px;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+            width: 13px;
+
+        }
+
+        &::-webkit-scrollbar-button {
+            background: transparent;
+            height: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $black1;
+            border-radius: 15px;
+
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 15px;
+        }
         .outArea{
             position: relative;
             width: 250px;

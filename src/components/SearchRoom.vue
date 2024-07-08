@@ -38,6 +38,11 @@ export default {
             <option value="閒置中">閒置中</option>
         </select>
         <select name="" id="" v-model="this.createObj.type" >
+            <option value="">房間編號</option>
+            <option value="601">601</option>
+            <option value="602">602</option>
+        </select>
+        <select name="" id="" v-model="this.createObj.type" >
             <option value="">空間類型</option>
             <option value="公司">公司</option>
             <option value="會議室">會議室</option>

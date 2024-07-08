@@ -20,7 +20,13 @@ export default {
     },
 
     methods: {
-
+        // 按鈕被點擊時通知父層並觸發父層方法
+        handleAddClick() {
+            this.$emit('add-click');
+        },
+        handleSearchClick() {
+            this.$emit('search-click');
+        }
     }
 };
 </script>
@@ -29,9 +35,9 @@ export default {
     <div class="buttonArea">
 
         <div class="createAndDeleteButton">
-            <button><i class="fa-solid fa-magnifying-glass" @click="handleSearchClick"></i></button>
+            <button  @click="handleSearchClick"><i class="fa-solid fa-magnifying-glass"></i></button>
             <button><i class="fa-solid fa-trash-can"></i></button>
-            <button><i class="fa-solid fa-circle-plus" @click="handleAddClick"></i></button>
+            <button @click="handleAddClick"><i class="fa-solid fa-circle-plus" ></i></button>
         </div>
     </div>
 </template>

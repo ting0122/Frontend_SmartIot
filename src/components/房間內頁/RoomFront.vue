@@ -3,11 +3,13 @@ import Energy from '@/components/Energy.vue';
 import CreateDeviceY from '@/components/CreateDeviceY.vue';
 import CreateAndDeleteButtonNoUsing from '@/components/CreateAndDeleteButtonNoUsing.vue';
 import Switch from '@/components/Switch.vue';
+import SearchDevice from '@/components/SearchDevice.vue';
 
 export default {
     data() {
         return {
-            dataArr:[{id:203154,type:"冷氣",name:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",name:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"}]
+            dataArr:[{id:203154,type:"冷氣",name:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",name:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"}],
+            showCreateRoom: false, // 用於控制顯示 Create 或 Search 组件
         };
     },
     created() {
@@ -21,15 +23,22 @@ export default {
     },
     components: {
         Energy,
-        CreateDeviceY,
         CreateAndDeleteButtonNoUsing,
-        Switch
+        Switch,
+        CreateDeviceY,
+        SearchDevice
       
       
     },
 
     methods: {
-
+        //以下兩個用於切換新增設備及搜尋設備2個元件的顯示
+        toggleCreateDevice() {
+            this.showCreateRoom = true;
+        },
+        toggleSearchDevice() {
+            this.showCreateRoom = false;
+        }
     }
 };
 </script>
@@ -44,13 +53,18 @@ export default {
             <div class="roomtitle">
                 <h2>602-會議室</h2><p>南方麒麟股份有限公司嘶嘶嘶嘶</p>
             </div>
-            <CreateDeviceY>
+            <CreateDeviceY v-if="showCreateRoom">
                 <template #roomid>
                    <p></p>
                 </template>
             </CreateDeviceY>
+            <SearchDevice v-else>
+                <template #roomid>
+                   <p></p>
+                </template>
+            </SearchDevice>
             <div class="botton">    
-                <CreateAndDeleteButtonNoUsing />
+                <CreateAndDeleteButtonNoUsing @add-click="toggleCreateDevice" @search-click="toggleSearchDevice"/>
             </div> 
             <div class="out">
                 <div class="room" v-for="(data, index) in dataArr" :key="index">
