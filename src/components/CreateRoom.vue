@@ -4,11 +4,11 @@ import { mapState, mapActions } from 'pinia';
 export default {
     data() {
         return {
-            createObj : {
+            
                 name: "",
                 area: "",
                 type: ""
-            }
+            
         };
     },
     created() {
@@ -32,8 +32,8 @@ export default {
 
 <template>
     <div class="createRoom">
-        <label for=""><input type="text" v-model="this.createObj.area" placeholder="空間編號"></label>
-        <select name="" id="" v-model="this.createObj.type" >
+        <label for=""><input type="text" v-model="this.area" placeholder="空間編號"></label>
+        <select name="" id="" v-model="this.type" >
             <option value="">空間類型</option>
             <option value="公司">公司</option>
             <option value="會議室">會議室</option>
@@ -43,8 +43,8 @@ export default {
             <option value="教室">教室</option>
             <option value="其他">其他</option>
         </select>
-        <label for=""><input type="text" v-model="this.createObj.name" placeholder="空間名稱"></label>
-        <button @click="this.createRoom(this.createObj.name,this.createObj.area,this.createObj.type)">新增</button>
+        <label for=""><input type="text" v-model="this.name" placeholder="空間名稱"></label>
+        <button @click="this.createRoom(this.name,this.area,this.type)">新增</button>
     </div>
 </template>
 
