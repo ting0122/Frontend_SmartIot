@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 export default defineStore("location", {
     state: () => ({
         isChecked: false,
-        dataArr:[],
+        dataArr: [],
 
 
     }),
@@ -30,7 +30,7 @@ export default defineStore("location", {
                     this.dataArr = data.devices
                 })
         },
-        deviceStatus(i,j,k,l,m){
+        deviceStatus(i, j, k, l, m) {
             let changeobj = {
                 id: i,
                 type: j,
@@ -48,8 +48,35 @@ export default defineStore("location", {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)                    
+                    console.log(data)
                 })
+        },
+        async searchDevices() {
+            const params = new URLSearchParams();
+
+            if (this.name) {
+                params.append('name', this.name);
+            }
+            if (this.type) {
+                params.append('type', this.type);
+            }
+            if (this.status !== null) {
+                params.append('status', this.status);
+            }
+
+            const url = `http://localhost:8080/devices/search?${params.toString()}`;
+
+            try {
+                const response = await fetch(url);
+                if (response.ok) {
+                    this.devices = await response.json();
+                } else {
+                    console.error('Failed to fetch devices:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Network error:', error);
+            }
         }
     }
+
 });
