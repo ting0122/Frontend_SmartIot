@@ -1,17 +1,17 @@
 <script>
-
+import location from '@/stores/location';
+import { mapState, mapActions } from 'pinia';
 export default {
     data() {
         return {
-            createObj: {
-                name: "",
-                area: "",
-                type: ""
-            }
+            name:"",
+            type:"",
+            area:"",
+            status:null
         };
     },
     created() {
-
+        this.searchRoom();
     },
     mounted() {
 
@@ -24,20 +24,21 @@ export default {
     },
 
     methods: {
-        
+        ...mapActions(location, ['searchRoom','searchOnlyRoom']),
     }
 };
 </script>
 
 <template>
     <div class="createRoom">
-        <label for=""><input type="text" v-model="this.createObj.area" placeholder="空間名稱"></label>
-        <select name="" id="" v-model="this.createObj.type" >
+        <label for=""><input type="text"  placeholder="空間名稱" v-model="this.name"></label>
+        <label for=""><input type="text"  placeholder="空間編號" v-model="this.area"></label>
+        <select name="" id="" v-model="this.status">
             <option value="">空間使用狀態</option>
-            <option value="使用中">使用中</option>
-            <option value="閒置中">閒置中</option>
+            <option :value=1>使用中</option>
+            <option :value=0>閒置中</option>
         </select>
-        <select name="" id="" v-model="this.createObj.type" >
+        <select name="" id=""  v-model="this.type">
             <option value="">空間類型</option>
             <option value="公司">公司</option>
             <option value="會議室">會議室</option>
@@ -47,7 +48,7 @@ export default {
             <option value="教室">教室</option>
             <option value="其他">其他</option>
         </select>
-        <button @click="this.createRoom()">搜尋</button>
+        <button @click="this.searchOnlyRoom(this.name,this.type,this.area,this.status)">搜尋</button>
     </div>
 </template>
 

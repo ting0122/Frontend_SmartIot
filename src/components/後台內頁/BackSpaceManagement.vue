@@ -1,4 +1,6 @@
 <script>
+import location from '@/stores/location';
+import { mapState, mapActions } from 'pinia';
 import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
 import Switch from '@/components/Switch.vue';
 import Energy from '@/components/Energy.vue';
@@ -7,24 +9,25 @@ import SearchRoom from '@/components/SearchRoom.vue';
 export default {
     data() {
         return {
-            dataArr: [{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"公司",roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"公司",roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"公司",roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"公司",roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"},{id:203154,area:602,type:"會議室",roommane:"會議室"}],
+
 
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
         };
     },
     created() {
-        // this.searchRoom()
+        // this.searchRoom();
     },
     mounted() {
 
     },
     computed: {
+        ...mapState(location, ['dataArr']),
         //用來隱藏超出指定長度的空間名稱內容
         truncatedContent() {
             return this.dataArr.map(data => {
                 return {
                     ...data,
-                    truncatedContent: data.roommane.length > 9 ? data.roommane.slice(0, 9) + '...' : data.roommane
+                    truncatedContent: data.name.length > 9 ? data.name.slice(0, 9) + '...' : data.name
                 };
             });
         }
@@ -38,19 +41,7 @@ export default {
     },
 
     methods: {
-        searchRoom() {
-            fetch("http://localhost:8080/rooms", {
-                method: "get",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify()
-            })
-                // .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                })
-        },
+        ...mapActions(location, ['searchRoom','searchOnlyRoom']),
         //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
         toggleCreateRoom() {
             this.showCreateRoom = true;

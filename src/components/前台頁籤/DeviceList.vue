@@ -34,7 +34,7 @@ export default {
 
     <div class="down">
         <div class="oo">
-            <div class="outArea" v-for="(data, index) in dataArr" :key="index">
+            <div class="outArea" v-for="(data, index) in dataArr.devices" :key="index">
                 <div >
                     <div class="switch">
                         <Switch :id="data.id" :checked="data.status" @change="deviceStatus(data.id,data.type,data.name,1,1)"/>

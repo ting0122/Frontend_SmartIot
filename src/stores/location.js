@@ -16,8 +16,10 @@ export default defineStore("location", {
         toggleCheck() {
             this.isChecked = !this.isChecked;
         },
+        //進入頁面搜尋房間或是房間id
         searchRoom(i) {
-            fetch(`http://localhost:8080/rooms/${i}`, {
+            const url = i ? `rooms/${i}` : "rooms";
+            fetch(`http://localhost:8080/${url}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json"
@@ -27,9 +29,12 @@ export default defineStore("location", {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    this.dataArr = data.devices
+                    this.dataArr = data
+                    console.log(this.dataArr)
                 })
         },
+
+        //修改設備狀態或欄位
         deviceStatus(i, j, k, l, m) {
             let changeobj = {
                 id: i,
@@ -37,7 +42,6 @@ export default defineStore("location", {
                 name: k,
                 status: l,
                 roomId: m
-
             }
             fetch(`http://localhost:8080/devices`, {
                 method: "post",
@@ -51,32 +55,58 @@ export default defineStore("location", {
                     console.log(data)
                 })
         },
-        async searchDevices() {
+        //搜尋列和是否使用中
+        searchOnlyRoom(i, j, k, l) {
             const params = new URLSearchParams();
-
-            if (this.name) {
-                params.append('name', this.name);
+            //this.name 
+            if (i) {
+                params.append('name', i);
             }
-            if (this.type) {
-                params.append('type', this.type);
+            //this.type
+            if (j) {
+                params.append('type', j);
             }
-            if (this.status !== null) {
-                params.append('status', this.status);
+            //this.area
+            if (k) {
+                params.append('area', k);
             }
-
-            const url = `http://localhost:8080/devices/search?${params.toString()}`;
-
-            try {
-                const response = await fetch(url);
-                if (response.ok) {
-                    this.devices = await response.json();
-                } else {
-                    console.error('Failed to fetch devices:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Network error:', error);
+            //this.status
+            if ( l !== null) {
+                params.append('status', l);
             }
-        }
+            fetch(`http://localhost:8080/rooms/search?${params.toString()}`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify()
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    this.dataArr = data
+                    console.log(this.dataArr)
+                })
+        },
+        createRoom(i,j,k) {
+            let obj = {
+                name: i,
+                area: j,
+                type: k
+            }
+            fetch("http://localhost:8080/rooms", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(obj)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    this.searchRoom()
+                })
+        },
     }
 
 });

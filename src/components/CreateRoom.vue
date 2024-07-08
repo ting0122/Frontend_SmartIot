@@ -1,9 +1,10 @@
 <script>
-
+import location from '@/stores/location';
+import { mapState, mapActions } from 'pinia';
 export default {
     data() {
         return {
-            createObj: {
+            createObj : {
                 name: "",
                 area: "",
                 type: ""
@@ -24,19 +25,7 @@ export default {
     },
 
     methods: {
-        createRoom() {
-            fetch("http://localhost:8080/rooms", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(this.createObj)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                })
-        },
+        ...mapActions(location, ['createRoom']),
     }
 };
 </script>
@@ -46,11 +35,16 @@ export default {
         <label for=""><input type="text" v-model="this.createObj.area" placeholder="空間編號"></label>
         <select name="" id="" v-model="this.createObj.type" >
             <option value="">空間類型</option>
+            <option value="公司">公司</option>
             <option value="會議室">會議室</option>
-            <option value="公共空間">公共空間</option>
+            <option value="公共區域">公共區域</option>
+            <option value="機房">機房</option>
+            <option value="廁所">廁所</option>
+            <option value="教室">教室</option>
+            <option value="其他">其他</option>
         </select>
         <label for=""><input type="text" v-model="this.createObj.name" placeholder="空間名稱"></label>
-        <button @click="this.createRoom()">新增</button>
+        <button @click="this.createRoom(this.createObj.name,this.createObj.area,this.createObj.type)">新增</button>
     </div>
 </template>
 
