@@ -52,10 +52,11 @@ export default {
             .name{
                 input{
                     width: 110px;
-                    height: 35px;
-                    border-radius: 30px;
-                    padding-left: 13px;
+                    height: 40px;
+                    border-radius: 35px;
+                    padding-left: 20px;
                     padding-right: 10px;
+                    font-size: 16px;
                     color: $white;
                     background-color: $dark02;
                     border: 0;
@@ -67,40 +68,46 @@ export default {
             }
             .start_date{
                 margin-left: 20px;
-                position: relative;
+                width: 260px;
+                border-radius: 35px;
+                display: flex;
+                justify-content: center;
+                align-items: center;  
+                background-color: $dark02;
 
-                i {
-                    position: absolute;
-                    right: 10px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    width: 20px;
-                    height: 20px;
-                    color: $white;
-                    background: transparent; /* 自定义图标颜色 */
-                    pointer-events: none;
-                }
-                .date{
-                    width: 150px;
-                    height: 35px;
-                    border-radius: 30px;
-                    padding-left: 9px;
-                    padding-right: 10px;
-                    color: $white;
-                    background-color: $dark02;
-                    border: 0;
-                    outline:none;
-                }
-                ::-webkit-calendar-picker-indicator {
-                    opacity: 0; /* 圖示設為透明 */
-                }
+                // i {
+                //     position: absolute;
+                //     right: 10px;
+                //     top: 50%;
+                //     transform: translateY(-50%);
+                //     width: 20px;
+                //     height: 20px;
+                //     color: $white;
+                //     background: transparent; /* 自定义图标颜色 */
+                //     pointer-events: none;
+                // }
+                // .date{
+                //     width: 150px;
+                //     height: 35px;
+                //     border-radius: 30px;
+                //     padding-left: 9px;
+                //     padding-right: 10px;
+                //     color: $white;
+                //     background-color: $dark02;
+                //     border: 0;
+                //     outline:none;
+                // }
+                // ::-webkit-calendar-picker-indicator {
+                //     opacity: 0; /* 圖示設為透明 */
+                // }
                 }
             .seach_list{
-                width: 60px;
-                height: 35px;
-                border-radius: 30px;
-                border-width: 0;
+                width: 88px;
+                height: 40px;
+                border-radius: 35px;
+                border: 0;
                 margin-left: 20px;
+                font-size: 16px;
                 cursor: pointer;
                 background-color: $dark02;
                 color: $white;

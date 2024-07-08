@@ -31,9 +31,9 @@ export default {
 
 <template>
     <div class="createRoom">
-        <label for=""><input type="text" v-model="this.createObj.area" placeholder="設備名稱"></label>
+        <input type="text" v-model="this.createObj.area" placeholder="設備名稱">
         <select name="" id="" v-model="this.createObj.type" >
-            <option value="">設備使用狀態</option>
+            <option value="">設備狀態</option>
             <option value="使用中">使用中</option>
             <option value="閒置中">閒置中</option>
         </select>
@@ -54,6 +54,10 @@ export default {
             <option value="機房">除濕機</option>
         </select>
         <button @click="this.createRoom()">搜尋</button>
+        <div class="createAndDeleteButton">
+            <button ><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button><i class="fa-solid fa-trash-can"></i></button>
+        </div>
     </div>
 </template>
 
@@ -62,23 +66,22 @@ export default {
 
 .createRoom {
     width: 100%;
-    height: 123px;
-    background: $dark03;
+    height: 71px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 25px 25px 0 0 ;
+    position: relative;
     
     select{
-        width: 155px;
+        width: 125px;
         height: 40px;
         font-size: 16px;
         border: none;
         border-radius: 35px;
         background: $dark02;
         outline: none;
-        padding-left: 13px;
-        margin-left: 30px;
+        padding-left: 20px;
+        margin-left: 20px;
         color: $white;
     }
     input{
@@ -89,10 +92,12 @@ export default {
         outline: none;
         background: $dark02;
         font-size: 16px;
-        padding-left: 13px;
+        padding: 0;
+        padding-left: 20px;
         color: $white;
-        margin-left: 30px;
+        margin-left: 83px;
     }
+
     ::placeholder {
         color: $white;
     }
@@ -105,7 +110,26 @@ export default {
         background: $dark02;
         color: $white;
         font-size: 16px;
-        margin-left: 30px;
+        margin-left: 20px;
+    }
+    .createAndDeleteButton {  
+        position: absolute;
+        right: 0;   
+        height: 40px;
+        display: flex;
+        // margin-right: 36px;
+    
+        button {
+            height: 40px;
+            width: 40px;
+            background: $dark02;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            color: $white;
+            font-size: 20px;
+            line-height: 40px;
+        }
     }
 }
 </style>

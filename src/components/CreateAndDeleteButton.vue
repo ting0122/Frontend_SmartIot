@@ -40,9 +40,9 @@ export default {
         </div>
         <div class="createAndDeleteButton">
             
-            <button><i class="fa-solid fa-magnifying-glass" @click="handleSearchClick"></i></button>
+            <button @click="handleSearchClick"><i class="fa-solid fa-magnifying-glass" ></i></button>
             <button><i class="fa-solid fa-trash-can"></i></button>
-            <button><i class="fa-solid fa-circle-plus" @click="handleAddClick"></i></button>
+            <button @click="handleAddClick"><i class="fa-solid fa-circle-plus" ></i></button>
         </div>
     </div>
 </template>
