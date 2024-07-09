@@ -111,6 +111,7 @@ export default {
         color: $white;
         font-size: 16px;
         margin-left: 20px;
+        padding: 0;
     }
     .createAndDeleteButton {  
         position: absolute;

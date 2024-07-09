@@ -8,7 +8,7 @@ export default {
             name:"呼呼",
             type:"空氣清淨機",
             fan_speed:"",
-            air_quality:"10",
+            air_quality:10,
             operating_time:"1.62",
 
         };
@@ -82,11 +82,9 @@ export default {
                     </div>
                 </div>
                 <div class="rightDownRight">
-                    <span>PM2.5含量</span>
+                    <span>當前<br>PM2.5含量</span>
                     <div class="mode">
-                        <i class="fa-solid fa-caret-up" @click="increaseTemp"></i>
                         <p>{{ this.air_quality }}</p>
-                        <i class="fa-solid fa-caret-down" @click="decreaseTemp"></i>
                     </div>
                 </div>
             </div>
@@ -182,7 +180,6 @@ export default {
                         height: 30px;
                         width: 100%;
                         margin-left: 45px;
-                        
                         p{
                             line-height: 30px;
                             margin-left: 10px;
@@ -226,14 +223,11 @@ export default {
                     padding-top: 55px;
                     color: $black1;
                     
-                    i{
-                        font-size: 25px;
-                        cursor: pointer;
-                    }
+                   
                     p{
-                        font-size: 35px;
+                        font-size: 38px;
                         margin: 0;
-                        margin-bottom: 10px;
+                        margin-top: 27px;
                     }
                 }
             }
