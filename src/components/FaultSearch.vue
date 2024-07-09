@@ -64,6 +64,7 @@ export default {
                     width: 110px;
                     height: 40px;
                     border-radius: 35px;
+                    padding: 0;
                     padding-left: 20px;
                     padding-right: 10px;
                     color: $white;
@@ -99,6 +100,7 @@ export default {
             .start_date{
                 margin-left: 20px;
                 width: 260px;
+                height: 40px;
                 border-radius: 35px;
                 display: flex;
                 justify-content: center;
@@ -140,6 +142,7 @@ export default {
                 border-width: 0;
                 margin-left: 20px;
                 font-size: 16px;
+                padding: 0;
                 cursor: pointer;
                 background-color: $dark02;
                 color: $white;
