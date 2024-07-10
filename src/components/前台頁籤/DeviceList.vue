@@ -33,10 +33,11 @@ export default {
     },
     components: {
         Switch,
+        ForestageSearchDevice,
     },
     computed: {
-        ...mapState(location, ['dataArr']),
-        ForestageSearchDevice
+        // ...mapState(location, ['dataArr']),
+        
 
     },
     methods: {
@@ -104,6 +105,7 @@ export default {
                 <p></p>
             </template>
         </ForestageSearchDevice>
+
         <div class="oo">
             <!-- <div class="outArea" v-for="(data, index) in dataArr.devices" :key="index">
                 <div>
@@ -258,7 +260,7 @@ export default {
                 </transition>
             </div>
 
-            <span>{{ data.name }}</span>
+            <!-- <span>{{ data.name }}</span> -->
             <!-- </div>
             </div> -->
         </div>
