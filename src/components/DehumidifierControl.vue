@@ -9,7 +9,8 @@ export default {
             type:"除濕機",
             tank_capacity:"150",  //水箱剩餘容量
             target_humidity:55,  //目標濕度
-            fan_speed:""
+            fan_speed:"",
+            current_humidity:55,  //當前濕度
         };
     },
     components: {
@@ -51,21 +52,25 @@ export default {
         </div>
         <div class="right">
             <div class="rightUp">
-                <p class="id">{{this.name }}</p>
+                <p class="id">總控台</p>
               
             </div>
             <div class="rightDown">
                 <div class="rightDownLeft">
                     <div class="target_temp">
-                        <span>水箱剩餘容量</span>
+                        <span>當前濕度</span>
                         <div class="time">
-                            <i class="fa-solid fa-glass-water"></i>
-                            <p>{{ this.tank_capacity }}</p>
-                            <P>ml</P>
+                            <i class="fa-solid fa-droplet"></i>
+                            <p>{{ this.current_humidity }}</p>
+                            <P>%</P>
                         </div>
                     </div>
                     <div class="fan_speed target_temp">
                         <span>運轉強度</span>
+                        <div  @click="setFanSpeed('自動')" :class="{ selected: fan_speed === '自動'}">
+                            <i class="fa-solid fa-a"></i>
+                            <P v-show="fan_speed === '自動'">自動</P>
+                        </div>
                         <div  @click="setFanSpeed('低')" :class="{ selected: fan_speed === '低' || fan_speed === '中' || fan_speed === '高'}">
                             <i class="fa-solid fa-wind"> </i>
                             <P v-show="fan_speed === '低'">低</P>
@@ -140,6 +145,7 @@ export default {
         }
         .rightUp{
             width: 100%;
+            color: $black1;
         }
         .rightDown{
             width: 100%;
@@ -172,7 +178,7 @@ export default {
                         cursor: pointer;
                     }
                     div{
-                        width: 50px;
+                        width: 33px;
                         margin-top: 35px;
                         text-align: center;
                     }
@@ -180,12 +186,12 @@ export default {
                         display: flex;
                         height: 30px;
                         width: 100%;
-                        margin-left: 57px;
+                        margin-left: 65px;
                         
                         p{
                             line-height: 30px;
                             margin-left: 10px;
-                            font-size: 22px;
+                            font-size: 27px;
                             color: $black1;
                             cursor:default;
                         }

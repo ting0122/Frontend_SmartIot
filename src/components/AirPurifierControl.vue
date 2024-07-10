@@ -52,7 +52,7 @@ export default {
         </div>
         <div class="right">
             <div class="rightUp">
-                <p class="id">{{this.name }}</p>
+                <p class="id">總控台</p>
               
             </div>
             <div class="rightDown">
@@ -67,6 +67,10 @@ export default {
                     </div>
                     <div class="fan_speed target_temp">
                         <span>風量</span>
+                        <div  @click="setFanSpeed('自動')" :class="{ selected: fan_speed === '自動'}">
+                            <i class="fa-solid fa-a"></i>
+                            <P v-show="fan_speed === '自動'">自動</P>
+                        </div>
                         <div  @click="setFanSpeed('低')" :class="{ selected: fan_speed === '低' || fan_speed === '中' || fan_speed === '高'}">
                             <i class="fa-solid fa-wind"> </i>
                             <P v-show="fan_speed === '低'">低</P>
@@ -82,7 +86,7 @@ export default {
                     </div>
                 </div>
                 <div class="rightDownRight">
-                    <span>當前<br>PM2.5含量</span>
+                    <span>當前<br>空氣品質</span>
                     <div class="mode">
                         <p>{{ this.air_quality }}</p>
                     </div>
@@ -139,6 +143,7 @@ export default {
         }
         .rightUp{
             width: 100%;
+            color: $black1;
         }
         .rightDown{
             width: 100%;
@@ -171,7 +176,7 @@ export default {
                         cursor: pointer;
                     }
                     div{
-                        width: 50px;
+                        width: 33px;
                         margin-top: 35px;
                         text-align: center;
                     }
@@ -185,12 +190,14 @@ export default {
                             margin-left: 10px;
                             font-size: 22px;
                             color: $black1;
+                            cursor: default;
                         }
                         i{
                             font-size: 25px;
                             line-height: 34px;
                             color: $black1;
-                            margin-right: 10px
+                            margin-right: 10px;
+                            cursor: default;
                         }
                     }
                 }
@@ -216,14 +223,12 @@ export default {
                 span{
                     position: absolute;
                     color: $black1;
-                    left: 16px;
+                    left: 23px;
                     top: 10px;
                 }
                 .mode{
                     padding-top: 55px;
-                    color: $black1;
-                    
-                   
+                    color: $black1;    
                     p{
                         font-size: 38px;
                         margin: 0;
