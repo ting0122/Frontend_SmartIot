@@ -43,6 +43,9 @@ export default {
 
 <template>
     <div class="background">
+        <div class="goBackstage">
+            <RouterLink :to="'/'">去前台</RouterLink>
+        </div>
         <div class="showArea">
             <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
             <!-- 這邊透過父傳子 父是這個vue傳想要幾個內頁給BookMark BookMark會v-for傳過去的這個陣列並生成插槽 -->
@@ -83,6 +86,12 @@ export default {
         height: 100dvh;
         background: $black;
         position: relative;
+        .goBackstage{
+        position: absolute;
+            font-size: 30px;
+            top: 20px;
+            left: 20px;
+        }
         .showArea{
             position: absolute;
             left: 50%;

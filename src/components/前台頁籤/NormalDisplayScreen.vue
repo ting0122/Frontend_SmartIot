@@ -43,6 +43,7 @@ export default {
     <div class="down">
         <DeviceCell />
     </div>
+    
 
 
 </template>
@@ -96,5 +97,6 @@ export default {
         width: 957px;
     }
 }
+
 
 </style>

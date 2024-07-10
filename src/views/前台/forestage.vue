@@ -46,6 +46,9 @@ export default {
 
 <template>
     <div class="background">
+        <div class="goBackstage">
+            <RouterLink :to="'/BackStage'">去後台</RouterLink>
+        </div>
         <div class="ipad">
             <div class="showArea">
                 <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
@@ -88,7 +91,12 @@ export default {
     background-image: url(../../img/slightly.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-
+    .goBackstage{
+        position: absolute;
+        font-size: 30px;
+        top: 20px;
+        left: 20px;
+    }
     .ipad {
         position: fixed;
         left: 50%;
