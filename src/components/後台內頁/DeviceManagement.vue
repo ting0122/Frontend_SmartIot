@@ -11,6 +11,7 @@ export default {
         return {
             dataArr:[{id:203154,type:"冷氣",mane:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",mane:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"}],
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
+            isChecked: false,  //處理switch子元件值得同步
         };
     },
     created() {
@@ -21,6 +22,15 @@ export default {
     },
     computed: {
         ...mapState(location, ['deviceArr']),
+        //用來隱藏超出指定長度的空間名稱內容
+        truncatedContent() {
+            return this.deviceArr.map(data => {
+                return {
+                    ...data,
+                    truncatedContent: data.name.length > 9 ? data.name.slice(0, 9) + '...' : data.name
+                };
+            });
+        },
     },
     components: {
         CreateAndDeleteButton,
@@ -31,7 +41,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['searchDevice']),
+        ...mapActions(location, ['searchDevice','deviceStatus']),
         //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
         toggleCreateRoom() {
             this.showCreateRoom = true;
@@ -39,14 +49,11 @@ export default {
         toggleSearchRoom() {
             this.showCreateRoom = false;
         },
-        //用來隱藏超出指定長度的空間名稱內容
-        truncatedContent() {
-            return this.dataArr.map(data => {
-                return {
-                    ...data,
-                    truncatedContent: data.name.length > 9 ? data.name.slice(0, 9) + '...' : data.name
-                };
-            });
+        
+        updateDeviceStatus(index, status) {
+            this.deviceArr[index].status = status;
+            // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
+            console.log('設備開關狀態',this.deviceArr)
         }
     }
 };
@@ -65,9 +72,9 @@ export default {
         </CreateAndDeleteButton>
 
         <div class="deviceDiv">
-            <div class="room" v-for="(data, index) in deviceArr" :key="index">
+            <div class="room" v-for="(data, index) in truncatedContent" :key="index">
                 <div class="switch">
-                    <Switch :id="data.id" />
+                    <Switch :id="data.id" v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)"/>
                 </div>
                 <p class="id">{{ data.id }}</p>
                 <p>{{ data.type }}</p>
