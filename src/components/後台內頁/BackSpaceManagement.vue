@@ -62,7 +62,7 @@ export default {
         <div class="rooms">
             <div class="room" v-for="(data, index) in truncatedContent" :key="index">
                 <div class="switch">
-                    <Switch :id="'on-' + index" />
+                    <Switch :id="data.id" :checked="data.status === true"/>
                 </div>
                 <p>{{ data.area }}-{{ data.type }}</p>
                 <div class="area">

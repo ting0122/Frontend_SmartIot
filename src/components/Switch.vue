@@ -36,6 +36,7 @@ export default {
     
     <div class="slideThree">
         <input type="checkbox"  :id="id" :checked="checked" />
+        <span :class="{ selected: checked }"></span>
         <label :for="id"></label>
     </div>
 
