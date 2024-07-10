@@ -33,8 +33,8 @@ export default {
         <!-- <Announcement /> -->
         <!-- <ACcontrol /> -->
         <!-- <AirPurifierControl/> -->
-        <!-- <DehumidifierControl/> -->
-        <lampControl/>
+        <DehumidifierControl/>
+        <!-- <lampControl/> -->
         <ElectricityConsumptionData />
     </div>
     <div class="middle">

@@ -144,9 +144,9 @@ export default {
                                 <i class="fa-regular fa-snowflake"></i>
                                 <P>冷氣</P>
                             </div>
-                            <div @click="setMode(index, '除溼')" :class="{ selected: data.mode === '除溼' }">
-                                <i class="fa-solid fa-droplet"></i>
-                                <P>除溼</P>
+                            <div @click="setMode(index, '送風')" :class="{ selected: data.mode === '送風' }">
+                                <i class="fa-solid fa-fan"></i>
+                                <P>送風</P>
                             </div>
                         </div>
                         <div v-if="data.type === '冷氣'" class="AC">
@@ -164,6 +164,10 @@ export default {
                                 <i class="fa-solid fa-wind"> </i>
                                 <P :class="{ hidden: data.fan_speed !== '低' }">低</P>
                             </div>
+                            <!-- <div  @click="setFanSpeed(index,'自動')" :class="{ selected: data.fan_speed === '自動'}">
+                                <i class="fa-solid fa-a"></i>
+                                <P :class="{ hidden: data.fan_speed !== '自動' }">自動</P>
+                            </div> -->
                         </div>
                         <div v-if="data.type === '冷氣'" class="AC">
                             <div class="mode">
@@ -200,7 +204,7 @@ export default {
                         <div v-if="data.type === '空氣清淨機'" class="Air">
                             <div class="mode">
                                 <p>{{ data.air_quality }}</p>
-                                <span>當前<br>PM2.5含量</span>
+                                <span>當前<br>空氣品質</span>
                             </div>
                         </div>
                         <!-- 以下是除濕機 -->
@@ -537,7 +541,7 @@ export default {
                             color: $black1;
                             text-align: center;
                             margin: 0;
-                            left: 227px;
+                            left: 233px;
                             top: 3px;
                             font-size: 14px;
                         }

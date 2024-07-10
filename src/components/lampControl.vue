@@ -38,7 +38,7 @@ export default {
         </div>
         <div class="right">
             <div class="rightUp">
-                <p class="id">{{this.name }}</p>
+                <p class="id">總控台</p>
             </div>
             <div class="rightDown">
                 <div class="target_temp">
@@ -113,6 +113,7 @@ export default {
         }
         .rightUp{
             width: 100%;
+            color: $black1;
         }
         .rightDown{
             width: 100%;

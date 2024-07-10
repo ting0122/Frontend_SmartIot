@@ -52,8 +52,7 @@ export default {
         </div>
         <div class="right">
             <div class="rightUp">
-                <p class="id">{{this.name }}</p>
-              
+                <p class="id">總控台</p>
             </div>
             <div class="rightDown">
                 <div class="rightDownLeft">
@@ -67,13 +66,17 @@ export default {
                             <i class="fa-regular fa-snowflake"></i>
                             <P>冷氣</P>
                         </div>
-                        <div @click="setMode('除溼')" :class="{ selected: mode === '除溼' }">
-                            <i class="fa-solid fa-droplet"></i>
-                            <P>除溼</P>
+                        <div @click="setMode('送風')" :class="{ selected: mode === '送風' }">
+                            <i class="fa-solid fa-fan"></i>
+                            <P>送風</P>
                         </div>
                     </div>
                     <div class="fan_speed target_temp">
                         <span>風量</span>
+                        <div  @click="setFanSpeed('自動')" :class="{ selected: fan_speed === '自動'}">
+                            <i class="fa-solid fa-a"></i>
+                            <P v-show="fan_speed === '自動'">自動</P>
+                        </div>
                         <div  @click="setFanSpeed('低')" :class="{ selected: fan_speed === '低' || fan_speed === '中' || fan_speed === '高'}">
                             <i class="fa-solid fa-wind"> </i>
                             <P v-show="fan_speed === '低'">低</P>
@@ -92,7 +95,7 @@ export default {
                     <span>溫度</span>
                     <div class="mode">
                         <i class="fa-solid fa-caret-up" @click="increaseTemp"></i>
-                        <p>{{ this.target_temp }}</p>
+                        <p>{{ this.target_temp }}˚C</p>
                         <i class="fa-solid fa-caret-down" @click="decreaseTemp"></i>
                     </div>
                 </div>
@@ -148,6 +151,7 @@ export default {
         }
         .rightUp{
             width: 100%;
+            color: $black1;
         }
         .rightDown{
             width: 100%;
@@ -180,7 +184,7 @@ export default {
                         cursor: pointer;
                     }
                     div{
-                        width: 50px;
+                        width: 33px;
                         margin-top: 35px;
                         text-align: center;
 
