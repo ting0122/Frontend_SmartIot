@@ -129,7 +129,8 @@ export default defineStore("location", {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    this.searchRoom(this.localRoomId)
+                    // this.searchRoom(this.localRoomId)
+                    this.searchDevice(null, null, null, null)
                 })
         },
         //搜尋設備
