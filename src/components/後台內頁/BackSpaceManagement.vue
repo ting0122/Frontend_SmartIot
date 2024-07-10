@@ -9,8 +9,6 @@ import SearchRoom from '@/components/SearchRoom.vue';
 export default {
     data() {
         return {
-
-
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
         };
     },
@@ -21,10 +19,10 @@ export default {
 
     },
     computed: {
-        ...mapState(location, ['dataArr']),
+        ...mapState(location, ['roomArr']),
         //用來隱藏超出指定長度的空間名稱內容
         truncatedContent() {
-            return this.dataArr.map(data => {
+            return this.roomArr.map(data => {
                 return {
                     ...data,
                     truncatedContent: data.name.length > 9 ? data.name.slice(0, 9) + '...' : data.name
@@ -41,14 +39,14 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['searchRoom','searchOnlyRoom']),
+        ...mapActions(location, ['searchRoom']),
         //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
         toggleCreateRoom() {
             this.showCreateRoom = true;
         },
         toggleSearchRoom() {
             this.showCreateRoom = false;
-        }
+        },
     }
 };
 </script>
@@ -58,17 +56,18 @@ export default {
         <Energy />
         <!-- 根據 showCreateRoom 的值決定顯示 CreateRoom 或 SearchRoom 组件 -->
         <CreateRoom v-if="showCreateRoom" />
-        <SearchRoom v-else /> 
+        <SearchRoom v-else />
         <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
         <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" />
         <div class="rooms">
             <div class="room" v-for="(data, index) in truncatedContent" :key="index">
                 <div class="switch">
-                    <Switch :id="'on-' +index" />
+                    <Switch :id="'on-' + index" />
                 </div>
                 <p>{{ data.area }}-{{ data.type }}</p>
                 <div class="area">
-                    <span>{{ data.truncatedContent }}</span>
+                    <RouterLink class="routerItem" @click="searchRoom(data.id)" to="/RoomConsole"><span>{{
+                            data.truncatedContent }}</span></RouterLink>
                 </div>
             </div>
         </div>
@@ -79,15 +78,16 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 
-.outarr{
+.outarr {
     width: 1238px;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items:end;
+    align-items: end;
     border-radius: 25px;
     border: 1px solid black;
     background-color: $dark02;
+
     .rooms {
         width: 100%;
         height: 609px;
@@ -97,50 +97,53 @@ export default {
         overflow-y: auto;
         // background-color: $dark01;
         border: 1px solid black;
+
         &::-webkit-scrollbar {
             width: 10px;
-            
+
         }
-    
+
         &::-webkit-scrollbar-button {
             background: transparent;
             height: 10px;
         }
-    
+
         &::-webkit-scrollbar-thumb {
             background: $black1;
             border-radius: 15px;
-            
+
         }
-    
+
         &::-webkit-scrollbar-track {
             background: transparent;
             border-radius: 15px;
         }
     }
-    
+
     .room {
         width: 282px;
         height: 150px;
         background: $dark03;
         border-radius: 25px;
-        margin: 20px 0 0 0 ;
+        margin: 20px 0 0 0;
         position: relative;
-    
+
         .switch {
             position: absolute;
             right: 18px;
             top: 15px;
         }
-        p{
+
+        p {
             margin: 50px 20px 0 30px;
             font-size: 16px;
         }
-        .area{
+
+        .area {
             margin: 0 20px 0 30px;
             font-size: 20px;
             font-weight: 600;
-            color:$black1;
+            color: $black1;
         }
     }
 

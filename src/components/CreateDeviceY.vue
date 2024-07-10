@@ -1,12 +1,14 @@
 <script>
+import location from '@/stores/location';
+import { mapState, mapActions } from 'pinia';
 export default {
     data() {
         return {
-            createObj: {
+            
                 name: "",
                 type: "",
-                roomId:1
-            }
+                
+            
         };
     },
     created() {
@@ -16,49 +18,30 @@ export default {
 
     },
     computed: {
-
+        ...mapState(location, ['localRoomId']),
     },
     components: {
 
     },
 
     methods: {
-        createRoom() {
-            fetch("http://localhost:8080/devices", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(this.createObj)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                })
-        },
+        ...mapActions(location, ['deviceStatus']),
     }
 };
 </script>
 
 <template>
     <div class="createRoom">
-        <label for=""><input type="text" v-model="this.createObj.name" placeholder="設備名稱"></label>
-        <select name="" id="" v-model="this.createObj.type" >
+        <label for=""><input type="text" v-model="this.name" placeholder="設備名稱"></label>
+        <select name="" id="" v-model="this.type" >
             <option value="">設備類型</option>
-            <option value="air_conditioner">冷氣</option>
-            <option value="light">電燈</option>
-            <option value="air_purifier">空氣清淨機</option>
-            <option value="dehumidifier">除濕機</option>
+            <option value="冷氣">冷氣</option>
+            <option value="電燈">電燈</option>
+            <option value="空氣清淨機">空氣清淨機</option>
+            <option value="除濕機">除濕機</option>
         </select>
-        <slot name="roomid">
-            <select name="" id="" v-model="this.createObj.type" >
-                <option value="">所屬空間</option>
-                <option value="601">601</option>
-                <option value="602">602</option>
-                <option value="603">603</option>
-            </select>
-        </slot>
-        <button @click="this.createRoom()">新增</button>
+        
+        <button @click="this.deviceStatus(null,this.type,this.name,0,this.localRoomId)">新增</button>
     </div>
 </template>
 

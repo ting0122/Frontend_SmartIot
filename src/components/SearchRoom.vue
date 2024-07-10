@@ -11,7 +11,7 @@ export default {
         };
     },
     created() {
-        this.searchRoom();
+        this.searchAllRoom();
     },
     mounted() {
 
@@ -24,7 +24,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['searchRoom','searchOnlyRoom']),
+        ...mapActions(location, ['searchAllRoom','searchOnlyRoom']),
     }
 };
 </script>
@@ -32,13 +32,12 @@ export default {
 <template>
     <div class="createRoom">
         <label for=""><input type="text"  placeholder="空間名稱" v-model="this.name"></label>
-        <label for=""><input type="text"  placeholder="空間編號" v-model="this.area"></label>
         <select name="" id="" v-model="this.status">
             <option value="">空間使用狀態</option>
             <option :value=1>使用中</option>
             <option :value=0>閒置中</option>
         </select>
-        <select name="" id="" v-model="this.type" >
+        <select name="" id="" v-model="this.area" >
             <option value="">房間編號</option>
             <option value="601">601</option>
             <option value="602">602</option>

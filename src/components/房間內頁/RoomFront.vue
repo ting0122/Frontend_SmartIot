@@ -1,4 +1,6 @@
 <script>
+import location from '@/stores/location';
+import { mapState, mapActions } from 'pinia';
 import Energy from '@/components/Energy.vue';
 import CreateDeviceY from '@/components/CreateDeviceY.vue';
 import CreateAndDeleteButtonNoUsing from '@/components/CreateAndDeleteButtonNoUsing.vue';
@@ -8,18 +10,17 @@ import SearchDevice from '@/components/SearchDevice.vue';
 export default {
     data() {
         return {
-            dataArr:[{id:203154,type:"冷氣",name:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",name:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",name:"後方的冷氣",area:602,roommane:"會議室"}],
             showCreateRoom: false, // 用於控制顯示 Create 或 Search 组件
         };
     },
     created() {
-
+        
     },
     mounted() {
-
+        
     },
     computed: {
-
+        ...mapState(location, ['deviceArr','localRoomArea']),
     },
     components: {
         Energy,
@@ -32,6 +33,7 @@ export default {
     },
 
     methods: {
+        ...mapActions(location, ['searchDevice']),
         //以下兩個用於切換新增設備及搜尋設備2個元件的顯示
         toggleCreateDevice() {
             this.showCreateRoom = true;
@@ -66,10 +68,10 @@ export default {
             <div class="botton">    
                 <CreateAndDeleteButtonNoUsing @add-click="toggleCreateDevice" @search-click="toggleSearchDevice"/>
             </div> 
-            <div class="out">
-                <div class="room" v-for="(data, index) in dataArr" :key="index">
+            <div class="out" >
+                <div class="room" v-for="(data, index) in deviceArr" :key="index">
                     <div class="switch">
-                        <Switch :id="this.name + index" />
+                        <Switch :id="data.id" />
                     </div>
                     <p class="id">{{ data.id }}</p>
                     <p>{{ data.type }}</p>
@@ -78,8 +80,8 @@ export default {
                         <p>{{ data.name}}</p>
                     </div>
                 </div>
-
             </div>
+
             
         </div>
     </div>
