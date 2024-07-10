@@ -187,12 +187,14 @@ export default {
                             margin-left: 10px;
                             font-size: 22px;
                             color: $black1;
+                            cursor:default;
                         }
                         i{
                             font-size: 25px;
                             line-height: 34px;
                             color: $black1;
-                            margin-right: 10px
+                            margin-right: 10px;
+                            cursor:default;
                         }
                     }
                 }
