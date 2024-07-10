@@ -21,6 +21,15 @@ export default {
     },
     computed: {
         ...mapState(location, ['deviceArr']),
+        //用來隱藏超出指定長度的空間名稱內容
+        truncatedContent() {
+            return this.deviceArr.map(data => {
+                return {
+                    ...data,
+                    truncatedContent: data.name.length > 9 ? data.name.slice(0, 9) + '...' : data.name
+                };
+            });
+        }
     },
     components: {
         CreateAndDeleteButton,
@@ -39,15 +48,7 @@ export default {
         toggleSearchRoom() {
             this.showCreateRoom = false;
         },
-        //用來隱藏超出指定長度的空間名稱內容
-        truncatedContent() {
-            return this.dataArr.map(data => {
-                return {
-                    ...data,
-                    truncatedContent: data.name.length > 9 ? data.name.slice(0, 9) + '...' : data.name
-                };
-            });
-        }
+        
     }
 };
 </script>
@@ -65,7 +66,7 @@ export default {
         </CreateAndDeleteButton>
 
         <div class="deviceDiv">
-            <div class="room" v-for="(data, index) in deviceArr" :key="index">
+            <div class="room" v-for="(data, index) in truncatedContent" :key="index">
                 <div class="switch">
                     <Switch :id="data.id" />
                 </div>
