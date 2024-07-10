@@ -36,7 +36,7 @@ export default {
         <select name="" id="" v-model="this.type" >
             <option value="">設備類型</option>
             <option value="冷氣">冷氣</option>
-            <option value="電燈">電燈</option>
+            <option value="燈">電燈</option>
             <option value="空氣清淨機">空氣清淨機</option>
             <option value="除濕機">除濕機</option>
         </select>

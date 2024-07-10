@@ -4,11 +4,11 @@ import { defineStore } from 'pinia'
 export default defineStore("location", {
     state: () => ({
         deviceArr: [],
-        roomArr:[],
+        roomArr: [],
         dataArr: [],
-        oneRoom:{},
-        localRoomId:null,
-        localRoomArea:""
+        oneRoom: {},
+        localRoomId: null,
+        localRoomArea: ""
 
 
     }),
@@ -32,10 +32,10 @@ export default defineStore("location", {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('搜尋房間data',data)
+                    console.log('搜尋房間data', data)
                     this.roomArr = data
                     this.localRoomArea = data.area
-                    console.log('搜尋房間roomArr',this.roomArr)
+                    console.log('搜尋房間roomArr', this.roomArr)
                 })
         },
         //進入頁面搜尋房間id
@@ -50,12 +50,12 @@ export default defineStore("location", {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('搜尋房間oneRoom',data)
+                    console.log('搜尋房間oneRoom', data)
                     this.oneRoom = data
                     this.localRoomArea = data.area
                     console.log(this.localRoomArea)
                     this.searchDevice(null, null, this.localRoomArea, null)
-                    console.log('搜尋房間oneRoom',this.oneRoom)
+                    console.log('搜尋房間oneRoom', this.oneRoom)
                 })
         },
         //房間搜尋列和是否使用中
@@ -74,7 +74,7 @@ export default defineStore("location", {
                 params.append('area', k);
             }
             //this.status
-            if ( l !== null) {
+            if (l !== null) {
                 params.append('status', l);
             }
             fetch(`http://localhost:8080/rooms/search?${params.toString()}`, {
@@ -92,11 +92,11 @@ export default defineStore("location", {
                 })
         },
         //建立房間
-        createRoom(i,j,k) {
+        createRoom(i, j, k) {
             let obj = {
                 name: i,
                 area: j,
-                type: k
+                type: k,
             }
             fetch("http://localhost:8080/rooms", {
                 method: "post",
@@ -149,7 +149,7 @@ export default defineStore("location", {
                 params.append('area', k);
             }
             //this.status
-            if ( l !== null) {
+            if (l !== null) {
                 params.append('status', l);
             }
             fetch(`http://localhost:8080/devices/search?${params.toString()}`, {
