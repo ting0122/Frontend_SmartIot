@@ -1,57 +1,70 @@
 <!-- 前台-首頁-左上角公告-元件 -->
 <script>
 import Switch from '@/components/Switch.vue';
+
 export default {
+    props: {
+        id: {
+            type: Number,
+            required: true
+        }
+    },
     data() {
         return {
-            id:0,
-            name:"喝水囉",
-            type:"除濕機",
-            tank_capacity:"150",  //水箱剩餘容量
-            target_humidity:55,  //目標濕度
-            fan_speed:"",
-            current_humidity:55,  //當前濕度
-            isChecked: false,  //處理switch子元件值得同步
+            type: "除濕機",
+            current_humidity: 0.0,
+            target_humidity: 55.0,
+            fan_speed: "中",
+            status: false,
         };
     },
     components: {
         Switch,
-    
     },
     methods: {
-        //點擊亮起當前選項
-        setMode(mode) {
-            this.mode = mode;
-            console.log("Selected mode:", mode);
+        setFanSpeed(speed) {
+            this.fan_speed = speed;
+            this.emitUpdate();
         },
-        setFanSpeed(fan_speed) {
-            this.fan_speed = fan_speed;
-            console.log("Selected fan speed:", fan_speed);
+        increaseHumidity() {
+            this.target_humidity = Math.min(parseFloat((this.target_humidity + 0.1).toFixed(1)), 100.0);
+            this.emitUpdate();
         },
-        //控制溫度加減
-        increaseTemp() {
-            this.target_humidity += 1;
-            console.log("Increased temperature to:", this.air_quality);
-        },
-        decreaseTemp() {
-            this.target_humidity -= 1;
-            console.log("Decreased temperature to:", this.air_quality);
+        decreaseHumidity() {
+            this.target_humidity = Math.max(parseFloat((this.target_humidity - 0.1).toFixed(1)), 0.0);
+            this.emitUpdate();
         },
         updateDeviceStatus(index, status) {
-            this.deviceArr[index].status = status;
-            // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
-            console.log('設備開關狀態', status)
+            this.status = status;
+            this.emitUpdate();
+        },
+        emitUpdate() {
+            this.$emit('update-dehumidifiers', {
+                status: this.status,
+                target_humidity: parseFloat(this.target_humidity.toFixed(1)),
+                fan_speed: this.mapFanSpeed(this.fan_speed),
+            });
+        },
+        updateCurrentHumidity(humidity) {
+            this.current_humidity = humidity;
+        },
+        mapFanSpeed(speed) {
+            const speedMap = {
+                '自動': 'AUTO',
+                '低': 'LOW',
+                '中': 'MEDIUM',
+                '高': 'HIGH'
+            };
+            return speedMap[speed] || 'MEDIUM';
         }
     }
- 
 };
 </script>
 
 <template>
     <div class="outArea">
         <div class="switch">
-            <Switch :id="id" v-model:checked="status"
-            @update:checked="updateDeviceStatus(index, $event)" />
+            <Switch :id="id" v-model:checked="status" @update:checked="updateDeviceStatus($event)" />
         </div>
         <div class="left">
             <i class="fa-solid fa-droplet-slash"></i>
@@ -60,7 +73,6 @@ export default {
         <div class="right">
             <div class="rightUp">
                 <p class="id">總控台</p>
-              
             </div>
             <div class="rightDown">
                 <div class="rightDownLeft">
@@ -68,21 +80,22 @@ export default {
                         <span>當前濕度</span>
                         <div class="time">
                             <i class="fa-solid fa-droplet"></i>
-                            <p>{{ this.current_humidity }}</p>
+                            <p>{{ this.current_humidity.toFixed(1) }}</p>
                             <P>%</P>
                         </div>
                     </div>
                     <div class="fan_speed target_temp">
                         <span>運轉強度</span>
-                        <div  @click="setFanSpeed('自動')" :class="{ selected: fan_speed === '自動'}">
+                        <div @click="setFanSpeed('自動')" :class="{ selected: fan_speed === '自動' }">
                             <i class="fa-solid fa-a"></i>
                             <P v-show="fan_speed === '自動'">自動</P>
                         </div>
-                        <div  @click="setFanSpeed('低')" :class="{ selected: fan_speed === '低' || fan_speed === '中' || fan_speed === '高'}">
+                        <div @click="setFanSpeed('低')"
+                            :class="{ selected: fan_speed === '低' || fan_speed === '中' || fan_speed === '高' }">
                             <i class="fa-solid fa-wind"> </i>
                             <P v-show="fan_speed === '低'">低</P>
                         </div>
-                        <div  @click="setFanSpeed('中')" :class="{ selected: fan_speed === '中' || fan_speed === '高' }">
+                        <div @click="setFanSpeed('中')" :class="{ selected: fan_speed === '中' || fan_speed === '高' }">
                             <i class="fa-solid fa-wind"></i>
                             <P v-show="fan_speed === '中'">中</P>
                         </div>
@@ -95,24 +108,21 @@ export default {
                 <div class="rightDownRight">
                     <span>目標濕度</span>
                     <div class="mode">
-                        <i class="fa-solid fa-caret-up" @click="increaseTemp"></i>
-                        <p>{{ this.target_humidity }}%</p>
-                        <i class="fa-solid fa-caret-down" @click="decreaseTemp"></i>
+                        <i class="fa-solid fa-caret-up" @click="increaseHumidity"></i>
+                        <p>{{ target_humidity.toFixed(1) }}%</p>
+                        <i class="fa-solid fa-caret-down" @click="decreaseHumidity"></i>
                     </div>
                 </div>
             </div>
         </div>
-
-        
     </div>
-    
 </template>
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 
 
-.outArea{
+.outArea {
     width: 541px;
     height: 268px;
     border-radius: 25px;
@@ -122,47 +132,57 @@ export default {
     justify-content: space-between;
     padding-top: 13px;
     position: relative;
+
     .switch {
         position: absolute;
         right: 24px;
         top: 15px;
     }
-    .left{
+
+    .left {
         height: 100%;
         width: 30%;
         text-align: center;
-        i{
+
+        i {
             font-size: 80px;
             color: $dark01;
-            margin-top: 75px;  
+            margin-top: 75px;
         }
-        p{
+
+        p {
             font-size: 20px;
             margin-top: 10px;
             color: $black;
         }
     }
-    .right{
+
+    .right {
         height: 100%;
         width: 70%;
+
         // border: 1px solid black;
-        p{
+        p {
             margin: 10px 0 20px 5px;
             font-size: 16px;
         }
-        .rightUp{
+
+        .rightUp {
             width: 100%;
             color: $black1;
         }
-        .rightDown{
+
+        .rightDown {
             width: 100%;
             display: flex;
+
             // border: 1px solid black;
-            .rightDownLeft{
+            .rightDownLeft {
                 height: 100%;
                 width: 65%;
+
                 // border: 1px solid black;
-                .target_temp{
+                .target_temp {
                     width: 234px;
                     height: 92px;
                     border-radius: 15px;
@@ -170,81 +190,94 @@ export default {
                     display: flex;
                     justify-content: space-evenly;
                     position: relative;
-                    span{
+
+                    span {
                         position: absolute;
                         color: $black1;
                     }
-                    i{
+
+                    i {
                         font-size: 25px;
                         color: $dark03;
                         cursor: pointer;
                     }
-                    p{
+
+                    p {
                         margin: 0;
                         color: $dark03;
                         cursor: pointer;
                     }
-                    div{
+
+                    div {
                         width: 33px;
                         margin-top: 35px;
                         text-align: center;
                     }
-                    .time{
+
+                    .time {
                         display: flex;
                         height: 30px;
                         width: 100%;
                         margin-left: 65px;
-                        
-                        p{
+
+                        p {
                             line-height: 30px;
                             margin-left: 10px;
                             font-size: 27px;
                             color: $black1;
-                            cursor:default;
+                            cursor: default;
                         }
-                        i{
+
+                        i {
                             font-size: 25px;
                             line-height: 34px;
                             color: $black1;
                             margin-right: 10px;
-                            cursor:default;
+                            cursor: default;
                         }
                     }
                 }
+
                 .selected {
-                    i{
+                    i {
                         color: $black1;
                     }
-                    p{
+
+                    p {
                         color: $black1;
                     }
                 }
-                .fan_speed{
+
+                .fan_speed {
                     margin-top: 10px;
                 }
             }
-            .rightDownRight{
+
+            .rightDownRight {
                 width: 110px;
                 height: 194px;
                 border-radius: 15px;
                 background-color: $dark01;
                 text-align: center;
                 position: relative;
-                span{
+
+                span {
                     position: absolute;
                     color: $black1;
                     left: 21px;
                     top: 10px;
                 }
-                .mode{
+
+                .mode {
                     padding-top: 55px;
                     color: $black1;
-                    
-                    i{
+
+                    i {
                         font-size: 25px;
                         cursor: pointer;
                     }
-                    p{
+
+                    p {
                         font-size: 35px;
                         margin: 0;
                         margin-bottom: 10px;
@@ -254,9 +287,7 @@ export default {
 
         }
     }
-    
-    
+
+
 }
-
-
 </style>
