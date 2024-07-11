@@ -82,7 +82,7 @@ export default {
         <div class="deviceDiv">
             <div class="room" v-for="(data, index) in truncatedContent" :key="index" >
                 <div class="switch">
-                    <Switch :id="data.id" v-model:checked="data.status"
+                    <Switch  v-model:checked="data.status"
                         @update:checked="updateDeviceStatus(index, $event)" />
                 </div>
                 <p class="id">{{ data.id }}</p>

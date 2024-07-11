@@ -53,6 +53,11 @@ export default {
             // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
             console.log('房間開關狀態',this.roomArr[index].status,index)
         },
+         // 控制顯示刪除 checkbox 的狀態
+         toggleCheckbox() {
+            this.showCheckbox = !this.showCheckbox;
+        }
+    
     }
 };
 </script>
