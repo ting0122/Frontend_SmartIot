@@ -44,6 +44,8 @@ export default {
                 .catch(error => console.error('獲取房間設備失敗：', error));
         },
         updateDehumidifiers(newSettings) {
+            console.log('接收到的 newSettings:', newSettings, 'target_humidity type:', typeof newSettings.target_humidity);
+
             const payload = this.dehumidifiers.map(dehumidifier => ({
                 id: dehumidifier.id,
                 status: newSettings.status,
@@ -51,14 +53,17 @@ export default {
                 fan_speed: newSettings.fan_speed
             }));
 
-            console.log('API 請求體:', JSON.stringify(payload, null, 2));
+            console.log('準備發送的 payload:', payload);
+
+            const requestBody = JSON.stringify(payload);
+            console.log('最終的 API 請求體字符串:', requestBody);
 
             fetch('http://localhost:8080/dehumidifiers/batch', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payload),
+                body: requestBody,
             })
                 .then(response => {
                     if (!response.ok) {

@@ -27,11 +27,13 @@ export default {
             this.emitUpdate();
         },
         increaseHumidity() {
-            this.target_humidity = Math.min(parseFloat((this.target_humidity + 0.1).toFixed(1)), 100.0);
+            this.target_humidity = Math.min(parseFloat((this.target_humidity + 1).toFixed(1)), 100);
+            console.log('增加後的濕度:', this.target_humidity, typeof this.target_humidity);
             this.emitUpdate();
         },
         decreaseHumidity() {
-            this.target_humidity = Math.max(parseFloat((this.target_humidity - 0.1).toFixed(1)), 0.0);
+            this.target_humidity = Math.max(parseFloat((this.target_humidity - 1).toFixed(1)), 0);
+            console.log('減少後的濕度:', this.target_humidity, typeof this.target_humidity);
             this.emitUpdate();
         },
         updateDeviceStatus(index, status) {
@@ -39,11 +41,13 @@ export default {
             this.emitUpdate();
         },
         emitUpdate() {
-            this.$emit('update-dehumidifiers', {
+            const updatedData = {
                 status: this.status,
                 target_humidity: parseFloat(this.target_humidity.toFixed(1)),
                 fan_speed: this.mapFanSpeed(this.fan_speed),
-            });
+            };
+            console.log('DehumidifierControl 發送的數據:', updatedData, 'target_humidity type:', typeof updatedData.target_humidity);
+            this.$emit('update-dehumidifiers', updatedData);
         },
         updateCurrentHumidity(humidity) {
             this.current_humidity = humidity;
