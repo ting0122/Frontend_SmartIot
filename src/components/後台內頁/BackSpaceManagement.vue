@@ -49,7 +49,7 @@ export default {
             this.showCreateRoom = false;
         },
         updateDeviceStatus(index, status) {
-            this.deviceArr[index].status = status;
+            this.roomArr[index].status = status;
             // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
             console.log('設備開關狀態', status)
         }

@@ -63,7 +63,9 @@ export default {
 <template>
     <div class="outarr">
         <!-- 根據 showCreateRoom 的值決定顯示 CreateRoom 或 SearchRoom 组件 -->
-        <CreateDeviceY v-if="showCreateRoom" />
+        <CreateDeviceY v-if="showCreateRoom">
+            
+        </CreateDeviceY>
         <SearchDevice v-else />
         <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
         <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom">

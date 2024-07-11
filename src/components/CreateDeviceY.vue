@@ -40,7 +40,14 @@ export default {
             <option value="空氣清淨機">空氣清淨機</option>
             <option value="除濕機">除濕機</option>
         </select>
-        
+        <slot name="roomid">
+            <select name="" id="" v-model="this.area">
+                <option value="">空間編號</option>
+                <option value="601">601</option>
+                <option value="601">602</option>
+                <option value="房間101號">101</option>
+            </select>
+        </slot>
         <button @click="this.deviceStatus(null,this.type,this.name,0,this.localRoomId)">新增</button>
     </div>
 </template>
