@@ -10,7 +10,7 @@ export default {
             fan_speed:"",
             air_quality:10,
             operating_time:"1.62",
-
+            isChecked: false,  //處理switch子元件值得同步
         };
     },
     components: {
@@ -36,6 +36,11 @@ export default {
             this.air_quality -= 1;
             console.log("Decreased temperature to:", this.air_quality);
         },
+        updateDeviceStatus(index, status) {
+            this.deviceArr[index].status = status;
+            // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
+            console.log('設備開關狀態', status)
+        }
     }
  
 };
@@ -44,7 +49,8 @@ export default {
 <template>
     <div class="outArea">
         <div class="switch">
-            <Switch :id="this.id" />
+            <Switch :id="id" v-model:checked="status"
+            @update:checked="updateDeviceStatus(index, $event)"/>
         </div>
         <div class="left">
             <i class="fa-solid fa-leaf"></i>

@@ -9,7 +9,7 @@ export default {
             type:"電燈",
             brightness:20,   //亮度
             color_temp:5000,  //色溫
-
+            isChecked: false,  //處理switch子元件值得同步
         };
     },
     components: {
@@ -17,7 +17,11 @@ export default {
     
     },
     methods: {
-        
+        updateDeviceStatus(index, status) {
+            this.deviceArr[index].status = status;
+            // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
+            console.log('設備開關狀態', status)
+        }
     },
     watch:{
 
@@ -30,7 +34,8 @@ export default {
 <template>
     <div class="outArea">
         <div class="switch">
-            <Switch :id="this.id" />
+            <Switch :id="id" v-model:checked="status"
+            @update:checked="updateDeviceStatus(index, $event)" />
         </div>
         <div class="left">
             <i class="fa-regular fa-lightbulb"></i>
