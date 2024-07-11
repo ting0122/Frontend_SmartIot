@@ -1,6 +1,10 @@
 <script>
+//以下為PINIA
 import location from '@/stores/location';
 import { mapState, mapActions } from 'pinia';
+//sweetalert2提示窗套件
+import Swal from 'sweetalert2'
+//以下為元件
 import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
 import Idle from '@/components/XIdle.vue';
 import SearchDevice from '@/components/SearchDevice.vue';
@@ -12,7 +16,8 @@ export default {
             dataArr:[{id:203154,type:"冷氣",mane:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",mane:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"}],
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
             isChecked: false,  //處理switch子元件值得同步
-            showCheckbox:false // 控制顯示 checkbox 的狀態
+            showCheckbox:false, // 控制顯示 checkbox 的狀態
+            select:[]  //儲存被選中的id
         };
     },
     created() {
@@ -59,6 +64,53 @@ export default {
         // 控制顯示刪除 checkbox 的狀態
         toggleCheckbox() {
             this.showCheckbox = !this.showCheckbox;
+            if (!this.showCheckbox) {
+                this.showDeleteConfirmation();
+            }
+        },
+        // 彈出 SweetAlert2 的刪除確認彈窗
+        showDeleteConfirmation() {
+            const selectedDevices = this.deviceArr.filter(device => this.select.includes(device.id));
+            const selectedNames = selectedDevices.map(device => `${device.area}-${device.name}`).join('<br>'); 
+            Swal.fire({
+                title: '確認刪除',
+                html:  `<p>${selectedNames}<p>`, // 使用 html 属性
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '確認刪除',
+                cancelButtonText: '取消',
+                customClass: {
+                    popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 在這裡處理確認刪除的邏輯
+                    this.deviceArr = this.deviceArr.filter(device => !this.select.includes(device.id));
+                    this.select = [];
+                    Swal.fire({
+                        title:'已刪除',
+                        text:'所選設備已被刪除',
+                        icon:'success',
+                        customClass: {
+                            popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                        },
+                    });
+                } else {
+                    // 在這裡處理取消刪除的邏輯
+                    this.select = [];
+                    this.showCheckbox = false;
+                }
+            });
+        },
+        // 將被選中的設備 ID 加入或移除 select 陣列的方法(刪除設備用)
+        addToSelect(id) {
+            const index = this.select.indexOf(id);
+            if (index === -1) {
+                this.select.push(id);
+            } else {
+                this.select.splice(index, 1);
+            }
+            console.log(this.select)
         }
     }
 };
@@ -70,14 +122,14 @@ export default {
         <CreateDeviceY v-if="showCreateRoom" />
         <SearchDevice v-else />
         <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
-        <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" @delete-click="toggleCheckbox">
+        <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" @delete-click="toggleCheckbox" :showCheckbox="showCheckbox">
             <template #text>
                 <p class="text">所有設備</p>
             </template>
-        </CreateAndDeleteButton>
+        </CreateAndDeleteButton>   
 
         <div class="deviceDiv">
-            <div class="room" v-for="(data, index) in truncatedContent" :key="index" >
+            <div class="room" v-for="(data, index) in truncatedContent" :key="index" @click="addToSelect(data.id)">
                 <div class="switch">
                     <Switch :id="data.id" v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)"/>
                 </div>
@@ -88,7 +140,7 @@ export default {
                     <p>{{ data.area }}-{{ data.truncatedContent }}</p>
                 </div>             
                 <div class="checkbox-overlay" v-if="showCheckbox">
-                    <input type="checkbox"  />
+                    <input type="checkbox" :checked="select.includes(data.id)"/>
                 </div>
             </div>
         </div>
@@ -214,9 +266,29 @@ export default {
             border-radius: 25px;
 
             input[type='checkbox'] {
-                /* 調整 checkbox 样式 */
-                transform: scale(2); /* 放大 checkbox */
-                color: aqua;
+                /* 自定義 checkbox 样式 */
+                appearance: none;
+                width: 30px;
+                height: 30px;
+                border: 2px solid $white;
+                border-radius: 3px;
+                background-color: transparent;
+                cursor: pointer;
+                position: relative;
+                &:checked {
+                    background-color:$dark02; /* 勾選後的背景色 */
+                }
+                &:checked::after {
+                    content: '';
+                    position: absolute;
+                    top: 4px;
+                    left: 9px;
+                    width: 6px;
+                    height: 12px;
+                    border: solid $white;
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                }
             }
         }
     }

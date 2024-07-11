@@ -58,7 +58,8 @@ export default {
                 showCloseButton: true, //右上叉叉按鈕
                 confirmButtonText: '新增',
                 customClass: {
-                    popup: 'swal2-custom-popup' // 自定義樣式
+                    popup: 'swal2-custom-popup', // 自定義樣式
+                    confirmButton: 'swal2-custom-confirm-button', // 自訂義確認按鈕樣式
                 },
                 preConfirm: () => {
                     const deviceId = Swal.getPopup().querySelector('#deviceId').value;

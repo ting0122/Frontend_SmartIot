@@ -60,6 +60,21 @@ h2 {
   background-color: #b0b0b0;
   height: 50px;
   margin-top: 10px;
-  width: 88px;
   font-size: 18px;
+}
+.swal2-custom-popup .swal2-cancel {
+  border-radius: 25px;
+  background-color: #b0b0b0;
+  height: 50px;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.DeviceManagement-custom-popup {
+  max-height: 550px;
+  overflow-y: auto;
+}
+.DeviceManagement-custom-popup p {
+  text-align: center;
+  font-size: 19px;
 }/*# sourceMappingURL=main.css.map */
