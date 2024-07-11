@@ -3,10 +3,9 @@ import location from '@/stores/location';
 import { mapState, mapActions } from 'pinia';
 export default {
     data() {
-        return {
-            
-                name: "",
-                type: "",
+        return{
+            name: "",
+            type: "",
                 
             
         };

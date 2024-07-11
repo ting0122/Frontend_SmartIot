@@ -51,8 +51,8 @@ export default {
         updateDeviceStatus(index, status) {
             this.roomArr[index].status = status;
             // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
-            console.log('設備開關狀態', status)
-        }
+            console.log('房間開關狀態',this.roomArr[index].status,index)
+        },
     }
 };
 </script>
@@ -68,8 +68,7 @@ export default {
         <div class="rooms">
             <div class="room" v-for="(data, index) in truncatedContent" :key="index">
                 <div class="switch">
-                    <Switch :id="data.id" v-model:checked="data.status"
-                    @update:checked="updateDeviceStatus(index, $event)" />
+                    <Switch  v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)"/>
                 </div>
                 <p>{{ data.area }}-{{ data.type }}</p>
                 <div class="area">

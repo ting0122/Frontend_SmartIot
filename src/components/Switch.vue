@@ -20,7 +20,8 @@ export default {
     },
 
     methods: {
-        toggleChecked() {
+        toggleChecked(event) {
+            event.stopPropagation(); // 防止事件冒泡
             this.$emit('update:checked', !this.checked);
         }
     },
@@ -37,8 +38,8 @@ export default {
 <template>
     
     <div class="slideThree"  @click="toggleChecked">
-        <input type="checkbox"  :id="id" :checked="checked" />
-        <label :for="id"></label>
+        <input type="checkbox" :checked="checked" @click.stop="toggleChecked" />
+        <label @click.stop="toggleChecked"></label>
     </div>
 
 </template>
