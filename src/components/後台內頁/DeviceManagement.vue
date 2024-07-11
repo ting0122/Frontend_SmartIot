@@ -12,6 +12,7 @@ export default {
             dataArr:[{id:203154,type:"冷氣",mane:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",mane:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"}],
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
             isChecked: false,  //處理switch子元件值得同步
+            showCheckbox:false // 控制顯示 checkbox 的狀態
         };
     },
     created() {
@@ -53,7 +54,11 @@ export default {
         updateDeviceStatus(index, status) {
             this.deviceArr[index].status = status;
             // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
-            console.log('設備開關狀態',this.deviceArr)
+            console.log('設備開關狀態',this.deviceArr[index].status,index)
+        },
+        // 控制顯示刪除 checkbox 的狀態
+        toggleCheckbox() {
+            this.showCheckbox = !this.showCheckbox;
         }
     }
 };
@@ -65,14 +70,14 @@ export default {
         <CreateDeviceY v-if="showCreateRoom" />
         <SearchDevice v-else />
         <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
-        <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom">
+        <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" @delete-click="toggleCheckbox">
             <template #text>
                 <p class="text">所有設備</p>
             </template>
         </CreateAndDeleteButton>
 
         <div class="deviceDiv">
-            <div class="room" v-for="(data, index) in truncatedContent" :key="index">
+            <div class="room" v-for="(data, index) in truncatedContent" :key="index" >
                 <div class="switch">
                     <Switch :id="data.id" v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)"/>
                 </div>
@@ -81,6 +86,9 @@ export default {
                 <i class="fa-regular fa-snowflake"></i>
                 <div class="area">
                     <p>{{ data.area }}-{{ data.truncatedContent }}</p>
+                </div>             
+                <div class="checkbox-overlay" v-if="showCheckbox">
+                    <input type="checkbox"  />
                 </div>
             </div>
         </div>
@@ -99,7 +107,6 @@ export default {
     border-radius: 25px;
     border: 1px solid black;
     background-color: $dark02;
-
 
     .text {
         font-size: 20px;
@@ -133,8 +140,7 @@ export default {
     border: 1px solid black;
     border-radius: 0 0 25px 25px;
     &::-webkit-scrollbar {
-        width: 10px;
-    
+        width: 10px;   
     }
     
     &::-webkit-scrollbar-button {
@@ -145,7 +151,6 @@ export default {
     &::-webkit-scrollbar-thumb {
         background: $black1;
         border-radius: 15px;
-    
     }
     
     &::-webkit-scrollbar-track {
@@ -192,6 +197,26 @@ export default {
                 line-height: 50px;
                 display: flex;
                 justify-content: center;
+            }
+        }
+        .checkbox-overlay {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $white;
+            border-radius: 25px;
+
+            input[type='checkbox'] {
+                /* 調整 checkbox 样式 */
+                transform: scale(2); /* 放大 checkbox */
+                color: aqua;
             }
         }
     }

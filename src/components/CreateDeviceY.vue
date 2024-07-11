@@ -3,10 +3,9 @@ import location from '@/stores/location';
 import { mapState, mapActions } from 'pinia';
 export default {
     data() {
-        return {
-            
-                name: "",
-                type: "",
+        return{
+            name: "",
+            type: "",
                 
             
         };
@@ -40,7 +39,13 @@ export default {
             <option value="空氣清淨機">空氣清淨機</option>
             <option value="除濕機">除濕機</option>
         </select>
-        
+        <select name="" id="" v-model="this.type" >
+            <option value="">空間編號</option>
+            <option value="601">601</option>
+            <option value="602">602</option>
+            <option value="603">603</option>
+            <option value="604">604</option>
+        </select>       
         <button @click="this.deviceStatus(null,this.type,this.name,0,this.localRoomId)">新增</button>
     </div>
 </template>

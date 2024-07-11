@@ -25,6 +25,9 @@ export default {
         },
         handleSearchClick() {
             this.$emit('search-click');
+        },
+        handleDeleteClick() {
+            this.$emit('delete-click');
         }
     }
 };
@@ -38,10 +41,9 @@ export default {
             </slot>    
             <div class="line"></div>
         </div>
-        <div class="createAndDeleteButton">
-            
+        <div class="createAndDeleteButton">            
             <button @click="handleSearchClick"><i class="fa-solid fa-magnifying-glass" ></i></button>
-            <button><i class="fa-solid fa-trash-can"></i></button>
+            <button @click="handleDeleteClick"><i class="fa-solid fa-trash-can"></i></button>
             <button @click="handleAddClick"><i class="fa-solid fa-circle-plus" ></i></button>
         </div>
     </div>

@@ -10,6 +10,7 @@ export default {
     data() {
         return {
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
+            isChecked: false,  //處理switch子元件值得同步
         };
     },
     created() {
@@ -47,6 +48,11 @@ export default {
         toggleSearchRoom() {
             this.showCreateRoom = false;
         },
+        updateDeviceStatus(index, status) {
+            this.roomArr[index].status = status;
+            // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
+            console.log('房間開關狀態',this.roomArr[index].status,index)
+        },
     }
 };
 </script>
@@ -62,7 +68,7 @@ export default {
         <div class="rooms">
             <div class="room" v-for="(data, index) in truncatedContent" :key="index">
                 <div class="switch">
-                    <Switch :id="data.id" :checked="data.status === true"/>
+                    <Switch :id="data.id" v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)"/>
                 </div>
                 <p>{{ data.area }}-{{ data.type }}</p>
                 <div class="area">
