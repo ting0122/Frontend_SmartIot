@@ -11,6 +11,7 @@ export default {
     data() {
         return {
             showCreateRoom: false, // 用於控制顯示 Create 或 Search 组件
+            searchDeviceControl:true
         };
     },
     created() {
@@ -28,8 +29,6 @@ export default {
         Switch,
         CreateDeviceY,
         SearchDevice
-      
-      
     },
 
     methods: {
@@ -60,7 +59,7 @@ export default {
                    <p></p>
                 </template>
             </CreateDeviceY>
-            <SearchDevice v-else>
+            <SearchDevice :searchDeviceControl="searchDeviceControl" v-else>
                 <template #roomid>
                    <p></p>
                 </template>

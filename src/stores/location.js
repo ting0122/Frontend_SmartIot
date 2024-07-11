@@ -34,7 +34,6 @@ export default defineStore("location", {
                 .then(data => {
                     console.log('搜尋房間data', data)
                     this.roomArr = data
-                    this.localRoomArea = data.area
                     console.log('搜尋房間roomArr', this.roomArr)
                 })
         },
@@ -111,7 +110,7 @@ export default defineStore("location", {
                     this.searchAllRoom()
                 })
         },
-        //修改設備狀態或欄位
+        //新增/修改設備狀態或欄位
         deviceStatus(i, j, k, l, m) {
             let changeobj = {
                 id: i,
@@ -130,11 +129,17 @@ export default defineStore("location", {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    this.searchRoom(this.localRoomId)
+                    // this.searchRoom(this.localRoomId)
+                    this.searchDevice(null, null, null, null)
                 })
         },
         //搜尋設備
-        searchDevice(i, j, k, l) {
+        searchDevice(i, j, k, l, useLocalRoomArea = false) {
+            
+            
+            if (useLocalRoomArea) {
+                k = this.localRoomArea;
+            }
             const params = new URLSearchParams();
             //this.name 
             if (i) {

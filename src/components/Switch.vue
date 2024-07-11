@@ -20,7 +20,9 @@ export default {
     },
 
     methods: {
-
+        toggleChecked() {
+            this.$emit('update:checked', !this.checked);
+        }
     },
     props: [
         "id",
@@ -34,9 +36,8 @@ export default {
 
 <template>
     
-    <div class="slideThree">
+    <div class="slideThree"  @click="toggleChecked">
         <input type="checkbox"  :id="id" :checked="checked" />
-        <span :class="{ selected: checked }"></span>
         <label :for="id"></label>
     </div>
 
@@ -53,6 +54,7 @@ export default {
     position: relative;
     border-radius: 50px;
     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
 
     &:before {
         content: 'OFF';
@@ -92,7 +94,9 @@ export default {
     }
 
     input[type=checkbox] {
-        visibility: hidden;
+        position: absolute;
+        left: -10px;
+        // visibility: hidden;
 
         &:checked+label {
             left: 36px;
