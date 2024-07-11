@@ -3,28 +3,35 @@ import location from '@/stores/location';
 import { mapState, mapActions } from 'pinia';
 export default {
     data() {
-        return{
+        return {
             name: "",
             type: "",
-                
+            area: "",
             
+
         };
     },
     created() {
-
+        
     },
     mounted() {
 
     },
     computed: {
-        ...mapState(location, ['localRoomId']),
+        ...mapState(location, ['localRoomId', 'createRoomDevice']),
     },
     components: {
 
     },
 
     methods: {
-        ...mapActions(location, ['deviceStatus']),
+        ...mapActions(location, ['deviceStatus', 'createRoomDeviceSearch']),
+    },
+    props: {
+        createRoomDeviceControl: {
+            type: Boolean,
+            required: true
+        }
     }
 };
 </script>
@@ -32,7 +39,7 @@ export default {
 <template>
     <div class="createRoom">
         <label for=""><input type="text" v-model="this.name" placeholder="設備名稱"></label>
-        <select name="" id="" v-model="this.type" >
+        <select name="" id="" v-model="this.type">
             <option value="">設備類型</option>
             <option value="冷氣機">冷氣</option>
             <option value="燈">電燈</option>
@@ -40,14 +47,20 @@ export default {
             <option value="除濕機">除濕機</option>
         </select>
         <slot name="roomid">
-            <select name="" id="" v-model="this.area">
+            <select name="" id="" v-model="this.area" @change="createRoomDeviceSearch(null, null, this.area, null)">
                 <option value="">空間編號</option>
                 <option value="601">601</option>
                 <option value="601">602</option>
+                <option value="房間100號">100</option>
                 <option value="房間101號">101</option>
+                <option value="房間103號">103</option>
+                <option value="房間106號">106</option>
             </select>
         </slot>
-        <button @click="this.deviceStatus(null,this.type,this.name,0,this.localRoomId)">新增</button>
+        <button v-if="this.createRoomDeviceControl"
+            @click="this.deviceStatus(null, this.type, this.name, 0, this.localRoomId,true)">新增</button>
+        <button v-else
+            @click="this.deviceStatus(null, this.type, this.name, 0, this.createRoomDevice[0].id,false)">新增</button>
     </div>
 </template>
 
@@ -61,9 +74,10 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 25px 25px 0 0 ;
+    border-radius: 25px 25px 0 0;
+
     // border: 1px solid black;
-    select{
+    select {
         width: 126px;
         height: 40px;
         font-size: 16px;
@@ -75,7 +89,8 @@ export default {
         margin-left: 30px;
         color: $white;
     }
-    input{
+
+    input {
         width: 180px;
         height: 40px;
         border-radius: 35px;
@@ -87,10 +102,12 @@ export default {
         color: $white;
         margin-left: 30px;
     }
+
     ::placeholder {
         color: $white;
     }
-    button{
+
+    button {
         width: 88px;
         height: 40px;
         border-radius: 35px;

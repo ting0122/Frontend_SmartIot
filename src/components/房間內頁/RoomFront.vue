@@ -11,17 +11,19 @@ export default {
     data() {
         return {
             showCreateRoom: false, // 用於控制顯示 Create 或 Search 组件
-            searchDeviceControl:true
+            searchDeviceControl:true,
+            createRoomDeviceControl:true,
+            isChecked: false,  //處理switch子元件值得同步
         };
     },
     created() {
-        
+        console.log(this.createRoomDevice)
     },
     mounted() {
         
     },
     computed: {
-        ...mapState(location, ['deviceArr','localRoomArea']),
+        ...mapState(location, ['deviceArr','localRoomArea','oneRoom']),
     },
     components: {
         Energy,
@@ -32,13 +34,22 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['searchDevice']),
+        ...mapActions(location, ['searchDevice','deviceStatus']),
         //以下兩個用於切換新增設備及搜尋設備2個元件的顯示
         toggleCreateDevice() {
             this.showCreateRoom = true;
         },
         toggleSearchDevice() {
             this.showCreateRoom = false;
+        },
+        updateDeviceStatus(index, status) {
+            this.deviceArr[index].status = status;
+            this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].roomId,true)
+            console.log('設備開關狀態',this.deviceArr[index].status,index)
+        },
+        // 控制顯示刪除 checkbox 的狀態
+        toggleCheckbox() {
+            this.showCheckbox = !this.showCheckbox;
         }
     }
 };
@@ -52,9 +63,9 @@ export default {
         </div>
         <div class="headerArea">
             <div class="roomtitle">
-                <h2>602-會議室</h2><p>南方麒麟股份有限公司嘶嘶嘶嘶</p>
+                <h2>{{this.oneRoom.area}}-{{this.oneRoom.type}}</h2><p>{{ this.oneRoom.name }}</p>
             </div>
-            <CreateDeviceY v-if="showCreateRoom">
+            <CreateDeviceY :createRoomDeviceControl="createRoomDeviceControl" v-if="showCreateRoom">
                 <template #roomid>
                    <p></p>
                 </template>
@@ -70,7 +81,8 @@ export default {
             <div class="out" >
                 <div class="room" v-for="(data, index) in deviceArr" :key="index">
                     <div class="switch">
-                        <Switch :id="data.id" />
+                        <Switch  v-model:checked="data.status"
+                        @update:checked="updateDeviceStatus(index, $event)" />
                     </div>
                     <p class="id">{{ data.id }}</p>
                     <p>{{ data.type }}</p>

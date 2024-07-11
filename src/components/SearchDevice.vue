@@ -59,7 +59,7 @@ export default {
             <option value="除濕機">除濕機</option>
         </select>
         <button v-if="searchDeviceControl" @click="this.searchDevice(this.name, this.type, null, this.status, true)">搜尋</button>
-        <button v-else="searchDeviceControl" @click="this.searchDevice(this.name, this.type, this.area, this.status, false)">搜尋</button>
+        <button v-else @click="this.searchDevice(this.name, this.type, this.area, this.status, false)">搜尋</button>
     </div>
 </template>
 

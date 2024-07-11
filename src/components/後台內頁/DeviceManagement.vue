@@ -12,7 +12,8 @@ export default {
             dataArr: [{ id: 203154, type: "冷氣", mane: "前方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203151, type: "電燈", mane: "右側電燈", area: 602, roommane: "南方麒麟股份有限公司嘶嘶嘶嘶" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }],
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
             isChecked: false,  //處理switch子元件值得同步
-            showCheckbox:false // 控制顯示 checkbox 的狀態
+            showCheckbox:false, // 控制顯示 checkbox 的狀態
+            
         };
     },
     created() {
@@ -54,21 +55,21 @@ export default {
 
         updateDeviceStatus(index, status) {
             this.deviceArr[index].status = status;
-            // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
+            this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].roomId,false)
             console.log('設備開關狀態',this.deviceArr[index].status,index)
         },
         // 控制顯示刪除 checkbox 的狀態
         toggleCheckbox() {
             this.showCheckbox = !this.showCheckbox;
         }
-    }
+    },
 };
 </script>
 
 <template>
     <div class="outarr">
         <!-- 根據 showCreateRoom 的值決定顯示 CreateRoom 或 SearchRoom 组件 -->
-        <CreateDeviceY v-if="showCreateRoom">
+        <CreateDeviceY  v-if="showCreateRoom">
             
         </CreateDeviceY>
         <SearchDevice v-else />

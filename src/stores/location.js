@@ -6,6 +6,7 @@ export default defineStore("location", {
         deviceArr: [],
         roomArr: [],
         dataArr: [],
+        createRoomDevice:[],
         oneRoom: {},
         localRoomId: null,
         localRoomArea: ""
@@ -91,11 +92,13 @@ export default defineStore("location", {
                 })
         },
         //建立房間
-        createRoom(i, j, k) {
+        createRoom(i, j, k, l, m) {
             let obj = {
-                name: i,
-                area: j,
-                type: k,
+                id:i,
+                name: j,
+                area: k,
+                type: l,
+                status:m
             }
             fetch("http://localhost:8080/rooms", {
                 method: "post",
@@ -111,7 +114,7 @@ export default defineStore("location", {
                 })
         },
         //新增/修改設備狀態或欄位
-        deviceStatus(i, j, k, l, m) {
+        deviceStatus(i, j, k, l, m, useLocalRoomArea = false) {
             let changeobj = {
                 id: i,
                 type: j,
@@ -129,8 +132,43 @@ export default defineStore("location", {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    // this.searchRoom(this.localRoomId)
-                    this.searchDevice(null, null, null, null)
+                    if(useLocalRoomArea){
+                        this.searchRoom(this.localRoomId)
+                    }else{
+                        this.searchDevice(null, null, null, null)
+                    }
+                })
+        },
+        createRoomDeviceSearch(i, j, k, l) {
+            const params = new URLSearchParams();
+            //this.name 
+            if (i) {
+                params.append('name', i);
+            }
+            //this.type
+            if (j) {
+                params.append('type', j);
+            }
+            //this.area
+            if (k) {
+                params.append('area', k);
+            }
+            //this.status
+            if (l !== null) {
+                params.append('status', l);
+            }
+            fetch(`http://localhost:8080/rooms/search?${params.toString()}`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify()
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    this.createRoomDevice = data
+                    console.log(this.createRoomDevice[0].id)
                 })
         },
         //搜尋設備

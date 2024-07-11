@@ -44,7 +44,7 @@ export default {
             <option value="其他">其他</option>
         </select>
         <label for=""><input type="text" v-model="this.name" placeholder="空間名稱"></label>
-        <button @click="this.createRoom(this.name,this.area,this.type)">新增</button>
+        <button @click="this.createRoom(null,this.name,this.area,this.type,false)">新增</button>
     </div>
 </template>
 
