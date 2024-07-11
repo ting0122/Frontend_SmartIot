@@ -1,17 +1,18 @@
 <script>
-import Announcement from '@/components/Announcement.vue';
 import ACcontrol from '@/components/ACcontrol.vue';
-import DehumidifierControl from '@/components/DehumidifierControl.vue';
 import AirPurifierControl from '@/components/AirPurifierControl.vue';
-import lampControl from '@/components/lampControl.vue';
+import Announcement from '@/components/Announcement.vue';
+import DehumidifierControl from '@/components/DehumidifierControl.vue';
+import DeviceCell from '@/components/DeviceCell.vue';
 import ElectricityConsumptionData from '@/components/ElectricityConsumptionData.vue';
 import EnvironmentalDataDisplay from '@/components/EnvironmentalDataDisplay.vue';
-import DeviceCell from '@/components/DeviceCell.vue';
+import lampControl from '@/components/lampControl.vue';
 
 export default {
     data() {
         return {
-
+            roomDevices: [],
+            dehumidifiers: [],
         };
     },
     components: {
@@ -24,7 +25,64 @@ export default {
         DehumidifierControl,  //除濕機控制元件
         lampControl,
     },
+    created() {
+        this.fetchRoomDevices();
+    },
+    methods: {
+        fetchRoomDevices() {
+            fetch('http://localhost:8080/rooms/1')
+                .then(response => response.json())
+                .then(data => {
+                    this.roomDevices = data.devices;
+                    this.dehumidifiers = this.roomDevices.filter(device => device.type === '除濕機');
+                    this.$nextTick(() => {
+                        if (this.dehumidifiers.length > 0) {
+                            this.$refs.dehumidifierControl.updateCurrentHumidity(this.dehumidifiers[0].dehumidifier.current_humidity);
+                        }
+                    });
+                })
+                .catch(error => console.error('獲取房間設備失敗：', error));
+        },
+        updateDehumidifiers(newSettings) {
+            console.log('接收到的 newSettings:', newSettings, 'target_humidity type:', typeof newSettings.target_humidity);
 
+            const payload = this.dehumidifiers.map(dehumidifier => ({
+                id: dehumidifier.id,
+                status: newSettings.status,
+                target_humidity: parseFloat(newSettings.target_humidity.toFixed(1)),
+                fan_speed: newSettings.fan_speed
+            }));
+
+            console.log('準備發送的 payload:', payload);
+
+            const requestBody = JSON.stringify(payload);
+            console.log('最終的 API 請求體字符串:', requestBody);
+
+            fetch('http://localhost:8080/dehumidifiers/batch', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: requestBody,
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(`HTTP error! status: ${response.status}, message: ${text}`);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('除濕機設置已更新', data);
+                    this.fetchRoomDevices();
+                })
+                .catch(error => {
+                    console.error('更新除濕機設置失敗：', error);
+                    alert('更新除濕機設置失敗，請稍後再試。');
+                });
+        },
+    },
 };
 </script>
 
@@ -33,7 +91,8 @@ export default {
         <!-- <Announcement /> -->
         <!-- <ACcontrol /> -->
         <!-- <AirPurifierControl/> -->
-        <DehumidifierControl/>
+        <DehumidifierControl ref="dehumidifierControl" :id="dehumidifiers.length > 0 ? dehumidifiers[0].id : null"
+            @update-dehumidifiers="updateDehumidifiers" />
         <!-- <lampControl/> -->
         <ElectricityConsumptionData />
     </div>
@@ -43,7 +102,7 @@ export default {
     <div class="down">
         <DeviceCell />
     </div>
-    
+
 
 
 </template>
@@ -75,6 +134,7 @@ export default {
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
+
     &::-webkit-scrollbar {
         height: 10px;
 
@@ -97,6 +157,4 @@ export default {
         width: 957px;
     }
 }
-
-
 </style>
