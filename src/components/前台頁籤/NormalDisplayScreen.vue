@@ -171,10 +171,10 @@ export default {
 <template>
     <div class="up">
         <!-- <Announcement /> -->
-        <!-- <ACcontrol /> -->
-        <AirPurifierControl :key="airPurifiers.length" :airPurifiers="airPurifiers"
-            @update-air-purifiers="updateAirPurifiers" />
-        <!-- <DehumidifierControl ref="dehumidifierControl" :id="dehumidifiers.length > 0 ? dehumidifiers[0].id : null"
+        <ACcontrol />
+        <!-- <AirPurifierControl :key="airPurifiers.length" :airPurifiers="airPurifiers"
+            @update-air-purifiers="updateAirPurifiers" /> -->
+        <!-- <DehumidifierControl :key="dehumidifiers.length" :dehumidifiers="dehumidifiers"
             @update-dehumidifiers="updateDehumidifiers" /> -->
         <!-- <lampControl :key="lights.length" :lights="lights" @update-lights="updateLights" /> -->
         <ElectricityConsumptionData />
