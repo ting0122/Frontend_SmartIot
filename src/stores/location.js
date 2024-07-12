@@ -111,6 +111,7 @@ export default defineStore("location", {
                 .then(data => {
                     console.log(data)
                     this.searchAllRoom()
+                    this.searchDevice(null, null, null, null,false)
                 })
         },
         //新增/修改設備狀態或欄位
@@ -135,7 +136,8 @@ export default defineStore("location", {
                     if(useLocalRoomArea){
                         this.searchRoom(this.localRoomId)
                     }else{
-                        this.searchDevice(null, null, null, null)
+                        this.searchDevice(null, null, null, null,false)
+                        this.searchAllRoom()
                     }
                 })
         },
