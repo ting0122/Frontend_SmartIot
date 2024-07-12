@@ -115,20 +115,19 @@ export default {
                         <span>運轉強度</span>
                         <div @click="setFanSpeed('自動')" :class="{ selected: fan_speed === '自動' }">
                             <i class="fa-solid fa-a"></i>
-                            <p v-show="fan_speed === '自動'">自動</p>
+                            <p>自動</p>
                         </div>
-                        <div @click="setFanSpeed('低')"
-                            :class="{ selected: fan_speed === '低' || fan_speed === '中' || fan_speed === '高' }">
-                            <i class="fa-solid fa-wind"> </i>
-                            <p v-show="fan_speed === '低'">低</p>
-                        </div>
-                        <div @click="setFanSpeed('中')" :class="{ selected: fan_speed === '中' || fan_speed === '高' }">
+                        <div @click="setFanSpeed('低')" :class="{ selected: fan_speed === '低' }">
                             <i class="fa-solid fa-wind"></i>
-                            <p v-show="fan_speed === '中'">中</p>
+                            <p>低</p>
+                        </div>
+                        <div @click="setFanSpeed('中')" :class="{ selected: fan_speed === '中' }">
+                            <i class="fa-solid fa-wind"></i>
+                            <p>中</p>
                         </div>
                         <div @click="setFanSpeed('高')" :class="{ selected: fan_speed === '高' }">
                             <i class="fa-solid fa-wind"></i>
-                            <p v-show="fan_speed === '高'">高</p>
+                            <p>高</p>
                         </div>
                     </div>
                 </div>
@@ -164,6 +163,10 @@ export default {
         position: absolute;
         right: 24px;
         top: 15px;
+
+        ::v-deep input[type="checkbox"] {
+            display: none;
+        }
     }
 
     .left {

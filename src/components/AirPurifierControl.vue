@@ -130,6 +130,10 @@ export default {
         position: absolute;
         right: 24px;
         top: 15px;
+
+        ::v-deep input[type="checkbox"] {
+            display: none;
+        }
     }
 
     .left {

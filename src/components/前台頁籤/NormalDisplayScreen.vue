@@ -15,6 +15,7 @@ export default {
             dehumidifiers: [],
             lights: [],
             airPurifiers: [],
+            airConditioners: [],
         };
     },
     components: {
@@ -39,14 +40,17 @@ export default {
                     this.dehumidifiers = this.roomDevices.filter(device => device.type === '除濕機');
                     this.lights = this.roomDevices.filter(device => device.type === '燈');
                     this.airPurifiers = this.roomDevices.filter(device => device.type === '空氣清淨機');
-
+                    this.airConditioners = this.roomDevices.filter(device => device.type === '冷氣機');
+                    // 更新除濕機和燈光的狀態
                     this.$nextTick(() => {
-                        if (this.dehumidifiers.length > 0) {
-                            this.$refs.dehumidifierControl.updateCurrentHumidity(this.dehumidifiers[0].dehumidifier.current_humidity);
-                        }
-                        if (this.lights.length > 0) {
-                            this.$refs.lampControl.updateLightStatus(this.lights[0].light);
-                        }
+                        // 更新除濕機的狀態
+                        // if (this.dehumidifiers.length > 0) {
+                        //     this.$refs.dehumidifierControl.updateCurrentHumidity(this.dehumidifiers[0].dehumidifier.current_humidity);
+                        // }
+                        // 更新燈光的狀態
+                        // if (this.lights.length > 0) {
+                        //     this.$refs.lampControl.updateLightStatus(this.lights[0].light);
+                        // }
                     });
                 })
                 .catch(error => console.error('獲取房間設備失敗：', error));
@@ -164,6 +168,38 @@ export default {
                     alert(`更新空氣清淨機設置失敗：${error.message}`);
                 });
         },
+        updateAirConditioners(newSettings) {
+            const payload = this.airConditioners.map(ac => ({
+                id: ac.id,
+                status: newSettings.status ? 1 : 0,
+                fan_speed: newSettings.fan_speed,
+                mode: newSettings.mode,
+                target_temp: newSettings.target_temp
+            }));
+
+            console.log('準備發送的 payload:', payload);
+
+            const requestBody = JSON.stringify(payload);
+            console.log('最終的 API 請求體字符串:', requestBody);
+
+            fetch('http://localhost:8080/air-conditioners/batch', {
+                method: 'PATCH',
+                headers: {
+                    'accept': '*/*',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('冷氣機設置已更新', data);
+                    this.fetchRoomDevices();
+                })
+                .catch(error => {
+                    console.error('更新冷氣機設置失敗：', error);
+                    alert('更新冷氣機設置失敗，請稍後再試。');
+                });
+        },
     },
 };
 </script>
@@ -171,13 +207,14 @@ export default {
 <template>
     <div class="up">
         <!-- <Announcement /> -->
-        <ACcontrol />
+        <ACcontrol :key="airConditioners.length" :airConditioners="airConditioners"
+            @update-air-conditioners="updateAirConditioners" />
         <!-- <AirPurifierControl :key="airPurifiers.length" :airPurifiers="airPurifiers"
             @update-air-purifiers="updateAirPurifiers" /> -->
         <!-- <DehumidifierControl :key="dehumidifiers.length" :dehumidifiers="dehumidifiers"
             @update-dehumidifiers="updateDehumidifiers" /> -->
-        <!-- <lampControl :key="lights.length" :lights="lights" @update-lights="updateLights" /> -->
-        <ElectricityConsumptionData />
+        <!-- <lampControl :key="lights.length" :lights="lights" @update-lights="updateLights" />
+        <ElectricityConsumptionData /> -->
     </div>
     <div class="middle">
         <EnvironmentalDataDisplay />

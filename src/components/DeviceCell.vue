@@ -5,7 +5,7 @@ import Switch from '@/components/Switch.vue';
 export default {
     data() {
         return {
-            dataArr:[{type:"冷氣"},{type:"燈"},{type:"除濕機"},{type:"空氣清淨機"}]
+            dataArr:[{type:"冷氣機"},{type:"燈"},{type:"除濕機"},{type:"空氣清淨機"}]
         };
     },
     components: {
@@ -39,7 +39,7 @@ export default {
 <template>
     <div class="oo">
         <div class="outArea" v-for="(data, index) in dataArr" :key="index">
-            <i class="fa-regular fa-snowflake" v-if="data.type === '冷氣'" :class="{ hidden: data.showControl }"></i>
+            <i class="fa-regular fa-snowflake" v-if="data.type === '冷氣機'" :class="{ hidden: data.showControl }"></i>
             <i class="fa-solid fa-leaf" v-if="data.type === '空氣清淨機'" :class="{ hidden: data.showControl }"></i>
             <i class="fa-solid fa-droplet-slash" v-if="data.type === '除濕機'" :class="{ hidden: data.showControl }"></i>
             <i class="fa-regular fa-lightbulb" v-if="data.type === '燈'" :class="{ hidden: data.showControl }"></i>
