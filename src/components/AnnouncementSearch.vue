@@ -46,7 +46,6 @@ export default {
         display: flex;
         align-items: center;
         padding-bottom: 15px;
-        padding-left: 128px;
         .left{
             display: flex;
             .name{

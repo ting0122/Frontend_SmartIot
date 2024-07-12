@@ -6,7 +6,6 @@ import { mapState, mapActions } from 'pinia';
 import Swal from 'sweetalert2'
 //以下為元件
 import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
-import Idle from '@/components/XIdle.vue';
 import SearchDevice from '@/components/SearchDevice.vue';
 import CreateDeviceY from '@/components/CreateDeviceY.vue';
 import Switch from '@/components/Switch.vue';
@@ -40,7 +39,6 @@ export default {
     },
     components: {
         CreateAndDeleteButton,
-        Idle,
         SearchDevice,
         CreateDeviceY,
         Switch
