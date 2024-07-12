@@ -13,6 +13,7 @@ export default {
         return {
             roomDevices: [],
             dehumidifiers: [],
+            lights: [],
         };
     },
     components: {
@@ -35,9 +36,13 @@ export default {
                 .then(data => {
                     this.roomDevices = data.devices;
                     this.dehumidifiers = this.roomDevices.filter(device => device.type === '除濕機');
+                    this.lights = this.roomDevices.filter(device => device.type === '燈');
                     this.$nextTick(() => {
                         if (this.dehumidifiers.length > 0) {
                             this.$refs.dehumidifierControl.updateCurrentHumidity(this.dehumidifiers[0].dehumidifier.current_humidity);
+                        }
+                        if (this.lights.length > 0) {
+                            this.$refs.lampControl.updateLightStatus(this.lights[0].light);
                         }
                     });
                 })
@@ -82,6 +87,43 @@ export default {
                     alert('更新除濕機設置失敗，請稍後再試。');
                 });
         },
+        updateLights(newSettings) {
+            const payload = this.lights.map(light => ({
+                id: light.id,
+                status: newSettings.status ? 1 : 0,
+                brightness: newSettings.brightness,
+                color_temp: newSettings.color_temp
+            }));
+
+            console.log('準備發送的 payload:', payload);
+
+            const requestBody = JSON.stringify(payload);
+            console.log('最終的 API 請求體字符串:', requestBody);
+
+            fetch('http://localhost:8080/lights/batch', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: requestBody,
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(`HTTP error! status: ${response.status}, message: ${text}`);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('燈光設置已更新', data);
+                    this.fetchRoomDevices();
+                })
+                .catch(error => {
+                    console.error('更新燈光設置失敗：', error);
+                    alert('更新燈光設置失敗，請稍後再試。');
+                });
+        },
     },
 };
 </script>
@@ -90,10 +132,10 @@ export default {
     <div class="up">
         <!-- <Announcement /> -->
         <!-- <ACcontrol /> -->
-        <!-- <AirPurifierControl/> -->
-        <DehumidifierControl ref="dehumidifierControl" :id="dehumidifiers.length > 0 ? dehumidifiers[0].id : null"
-            @update-dehumidifiers="updateDehumidifiers" />
-        <!-- <lampControl/> -->
+        <AirPurifierControl/>
+        <!-- <DehumidifierControl ref="dehumidifierControl" :id="dehumidifiers.length > 0 ? dehumidifiers[0].id : null"
+            @update-dehumidifiers="updateDehumidifiers" /> -->
+        <!-- <lampControl :lights="lights" @update-lights="updateLights" /> -->
         <ElectricityConsumptionData />
     </div>
     <div class="middle">
