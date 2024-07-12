@@ -1,56 +1,66 @@
 <!-- 前台-首頁-左上角公告-元件 -->
 <script>
 import Switch from '@/components/Switch.vue';
+
 export default {
+    props: {
+        airPurifiers: {
+            type: Array,
+            required: true
+        }
+    },
     data() {
         return {
-            id:0,
-            name:"呼呼",
-            type:"空氣清淨機",
-            fan_speed:"",
-            air_quality:10,
-            operating_time:"1.62",
-            isChecked: false,  //處理switch子元件值得同步
+            name: "總控台",
+            type: "空氣清淨機",
+            fan_speed: 50,
+            air_quality: 0,
+            operating_time: 0,
+            status: false,
         };
     },
     components: {
         Switch,
-    
     },
     methods: {
-        //點擊亮起當前選項
-        setMode(mode) {
-            this.mode = mode;
-            console.log("Selected mode:", mode);
+        updateAirPurifiers() {
+            this.$emit('update-air-purifiers', {
+                status: this.status,
+                fan_speed: this.fan_speed
+            });
         },
-        setFanSpeed(fan_speed) {
-            this.fan_speed = fan_speed;
-            console.log("Selected fan speed:", fan_speed);
+        updateStatus(status) {
+            this.status = status;
+            this.updateAirPurifiers();
         },
-        //控制溫度加減
-        increaseTemp() {
-            this.air_quality += 1;
-            console.log("Increased temperature to:", this.air_quality);
+        setFanSpeed(speed) {
+            const speedMap = { '自動': 25, '低': 50, '中': 75, '高': 100 };
+            this.fan_speed = speedMap[speed];
+            this.updateAirPurifiers();
         },
-        decreaseTemp() {
-            this.air_quality -= 1;
-            console.log("Decreased temperature to:", this.air_quality);
-        },
-        updateDeviceStatus(index, status) {
-            this.deviceArr[index].status = status;
-            // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
-            console.log('設備開關狀態', status)
+        getFanSpeedText(speed) {
+            if (speed <= 25) return '自動';
+            if (speed <= 50) return '低';
+            if (speed <= 75) return '中';
+            return '高';
+        }
+    },
+    mounted() {
+        if (this.airPurifiers.length > 0) {
+            const firstAirPurifier = this.airPurifiers[0];
+            this.fan_speed = firstAirPurifier.airPurifier.fan_speed;
+            this.air_quality = firstAirPurifier.airPurifier.air_quality;
+            this.operating_time = firstAirPurifier.airPurifier.operating_time;
+            this.status = firstAirPurifier.status;
         }
     }
- 
 };
 </script>
 
 <template>
     <div class="outArea">
         <div class="switch">
-            <Switch :id="id" v-model:checked="status"
-            @update:checked="updateDeviceStatus(index, $event)"/>
+            <Switch :id="0" v-model:checked="status" @update:checked="updateStatus" />
         </div>
         <div class="left">
             <i class="fa-solid fa-leaf"></i>
@@ -58,8 +68,7 @@ export default {
         </div>
         <div class="right">
             <div class="rightUp">
-                <p class="id">總控台</p>
-              
+                <p class="id">{{ name }}</p>
             </div>
             <div class="rightDown">
                 <div class="rightDownLeft">
@@ -67,49 +76,46 @@ export default {
                         <span>運轉時間</span>
                         <div class="time">
                             <i class="fa-regular fa-clock"></i>
-                            <p>{{ this.operating_time }}</p>
+                            <p>{{ operating_time.toFixed(2) }}</p>
                             <P>小時</P>
                         </div>
                     </div>
                     <div class="fan_speed target_temp">
                         <span>風量</span>
-                        <div  @click="setFanSpeed('自動')" :class="{ selected: fan_speed === '自動'}">
+                        <div @click="setFanSpeed('自動')" :class="{ selected: fan_speed <= 25 }">
                             <i class="fa-solid fa-a"></i>
-                            <P v-show="fan_speed === '自動'">自動</P>
+                            <P v-show="fan_speed <= 25">自動</P>
                         </div>
-                        <div  @click="setFanSpeed('低')" :class="{ selected: fan_speed === '低' || fan_speed === '中' || fan_speed === '高'}">
+                        <div @click="setFanSpeed('低')" :class="{ selected: fan_speed > 25 && fan_speed <= 50 }">
                             <i class="fa-solid fa-wind"> </i>
-                            <P v-show="fan_speed === '低'">低</P>
+                            <P v-show="fan_speed > 25 && fan_speed <= 50">低</P>
                         </div>
-                        <div  @click="setFanSpeed('中')" :class="{ selected: fan_speed === '中' || fan_speed === '高' }">
+                        <div @click="setFanSpeed('中')" :class="{ selected: fan_speed > 50 && fan_speed <= 75 }">
                             <i class="fa-solid fa-wind"></i>
-                            <P v-show="fan_speed === '中'">中</P>
+                            <P v-show="fan_speed > 50 && fan_speed <= 75">中</P>
                         </div>
-                        <div @click="setFanSpeed('高')" :class="{ selected: fan_speed === '高' }">
+                        <div @click="setFanSpeed('高')" :class="{ selected: fan_speed > 75 }">
                             <i class="fa-solid fa-wind"></i>
-                            <P v-show="fan_speed === '高'">高</P>
+                            <P v-show="fan_speed > 75">高</P>
                         </div>
                     </div>
                 </div>
                 <div class="rightDownRight">
                     <span>當前<br>空氣品質</span>
                     <div class="mode">
-                        <p>{{ this.air_quality }}</p>
+                        <p>{{ air_quality }}</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        
     </div>
-    
 </template>
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 
 
-.outArea{
+.outArea {
     width: 541px;
     height: 268px;
     border-radius: 25px;
@@ -119,47 +125,57 @@ export default {
     justify-content: space-between;
     padding-top: 13px;
     position: relative;
+
     .switch {
         position: absolute;
         right: 24px;
         top: 15px;
     }
-    .left{
+
+    .left {
         height: 100%;
         width: 30%;
         text-align: center;
-        i{
+
+        i {
             font-size: 80px;
             color: $dark01;
-            margin-top: 75px;  
+            margin-top: 75px;
         }
-        p{
+
+        p {
             font-size: 20px;
             margin-top: 10px;
             color: $black;
         }
     }
-    .right{
+
+    .right {
         height: 100%;
         width: 70%;
+
         // border: 1px solid black;
-        p{
+        p {
             margin: 10px 0 20px 5px;
             font-size: 16px;
         }
-        .rightUp{
+
+        .rightUp {
             width: 100%;
             color: $black1;
         }
-        .rightDown{
+
+        .rightDown {
             width: 100%;
             display: flex;
+
             // border: 1px solid black;
-            .rightDownLeft{
+            .rightDownLeft {
                 height: 100%;
                 width: 65%;
+
                 // border: 1px solid black;
-                .target_temp{
+                .target_temp {
                     width: 234px;
                     height: 92px;
                     border-radius: 15px;
@@ -167,38 +183,45 @@ export default {
                     display: flex;
                     justify-content: space-evenly;
                     position: relative;
-                    span{
+
+                    span {
                         position: absolute;
                         color: $black1;
                     }
-                    i{
+
+                    i {
                         font-size: 25px;
                         color: $dark03;
                         cursor: pointer;
                     }
-                    p{
+
+                    p {
                         margin: 0;
                         color: $dark03;
                         cursor: pointer;
                     }
-                    div{
+
+                    div {
                         width: 33px;
                         margin-top: 35px;
                         text-align: center;
                     }
-                    .time{
+
+                    .time {
                         display: flex;
                         height: 30px;
                         width: 100%;
                         margin-left: 45px;
-                        p{
+
+                        p {
                             line-height: 30px;
                             margin-left: 10px;
                             font-size: 22px;
                             color: $black1;
                             cursor: default;
                         }
-                        i{
+
+                        i {
                             font-size: 25px;
                             line-height: 34px;
                             color: $black1;
@@ -207,35 +230,42 @@ export default {
                         }
                     }
                 }
+
                 .selected {
-                    i{
+                    i {
                         color: $black1;
                     }
-                    p{
+
+                    p {
                         color: $black1;
                     }
                 }
-                .fan_speed{
+
+                .fan_speed {
                     margin-top: 10px;
                 }
             }
-            .rightDownRight{
+
+            .rightDownRight {
                 width: 110px;
                 height: 194px;
                 border-radius: 15px;
                 background-color: $dark01;
                 text-align: center;
                 position: relative;
-                span{
+
+                span {
                     position: absolute;
                     color: $black1;
                     left: 23px;
                     top: 10px;
                 }
-                .mode{
+
+                .mode {
                     padding-top: 55px;
-                    color: $black1;    
-                    p{
+                    color: $black1;
+
+                    p {
                         font-size: 38px;
                         margin: 0;
                         margin-top: 27px;
@@ -245,9 +275,7 @@ export default {
 
         }
     }
-    
-    
+
+
 }
-
-
 </style>
