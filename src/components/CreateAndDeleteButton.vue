@@ -1,4 +1,5 @@
 <script>
+
 export default {
     data() {
         return {
@@ -29,7 +30,11 @@ export default {
         handleDeleteClick() {
             this.$emit('delete-click');
         }
-    }
+    },
+    props:[
+        "showCheckbox"
+    ]
+    
 };
 </script>
 
@@ -43,7 +48,7 @@ export default {
         </div>
         <div class="createAndDeleteButton">            
             <button @click="handleSearchClick"><i class="fa-solid fa-magnifying-glass" ></i></button>
-            <button @click="handleDeleteClick"><i class="fa-solid fa-trash-can"></i></button>
+            <button @click="handleDeleteClick" :class="{chick:showCheckbox}"><i class="fa-solid fa-trash-can" ></i></button>
             <button @click="handleAddClick"><i class="fa-solid fa-circle-plus" ></i></button>
         </div>
     </div>
@@ -84,18 +89,21 @@ justify-content: center;
     display: flex;
     justify-content: space-between;
     margin-right: 36px;
-
-}
-button {
-    height: 45px;
-    width: 45px;
-    background: $dark03;
-    border-radius: 50%;
-    border: none;
-    outline: none;
-    color: $white;
-    font-size: 20px;
-    line-height: 45px;
     
+    button {
+        height: 45px;
+        width: 45px;
+        background: $dark03;
+        border-radius: 50%;
+        border: none;
+        outline: none;
+        color: $white;
+        font-size: 20px;
+        line-height: 45px;  
+    }
+    .chick{
+        color: $black1;
+        background: salmon;
+    }
 }
 </style>
