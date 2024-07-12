@@ -211,6 +211,35 @@ export default defineStore("location", {
                     console.log(this.deviceArr)
                 })
         },
+        deleteDevice(i){
+            let arr = []
+            for( let j = 0 ; j < i.length ; j++){
+                arr.push(i[j]);
+            }
+            
+            let a = '[';
+            for(let i = 0; i < arr.length; i++){
+                a += arr[i];
+                if(i === arr.length-1){
+                    break;
+                }
+                a += ',';
+            }
+            a += ']'
+            console.log(a)
+            fetch("http://localhost:8080/devices", {
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body:  JSON.stringify(a) 
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    this.searchDevice(null, null, null, null,false)
+                })
+        }
     }
 
 });

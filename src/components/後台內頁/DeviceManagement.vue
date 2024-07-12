@@ -48,7 +48,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['searchDevice', 'deviceStatus']),
+        ...mapActions(location, ['searchDevice', 'deviceStatus','deleteDevice']),
         //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
         toggleCreateRoom() {
             this.showCreateRoom = true;
@@ -86,7 +86,8 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // 在這裡處理確認刪除的邏輯
-                    this.deviceArr = this.deviceArr.filter(device => !this.select.includes(device.id));
+                    // this.deviceArr = this.deviceArr.filter(device => !this.select.includes(device.id));
+                    this.deleteDevice(this.select)
                     this.select = [];
                     Swal.fire({
                         title:'已刪除',
