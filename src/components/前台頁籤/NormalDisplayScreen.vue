@@ -16,6 +16,8 @@ export default {
             lights: [],
             airPurifiers: [],
             airConditioners: [],
+            selectedDeviceType: 'Announcement',
+            resetTimer: null,
         };
     },
     components: {
@@ -200,31 +202,46 @@ export default {
                     alert('更新冷氣機設置失敗，請稍後再試。');
                 });
         },
+        selectDeviceType(type) {
+            this.selectedDeviceType = type;
+            this.startResetTimer();
+        },
+        resetToAnnouncement() {
+            this.selectedDeviceType = 'Announcement';
+        },
+        startResetTimer() {
+            // 清除現有的計時器
+            if (this.resetTimer) {
+                clearTimeout(this.resetTimer);
+            }
+
+            // 設置新的計時器，3分鐘後重置為公告
+            this.resetTimer = setTimeout(() => {
+                this.resetToAnnouncement();
+            }, 3 * 60 * 1000); // 3分鐘
+        },
+    },
+    beforeUnmount() {
+        if (this.resetTimer) {
+            clearTimeout(this.resetTimer);
+        }
     },
 };
 </script>
 
 <template>
     <div class="up">
-        <!-- <Announcement /> -->
-        <ACcontrol :key="airConditioners.length" :airConditioners="airConditioners"
-            @update-air-conditioners="updateAirConditioners" />
-        <!-- <AirPurifierControl :key="airPurifiers.length" :airPurifiers="airPurifiers"
-            @update-air-purifiers="updateAirPurifiers" /> -->
-        <!-- <DehumidifierControl :key="dehumidifiers.length" :dehumidifiers="dehumidifiers"
-            @update-dehumidifiers="updateDehumidifiers" /> -->
-        <!-- <lampControl :key="lights.length" :lights="lights" @update-lights="updateLights" />
-        <ElectricityConsumptionData /> -->
+        <component :is="selectedDeviceType" :key="selectedDeviceType" :airConditioners="airConditioners"
+            :lights="lights" :airPurifiers="airPurifiers" :dehumidifiers="dehumidifiers"
+            @update-air-conditioners="updateAirConditioners" @update-lights="updateLights"
+            @update-air-purifiers="updateAirPurifiers" @update-dehumidifiers="updateDehumidifiers" />
     </div>
     <div class="middle">
         <EnvironmentalDataDisplay />
     </div>
     <div class="down">
-        <DeviceCell />
+        <DeviceCell @select-device="selectDeviceType" />
     </div>
-
-
-
 </template>
 
 <style scoped lang="scss">
