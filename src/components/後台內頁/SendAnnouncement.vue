@@ -13,7 +13,7 @@ import AnnouncementSearch from '@/components/AnnouncementSearch.vue';
 export default {
     data() {
         return {
-            annArr:[{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
+            annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
             sendroomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
             showCheckbox: false, // 控制顯示 checkbox 的狀態
@@ -41,9 +41,75 @@ export default {
         //點擊切換expanded的ture/false屬性
         toggleContent(index) {
         this.annArr[index].expanded = !this.annArr[index].expanded;
+        },
+        // 控制顯示刪除 checkbox 的狀態
+        toggleCheckbox() {
+            this.annArr.forEach(ann => {
+                ann.expanded = false;
+            });
+            this.showCheckbox = !this.showCheckbox;
+            if (!this.showCheckbox) {
+                this.showDeleteConfirmation();
+            }
+        },
+        // 彈出 SweetAlert2 的刪除確認彈窗
+        showDeleteConfirmation() {
+            if (this.select.length === 0) {
+                Swal.fire({
+                    title: '無選取任何公告',
+                    text: '請選擇至少一個公告進行刪除',
+                    icon: 'info',
+                    customClass: {
+                        popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                    },
+                });
+                return;
+            }
+            const selectedDevices = this.annArr.filter(ann => this.select.includes(ann.id));
+            const selectedNames = selectedDevices.map(ann => `${ann.title}-${ann.time}`).join('<br>'); 
+            Swal.fire({
+                title: '確認刪除以下公告?',
+                html:  `<p>${selectedNames}<p>`, // 使用 html 属性
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '確認刪除',
+                cancelButtonText: '取消',
+                customClass: {
+                    popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 在這裡處理確認刪除的邏輯
+                    this.annArr = this.annArr.filter(ann => !this.select.includes(ann.id));
+                    this.select = [];
+                    Swal.fire({
+                        title:'已刪除',
+                        text:'所選公告已被刪除',
+                        icon:'success',
+                        customClass: {
+                            popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                        },
+                    });
+                } else {
+                    // 在這裡處理取消刪除的邏輯
+                    this.select = [];
+                    this.showCheckbox = false;
+                }
+            });
+        },
+        // 將被選中的設備 ID 加入或移除 select 陣列的方法(刪除設備用)
+        addToSelect(id) {
+            const index = this.select.indexOf(id);
+            if (index === -1) {
+                this.select.push(id);
+            } else {
+                this.select.splice(index, 1);
+            }
+            console.log(this.select)
         }
         
-    }
+    },
+  
 };
 </script>
 
@@ -51,8 +117,8 @@ export default {
     <div class="outarr">
         <div class="announcementSearch">
             <AnnouncementSearch />
-            <div class="butto">
-                <button @click="handleDeleteClick" :class="{chick:showCheckbox}"><i class="fa-solid fa-trash-can" ></i></button>
+            <div class="button">
+                <button @click="toggleCheckbox" :class="{chick:showCheckbox}"><i class="fa-solid fa-trash-can" ></i></button>
                 <button @click="handleAddClick"><i class="fa-solid fa-circle-plus" ></i></button>
             </div>
         </div>
@@ -71,6 +137,9 @@ export default {
                         <div class="sendroom" v-for="(room, index) in sendroomARR" :key="index">
                             <p>{{ room.area }}-{{ room.roomname }}</p>
                         </div>
+                    </div>
+                    <div class="checkbox-overlay" v-if="showCheckbox" @click="addToSelect(data.id)">
+                        <input type="checkbox" :checked="select.includes(data.id)"/>
                     </div>
                 </div>
             </div>
@@ -111,7 +180,8 @@ export default {
             font-size: 20px;
             line-height: 45px;
             margin-top: 12px;
-            margin-left: 20px  
+            margin-left: 20px; 
+            cursor: pointer;
         }
         .chick{
             color: $black1;
@@ -143,7 +213,6 @@ export default {
             overflow-x:hidden;
             &::-webkit-scrollbar {
                 width: 12px;
-    
             }
     
             &::-webkit-scrollbar-button {
@@ -239,6 +308,45 @@ export default {
                             margin: 0;
                             line-height: 40px;
                             margin:0 10px ;
+                        }
+                    }
+                }
+                .checkbox-overlay {
+                    position: absolute;
+                    z-index: 3;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: $white;
+
+                    input[type='checkbox'] {
+                        /* 自定義 checkbox 样式 */
+                        appearance: none;
+                        width: 30px;
+                        height: 30px;
+                        border: 2px solid $white;
+                        border-radius: 3px;
+                        background-color: transparent;
+                        cursor: pointer;
+                        position: relative;
+                        &:checked {
+                            background-color:$dark02; /* 勾選後的背景色 */
+                        }
+                        &:checked::after {
+                            content: '';
+                            position: absolute;
+                            top: 4px;
+                            left: 9px;
+                            width: 6px;
+                            height: 12px;
+                            border: solid $white;
+                            border-width: 0 2px 2px 0;
+                            transform: rotate(45deg);
                         }
                     }
                 }

@@ -71,7 +71,7 @@ export default {
             const selectedDevices = this.deviceArr.filter(device => this.select.includes(device.id));
             const selectedNames = selectedDevices.map(device => `${device.area}-${device.name}`).join('<br>'); 
             Swal.fire({
-                title: '確認刪除',
+                title: '確認刪除以下設備?',
                 html:  `<p>${selectedNames}<p>`, // 使用 html 属性
                 icon: 'warning',
                 showCancelButton: true,
