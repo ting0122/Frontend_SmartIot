@@ -4,39 +4,57 @@ import Switch from '@/components/Switch.vue';
 
 export default {
     props: {
-        id: {
-            type: Number,
+        dehumidifiers: {
+            type: Array,
             required: true
         }
     },
     data() {
         return {
-            type: "除濕機",
+            status: false,
             current_humidity: 0.0,
             target_humidity: 55.0,
             fan_speed: "中",
-            status: false,
         };
     },
     components: {
         Switch,
     },
+    computed: {
+        firstDehumidifier() {
+            return this.dehumidifiers[0] || {};
+        }
+    },
+    watch: {
+        dehumidifiers: {
+            immediate: true,
+            handler() {
+                this.updateData();
+            }
+        }
+    },
     methods: {
+        updateData() {
+            if (this.firstDehumidifier.dehumidifier) {
+                this.status = this.firstDehumidifier.status;
+                this.current_humidity = this.firstDehumidifier.dehumidifier.current_humidity;
+                this.target_humidity = this.firstDehumidifier.dehumidifier.target_humidity;
+                this.fan_speed = this.mapFanSpeedReverse(this.firstDehumidifier.dehumidifier.fan_speed);
+            }
+        },
         setFanSpeed(speed) {
             this.fan_speed = speed;
             this.emitUpdate();
         },
         increaseHumidity() {
             this.target_humidity = Math.min(parseFloat((this.target_humidity + 1).toFixed(1)), 100);
-            console.log('增加後的濕度:', this.target_humidity, typeof this.target_humidity);
             this.emitUpdate();
         },
         decreaseHumidity() {
             this.target_humidity = Math.max(parseFloat((this.target_humidity - 1).toFixed(1)), 0);
-            console.log('減少後的濕度:', this.target_humidity, typeof this.target_humidity);
             this.emitUpdate();
         },
-        updateDeviceStatus(index, status) {
+        updateDeviceStatus(status) {
             this.status = status;
             this.emitUpdate();
         },
@@ -46,11 +64,7 @@ export default {
                 target_humidity: parseFloat(this.target_humidity.toFixed(1)),
                 fan_speed: this.mapFanSpeed(this.fan_speed),
             };
-            console.log('DehumidifierControl 發送的數據:', updatedData, 'target_humidity type:', typeof updatedData.target_humidity);
             this.$emit('update-dehumidifiers', updatedData);
-        },
-        updateCurrentHumidity(humidity) {
-            this.current_humidity = humidity;
         },
         mapFanSpeed(speed) {
             const speedMap = {
@@ -60,6 +74,15 @@ export default {
                 '高': 'HIGH'
             };
             return speedMap[speed] || 'MEDIUM';
+        },
+        mapFanSpeedReverse(speed) {
+            const speedMap = {
+                'AUTO': '自動',
+                'LOW': '低',
+                'MEDIUM': '中',
+                'HIGH': '高'
+            };
+            return speedMap[speed] || '中';
         }
     }
 };
@@ -68,11 +91,11 @@ export default {
 <template>
     <div class="outArea">
         <div class="switch">
-            <Switch :id="id" v-model:checked="status" @update:checked="updateDeviceStatus($event)" />
+            <Switch v-model:checked="status" @update:checked="updateDeviceStatus" />
         </div>
         <div class="left">
             <i class="fa-solid fa-droplet-slash"></i>
-            <p>{{ this.type }}</p>
+            <p>除濕機</p>
         </div>
         <div class="right">
             <div class="rightUp">
@@ -84,28 +107,27 @@ export default {
                         <span>當前濕度</span>
                         <div class="time">
                             <i class="fa-solid fa-droplet"></i>
-                            <p>{{ this.current_humidity.toFixed(1) }}</p>
-                            <P>%</P>
+                            <p>{{ current_humidity.toFixed(1) }}</p>
+                            <p>%</p>
                         </div>
                     </div>
                     <div class="fan_speed target_temp">
                         <span>運轉強度</span>
                         <div @click="setFanSpeed('自動')" :class="{ selected: fan_speed === '自動' }">
                             <i class="fa-solid fa-a"></i>
-                            <P v-show="fan_speed === '自動'">自動</P>
+                            <p>自動</p>
                         </div>
-                        <div @click="setFanSpeed('低')"
-                            :class="{ selected: fan_speed === '低' || fan_speed === '中' || fan_speed === '高' }">
-                            <i class="fa-solid fa-wind"> </i>
-                            <P v-show="fan_speed === '低'">低</P>
-                        </div>
-                        <div @click="setFanSpeed('中')" :class="{ selected: fan_speed === '中' || fan_speed === '高' }">
+                        <div @click="setFanSpeed('低')" :class="{ selected: fan_speed === '低' }">
                             <i class="fa-solid fa-wind"></i>
-                            <P v-show="fan_speed === '中'">中</P>
+                            <p>低</p>
+                        </div>
+                        <div @click="setFanSpeed('中')" :class="{ selected: fan_speed === '中' }">
+                            <i class="fa-solid fa-wind"></i>
+                            <p>中</p>
                         </div>
                         <div @click="setFanSpeed('高')" :class="{ selected: fan_speed === '高' }">
                             <i class="fa-solid fa-wind"></i>
-                            <P v-show="fan_speed === '高'">高</P>
+                            <p>高</p>
                         </div>
                     </div>
                 </div>
@@ -141,6 +163,10 @@ export default {
         position: absolute;
         right: 24px;
         top: 15px;
+
+        ::v-deep input[type="checkbox"] {
+            display: none;
+        }
     }
 
     .left {
