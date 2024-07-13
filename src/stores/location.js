@@ -9,17 +9,19 @@ export default defineStore("location", {
         createRoomDevice:[],
         oneRoom: {},
         localRoomId: null,
-        localRoomArea: ""
+        localRoomArea: "",
+        allLogs:[]
 
 
     }),
     getters: {
-        getDeviceArr: (state) => state.deviceArr,
-        getRoomArr: (state) => state.roomArr,
-        getDataArr: (state) => state.dataArr,
-        getLocalRoomId: (state) => state.localRoomId,
-        getLocalRoomArea: (state) => state.localRoomArea,
-        getOneRoomArr: (state) => state.oneRoom,
+        // getDeviceArr: (state) => state.deviceArr,
+        // getRoomArr: (state) => state.roomArr,
+        // getDataArr: (state) => state.dataArr,
+        // getLocalRoomId: (state) => state.localRoomId,
+        // getLocalRoomArea: (state) => state.localRoomArea,
+        // getOneRoomArr: (state) => state.oneRoom,
+        // getAllLogs: (state) => state.allLogs,
     },
     actions: {
         //進入頁面搜尋全房間
@@ -115,7 +117,7 @@ export default defineStore("location", {
                 })
         },
         //新增/修改設備狀態或欄位
-        deviceStatus(i, j, k, l, m, useLocalRoomArea = false) {
+        deviceStatus(i, j, k, l, m, judge = false) {
             let changeobj = {
                 id: i,
                 type: j,
@@ -133,7 +135,7 @@ export default defineStore("location", {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    if(useLocalRoomArea){
+                    if(judge){
                         this.searchRoom(this.localRoomId)
                     }else{
                         this.searchDevice(null, null, null, null,false)
@@ -174,10 +176,10 @@ export default defineStore("location", {
                 })
         },
         //搜尋設備
-        searchDevice(i, j, k, l, useLocalRoomArea = false) {
+        searchDevice(i, j, k, l, judge = false) {
             
             
-            if (useLocalRoomArea) {
+            if (judge) {
                 k = this.localRoomArea;
             }
             const params = new URLSearchParams();
@@ -211,35 +213,42 @@ export default defineStore("location", {
                     console.log(this.deviceArr)
                 })
         },
-        deleteDevice(i){
+        //刪除設備
+        deleteDevice(i,judge = false){
             let arr = []
             for( let j = 0 ; j < i.length ; j++){
                 arr.push(i[j]);
             }
             
-            let a = '[';
-            for(let i = 0; i < arr.length; i++){
-                a += arr[i];
-                if(i === arr.length-1){
-                    break;
-                }
-                a += ',';
-            }
-            a += ']'
-            console.log(a)
             fetch("http://localhost:8080/devices", {
                 method: "delete",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body:  JSON.stringify(a) 
+                body: JSON.stringify(arr),
+            })
+                // .then(res => res.json())
+                .then(data => {
+                    if(judge){
+                        this.searchDevice(null, null, this.localRoomArea, null)
+                    }else{
+                        this.searchDevice(null, null, null, null,false)
+                    }
+                    
+                })
+        },
+        getAllLogs() {
+            fetch(`http://localhost:8080/history`, {
+                method: "get",
+                body: JSON.stringify()
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
-                    this.searchDevice(null, null, null, null,false)
+                    console.log('allLog',data)
+                    this.allLogs = data
                 })
-        }
-    }
+        },
+    },
+    
 
 });
