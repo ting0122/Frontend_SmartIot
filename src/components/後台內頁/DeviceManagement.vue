@@ -6,7 +6,6 @@ import { mapState, mapActions } from 'pinia';
 import Swal from 'sweetalert2'
 //以下為元件
 import CreateAndDeleteButton from '@/components/CreateAndDeleteButton.vue';
-import Idle from '@/components/XIdle.vue';
 import SearchDevice from '@/components/SearchDevice.vue';
 import CreateDeviceY from '@/components/CreateDeviceY.vue';
 import Switch from '@/components/Switch.vue';
@@ -41,7 +40,6 @@ export default {
 
     components: {
         CreateAndDeleteButton,
-        Idle,
         SearchDevice,
         CreateDeviceY,
         Switch
@@ -74,7 +72,7 @@ export default {
             const selectedDevices = this.deviceArr.filter(device => this.select.includes(device.id));
             const selectedNames = selectedDevices.map(device => `${device.area}-${device.name}`).join('<br>'); 
             Swal.fire({
-                title: '確認刪除',
+                title: '確認刪除以下設備?',
                 html:  `<p>${selectedNames}<p>`, // 使用 html 属性
                 icon: 'warning',
                 showCancelButton: true,

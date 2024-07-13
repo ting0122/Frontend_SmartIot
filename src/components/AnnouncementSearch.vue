@@ -21,7 +21,7 @@ export default {
     <div class="search_big_area">
         <div class="left">
             <div class="name" >
-                <input type="text" placeholder="設備名稱">
+                <input type="text" placeholder="公告名稱">
             </div>
             <div class="start_date">
                 <VueDatePicker 
@@ -46,7 +46,6 @@ export default {
         display: flex;
         align-items: center;
         padding-bottom: 15px;
-        padding-left: 128px;
         .left{
             display: flex;
             .name{

@@ -56,8 +56,10 @@ export default {
 </script>
 
 <template>
-    <div class="down">
-        <AnnouncementSearch />
+    <div class="down"> 
+        <div class="announcementSearch">
+            <AnnouncementSearch/>   
+        </div> 
         <div class="outArea">
             <h2>公告</h2>
             <div class="list">
@@ -81,8 +83,10 @@ export default {
     width: 900px;
     height: 650px;
     padding: 41px 0px 16px 80px;
-
-    .outArea {
+    .announcementSearch{
+        padding-left: 128px;
+    }
+    .outArea{
         border-radius: 25px;
         height: 594px;
         border: 1px solid $dark02;
