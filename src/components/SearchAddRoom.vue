@@ -31,7 +31,6 @@ export default {
 
 <template>
     <div class="createRoom">
-        <div class="left">
             <label for=""><input type="text"  placeholder="空間名稱" v-model="this.name"></label>
             <select name="" id="" v-model="this.area" >
                 <option value="">房間編號</option>
@@ -48,11 +47,8 @@ export default {
                 <option value="教室">教室</option>
                 <option value="其他">其他</option>
             </select>
-            <button @click="this.searchOnlyRoom(this.name,this.type,this.area,this.status)">添加接收對象</button>
-        </div>
-        <div class="right">
+            <button @click="this.searchOnlyRoom(this.name,this.type,this.area,this.status)">添加接收對象</button>      
             <button @click="this.searchOnlyRoom(this.name,this.type,this.area,this.status)">添加所有空間</button>
-        </div>
     </div>
 </template>
 
@@ -60,16 +56,13 @@ export default {
 @import '@/assets/main.scss';
 
 .createRoom {
-    width: 100%;
-    height: 113px;
-    background: $dark03;
+    width: 800px;
     display: flex;
-    justify-content:space-between;
     align-items: center;
-    border-radius: 25px 25px 0 0;
+    padding-bottom: 15px;
     
     select{
-        width: 155px;
+        width: 100px;
         height: 40px;
         font-size: 16px;
         border: none;
@@ -77,7 +70,7 @@ export default {
         background: $dark02;
         outline: none;
         padding-left: 13px;
-        margin-left: 30px;
+        margin-left: 20px;
         color: $white;
     }
     input{
@@ -90,7 +83,6 @@ export default {
         font-size: 16px;
         padding-left: 13px;
         color: $white;
-        margin-left: 30px;
     }
     ::placeholder {
         color: $white;
@@ -104,8 +96,7 @@ export default {
         background: $dark02;
         color: $white;
         font-size: 16px;
-        margin-left: 30px;
-        margin-right: 30px;
+        margin-left: 20px;
     }
 }
 </style>

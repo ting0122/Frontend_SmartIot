@@ -15,9 +15,11 @@ export default {
         return {
             annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
             sendroomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
-            showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
+            addSendRoomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
+            showUseAdd: false, // 使用新增公告時切換搜尋欄位用
             showCheckbox: false, // 控制顯示 checkbox 的狀態
-            select:[]  //儲存被選中的 id
+            select:[], // 儲存被選中的 id
+            announcement:""  //發布公告的內容
         };
     },
     created() {
@@ -47,6 +49,7 @@ export default {
             this.annArr.forEach(ann => {
                 ann.expanded = false;
             });
+            this.showUseAdd = false;
             this.showCheckbox = !this.showCheckbox;
             if (!this.showCheckbox) {
                 this.showDeleteConfirmation();
@@ -106,6 +109,19 @@ export default {
                 this.select.splice(index, 1);
             }
             console.log(this.select)
+        },
+        //以下三個用於切換新增公告時不同搜尋元件的切換
+        showAddAnnouncement() {
+            // this.showUseAdd = true;
+            this.showUseAdd = !this.showUseAdd;
+            this.showCheckbox = false;
+        },
+        showSearchAnnouncement() {
+            this.showCreateRoom = false;
+        },
+        handleSearchClick(){
+            this.showCheckbox = false;
+            this.showUseAdd=false;
         }
         
     },
@@ -116,13 +132,34 @@ export default {
 <template>
     <div class="outarr">
         <div class="announcementSearch">
-            <AnnouncementSearch />
+            <SearchAddRoom v-if="this.showUseAdd"/>
+            <AnnouncementSearch v-else/>
             <div class="button">
+                <button @click="handleSearchClick" :class="{chick:!showCheckbox&&!showUseAdd}"><i class="fa-solid fa-magnifying-glass" ></i></button>
                 <button @click="toggleCheckbox" :class="{chick:showCheckbox}"><i class="fa-solid fa-trash-can" ></i></button>
-                <button @click="handleAddClick"><i class="fa-solid fa-circle-plus" ></i></button>
+                <button @click="showAddAnnouncement" :class="{chick:showUseAdd}"><i class="fa-solid fa-circle-plus" ></i></button>
             </div>
         </div>
-        <div class="outArea">
+        <div class="addSendRoomARR" v-if="this.showUseAdd">
+            <p class="t">公告發送房間</p>
+            <div class="sendroom" v-for="(room, index) in sendroomARR" :key="index">
+                <p>{{ room.area }}-{{ room.roomname }}</p>
+            </div>
+        </div>
+        <div class="announcementAddArea" v-if="this.showUseAdd">
+            <span>公告標題</span>
+            <br>
+            <div class="in">
+                <input type="text" class="title">
+                <button class="send">發送公告</button>
+            </div>
+            <br>
+            <span>公告內容</span>
+            <br>
+            <textarea v-model="announcement">
+            </textarea>
+        </div>
+        <div class="announcementListArea" v-else>
             <div class="list">
                 <div class="content" v-for="(data, index) in annArr" :key="index" @click="toggleContent(index)"
                 :class="{ expanded: annArr[index].expanded }">
@@ -194,7 +231,98 @@ export default {
         padding-left: 10px;
         padding-bottom: 6px
     }
-    .outArea{
+    .addSendRoomARR{
+        width:1100px;
+        margin: 0 auto;
+        margin-top: 20px;
+        padding-bottom: 20px;
+        padding-top: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        .t{
+            margin: 0;
+            position: absolute;
+            left: 15px;
+            top: 8px;
+            font-size: 18px;
+        }                  
+        .sendroom{
+            padding: 0 10px;
+            margin-top: 10px;
+            margin-right: 20px;
+            width: auto;
+            height: 40px;
+            border-radius: 20px;
+            background-color: $white;
+            p{
+                margin: 0;
+                line-height: 40px;
+                margin:0 10px ;
+            }
+                        
+        }
+    }
+    .announcementAddArea{
+        border-radius: 25px;
+        width: 1060px;
+        height: 700px;
+        border: 1px solid $white;
+        padding: 20px 20px 15px 20px;
+        margin: 20px auto 40px auto;
+        span{
+            font-size: 18px;
+        }
+        .in{
+            width: 1020px;
+            height: 40px;
+            display: block;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            input{
+                background-color: transparent;
+                background-color: $white;
+                outline: none;
+                border-width: 0;
+                padding-left: 20px;
+            }
+            .title{
+                width: 860px;
+                height: 100%;
+                font-size: 18px;
+                border-radius: 30px;
+            }
+            button{
+                width: 120px;
+                height: 100%;
+                font-size: 18px;
+                border-radius: 30px;
+                cursor: pointer;
+            }
+            .chick{
+                color: $black1;
+                background: salmon;
+            }
+        }
+        textarea{
+            display: block;
+            resize: none;
+            outline: none;
+            border-width: 0;
+            width: 980px;
+            height: 374px;
+            background-color: $white;
+            padding: 20px;
+            font-size: 18px;
+            margin: auto;
+            margin-top: 10px;
+            border-radius: 25px;
+        }
+        
+    }
+    .announcementListArea{
         border-radius: 25px;
         width: 1100px;
         height: 700px;
@@ -309,6 +437,7 @@ export default {
                             line-height: 40px;
                             margin:0 10px ;
                         }
+                        
                     }
                 }
                 .checkbox-overlay {
