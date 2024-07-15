@@ -35,7 +35,12 @@ export default {
                     throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
                 }
                 const data = await response.json();
-                this.annArr = data.map(item => ({
+                // 對公告按發布時間進行排序，最新的在前
+                this.annArr = data.sort((a, b) => {
+                    const dateA = new Date(a.publishTime);
+                    const dateB = new Date(b.publishTime);
+                    return dateB - dateA;
+                }).map(item => ({
                     ...item,
                     expanded: false,
                     time: item.publishTime
@@ -56,10 +61,10 @@ export default {
 </script>
 
 <template>
-    <div class="down"> 
+    <div class="down">
         <div class="announcementSearch">
-            <AnnouncementSearch/>   
-        </div> 
+            <AnnouncementSearch />
+        </div>
         <div class="outArea">
             <h2>公告</h2>
             <div class="list">
@@ -83,10 +88,12 @@ export default {
     width: 900px;
     height: 650px;
     padding: 41px 0px 16px 80px;
-    .announcementSearch{
+
+    .announcementSearch {
         padding-left: 128px;
     }
-    .outArea{
+
+    .outArea {
         border-radius: 25px;
         height: 594px;
         border: 1px solid $dark02;

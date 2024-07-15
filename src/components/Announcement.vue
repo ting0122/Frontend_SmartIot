@@ -29,7 +29,14 @@ export default {
                 if (!response.ok) {
                     throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
                 }
-                this.annArr = await response.json();
+                let announcements = await response.json();
+
+                // 對公告按發布時間進行排序，最新的在前
+                this.annArr = announcements.sort((a, b) => {
+                    const dateA = new Date(a.publishTime);
+                    const dateB = new Date(b.publishTime);
+                    return dateB - dateA;
+                });
             } catch (error) {
                 console.error('獲取公告時出錯：', error);
                 Swal.fire({
