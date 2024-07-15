@@ -48,6 +48,7 @@ export default {
                         <p class="date">{{ data.time }}</p>
                     </div>
                     <p>{{ annArr[index].expanded ? data.content : data.truncatedContent }}</p>
+                    <div class="red"></div>
                 </div>
             </div>
         </div>
@@ -102,9 +103,11 @@ export default {
             }
     
             .content{
-                width: 700px;
+                position: relative;
+                width: 685px;
                 border-radius: 20px;
                 padding: 10px;
+                padding-left: 20px;
                 overflow-y: hidden;
                 background-color: $dark02;
                 margin: 10px 15px;
@@ -132,6 +135,15 @@ export default {
                     margin-top: 5px;
                     font-size: 14px;
                     margin-left: 10px;
+                }
+                .red{
+                    position: absolute;
+                    left: 12px;
+                    top: 18px;
+                    width: 9px;
+                    height: 9px;
+                    border-radius: 5px;
+                    background-color: red;
                 }
             }
         }

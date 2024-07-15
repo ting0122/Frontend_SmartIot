@@ -30,10 +30,10 @@ export default {
 
 <template>
     <div class="up">
-        <!-- <Announcement /> -->
+        <Announcement />
         <!-- <ACcontrol /> -->
         <!-- <AirPurifierControl/> -->
-        <DehumidifierControl/>
+        <!-- <DehumidifierControl/> -->
         <!-- <lampControl/> -->
         <ElectricityConsumptionData />
     </div>
