@@ -12,7 +12,7 @@ import Switch from '@/components/Switch.vue';
 export default {
     data() {
         return {
-            dataArr:[{id:203154,type:"冷氣",mane:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",mane:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"}],
+            dataArr: [{ id: 203154, type: "冷氣", mane: "前方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203151, type: "電燈", mane: "右側電燈", area: 602, roommane: "南方麒麟股份有限公司嘶嘶嘶嘶" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }, { id: 203157, type: "冷氣", mane: "後方的冷氣", area: 602, roommane: "會議室" }],
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
             isChecked: false,  //處理switch子元件值得同步
             showCheckbox:false, // 控制顯示 checkbox 的狀態
@@ -20,7 +20,7 @@ export default {
         };
     },
     created() {
-        this.searchDevice(null,null,null,null)
+        this.searchDevice(null, null, null, null)
     },
     mounted() {
 
@@ -35,8 +35,9 @@ export default {
                     truncatedContent: data.name.length > 9 ? data.name.slice(0, 9) + '...' : data.name
                 };
             });
-        },
+        }
     },
+
     components: {
         CreateAndDeleteButton,
         SearchDevice,
@@ -45,7 +46,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['searchDevice','deviceStatus']),
+        ...mapActions(location, ['searchDevice', 'deviceStatus','deleteDevice']),
         //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
         toggleCreateRoom() {
             this.showCreateRoom = true;
@@ -53,10 +54,10 @@ export default {
         toggleSearchRoom() {
             this.showCreateRoom = false;
         },
-        
+
         updateDeviceStatus(index, status) {
             this.deviceArr[index].status = status;
-            // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
+            this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].roomId,false)
             console.log('設備開關狀態',this.deviceArr[index].status,index)
         },
         // 控制顯示刪除 checkbox 的狀態
@@ -83,7 +84,8 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // 在這裡處理確認刪除的邏輯
-                    this.deviceArr = this.deviceArr.filter(device => !this.select.includes(device.id));
+                    // this.deviceArr = this.deviceArr.filter(device => !this.select.includes(device.id));
+                    this.deleteDevice(this.select,falses)
                     this.select = [];
                     Swal.fire({
                         title:'已刪除',
@@ -110,14 +112,16 @@ export default {
             }
             console.log(this.select)
         }
-    }
+    },
 };
 </script>
 
 <template>
     <div class="outarr">
         <!-- 根據 showCreateRoom 的值決定顯示 CreateRoom 或 SearchRoom 组件 -->
-        <CreateDeviceY v-if="showCreateRoom" />
+        <CreateDeviceY  v-if="showCreateRoom">
+            
+        </CreateDeviceY>
         <SearchDevice v-else />
         <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
         <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" @delete-click="toggleCheckbox" :showCheckbox="showCheckbox">
@@ -129,7 +133,8 @@ export default {
         <div class="deviceDiv">
             <div class="room" v-for="(data, index) in truncatedContent" :key="index" @click="addToSelect(data.id)">
                 <div class="switch">
-                    <Switch :id="data.id" v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)"/>
+                    <Switch  v-model:checked="data.status"
+                        @update:checked="updateDeviceStatus(index, $event)" />
                 </div>
                 <p class="id">{{ data.id }}</p>
                 <p>{{ data.type }}</p>
@@ -180,7 +185,8 @@ export default {
         top: 10px;
     }
 }
-.deviceDiv{
+
+.deviceDiv {
     width: 100%;
     height: 713px;
     display: flex;
@@ -189,59 +195,65 @@ export default {
     overflow-y: auto;
     border: 1px solid black;
     border-radius: 0 0 25px 25px;
+
     &::-webkit-scrollbar {
         width: 10px;   
     }
-    
+
     &::-webkit-scrollbar-button {
         background: transparent;
         height: 10px;
     }
-    
+
     &::-webkit-scrollbar-thumb {
         background: $black1;
         border-radius: 15px;
     }
-    
+
     &::-webkit-scrollbar-track {
-        background:transparent;
+        background: transparent;
         border-radius: 15px;
     }
+
     .room {
         width: 282px;
         height: 150px;
         background: $dark03;
         border-radius: 25px;
-        margin: 20px 0 0 0 ;
+        margin: 20px 0 0 0;
         position: relative;
-        
+
         .switch {
             position: absolute;
             right: 18px;
             top: 15px;
         }
-        i{
+
+        i {
             font-size: 50px;
             color: $dark01;
             margin-left: 43%;
             margin-top: -40px;
         }
-        .id{
+
+        .id {
             margin-top: 10px
         }
-        p{
+
+        p {
             margin: 0px 20px 0 30px;
             font-size: 16px;
         }
-        
-        .area{
+
+        .area {
             position: absolute;
             bottom: 0;
             width: 100%;
             height: 50px;
             border-radius: 0 0 25px 25px;
             background-color: $dark01;
-            p{
+
+            p {
                 margin: 0;
                 font-size: 20px;
                 line-height: 50px;

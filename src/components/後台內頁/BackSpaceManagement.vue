@@ -14,7 +14,7 @@ export default {
         };
     },
     created() {
-        
+
     },
     mounted() {
 
@@ -40,7 +40,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['searchRoom']),
+        ...mapActions(location, ['searchRoom', 'createRoom']),
         //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
         toggleCreateRoom() {
             this.showCreateRoom = true;
@@ -50,9 +50,14 @@ export default {
         },
         updateDeviceStatus(index, status) {
             this.roomArr[index].status = status;
-            // this.deviceStatus(this.deviceArr[index].id,this.deviceArr[index].type,this.deviceArr[index].name,this.deviceArr[index].status,this.deviceArr[index].)
-            console.log('房間開關狀態',this.roomArr[index].status,index)
+            this.createRoom(this.roomArr[index].id, this.roomArr[index].name, this.roomArr[index].area, this.roomArr[index].type, this.roomArr[index].status)
+            console.log('房間開關狀態', this.roomArr[index].status, index)
         },
+        // 控制顯示刪除 checkbox 的狀態
+        toggleCheckbox() {
+            this.showCheckbox = !this.showCheckbox;
+        }
+
     }
 };
 </script>
@@ -68,12 +73,12 @@ export default {
         <div class="rooms">
             <div class="room" v-for="(data, index) in truncatedContent" :key="index">
                 <div class="switch">
-                    <Switch :id="data.id" v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)"/>
+                    <Switch v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)" />
                 </div>
                 <p>{{ data.area }}-{{ data.type }}</p>
                 <div class="area">
                     <RouterLink class="routerItem" @click="searchRoom(data.id)" to="/RoomConsole"><span>{{
-                            data.truncatedContent }}</span></RouterLink>
+                        data.truncatedContent }}</span></RouterLink>
                 </div>
             </div>
         </div>
