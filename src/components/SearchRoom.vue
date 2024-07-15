@@ -17,7 +17,7 @@ export default {
 
     },
     computed: {
-
+        ...mapState(location, ['allArea']),
     },
     components: {
 
@@ -39,8 +39,8 @@ export default {
         </select>
         <select name="" id="" v-model="this.area" >
             <option value="">房間編號</option>
-            <option value="601">601</option>
-            <option value="602">602</option>
+            <option v-for="(item,index) in allArea" :value=item.area>{{ item.area }}</option>
+            
         </select>
         <select name="" id="" v-model="this.type" >
             <option value="">空間類型</option>

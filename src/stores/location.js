@@ -10,7 +10,8 @@ export default defineStore("location", {
         oneRoom: {},
         localRoomId: null,
         localRoomArea: "",
-        allLogs:[]
+        allLogs:[],
+        allArea:[]
 
 
     }),
@@ -37,6 +38,7 @@ export default defineStore("location", {
                 .then(data => {
                     console.log('搜尋房間data', data)
                     this.roomArr = data
+                    this.allArea = data
                     console.log('搜尋房間roomArr', this.roomArr)
                 })
         },
@@ -235,6 +237,25 @@ export default defineStore("location", {
                         this.searchDevice(null, null, null, null,false)
                     }
                     
+                })
+        },
+        //刪除設備
+        deleteRooms(i){
+            let arr = []
+            for( let j = 0 ; j < i.length ; j++){
+                arr.push(i[j]);
+            }
+            
+            fetch("http://localhost:8080/rooms", {
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(arr),
+            })
+                // .then(res => res.json())
+                .then(data => {
+                    this.searchAllRoom()
                 })
         },
         getAllLogs() {

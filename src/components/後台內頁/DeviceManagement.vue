@@ -85,7 +85,7 @@ export default {
                 if (result.isConfirmed) {
                     // 在這裡處理確認刪除的邏輯
                     // this.deviceArr = this.deviceArr.filter(device => !this.select.includes(device.id));
-                    this.deleteDevice(this.select,falses)
+                    this.deleteDevice(this.select,false)
                     this.select = [];
                     Swal.fire({
                         title:'已刪除',
@@ -160,7 +160,7 @@ export default {
     flex-direction: column;
     align-items: end;
     border-radius: 25px;
-    border: 1px solid black;
+    // border: 1px solid black;
     background-color: $dark02;
 
     .text {
@@ -193,7 +193,7 @@ export default {
     flex-wrap: wrap;
     justify-content: space-evenly;
     overflow-y: auto;
-    border: 1px solid black;
+    // border: 1px solid black;
     border-radius: 0 0 25px 25px;
 
     &::-webkit-scrollbar {

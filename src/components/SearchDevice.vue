@@ -18,7 +18,7 @@ export default {
 
     },
     computed: {
-        ...mapState(location, ['localRoomArea']),
+        ...mapState(location, ['localRoomArea','allArea']),
     },
     components: {
 
@@ -45,9 +45,7 @@ export default {
         <slot name="roomid">
             <select name="" id="" v-model="this.area">
                 <option value="">空間編號</option>
-                <option value="601">601</option>
-                <option value="601">602</option>
-                <option value="房間101號">101</option>
+                <option v-for="(item,index) in allArea" :value=item.area>{{ item.area }}</option>
             </select>
         </slot>
 

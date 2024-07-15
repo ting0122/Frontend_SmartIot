@@ -11,9 +11,9 @@ export default {
         return {
             //這個頁面vue想要幾個內頁
             tabsArray: {
-                buttonName: ["空間管理", "設備管理", "歷史記錄", "錯誤紀錄", "公告列表"],
+                buttonName: ["空間管理", "設備管理", "歷史記錄",  "公告列表"],
                 //tab1、2、3是為了標記插槽名稱
-                tabsNumber: ['tab1', 'tab2', 'tab3', 'tab4','tab5']
+                tabsNumber: ['tab1', 'tab2', 'tab3', 'tab4']
             }
 
         };
@@ -61,12 +61,9 @@ export default {
                     <DeviceManagement />
                 </template>
                 <template class="tab" v-slot:tab3>
-                    <HistoricalRecord />
-                </template>
-                <template class="tab" v-slot:tab4>
                     <ErrorLog/>
                 </template>
-                <template class="tab" v-slot:tab5>
+                <template class="tab" v-slot:tab4>
                     <SendAnnouncement/>
                 </template>
                 <template #re>
@@ -105,7 +102,7 @@ export default {
             margin-left: -750px;
             width: 1500px;
             height: 950px;
-            border: 1px solid black;
+            // border: 1px solid black;
         }
     }
 </style>

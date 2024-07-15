@@ -96,7 +96,7 @@ export default {
     input[type=checkbox] {
         position: absolute;
         left: -10px;
-        // visibility: hidden;
+        visibility: hidden;
 
         &:checked+label {
             left: 36px;

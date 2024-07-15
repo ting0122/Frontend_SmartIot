@@ -18,7 +18,7 @@ export default {
 
     },
     computed: {
-        ...mapState(location, ['localRoomId', 'createRoomDevice']),
+        ...mapState(location, ['localRoomId', 'createRoomDevice','allArea']),
     },
     components: {
 
@@ -49,12 +49,8 @@ export default {
         <slot name="roomid">
             <select name="" id="" v-model="this.area" @change="createRoomDeviceSearch(null, null, this.area, null)">
                 <option value="">空間編號</option>
-                <option value="601">601</option>
-                <option value="601">602</option>
-                <option value="房間100號">100</option>
-                <option value="房間101號">101</option>
-                <option value="房間103號">103</option>
-                <option value="房間106號">106</option>
+                <option v-for="(item,index) in allArea" :value=item.area>{{ item.area }}</option>
+                
             </select>
         </slot>
         <button v-if="this.createRoomDeviceControl"
