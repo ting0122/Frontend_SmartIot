@@ -77,7 +77,7 @@ export default {
 
         async addDevice(device) {
             try {
-                const response = await fetch('http://localhost:8080/devices', {
+                const response = await fetch('https://backend-smartiot.onrender.com/devices', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

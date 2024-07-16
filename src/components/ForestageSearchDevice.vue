@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         searchDevices() {
-            fetch('http://localhost:8080/rooms/1')
+            fetch('https://backend-smartiot.onrender.com/rooms/1')
                 .then(response => response.json())
                 .then(data => {
                     let filteredDevices = data.devices.filter(device => {

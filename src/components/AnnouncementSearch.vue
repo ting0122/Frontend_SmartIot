@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         searchAnnouncements() {
-            fetch('http://localhost:8080/announcements/1')
+            fetch('https://backend-smartiot.onrender.com/announcements/1')
                 .then(response => response.json())
                 .then(data => {
                     let filteredAnnouncements = data.filter(announcement => {

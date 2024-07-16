@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         fetchRoomDevices() {
-            fetch('http://localhost:8080/rooms/1')
+            fetch('https://backend-smartiot.onrender.com/rooms/1')
                 .then(response => response.json())
                 .then(data => {
                     this.roomDevices = data.devices;
@@ -72,7 +72,7 @@ export default {
             const requestBody = JSON.stringify(payload);
             console.log('最終的 API 請求體字符串:', requestBody);
 
-            fetch('http://localhost:8080/dehumidifiers/batch', {
+            fetch('https://backend-smartiot.onrender.com/dehumidifiers/batch', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export default {
             const requestBody = JSON.stringify(payload);
             console.log('最終的 API 請求體字符串:', requestBody);
 
-            fetch('http://localhost:8080/lights/batch', {
+            fetch('https://backend-smartiot.onrender.com/lights/batch', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ export default {
             const requestBody = JSON.stringify(payload);
             console.log('最終的 API 請求體字符串:', requestBody);
 
-            fetch('http://localhost:8080/air-purifiers/batch', {
+            fetch('https://backend-smartiot.onrender.com/air-purifiers/batch', {
                 method: 'PATCH',
                 headers: {
                     'accept': '*/*',
@@ -184,7 +184,7 @@ export default {
             const requestBody = JSON.stringify(payload);
             console.log('最終的 API 請求體字符串:', requestBody);
 
-            fetch('http://localhost:8080/air-conditioners/batch', {
+            fetch('https://backend-smartiot.onrender.com/air-conditioners/batch', {
                 method: 'PATCH',
                 headers: {
                     'accept': '*/*',

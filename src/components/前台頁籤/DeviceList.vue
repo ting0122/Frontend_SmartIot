@@ -22,7 +22,7 @@ export default {
         ...mapActions(location, ['deviceStatus', 'searchRoom']),
 
         fetchRoomDevices() {
-            fetch('http://localhost:8080/rooms/1')
+            fetch('https://backend-smartiot.onrender.com/rooms/1')
                 .then(response => response.json())
                 .then(data => {
                     this.roomDevices = data.devices.map(device => ({
@@ -49,7 +49,7 @@ export default {
             if (!endpoint) return;
 
             let payload;
-            const url = `http://localhost:8080/${endpoint}/batch`;
+            const url = `https://backend-smartiot.onrender.com/${endpoint}/batch`;
 
             switch (device.type) {
                 case '冷氣機':
@@ -127,7 +127,7 @@ export default {
             const endpoint = this.getEndpoint(device.type);
             if (!endpoint) return;
 
-            const url = `http://localhost:8080/${endpoint}/batch`;
+            const url = `https://backend-smartiot.onrender.com/${endpoint}/batch`;
             const payload = [{
                 id: deviceId,
                 status: status ? 1 : 0

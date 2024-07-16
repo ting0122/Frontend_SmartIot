@@ -28,7 +28,7 @@ export default defineStore("location", {
     actions: {
         //進入頁面搜尋全房間
         searchAllRoom() {
-            fetch(`http://localhost:8080/rooms`, {
+            fetch(`https://backend-smartiot.onrender.com/rooms`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json"
@@ -46,7 +46,7 @@ export default defineStore("location", {
         //進入頁面搜尋房間id
         searchRoom(i) {
             this.localRoomId = i
-            fetch(`http://localhost:8080/rooms/${i}`, {
+            fetch(`https://backend-smartiot.onrender.com/rooms/${i}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json"
@@ -83,7 +83,7 @@ export default defineStore("location", {
             if (l !== null) {
                 params.append('status', l);
             }
-            fetch(`http://localhost:8080/rooms/search?${params.toString()}`, {
+            fetch(`https://backend-smartiot.onrender.com/rooms/search?${params.toString()}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json"
@@ -106,7 +106,7 @@ export default defineStore("location", {
                 type: l,
                 status: m
             }
-            fetch("http://localhost:8080/rooms", {
+            fetch("https://backend-smartiot.onrender.com/rooms", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
@@ -129,7 +129,7 @@ export default defineStore("location", {
                 status: l,
                 roomId: m
             }
-            fetch(`http://localhost:8080/devices`, {
+            fetch(`https://backend-smartiot.onrender.com/devices`, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
@@ -165,7 +165,7 @@ export default defineStore("location", {
             if (l !== null) {
                 params.append('status', l);
             }
-            fetch(`http://localhost:8080/rooms/search?${params.toString()}`, {
+            fetch(`https://backend-smartiot.onrender.com/rooms/search?${params.toString()}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json"
@@ -203,7 +203,7 @@ export default defineStore("location", {
             if (l !== null) {
                 params.append('status', l);
             }
-            fetch(`http://localhost:8080/devices/search?${params.toString()}`, {
+            fetch(`https://backend-smartiot.onrender.com/devices/search?${params.toString()}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json"
@@ -224,7 +224,7 @@ export default defineStore("location", {
                 arr.push(i[j]);
             }
 
-            fetch("http://localhost:8080/devices", {
+            fetch("https://backend-smartiot.onrender.com/devices", {
                 method: "delete",
                 headers: {
                     "Content-Type": "application/json"
@@ -248,7 +248,7 @@ export default defineStore("location", {
                 arr.push(i[j]);
             }
 
-            fetch("http://localhost:8080/rooms", {
+            fetch("https://backend-smartiot.onrender.com/rooms", {
                 method: "delete",
                 headers: {
                     "Content-Type": "application/json"
@@ -262,7 +262,7 @@ export default defineStore("location", {
         },
         //全部公告
         allAnnouncement() {
-            fetch("http://localhost:8080/rooms", {
+            fetch("https://backend-smartiot.onrender.com/rooms", {
                 method: "delete",
                 headers: {
                     "Content-Type": "application/json"
@@ -292,7 +292,7 @@ export default defineStore("location", {
             if (l) {
                 params.append('roomArea', l);
             }
-            fetch(`http://localhost:8080/history/search?${params.toString()}`, {
+            fetch(`https://backend-smartiot.onrender.com/history/search?${params.toString()}`, {
                 method: "get",
                 body: JSON.stringify()
             })
@@ -304,7 +304,7 @@ export default defineStore("location", {
                 })
         },
         getAllLogs() {
-            fetch(`http://localhost:8080/history`, {
+            fetch(`https://backend-smartiot.onrender.com/history`, {
                 method: "get",
                 body: JSON.stringify()
             })
@@ -316,7 +316,7 @@ export default defineStore("location", {
                 })
         },
         getAllAnn() {
-            fetch(`http://localhost:8080/announcements`, {
+            fetch(`https://backend-smartiot.onrender.com/announcements`, {
                 method: "get",
                 body: JSON.stringify()
             })

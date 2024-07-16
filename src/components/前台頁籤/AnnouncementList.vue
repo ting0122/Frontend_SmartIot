@@ -25,7 +25,7 @@ export default {
     methods: {
         async fetchAnnouncements() {
             try {
-                const response = await fetch('http://localhost:8080/announcements/1', {
+                const response = await fetch('https://backend-smartiot.onrender.com/announcements/1', {
                     method: 'GET',
                     headers: {
                         'Accept': '*/*'

@@ -17,7 +17,7 @@ export default {
 
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/rooms/1');
+                const response = await fetch('https://backend-smartiot.onrender.com/rooms/1');
                 if (!response.ok) {
                     throw new Error('網絡響應不正確');
                 }
