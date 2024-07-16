@@ -52,6 +52,13 @@ export default {
         //點擊切換expanded的ture/false屬性
         toggleContent(index) {
             this.annArr[index].expanded = !this.annArr[index].expanded;
+        },
+        handleSearchResults(filteredAnnouncements) {
+            this.annArr = filteredAnnouncements.map(item => ({
+                ...item,
+                expanded: false,
+                time: item.publishTime
+            }));
         }
     },
     mounted() {
@@ -63,7 +70,7 @@ export default {
 <template>
     <div class="down">
         <div class="announcementSearch">
-            <AnnouncementSearch />
+            <AnnouncementSearch @search-results="handleSearchResults" />
         </div>
         <div class="outArea">
             <h2>公告</h2>
