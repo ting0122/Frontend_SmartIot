@@ -231,18 +231,18 @@ export default {
                         <!-- 冷氣機控制 -->
                         <template v-if="device.type === '冷氣機'">
                             <div class="AC">
-                                <div @click="updateDeviceSettings(device.id, { mode: '暖氣' })"
-                                    :class="{ selected: device.airConditioner.mode === '暖氣' }">
+                                <div @click="updateDeviceSettings(device.id, { mode: 'HEAT' })"
+                                    :class="{ selected: device.airConditioner.mode === 'HEAT' }">
                                     <i class="fa-solid fa-temperature-arrow-up"></i>
                                     <p>暖氣</p>
                                 </div>
-                                <div @click="updateDeviceSettings(device.id, { mode: '冷氣' })"
-                                    :class="{ selected: device.airConditioner.mode === '冷氣' }">
+                                <div @click="updateDeviceSettings(device.id, { mode: 'COOL' })"
+                                    :class="{ selected: device.airConditioner.mode === 'COOL' }">
                                     <i class="fa-regular fa-snowflake"></i>
                                     <p>冷氣</p>
                                 </div>
-                                <div @click="updateDeviceSettings(device.id, { mode: '送風' })"
-                                    :class="{ selected: device.airConditioner.mode === '送風' }">
+                                <div @click="updateDeviceSettings(device.id, { mode: 'FAN' })"
+                                    :class="{ selected: device.airConditioner.mode === 'FAN' }">
                                     <i class="fa-solid fa-fan"></i>
                                     <p>送風</p>
                                 </div>
