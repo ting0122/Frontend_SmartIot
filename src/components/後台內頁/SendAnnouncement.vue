@@ -126,7 +126,7 @@ export default {
         }
         
     },
-  
+
 };
 </script>
 
@@ -141,6 +141,7 @@ export default {
                 <button @click="showAddAnnouncement" :class="{chick:showUseAdd}"><i class="fa-solid fa-circle-plus" ></i></button>
             </div>
         </div>
+        <!-- 公告發送房間 選擇加入此陣列 -->
         <div class="addSendRoomARR" v-if="this.showUseAdd">
             <p class="t">公告發送房間</p>
             <div class="sendroom" v-for="(room, index) in sendroomARR" :key="index">

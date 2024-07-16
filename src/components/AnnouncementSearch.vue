@@ -13,7 +13,11 @@ export default {
     components : {
         VueDatePicker,   //日曆用
     },
-   
+    methods: {
+        a(){
+            console.log(this.dateRange)
+        }
+    }
 };
 </script>
 
@@ -25,13 +29,13 @@ export default {
             </div>
             <div class="start_date">
                 <VueDatePicker 
-                v-model="dateRange" 
+                v-model="this.dateRange" 
                 range format="yyyy-MM-dd" 
                 style="width: 260px" />
                 <!-- <input type="date" class="date">
                 <i class="fa-regular fa-calendar"></i> -->
             </div>
-            <button class="seach_list" >搜尋</button>
+            <button class="seach_list" @click="a">搜尋</button>
 
         </div>
        
