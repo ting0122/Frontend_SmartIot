@@ -31,6 +31,11 @@ export default {
         },
         updateStatus(status) {
             this.status = status;
+            if (status) {
+                this.brightness = 100;
+            } else {
+                this.brightness = 0;
+            }
             this.updateLights();
         }
     },
