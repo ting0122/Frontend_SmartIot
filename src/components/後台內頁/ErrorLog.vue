@@ -206,8 +206,8 @@ export default {
 
                     <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
                     <p class="id">編號:{{ data.id }}</p>
-                    <p>{{ data.detail.deviceName }}</p>
                     <p>{{ data.detail.deviceType }}</p>
+                    <p>{{ data.detail.deviceName }}</p>
                     <p class="right">{{ data.eventType }}</p>
                 </div>
                 <div v-if="data.eventType === '設備參數調整'" class="box">

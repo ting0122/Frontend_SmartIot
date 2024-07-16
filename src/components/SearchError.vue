@@ -62,7 +62,7 @@ export default {
             <option value="空氣清淨機">空氣清淨機</option>
             <option value="除濕機">除濕機</option>
         </select>
-        <button v-if="roomErrorLogSearch" @click="this.searchHistory(this.deviceName,this.deviceType,this.date,this.oneRoom.area)">搜尋X</button>
+        <button v-if="roomErrorLogSearch" @click="this.searchHistory(this.deviceName,this.deviceType,this.date,this.oneRoom.area)">搜尋</button>
         <button v-else @click="this.searchHistory(this.deviceName,this.deviceType,this.date,this.roomArea)">搜尋</button>
     </div>
 </template>

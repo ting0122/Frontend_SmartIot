@@ -3,7 +3,7 @@
 import BackBookMark from '@/components/BackBookMark.vue';
 import BackSpaceManagement from '@/components/後台內頁/BackSpaceManagement.vue';
 import DeviceManagement from '@/components/後台內頁/DeviceManagement.vue';
-import HistoricalRecord from '@/components/後台內頁/HistoricalRecord.vue';
+// import HistoricalRecord from '@/components/後台內頁/HistoricalRecord.vue';
 import ErrorLog from '@/components/後台內頁/ErrorLog.vue';
 import SendAnnouncement from '@/components/後台內頁/SendAnnouncement.vue';
 export default {
@@ -19,7 +19,7 @@ export default {
         };
     },
     created() {
-        
+    
     },
     mounted() {
 
@@ -31,7 +31,7 @@ export default {
         BackBookMark,  //後台頁籤
         BackSpaceManagement,  //空間管理
         DeviceManagement,  //設備管理
-        HistoricalRecord,  //歷史紀錄
+        
         ErrorLog,  //錯誤紀錄
         SendAnnouncement,  //發布公告
     },
