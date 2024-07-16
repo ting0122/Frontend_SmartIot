@@ -200,13 +200,28 @@ export default {
                 default: return 'fa-solid fa-question';
             }
         },
+        handleSearchResults(results) {
+            this.roomDevices = results.map(device => ({
+                ...device,
+                expanded: false,
+                showControl: false,
+                mode: '',
+                fan_speed: device.type === '冷氣機' ? device.airConditioner.fanSpeed :
+                    device.type === '空氣清淨機' ? device.airPurifier.fan_speed :
+                        device.type === '除濕機' ? device.dehumidifier.fanSpeed : '',
+                target_temp: device.type === '冷氣機' ? device.airConditioner.target_temp : null,
+                target_humidity: device.type === '除濕機' ? device.dehumidifier.target_humidity : null,
+                brightness: device.type === '燈' ? device.light.brightness : null,
+                color_temp: device.type === '燈' ? device.light.color_temp : null,
+            }));
+        }
     }
 };
 </script>
 
 <template>
     <div class="down">
-        <ForestageSearchDevice>
+        <ForestageSearchDevice @search-results="handleSearchResults">
             <template #roomid>
                 <p></p>
             </template>
