@@ -13,7 +13,8 @@ export default {
                 buttonName: ["首頁", "設備列表", "故障紀錄", "通知訊息"],
                 //tab1、2、3是為了標記插槽名稱
                 tabsNumber: ['tab1', 'tab2', 'tab3', 'tab4']
-            }
+            },
+            buttonState: false
 
         };
     },
@@ -35,7 +36,9 @@ export default {
     },
 
     methods: {
-
+        toggleButton() {
+            this.buttonState = !this.buttonState;
+        }
 
     }
 };
@@ -43,6 +46,9 @@ export default {
 
 <template>
     <div class="background">
+        <div class="goBackstage">
+            <RouterLink :to="'/BackStage'">去後台</RouterLink>
+        </div>
         <div class="ipad">
             <div class="showArea">
                 <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
@@ -51,25 +57,25 @@ export default {
                     <!-- 子BookMark會v-for我們所需要的插槽數量出來 -->
                     <!-- 下面template接收插槽並放入你所想要顯示的內頁資料 -->
                     <template v-slot:tab1>
-                        <NormalDisplayScreen/>
+                        <NormalDisplayScreen />
                     </template>
                     <template v-slot:tab2>
-                        <DeviceList/>
+                        <DeviceList />
                     </template>
                     <template v-slot:tab3>
-                        <FailureRecord/>
+                        <FailureRecord />
                     </template>
                     <template v-slot:tab4>
-                        <AnnouncementList/>
+                        <AnnouncementList />
                     </template>
 
-        
-                </BookMark>              
-                    
-                    
+
+                </BookMark>
+
+
             </div>
         </div>
-        
+
 
     </div>
 
@@ -78,15 +84,20 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/main.scss';
-    
-.background{
+
+.background {
     width: 100%;
     height: 100dvh;
     background-image: url(../../img/slightly.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    
-    .ipad{
+    .goBackstage{
+        position: absolute;
+        font-size: 30px;
+        top: 20px;
+        left: 20px;
+    }
+    .ipad {
         position: fixed;
         left: 50%;
         top: 50%;
@@ -98,7 +109,8 @@ export default {
         background-image: url(../../img/ipad2.png);
         background-repeat: no-repeat;
         background-size: contain;
-        .showArea{
+
+        .showArea {
             position: absolute;
             width: 1060px;
             height: 800px;
@@ -108,11 +120,10 @@ export default {
             left: 50%;
             margin-top: -404px;
             margin-left: -575px;
-            
-        
+
+
         }
     }
 
 }
-
 </style>

@@ -3,14 +3,15 @@
 import BackBookMark from '@/components/BackBookMark.vue';
 import BackSpaceManagement from '@/components/後台內頁/BackSpaceManagement.vue';
 import DeviceManagement from '@/components/後台內頁/DeviceManagement.vue';
-import HistoricalRecord from '@/components/後台內頁/HistoricalRecord.vue';
+// import HistoricalRecord from '@/components/後台內頁/HistoricalRecord.vue';
 import ErrorLog from '@/components/後台內頁/ErrorLog.vue';
+import SendAnnouncement from '@/components/後台內頁/SendAnnouncement.vue';
 export default {
     data() {
         return {
             //這個頁面vue想要幾個內頁
             tabsArray: {
-                buttonName: ["空間管理", "設備管理", "歷史記錄", "錯誤紀錄"],
+                buttonName: ["空間管理", "設備管理", "歷史記錄",  "公告列表"],
                 //tab1、2、3是為了標記插槽名稱
                 tabsNumber: ['tab1', 'tab2', 'tab3', 'tab4']
             }
@@ -18,7 +19,7 @@ export default {
         };
     },
     created() {
-        
+    
     },
     mounted() {
 
@@ -30,8 +31,9 @@ export default {
         BackBookMark,  //後台頁籤
         BackSpaceManagement,  //空間管理
         DeviceManagement,  //設備管理
-        HistoricalRecord,  //歷史紀錄
+        
         ErrorLog,  //錯誤紀錄
+        SendAnnouncement,  //發布公告
     },
 
     methods: {
@@ -43,6 +45,9 @@ export default {
 
 <template>
     <div class="background">
+        <div class="goBackstage">
+            <RouterLink :to="'/'">去前台</RouterLink>
+        </div>
         <div class="showArea">
             <!-- this.tabsArray.buttomName是頁籤的名字陣列 可以往上拉到data看詳細內容 -->
             <!-- 這邊透過父傳子 父是這個vue傳想要幾個內頁給BookMark BookMark會v-for傳過去的這個陣列並生成插槽 -->
@@ -56,10 +61,10 @@ export default {
                     <DeviceManagement />
                 </template>
                 <template class="tab" v-slot:tab3>
-                    <HistoricalRecord />
+                    <ErrorLog/>
                 </template>
                 <template class="tab" v-slot:tab4>
-                    <ErrorLog/>
+                    <SendAnnouncement/>
                 </template>
                 <template #re>
                     <p></p>
@@ -83,6 +88,12 @@ export default {
         height: 100dvh;
         background: $black;
         position: relative;
+        .goBackstage{
+        position: absolute;
+            font-size: 30px;
+            top: 20px;
+            left: 20px;
+        }
         .showArea{
             position: absolute;
             left: 50%;
@@ -91,7 +102,7 @@ export default {
             margin-left: -750px;
             width: 1500px;
             height: 950px;
-            border: 1px solid black;
+            // border: 1px solid black;
         }
     }
 </style>

@@ -1,13 +1,16 @@
 <script>
-
+import location from '@/stores/location';
+import { mapState, mapActions } from 'pinia';
+//sweetalert2提示窗套件
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
-            createObj: {
+            
                 name: "",
                 area: "",
                 type: ""
-            }
+            
         };
     },
     created() {
@@ -24,33 +27,48 @@ export default {
     },
 
     methods: {
-        createRoom() {
-            fetch("http://localhost:8080/rooms", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(this.createObj)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                })
-        },
+        ...mapActions(location, ['createRoom']),
+        verify(){
+            if(this.name == "" || this.area == "" || this.type == "" ){
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>請輸入空間編號、空間類型、空間名稱</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+                return
+            }
+            this.createRoom(null,this.name,this.area,this.type,false)
+            Swal.fire({
+                title: "新增成功",
+                // text: "That thing is still around?",
+                icon: "success"
+            });
+        }
     }
 };
 </script>
 
 <template>
     <div class="createRoom">
-        <label for=""><input type="text" v-model="this.createObj.area" placeholder="空間編號"></label>
-        <select name="" id="" v-model="this.createObj.type" >
+        <label for=""><input type="text" v-model="this.area" placeholder="空間編號"></label>
+        <select name="" id="" v-model="this.type" >
             <option value="">空間類型</option>
+            <option value="公司">公司</option>
             <option value="會議室">會議室</option>
-            <option value="公共空間">公共空間</option>
+            <option value="公共區域">公共區域</option>
+            <option value="機房">機房</option>
+            <option value="廁所">廁所</option>
+            <option value="教室">教室</option>
+            <option value="其他">其他</option>
         </select>
-        <label for=""><input type="text" v-model="this.createObj.name" placeholder="空間名稱"></label>
-        <button @click="this.createRoom()">新增</button>
+        <label for=""><input type="text" v-model="this.name" placeholder="空間名稱"></label>
+        <button @click="verify">新增</button>
     </div>
 </template>
 

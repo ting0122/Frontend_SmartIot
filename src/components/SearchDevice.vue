@@ -1,13 +1,14 @@
 <script>
-
+import location from '@/stores/location';
+import { mapState, mapActions } from 'pinia';
 export default {
     data() {
         return {
-            createObj: {
-                name: "",
-                area: "",
-                type: ""
-            }
+            name: "",
+            area: "",
+            type: "",
+            status: null
+
         };
     },
     created() {
@@ -17,43 +18,46 @@ export default {
 
     },
     computed: {
-
+        ...mapState(location, ['localRoomArea','allArea']),
     },
     components: {
 
     },
 
     methods: {
-        
-    }
+        ...mapActions(location, ['searchDevice']),
+    },
+    props: [
+        "searchDeviceControl"
+    ]
 };
 </script>
 
 <template>
     <div class="createRoom">
-        <label for=""><input type="text" v-model="this.createObj.area" placeholder="設備名稱"></label>
-        <select name="" id="" v-model="this.createObj.type" >
+        <label for=""><input type="text" v-model="this.name" placeholder="設備名稱"></label>
+        <select name="" id="" v-model="this.status">
             <option value="">設備使用狀態</option>
-            <option value="使用中">使用中</option>
-            <option value="閒置中">閒置中</option>
+            <option :value=1>使用中</option>
+            <option :value=0>閒置中</option>
         </select>
 
         <slot name="roomid">
-            <select name="" id="" v-model="this.createObj.type" >
+            <select name="" id="" v-model="this.area">
                 <option value="">空間編號</option>
-                <option value="使用中">601</option>
-                <option value="閒置中">602</option>
+                <option v-for="(item,index) in allArea" :value=item.area>{{ item.area }}</option>
             </select>
         </slot>
 
-        <select name="" id="" v-model="this.createObj.type" >
+        <select name="" id="" v-model="this.type">
             <option value="">設備類型</option>
-            <option value="公司">冷氣</option>
-            <option value="會議室">電燈</option>
-            <option value="公共區域">空氣清淨機</option>
-            <option value="機房">除濕機</option>
+            <option value="冷氣機">冷氣</option>
+            <option value="燈">電燈</option>
+            <option value="空氣清淨機">空氣清淨機</option>
+            <option value="除濕機">除濕機</option>
         </select>
-        <button @click="this.createRoom()">搜尋</button>
+        <button v-if="searchDeviceControl" @click="this.searchDevice(this.name, this.type, null, this.status, true)">搜尋</button>
+        <button v-else @click="this.searchDevice(this.name, this.type, this.area, this.status, false)">搜尋</button>
     </div>
 </template>
 
@@ -67,9 +71,9 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 25px 25px 0 0 ;
-    
-    select{
+    border-radius: 25px 25px 0 0;
+
+    select {
         width: 155px;
         height: 40px;
         font-size: 16px;
@@ -81,7 +85,8 @@ export default {
         margin-left: 30px;
         color: $white;
     }
-    input{
+
+    input {
         width: 180px;
         height: 40px;
         border-radius: 35px;
@@ -93,10 +98,12 @@ export default {
         color: $white;
         margin-left: 30px;
     }
+
     ::placeholder {
         color: $white;
     }
-    button{
+
+    button {
         width: 88px;
         height: 40px;
         border-radius: 35px;

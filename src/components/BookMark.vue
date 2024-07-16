@@ -1,11 +1,10 @@
 <script>
-//sweetalert2提示窗套件
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
             isActive: "",
-            deviceTypes: ['冷氣', '電燈', '空氣清淨機','除濕機'] // 模擬設備類型
+            deviceTypes: ['冷氣機', '燈', '空氣清淨機', '除濕機'] // 模擬設備類型
         };
     },
     created() {
@@ -48,26 +47,26 @@ export default {
             Swal.fire({
                 title: '新增設備',
                 html: `
-                    <div class="arr">
-                    <select id="deviceType" class="swal2-input-select">
-                        ${this.deviceTypes.map(type => `<option value="${type}">${type}</option>`).join('')}
-                    </select>
-                    <input type="text" id="deviceName" class="swal2-input" placeholder="設備名稱">
-                    </div>
-                `,
+          <div class="device-form">
+            <select id="deviceType" class="swal2-input">
+              ${this.deviceTypes.map(type => `<option value="${type}">${type}</option>`).join('')}
+            </select>
+            <input type="text" id="deviceName" class="swal2-input" placeholder="設備名稱">
+          </div>
+        `,
                 showCloseButton: true, //右上叉叉按鈕
                 confirmButtonText: '新增',
                 customClass: {
-                    popup: 'swal2-custom-popup' // 自定義樣式
+                    popup: 'swal2-custom-popup', // 自定義樣式
+                    confirmButton: 'swal2-custom-confirm-button', // 自訂義確認按鈕樣式
                 },
                 preConfirm: () => {
-                    const deviceId = Swal.getPopup().querySelector('#deviceId').value;
                     const deviceType = Swal.getPopup().querySelector('#deviceType').value;
                     const deviceName = Swal.getPopup().querySelector('#deviceName').value;
-                    if (!deviceId || !deviceType || !deviceName) {
+                    if (!deviceType || !deviceName) {
                         Swal.showValidationMessage(`請輸入完整的設備資訊`);
                     }
-                    return { deviceId, deviceType, deviceName };
+                    return { deviceType, deviceName };
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -75,10 +74,33 @@ export default {
                 }
             });
         },
-        // 新增設備的方法，這裡可以加入邏輯來處理設備新增
-        addDevice(device) {
-            console.log('新增的設備資訊：', device);
-            // 這裡可以加入新增設備的邏輯，例如將設備資訊發送到伺服器或更新本地狀態
+
+        async addDevice(device) {
+            try {
+                const response = await fetch('http://localhost:8080/devices', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: device.deviceName,
+                        type: device.deviceType,
+                        status: false,
+                        roomId: 1
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('網絡響應不正確');
+                }
+
+                const result = await response.json();
+                console.log('新增的設備資訊：', result);
+                Swal.fire('成功', '設備已成功新增', 'success');
+            } catch (error) {
+                console.error('新增設備失敗：', error);
+                Swal.fire('錯誤', '新增設備失敗，請稍後再試', 'error');
+            }
         }
     }
 };

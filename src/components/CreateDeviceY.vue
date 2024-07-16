@@ -1,12 +1,16 @@
 <script>
+import location from '@/stores/location';
+import { mapState, mapActions } from 'pinia';
+//sweetalert2提示窗套件
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
-            createObj: {
-                name: "",
-                type: "",
-                roomId:1
-            }
+            name: "",
+            type: "",
+            area: "",
+
+
         };
     },
     created() {
@@ -16,49 +20,90 @@ export default {
 
     },
     computed: {
-
+        ...mapState(location, ['localRoomId', 'createRoomDevice', 'allArea']),
     },
     components: {
 
     },
 
     methods: {
-        createRoom() {
-            fetch("http://localhost:8080/devices", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(this.createObj)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                })
+        ...mapActions(location, ['deviceStatus', 'createRoomDeviceSearch']),
+        verify() {
+            if (this.name == "" || this.type == "") {
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>請輸入設備類型、設備名稱</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+                return
+            }
+            this.deviceStatus(null, this.type, this.name, 0, this.localRoomId, true)
+            Swal.fire({
+                title: "新增成功",
+                // text: "That thing is still around?",
+                icon: "success"
+            });
         },
+        verifyX() {
+            if (this.name == "" || this.type == "") {
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>請輸入設備類型、設備名稱</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+                return
+            }
+            this.deviceStatus(null, this.type, this.name, 0, this.createRoomDevice[0].id, false)
+            Swal.fire({
+                title: "新增成功",
+                // text: "That thing is still around?",
+                icon: "success"
+            });
+        },
+
+    },
+    props: {
+        createRoomDeviceControl: {
+            type: Boolean,
+            required: true
+        }
     }
 };
 </script>
 
 <template>
     <div class="createRoom">
-        <label for=""><input type="text" v-model="this.createObj.name" placeholder="設備名稱"></label>
-        <select name="" id="" v-model="this.createObj.type" >
+        <label for=""><input type="text" v-model="this.name" placeholder="設備名稱"></label>
+        <select name="" id="" v-model="this.type">
             <option value="">設備類型</option>
-            <option value="air_conditioner">冷氣</option>
-            <option value="light">電燈</option>
-            <option value="air_purifier">空氣清淨機</option>
-            <option value="dehumidifier">除濕機</option>
+            <option value="冷氣機">冷氣</option>
+            <option value="燈">電燈</option>
+            <option value="空氣清淨機">空氣清淨機</option>
+            <option value="除濕機">除濕機</option>
         </select>
         <slot name="roomid">
-            <select name="" id="" v-model="this.createObj.type" >
-                <option value="">所屬空間</option>
-                <option value="601">601</option>
-                <option value="602">602</option>
-                <option value="603">603</option>
+            <select name="" id="" v-model="this.area" @change="createRoomDeviceSearch(null, null, this.area, null)">
+                <option value="">空間編號</option>
+                <option v-for="(item, index) in allArea" :value=item.area>{{ item.area }}</option>
+
             </select>
         </slot>
-        <button @click="this.createRoom()">新增</button>
+        <button v-if="this.createRoomDeviceControl" @click="verify">新增</button>
+        <button v-else @click="verifyX">新增</button>
     </div>
 </template>
 
@@ -72,9 +117,10 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 25px 25px 0 0 ;
+    border-radius: 25px 25px 0 0;
+
     // border: 1px solid black;
-    select{
+    select {
         width: 126px;
         height: 40px;
         font-size: 16px;
@@ -86,7 +132,8 @@ export default {
         margin-left: 30px;
         color: $white;
     }
-    input{
+
+    input {
         width: 180px;
         height: 40px;
         border-radius: 35px;
@@ -98,10 +145,12 @@ export default {
         color: $white;
         margin-left: 30px;
     }
+
     ::placeholder {
         color: $white;
     }
-    button{
+
+    button {
         width: 88px;
         height: 40px;
         border-radius: 35px;

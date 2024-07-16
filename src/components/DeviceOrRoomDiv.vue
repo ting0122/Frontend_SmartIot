@@ -3,7 +3,7 @@ import Switch from '@/components/Switch.vue';
 export default {
     data() {
         return {
-            dataArr:[{id:203154,type:"冷氣",mane:"前方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203151,type:"電燈",mane:"右側電燈",area:602,roommane:"南方麒麟股份有限公司嘶嘶嘶嘶"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"},{id:203157,type:"冷氣",mane:"後方的冷氣",area:602,roommane:"會議室"}]
+            
         };
     },
     created() {
@@ -18,7 +18,7 @@ export default {
             return this.dataArr.map(data => {
                 return {
                     ...data,
-                    truncatedContent: data.roommane.length > 9 ? data.roommane.slice(0, 9) + '...' : data.roommane
+                    truncatedContent: data.name.length > 9 ? data.name.slice(0, 9) + '...' : data.name
                 };
             });
         }
@@ -31,7 +31,7 @@ export default {
 
     },
     props:[
-        "name"
+        "dataArr"
     ]
 };
 </script>
@@ -40,7 +40,7 @@ export default {
     <div class="out">
         <div class="room" v-for="(data, index) in truncatedContent" :key="index">
             <div class="switch">
-                <Switch :id="this.name + index" />
+                <Switch :id="data.id" />
             </div>
             <p class="id">{{ data.id }}</p>
             <p>{{ data.type }}</p>

@@ -20,10 +20,13 @@ export default {
     },
 
     methods: {
-
+        toggleChecked(event) {
+            event.stopPropagation(); // 防止事件冒泡
+            this.$emit('update:checked', !this.checked);
+        }
     },
     props: [
-        "id"
+        "checked"
     ]
         
     
@@ -33,9 +36,9 @@ export default {
 
 <template>
     
-    <div class="slideThree">
-        <input type="checkbox"  :id="id"  />
-        <label :for="id"></label>
+    <div class="slideThree"  @click="toggleChecked">
+        <input type="checkbox" :checked="checked" @click.stop="toggleChecked" />
+        <label @click.stop="toggleChecked"></label>
     </div>
 
 </template>
@@ -51,6 +54,7 @@ export default {
     position: relative;
     border-radius: 50px;
     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
 
     &:before {
         content: 'OFF';
@@ -90,6 +94,8 @@ export default {
     }
 
     input[type=checkbox] {
+        position: absolute;
+        left: -10px;
         visibility: hidden;
 
         &:checked+label {
