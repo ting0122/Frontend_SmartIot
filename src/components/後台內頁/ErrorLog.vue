@@ -2,6 +2,9 @@
 //以下為PINIA
 import location from '@/stores/location';
 import { mapState, mapActions } from 'pinia';
+//sweetalert2提示窗套件
+import Swal from 'sweetalert2';
+import moment from "moment"
 import SearchError from '@/components/SearchError.vue';
 export default {
     data() {
@@ -13,7 +16,7 @@ export default {
         this.getAllLogs()
     },
     mounted() {
-        
+
     },
     computed: {
         ...mapState(location, ['allLogs']),
@@ -23,18 +26,171 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['getAllLogs']),
-        // getAllLogs() {
-        //     fetch(`http://localhost:8080/history`, {
-        //         method: "get",
-        //         body: JSON.stringify()
-        //     })
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             console.log('allLog',data)
-        //             this.allLogs = data
-        //         })
-        // }
+        ...mapActions(location, ['getAllLogs','searchHistory']),
+        formatDate(date) {
+            return moment(new Date(date)).format('YYYY-MM-DD HH:mm:ss');
+        },
+        //點擊切換expanded的ture/false屬性
+        toggleContent(index) {
+            const announcement = this.allLogs[index];
+            if (announcement.eventType === '設備開關') {
+                Swal.fire({
+                    title: this.allLogs[index].eventType,
+                    html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                            <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                            <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                            <p><strong>操作：</strong>${announcement.detail.status}</p>
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
+            if (announcement.eventType === '設備參數調整') {
+                if (announcement.detail.deviceType === '冷氣機') {
+                    Swal.fire({
+                        title: this.allLogs[index].eventType,
+                        html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                                <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                                <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                                <p><strong>模式:</strong>${announcement.detail.mode}</p>
+                                <p><strong>風量:</strong>${announcement.detail.fan_speed}</p>
+                                <p><strong>溫度:</strong>${announcement.detail.target_temp}</p>
+                                <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
+                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                        // text: announcement.content,
+                        showCloseButton: true,
+                        showConfirmButton: false,  //隱藏下方ok按鈕
+                        // confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal2-custom-popup', // 可以自定義樣式
+                        }
+                    });
+                }
+                if (announcement.detail.deviceType === '燈') {
+                    Swal.fire({
+                        title: this.allLogs[index].eventType,
+                        html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                                <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                                <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                                <p><strong>亮度:</strong>${announcement.detail.brightness}</p>
+                                <p><strong>色溫:</strong>${announcement.detail.color_temp}</p>
+                                <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
+                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                        // text: announcement.content,
+                        showCloseButton: true,
+                        showConfirmButton: false,  //隱藏下方ok按鈕
+                        // confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal2-custom-popup', // 可以自定義樣式
+                        }
+                    });
+                }
+                if (announcement.detail.deviceType === '除濕機') {
+                    Swal.fire({
+                        title: this.allLogs[index].eventType,
+                        html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                                <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                                <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                                <p><strong>濕度:</strong>${announcement.detail.target_humidity}</p>
+                                <p><strong>風量:</strong>${announcement.detail.fan_speed}</p>
+                                <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
+                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                        // text: announcement.content,
+                        showCloseButton: true,
+                        showConfirmButton: false,  //隱藏下方ok按鈕
+                        // confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal2-custom-popup', // 可以自定義樣式
+                        }
+                    });
+                }
+                if (announcement.detail.deviceType === '空氣清淨機') {
+                    Swal.fire({
+                        title: this.allLogs[index].eventType,
+                        html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                                <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                                <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                                <p><strong>風量:</strong>${announcement.detail.fan_speed}</p>
+                                <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
+                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                        // text: announcement.content,
+                        showCloseButton: true,
+                        showConfirmButton: false,  //隱藏下方ok按鈕
+                        // confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal2-custom-popup', // 可以自定義樣式
+                        }
+                    });
+                }
+            }
+            if (announcement.eventType === '新增設備') {
+                Swal.fire({
+                    title: this.allLogs[index].eventType,
+                    html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                            <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                            <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
+            if (announcement.eventType === '刪除設備') {
+                Swal.fire({
+                    title: this.allLogs[index].eventType,
+                    html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                            <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                            <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
+            if (announcement.eventType === '新增房間') {
+                Swal.fire({
+                    title: this.allLogs[index].eventType,
+                    html: `<p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                            <p><strong>類型：</strong>${announcement.detail.roomType}</p>
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
+            if (announcement.eventType === '刪除房間') {
+                Swal.fire({
+                    title: this.allLogs[index].eventType,
+                    html: ` <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                            <p><strong>類型：</strong>${announcement.detail.roomType}</p>
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
+        }
     }
 };
 </script>
@@ -43,40 +199,53 @@ export default {
     <div class="out">
         <SearchError />
         <div class="down">
-            <div class="history" v-for="(data, index) in allLogs">
+            <div class="history" v-for="(data, index) in allLogs" @click="toggleContent(index)"
+                :class="{ expanded: allLogs[index].expanded }">
+
                 <div v-if="data.eventType === '設備開關'" class="box">
-                    <h2>{{ data.detail.room_area }}-{{ data.detail.room_name }}</h2>
-                    <p class="id">{{ data.id }}</p>
-                    <p>{{ data.detail.device_name}}</p>
-                    <p>{{ data.detail.device_type }}</p>
+
+                    <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
+                    <p class="id">編號:{{ data.id }}</p>
+                    <p>{{ data.detail.deviceName }}</p>
+                    <p>{{ data.detail.deviceType }}</p>
                     <p class="right">{{ data.eventType }}</p>
                 </div>
                 <div v-if="data.eventType === '設備參數調整'" class="box">
+
                     <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
-                    <p class="id">{{ data.id }}</p>
+                    <p class="id">編號:{{ data.id }}</p>
                     <p>{{ data.detail.deviceType }}</p>
-                    <p>{{ data.detail.deviceName}}</p>
+                    <p>{{ data.detail.deviceName }}</p>
                     <p class="right">{{ data.eventType }}</p>
                 </div>
                 <div v-if="data.eventType === '新增房間'" class="box">
-                    <h2>{{ data.detail.area }}-{{ data.detail.name }}</h2>
-                    <p class="id">{{ data.id }}</p>
-                    <p>{{ data.detail.type }}</p>
+
+                    <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
+                    <p class="id">編號:{{ data.id }}</p>
+                    <p>{{ data.detail.roomType }}</p>
                     <p class="right">{{ data.eventType }}</p>
                 </div>
                 <div v-if="data.eventType === '刪除房間'" class="box">
-                    <h2>{{ data.detail.area }}-{{ data.detail.name }}</h2>
-                    <p class="id">{{ data.id }}</p>
-                    <p>{{ data.detail.type }}</p>
+                    <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
+                    <p class="id">編號:{{ data.id }}</p>
+                    <p>{{ data.detail.roomType }}</p>
                     <p class="right">{{ data.eventType }}</p>
                 </div>
                 <div v-if="data.eventType === '新增設備'" class="box">
-                    <h2>{{ data.detail.room_area }}-{{ data.detail.room_name }}</h2>
-                    <p class="id">{{ data.id }}</p>
-                    <p>{{ data.detail.type }}</p>
+                    <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
+                    <p class="id">編號:{{ data.id }}</p>
+                    <p>{{ data.detail.deviceType }}</p>
+                    <p>{{ data.detail.deviceName }}</p>
                     <p class="right">{{ data.eventType }}</p>
                 </div>
-                <p class="date">{{ data.eventTime }}</p>
+                <div v-if="data.eventType === '刪除設備'" class="box">
+                    <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
+                    <p class="id">編號:{{ data.id }}</p>
+                    <p>{{ data.detail.deviceType }}</p>
+                    <p>{{ data.detail.deviceName }}</p>
+                    <p class="right">{{ data.eventType }}</p>
+                </div>
+                <p class="date">{{ formatDate(data.eventTime) }}</p>
             </div>
 
         </div>
@@ -155,6 +324,7 @@ export default {
         align-items: center;
         background: $dark03;
         border-radius: 35px;
+
 
         .box {
             // width: 305px;
