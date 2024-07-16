@@ -331,6 +331,7 @@ export default {
             height: 30px;
             display: flex;
             padding-left: 10px;
+            cursor: pointer;
 
             h2 {
                 display: block;

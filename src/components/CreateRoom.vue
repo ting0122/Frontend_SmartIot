@@ -1,6 +1,8 @@
 <script>
 import location from '@/stores/location';
 import { mapState, mapActions } from 'pinia';
+//sweetalert2提示窗套件
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -26,6 +28,28 @@ export default {
 
     methods: {
         ...mapActions(location, ['createRoom']),
+        verify(){
+            if(this.name == "" || this.area == "" || this.type == "" ){
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>請輸入空間編號、空間類型、空間名稱</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+                return
+            }
+            this.createRoom(null,this.name,this.area,this.type,false)
+            Swal.fire({
+                title: "新增成功",
+                // text: "That thing is still around?",
+                icon: "success"
+            });
+        }
     }
 };
 </script>
@@ -44,7 +68,7 @@ export default {
             <option value="其他">其他</option>
         </select>
         <label for=""><input type="text" v-model="this.name" placeholder="空間名稱"></label>
-        <button @click="this.createRoom(null,this.name,this.area,this.type,false)">新增</button>
+        <button @click="verify">新增</button>
     </div>
 </template>
 

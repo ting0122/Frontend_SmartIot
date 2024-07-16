@@ -13,7 +13,7 @@ import AnnouncementSearch from '@/components/AnnouncementSearch.vue';
 export default {
     data() {
         return {
-            annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
+            // annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
             sendroomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
             addSendRoomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
             showUseAdd: false, // 使用新增公告時切換搜尋欄位用
@@ -23,13 +23,13 @@ export default {
         };
     },
     created() {
-        
+        this.getAllAnn()
     },
     mounted() {
 
     },
     computed: {
-        ...mapState(location, ['deviceArr']),
+        ...mapState(location, ['allAnn']),
     },
     components: {
         CreateAndDeleteButton,
@@ -40,13 +40,14 @@ export default {
     },
 
     methods: {
+        ...mapActions(location, ['getAllAnn']),
         //點擊切換expanded的ture/false屬性
         toggleContent(index) {
-        this.annArr[index].expanded = !this.annArr[index].expanded;
+        this.allAnn[index].expanded = !this.allAnn[index].expanded;
         },
         // 控制顯示刪除 checkbox 的狀態
         toggleCheckbox() {
-            this.annArr.forEach(ann => {
+            this.allAnn.forEach(ann => {
                 ann.expanded = false;
             });
             this.showUseAdd = false;
@@ -68,7 +69,7 @@ export default {
                 });
                 return;
             }
-            const selectedDevices = this.annArr.filter(ann => this.select.includes(ann.id));
+            const selectedDevices = this.allAnn.filter(ann => this.select.includes(ann.id));
             const selectedNames = selectedDevices.map(ann => `${ann.title}-${ann.time}`).join('<br>'); 
             Swal.fire({
                 title: '確認刪除以下公告?',
@@ -83,7 +84,7 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // 在這裡處理確認刪除的邏輯
-                    this.annArr = this.annArr.filter(ann => !this.select.includes(ann.id));
+                    this.allAnn = this.allAnn.filter(ann => !this.select.includes(ann.id));
                     this.select = [];
                     Swal.fire({
                         title:'已刪除',
@@ -161,8 +162,8 @@ export default {
         </div>
         <div class="announcementListArea" v-else>
             <div class="list">
-                <div class="content" v-for="(data, index) in annArr" :key="index" @click="toggleContent(index)"
-                :class="{ expanded: annArr[index].expanded }">
+                <div class="content" v-for="(data, index) in allAnn" :key="index" @click="toggleContent(index)"
+                :class="{ expanded: allAnn[index].expanded }">
                     <div class="Modify"></div>
                     <div class="up">
                         <span>{{ data.title }}</span>
@@ -171,8 +172,8 @@ export default {
                     <p>{{ data.content}}</p>
                     <div class="sendrooms">
                         <p class="t">公告發送房間</p>
-                        <div class="sendroom" v-for="(room, index) in sendroomARR" :key="index">
-                            <p>{{ room.area }}-{{ room.roomname }}</p>
+                        <div class="sendroom" v-for="(room, index) in data.roomInfo" :key="index">
+                            <p>{{ room.area }}-{{ room.name }}</p>
                         </div>
                     </div>
                     <div class="checkbox-overlay" v-if="showCheckbox" @click="addToSelect(data.id)">

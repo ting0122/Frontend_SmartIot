@@ -11,7 +11,8 @@ export default defineStore("location", {
         localRoomId: null,
         localRoomArea: "",
         allLogs: [],
-        allArea: []
+        allArea: [],
+        allAnn:[]
 
 
     }),
@@ -59,6 +60,7 @@ export default defineStore("location", {
                     this.localRoomArea = data.area
                     console.log(this.localRoomArea)
                     this.searchDevice(null, null, this.localRoomArea, null)
+                    this.searchHistory(null,null,null,this.localRoomArea)
                     console.log('搜尋房間oneRoom', this.oneRoom)
                 })
         },
@@ -313,7 +315,18 @@ export default defineStore("location", {
                     this.allLogs = this.allLogs.reverse()
                 })
         },
-
+        getAllAnn() {
+            fetch(`http://localhost:8080/announcements`, {
+                method: "get",
+                body: JSON.stringify()
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('allAnn', data)
+                    this.allAnn = data
+                    this.allAnn = this.allAnn.reverse()
+                })
+        },
     },
 
 
