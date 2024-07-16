@@ -87,14 +87,14 @@ export default {
     height: 268px;
     border-radius: 25px;
     // border: 1px solid black;
-    background-color: $dark02;
+    background-color: $dark01;
     display: flex;
     justify-content: space-between;
     padding-top: 10px;
 
     h2 {
         margin: 12px 0 0 30px;
-        color: $black1;
+        color: $dark03;
     }
 
     .list {
@@ -103,7 +103,7 @@ export default {
         margin-right: 10px;
 
         &::-webkit-scrollbar {
-            width: 12px;
+            width: 9px;
 
         }
 
@@ -112,7 +112,7 @@ export default {
         }
 
         &::-webkit-scrollbar-thumb {
-            background: $black1;
+            background: $dark03;
             border-radius: 15px;
 
         }
@@ -129,7 +129,7 @@ export default {
             border-radius: 20px;
             padding: 8px 17px 0 33px;
             overflow-y: hidden;
-            background-color: $dark01;
+            background-color: $white;
             margin: 10px 15px;
             flex: 0 0 auto;
             /* 确保每个项目不会缩小并且保持其内容的宽度 */
@@ -164,8 +164,8 @@ export default {
                 top: 16px;
                 width: 9px;
                 height: 9px;
-                border-radius: 5px;
-                background-color: red;
+                border-radius: 10px;
+                background-color: rgb(255, 99, 15);
             }
         }
     }

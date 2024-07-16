@@ -107,15 +107,6 @@ export default {
         </ForestageSearchDevice>
 
         <div class="oo">
-            <!-- <div class="outArea" v-for="(data, index) in dataArr.devices" :key="index">
-                <div>
-                    <div class="switch">
-                        <Switch :id="data.id" :checked="data.status"
-                            @change="deviceStatus(data.id, data.type, data.name, 1, 1)" />
-                    </div>
-                    <p class="id">{{ data.id }}</p>
-                    <i class="fa-regular fa-snowflake"></i>
-                    <p>{{ data.type }}</p> -->
 
             <div class="outArea" v-for="(data, index) in dataArr" :key="index" :class="{ expanded: data.expanded }">
                 <div class="switch">
@@ -264,9 +255,6 @@ export default {
                 </transition>
             </div>
 
-            <!-- <span>{{ data.name }}</span> -->
-            <!-- </div>
-            </div> -->
         </div>
     </div>
 
@@ -289,7 +277,7 @@ export default {
         overflow-y: auto;
 
         &::-webkit-scrollbar {
-            width: 13px;
+            width: 10px;
 
         }
 
@@ -299,7 +287,7 @@ export default {
         }
 
         &::-webkit-scrollbar-thumb {
-            background: $black1;
+            background: $dark03;
             border-radius: 15px;
 
         }
@@ -315,7 +303,7 @@ export default {
             height: 200px;
             border-radius: 25px;
             margin-bottom: 15px;
-            background-color: $dark02;
+            background-color: $dark01;
             
 
             // flex: 0 0 auto; /* 确保每个项目不会缩小并且保持其内容的宽度 */
@@ -327,6 +315,7 @@ export default {
             /* 添加過渡效果 */
             &.expanded {
                 width: 517px;
+                background-color: $black;
                 /* 展開後的寬度 */
             }
 
@@ -338,8 +327,8 @@ export default {
 
             i {
                 font-size: 80px;
-                color: $dark01;
-                margin-left: 37%;
+                color: $white;
+                margin-left: 35%;
                 margin-top: 21px;
 
                 &.hidden {
@@ -392,7 +381,7 @@ export default {
                 .AC {
                     width: 95px;
                     height: 120px;
-                    background-color: $dark01;
+                    background-color: $white;
                     margin-right: 12px;
                     border-radius: 20px;
                     padding-top: 10px;
@@ -400,7 +389,7 @@ export default {
                     i {
                         width: 30px;
                         font-size: 25px;
-                        color: $dark03;
+                        color: $dark02;
                         cursor: pointer;
                         margin: 0;
                     }
@@ -438,13 +427,13 @@ export default {
                     .mode {
                         flex-direction: column;
                         align-items: center;
-                        color: $black1;
                         padding-top: 10px;
 
                         i {
                             width: auto;
                             font-size: 25px;
                             cursor: pointer;
+                            color: $black1;
                         }
 
                         p {
@@ -469,7 +458,7 @@ export default {
                 .Air {
                     width: 95px;
                     height: 120px;
-                    background-color: $dark01;
+                    background-color: $white;
                     margin-right: 12px;
                     border-radius: 20px;
                     padding-top: 10px;
@@ -570,7 +559,7 @@ export default {
                 .Lamp {
                     width: 309px;
                     height: 130px;
-                    background-color: $dark01;
+                    background-color: $white;
                     margin-right: 12px;
                     border-radius: 20px;
 

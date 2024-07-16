@@ -77,7 +77,7 @@ justify-content: center;
     }
     p{
         font-size: 20px;
-        color: $white;
+        color: $black1;
         padding-left: 10px;
         padding-bottom: 6px
     }
@@ -93,11 +93,11 @@ justify-content: center;
     button {
         height: 45px;
         width: 45px;
-        background: $dark03;
+        background: $white;
         border-radius: 50%;
         border: none;
         outline: none;
-        color: $white;
+        color: $dark03;  
         font-size: 20px;
         line-height: 45px;  
     }

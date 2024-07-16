@@ -24,7 +24,7 @@ export default {
     height: 278px;
     border-radius: 25px;
     // border: 1px solid black;
-    background-color: $dark02;
+    background-color: $dark01;
 }
 
 </style>

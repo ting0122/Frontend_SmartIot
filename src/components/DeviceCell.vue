@@ -10,15 +10,17 @@ export default {
                 { type: "燈", component: "lampControl" },
                 { type: "除濕機", component: "DehumidifierControl" },
                 { type: "空氣清淨機", component: "AirPurifierControl" }
-            ]
+            ],
+            selectedIndex: null, // 新增：儲存選擇的索引
         };
     },
     components: {
         Switch,
     },
     methods: {
-        selectDevice(component) {
+        selectDevice(component,index) {
             this.$emit('select-device', component);
+            this.selectedIndex = index;
         }
     }
 };
@@ -26,7 +28,8 @@ export default {
 
 <template>
     <div class="oo">
-        <div class="outArea" v-for="(data, index) in dataArr" :key="index" @click="selectDevice(data.component)">
+        <div class="outArea" v-for="(data, index) in dataArr" :key="index" 
+        @click="selectDevice(data.component, index)" :class="{ selected: selectedIndex === index }">
             <i class="fa-regular fa-snowflake" v-if="data.type === '冷氣機'" :class="{ hidden: data.showControl }"></i>
             <i class="fa-solid fa-leaf" v-if="data.type === '空氣清淨機'" :class="{ hidden: data.showControl }"></i>
             <i class="fa-solid fa-droplet-slash" v-if="data.type === '除濕機'" :class="{ hidden: data.showControl }"></i>
@@ -50,30 +53,41 @@ export default {
         height: 210px;
         border-radius: 25px;
         margin-bottom: 15px;
-        background-color: $dark02;
+        background-color: $dark01;
         flex: 0 0 auto;
         /* 确保每个项目不会缩小并且保持其内容的宽度 */
         margin-right: 25px;
         /* 可选的间距 */
         text-align: center;
         cursor: pointer;
-
         i {
             font-size: 80px;
-            color: $dark01;
+            color: $dark03;
             margin: auto;
             margin-top: 36px;
             margin-bottom: 9px;
         }
-
+        
         span {
             margin: auto;
             font-size: 20px;
-            color: $black1;
+            color: $dark03;
         }
-
+        
         p {
             color: $black;
+        }
+    }
+    .selected {
+        background-color: $black;
+        i{
+            color: $dark01;
+        }
+        p {
+            color: $black1;
+        }
+        span{
+            color: $dark01;
         }
     }
 

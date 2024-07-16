@@ -34,7 +34,7 @@ export default {
 .stateDiv {
     width: 100%;
     height: 316px;
-    background-color:$dark03;
+    background-color:$white;
     border-radius: 25px 25px 0 0;
 }
 </style>

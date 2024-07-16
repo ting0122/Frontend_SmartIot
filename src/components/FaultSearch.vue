@@ -68,13 +68,15 @@ export default {
                     padding-left: 20px;
                     padding-right: 10px;
                     color: $white;
-                    background-color: $dark02;
+                    background-color: $white;
                     border: 0;
                     outline:none;
                     font-size: 16px;
+                    line-height: 40px;
                 }
                 ::placeholder {
-                    color: $white;
+                    color: $dark03;
+                    
                 }
             }
             .state{
@@ -83,18 +85,20 @@ export default {
                     font-style: normal;
                     margin-left: 10px;
                     font-size: 16px;
-                    color: $white;
+                    color: $dark03;
+                    
                 }
                 select{
                     width: 100px;
                     height: 40px;
                     border-radius: 35px;
                     padding-left: 10px;
-                    color: $white;
+                    color: $dark03;
                     font-size: 16px;
-                    background-color: $dark02;
+                    background-color: $white;
                     border: 0;
                     outline:none;
+                    
                 }
             }
             .start_date{
@@ -105,7 +109,7 @@ export default {
                 display: flex;
                 justify-content: center;
                 align-items: center;  
-                background-color: $dark02;
+                background-color: $white;
 
                 // i {
                 //     position: absolute;
@@ -144,8 +148,9 @@ export default {
                 font-size: 16px;
                 padding: 0;
                 cursor: pointer;
-                background-color: $dark02;
-                color: $white;
+                background-color: $white;
+                color: $dark03;
+                line-height: 40px;
             }
          
             

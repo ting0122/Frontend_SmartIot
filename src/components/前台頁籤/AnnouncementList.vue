@@ -84,13 +84,11 @@ export default {
     width: 900px;
     height: 650px;
     padding: 41px 0px 16px 80px;
-    .announcementSearch{
-        padding-left: 128px;
-    }
+  
     .outArea{
         border-radius: 25px;
         height: 594px;
-        border: 1px solid $dark02;
+        border: 2px solid $white;
         // background-color: $dark02;
         display: flex;
         justify-content: space-between;
@@ -106,7 +104,7 @@ export default {
             margin-right: 30px;
 
             &::-webkit-scrollbar {
-                width: 12px;
+                width: 10px;
 
             }
 
@@ -115,7 +113,7 @@ export default {
             }
 
             &::-webkit-scrollbar-thumb {
-                background: $black1;
+                background: $dark03;
                 border-radius: 15px;
 
             }
@@ -133,7 +131,7 @@ export default {
                 padding: 10px;
                 padding-left: 20px;
                 overflow-y: hidden;
-                background-color: $dark02;
+                background-color: $white;
                 margin: 10px 15px;
                 flex: 0 0 auto;
                 /* 确保每个项目不会缩小并且保持其内容的宽度 */
@@ -161,12 +159,14 @@ export default {
                     font-size: 16px;
                     font-weight: 600;
                     margin-left: 10px;
+                    color: $dark03;
                 }
 
                 p {
                     margin-top: 5px;
                     font-size: 14px;
                     margin-left: 10px;
+                    color: $dark03;
                 }
                 .red{
                     position: absolute;

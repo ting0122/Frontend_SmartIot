@@ -14,7 +14,7 @@ export default {
     data() {
         return {
             annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
-            sendroomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
+            sendroomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"},{area:608,roomname:"小兵公司"},{area:609,roomname:"兵公司"},{area:610,roomname:"小小司"},{area:611,roomname:"兵公"},{area:612,roomname:"小小兵公"},{area:613,roomname:"小小"},{area:614,roomname:"司"}],
             addSendRoomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
             showUseAdd: false, // 使用新增公告時切換搜尋欄位用
             showCheckbox: false, // 控制顯示 checkbox 的狀態
@@ -142,8 +142,10 @@ export default {
         </div>
         <div class="addSendRoomARR" v-if="this.showUseAdd">
             <p class="t">公告發送房間</p>
-            <div class="sendroom" v-for="(room, index) in sendroomARR" :key="index">
-                <p>{{ room.area }}-{{ room.roomname }}</p>
+            <div class="outarea">
+                <div class="sendroom" v-for="(room, index) in sendroomARR" :key="index">
+                    <p>{{ room.area }}-{{ room.roomname }}</p>
+                </div>
             </div>
         </div>
         <div class="announcementAddArea" v-if="this.showUseAdd">
@@ -194,14 +196,14 @@ export default {
     flex-direction: column;
     align-items: end;
     border-radius: 25px;
-    border: 1px solid black;
+    // border: 1px solid black;
     background-color: $dark02;
     .announcementSearch{
         display: flex;
         justify-content: space-between;
         width: 1078px;
         height: 85px;
-        background-color: $dark01;
+        background-color: $white;
         border-radius: 25px 25px 0 0;
         padding-top: 40px;
         padding-left: 80px;
@@ -209,11 +211,11 @@ export default {
         button {
             height: 45px;
             width: 45px;
-            background: $dark03;
+            background: $dark02;
             border-radius: 50%;
             border: none;
             outline: none;
-            color: $white;
+            color: $dark03;
             font-size: 20px;
             line-height: 45px;
             margin-top: 12px;
@@ -221,8 +223,8 @@ export default {
             cursor: pointer;
         }
         .chick{
-            color: $black1;
-            background: salmon;
+            color: $white;
+            background: $black;
         }
     }  
     .text {
@@ -235,40 +237,65 @@ export default {
         width:1100px;
         margin: 0 auto;
         margin-top: 20px;
-        padding-bottom: 20px;
+     
         padding-top: 40px;
-        display: flex;
-        flex-wrap: wrap;
         position: relative;
+        
         .t{
             margin: 0;
             position: absolute;
             left: 15px;
             top: 8px;
             font-size: 18px;
-        }                  
-        .sendroom{
-            padding: 0 10px;
-            margin-top: 10px;
-            margin-right: 20px;
-            width: auto;
-            height: 40px;
-            border-radius: 20px;
-            background-color: $white;
-            p{
-                margin: 0;
-                line-height: 40px;
-                margin:0 10px ;
+        } 
+        .outarea{
+            width: 100%;
+            height: 170px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow-y: auto;
+            &::-webkit-scrollbar {
+                width: 12px;
             }
-                        
-        }
+
+            &::-webkit-scrollbar-button {
+                background: transparent;
+                height: 5px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: $black1;
+                border-radius: 15px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+                border-radius: 15px;
+                width: 957px;
+            }
+            .sendroom{
+                padding: 0 10px;
+                margin-top: 10px;
+                margin-right: 20px;
+                width: auto;
+                height: 40px;
+                border-radius: 20px;
+                background-color: $white;
+                p{
+                    margin: 0;
+                    line-height: 40px;
+                    margin:0 10px ;
+                }
+                            
+            }
+        }                 
     }
     .announcementAddArea{
         border-radius: 25px;
         width: 1060px;
-        height: 700px;
+        height: 483px;
         border: 1px solid $white;
-        padding: 20px 20px 15px 20px;
+        padding: 20px 20px 30px 20px;
         margin: 20px auto 40px auto;
         span{
             font-size: 18px;
@@ -302,8 +329,8 @@ export default {
                 cursor: pointer;
             }
             .chick{
-                color: $black1;
-                background: salmon;
+                color: $white;
+                background: $black;
             }
         }
         textarea{
@@ -312,13 +339,13 @@ export default {
             outline: none;
             border-width: 0;
             width: 980px;
-            height: 374px;
+            height: 311px;
             background-color: $white;
             padding: 20px;
             font-size: 18px;
             margin: auto;
             margin-top: 10px;
-            border-radius: 25px;
+            border-radius: 20px;
         }
         
     }
@@ -340,7 +367,7 @@ export default {
             overflow-y: auto;
             overflow-x:hidden;
             &::-webkit-scrollbar {
-                width: 12px;
+                width: 10px;
             }
     
             &::-webkit-scrollbar-button {
@@ -348,7 +375,7 @@ export default {
             }
     
             &::-webkit-scrollbar-thumb {
-                background: $black1;
+                background: $dark03;
                 border-radius: 15px;
     
             }
@@ -366,7 +393,7 @@ export default {
                 padding: 10px;
                 padding-top: 30px;
                 overflow-y: hidden;
-                background-color: $dark01;
+                background-color: $white;
                 margin: 10px 20px;
                 flex: 0 0 auto; /* 确保每个项目不会缩小并且保持其内容的宽度 */
                 margin-top: 10px; /* 可选的间距 */
@@ -382,9 +409,9 @@ export default {
                     bottom: 0;
                     width: 1030px;
                     height: 25px;
-                    background-color: $dark01;
+                    background-color: $white;
                     // background-color:aqua;
-                    border-radius: 0 0 25px 25px;
+                    border-radius: 0 0 20px 20px;
                 }
                 &.expanded {
                     max-height: 500px; /* 展开后的高度，可以根据内容长度调整 */
@@ -401,12 +428,14 @@ export default {
                     font-size: 18px;
                     font-weight: 600;
                     margin-left: 30px;
+                    color: $dark03;
                 }
                 p{
                     margin-top: 5px;
                     font-size: 16px;
                     margin-left: 30px;
                     margin-right: 30px;
+                    color: $dark03;
                 }
                 .sendrooms{
                     width: 950px;
@@ -414,7 +443,7 @@ export default {
                     margin-top: 30px;
                     padding-bottom: 20px;
                     padding-top: 40px;
-                    border-top: 1px solid black;
+                    border-top: 1px solid $black1;
                     display: flex;
                     flex-wrap: wrap;
                     position: relative;
@@ -423,6 +452,7 @@ export default {
                         position: absolute;
                         left: 3px;
                         top: 13px;
+                        color: $dark03;
                     }
                     .sendroom{
                         padding: 0 10px;
@@ -431,11 +461,12 @@ export default {
                         width: auto;
                         height: 40px;
                         border-radius: 20px;
-                        background-color: $white;
+                        background-color: $dark01;
                         p{
                             margin: 0;
                             line-height: 40px;
                             margin:0 10px ;
+                            color: $dark03;
                         }
                         
                     }
@@ -464,12 +495,12 @@ export default {
                         cursor: pointer;
                         position: relative;
                         &:checked {
-                            background-color:$dark02; /* 勾選後的背景色 */
+                            background-color:$black; /* 勾選後的背景色 */
                         }
                         &:checked::after {
                             content: '';
                             position: absolute;
-                            top: 4px;
+                            top: 5px;
                             left: 9px;
                             width: 6px;
                             height: 12px;

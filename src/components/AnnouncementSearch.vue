@@ -56,13 +56,14 @@ export default {
                     padding-left: 20px;
                     padding-right: 10px;
                     font-size: 16px;
-                    color: $white;
+                    color: $black1;
                     background-color: $dark02;
                     border: 0;
                     outline:none;
+                    line-height: 40px;
                 }
                 ::placeholder {
-                    color: $white;
+                    color: $black1;
                 }
             }
             .start_date{
@@ -109,7 +110,8 @@ export default {
                 font-size: 16px;
                 cursor: pointer;
                 background-color: $dark02;
-                color: $white;
+                color: $black1;
+                line-height: 40px;
             }
             
 

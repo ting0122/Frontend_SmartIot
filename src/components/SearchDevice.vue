@@ -69,7 +69,7 @@ export default {
 .createRoom {
     width: 100%;
     height: 123px;
-    background: $dark03;
+    background: $white;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -81,11 +81,11 @@ export default {
         font-size: 16px;
         border: none;
         border-radius: 35px;
-        background: $dark02;
+        background: $dark01;
         outline: none;
         padding-left: 13px;
         margin-left: 30px;
-        color: $white;
+        color: $black1;
     }
 
     input {
@@ -94,15 +94,15 @@ export default {
         border-radius: 35px;
         border: none;
         outline: none;
-        background: $dark02;
+        background: $dark01;
         font-size: 16px;
         padding-left: 13px;
-        color: $white;
+        color: $black1;
         margin-left: 30px;
     }
 
     ::placeholder {
-        color: $white;
+        color: $black1;
     }
 
     button {
@@ -111,8 +111,8 @@ export default {
         border-radius: 35px;
         border: none;
         cursor: pointer;
-        background: $dark02;
-        color: $white;
+        background: $dark01;
+        color: $black1;
         font-size: 16px;
         margin-left: 30px;
     }

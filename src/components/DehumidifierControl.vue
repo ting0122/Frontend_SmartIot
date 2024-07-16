@@ -153,7 +153,7 @@ export default {
     height: 268px;
     border-radius: 25px;
     // border: 1px solid black;
-    background-color: $dark02;
+    background-color: $black;
     display: flex;
     justify-content: space-between;
     padding-top: 13px;
@@ -183,7 +183,7 @@ export default {
         p {
             font-size: 20px;
             margin-top: 10px;
-            color: $black;
+            color: $black1;
         }
     }
 
@@ -228,13 +228,13 @@ export default {
 
                     i {
                         font-size: 25px;
-                        color: $dark03;
+                        color: $black;
                         cursor: pointer;
                     }
 
                     p {
                         margin: 0;
-                        color: $dark03;
+                        color: $black;
                         cursor: pointer;
                     }
 

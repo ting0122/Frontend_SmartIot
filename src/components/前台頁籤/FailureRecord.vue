@@ -54,7 +54,7 @@ export default {
         overflow-y: auto;
         overflow-x: hidden;
         &::-webkit-scrollbar {
-            width: 13px;
+            width: 10px;
         }
 
         &::-webkit-scrollbar-button {
@@ -63,7 +63,7 @@ export default {
         }
 
         &::-webkit-scrollbar-thumb {
-            background: $black1;
+            background: $dark03;
             border-radius: 15px;
 
         }
@@ -80,7 +80,7 @@ export default {
             height: 53px;
             border-radius: 30px;
             margin-bottom: 15px;
-            background-color: $dark02;
+            background-color: $white;
             flex: 0 0 auto; /* 确保每个项目不会缩小并且保持其内容的宽度 */
           
             h2{
@@ -89,33 +89,33 @@ export default {
                 font-size: 18px;
                 line-height: 52px;
                 margin-left: 23px;
-                color: $white;
+                color: $dark03;
                 
             }
             .box{
                 width: 185px;
                 height: 30px;
-                border-right: 1px solid $white;
+                border-right: 1px solid $dark03;
                 display: flex;
                 padding-left: 10px;
                 p{
                     // font-size: 1px;
                     line-height: 30px;
                     margin-right: 18px;
-                    color: $white;
+                    color: $dark03;
                 }
             }
             .right{
                 display: block;
                 margin-left: 28px;
                 width: 258px;
-                color: $white;
+                color: $black;
                 // border: 1px solid black;
             }
             .date{
                 display: block;
                 margin-left: 50px;
-                color: $white;
+                color: $dark03;
                 
 
             }

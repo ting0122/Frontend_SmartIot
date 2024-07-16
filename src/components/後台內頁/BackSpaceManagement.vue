@@ -96,7 +96,7 @@ export default {
     flex-direction: column;
     align-items: end;
     border-radius: 25px;
-    border: 1px solid black;
+    // border: 1px solid black;
     background-color: $dark02;
 
     .rooms {
@@ -106,8 +106,7 @@ export default {
         flex-wrap: wrap;
         justify-content: space-evenly;
         overflow-y: auto;
-        // background-color: $dark01;
-        border: 1px solid black;
+        // border: 1px solid black;
 
         &::-webkit-scrollbar {
             width: 10px;
@@ -120,7 +119,7 @@ export default {
         }
 
         &::-webkit-scrollbar-thumb {
-            background: $black1;
+            background: $dark03;
             border-radius: 15px;
 
         }
@@ -134,7 +133,7 @@ export default {
     .room {
         width: 282px;
         height: 150px;
-        background: $dark03;
+        background: $white;
         border-radius: 25px;
         margin: 20px 0 0 0;
         position: relative;
@@ -155,6 +154,9 @@ export default {
             font-size: 20px;
             font-weight: 600;
             color: $black1;
+            span{
+                color: $black;
+            }
         }
     }
 
