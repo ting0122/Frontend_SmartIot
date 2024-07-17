@@ -146,7 +146,7 @@ export default {
         right: 24px;
         top: 15px;
 
-        ::v-deep input[type="checkbox"] {
+        :deep(input[type="checkbox"]) {
             display: none;
         }
     }
