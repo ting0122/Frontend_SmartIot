@@ -10,6 +10,7 @@ export default {
             roomDevices: [],
             lastExpandedTime: 0,
             saveTimers: {},
+            activeDeviceId: null, // 追踪當前開啟的設備ID
         };
     },
     created() {
@@ -157,26 +158,97 @@ export default {
         },
         toggleExpand(index) {
             const currentTime = Date.now();
-            if (this.roomDevices[index].expanded && currentTime - this.lastExpandedTime < 500) {
+            const device = this.roomDevices[index];
+
+            if (device.expanded && currentTime - this.lastExpandedTime < 500) {
                 return;
             }
 
-            if (this.roomDevices[index].expanded) {
-                const device = this.roomDevices[index];
+            if (device.expanded) {
                 if (device.tempSettings && Object.keys(device.tempSettings).length > 0) {
                     this.saveDeviceSettings(device.id);
                 }
+                this.activeDeviceId = null; // 關閉面板時清除活動設備ID
+            } else {
+                // 關閉其他開啟的面板
+                this.roomDevices.forEach(d => {
+                    if (d.id !== device.id && d.expanded) {
+                        d.expanded = false;
+                        d.showControl = false;
+                    }
+                });
+
+                this.fetchDeviceData(device.id);
+                this.activeDeviceId = device.id; // 設置新的活動設備ID
             }
 
-            this.roomDevices[index].expanded = !this.roomDevices[index].expanded;
-            if (this.roomDevices[index].expanded) {
+            device.expanded = !device.expanded;
+            if (device.expanded) {
                 this.lastExpandedTime = currentTime;
                 setTimeout(() => {
-                    this.roomDevices[index].showControl = true;
+                    device.showControl = true;
                 }, 300);
             } else {
-                this.roomDevices[index].showControl = false;
+                device.showControl = false;
             }
+        },
+        fetchDeviceData(deviceId) {
+            const device = this.roomDevices.find(d => d.id === deviceId);
+            if (!device) return;
+
+            const endpoint = this.getEndpoint(device.type);
+            if (!endpoint) return;
+
+            fetch(`http://localhost:8080/${endpoint}/${deviceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // 更新設備數據
+                    const updatedDevice = this.mapDeviceData(device.type, data);
+                    Object.assign(device, updatedDevice);
+
+                    // 添加控制台提示
+                    console.log(`設備 ${device.name} (ID: ${device.id}, 類型: ${device.type}) 的面板狀態已更新`);
+
+                    // 記錄更新的具體內容
+                    console.log('更新的數據:', updatedDevice);
+                })
+                .catch(error => {
+                    console.error(`獲取設備 ${device.name} (ID: ${device.id}) 數據失敗：`, error);
+                });
+        },
+        mapDeviceData(deviceType, data) {
+            const mappedData = {
+                id: data.id,
+                expanded: true,
+                showControl: true,
+                tempSettings: {},
+            };
+
+            switch (deviceType) {
+                case '冷氣機':
+                    mappedData.current_temp = data.current_temp;
+                    mappedData.target_temp = data.target_temp;
+                    mappedData.mode = data.mode;
+                    mappedData.fan_speed = data.fanSpeed;
+                    break;
+                case '空氣清淨機':
+                    mappedData.air_quality = data.air_quality;
+                    mappedData.fan_speed = data.fan_speed;
+                    mappedData.operating_time = data.operating_time;
+                    break;
+                case '除濕機':
+                    mappedData.current_humidity = data.current_humidity;
+                    mappedData.target_humidity = data.target_humidity;
+                    mappedData.tank_capacity = data.tank_capacity;
+                    mappedData.fan_speed = data.fanSpeed;
+                    break;
+                case '燈':
+                    mappedData.brightness = data.brightness;
+                    mappedData.color_temp = data.color_temp;
+                    break;
+            }
+
+            return mappedData;
         },
         getDeviceIcon(type) {
             switch (type) {
@@ -216,17 +288,8 @@ export default {
         </ForestageSearchDevice>
 
         <div class="oo">
-            <!-- <div class="outArea" v-for="(data, index) in dataArr.devices" :key="index">
-                <div>
-                    <div class="switch">
-                        <Switch :id="data.id" :checked="data.status"
-                            @change="deviceStatus(data.id, data.type, data.name, 1, 1)" />
-                    </div>
-                    <p class="id">{{ data.id }}</p>
-                    <i class="fa-regular fa-snowflake"></i>
-                    <p>{{ data.type }}</p> -->
-
-            <div class="outArea" v-for="(data, index) in dataArr" :key="index" :class="{ expanded: data.expanded }">
+            <div class="outArea" v-for="(device, index) in roomDevices" :key="device.id"
+                :class="{ expanded: device.expanded, active: device.id === activeDeviceId }">
                 <div class="switch">
                     <Switch v-model:checked="device.status"
                         @update:checked="(status) => updateDeviceStatus(device.id, status)" />
@@ -239,52 +302,62 @@ export default {
                     <i class="fa-solid fa-gear"></i>
                 </button>
                 <transition name="fade">
-                    <div v-if="device.showControl" class="control">
+                    <div v-if="device.showControl && device.id === activeDeviceId" class="control">
                         <!-- 冷氣機控制 -->
                         <template v-if="device.type === '冷氣機'">
                             <div class="AC">
                                 <div @click="updateTempSettings(device.id, { mode: 'HEAT' })"
-                                    :class="{ selected: (device.tempSettings.mode || device.airConditioner.mode) === 'HEAT' }">
+                                    :class="{ selected: (device.tempSettings.mode || device.mode) === 'HEAT' }">
                                     <i class="fa-solid fa-temperature-arrow-up"></i>
                                     <p>暖氣</p>
                                 </div>
                                 <div @click="updateTempSettings(device.id, { mode: 'COOL' })"
-                                    :class="{ selected: (device.tempSettings.mode || device.airConditioner.mode) === 'COOL' }">
+                                    :class="{ selected: (device.tempSettings.mode || device.mode) === 'COOL' }">
                                     <i class="fa-regular fa-snowflake"></i>
                                     <p>冷氣</p>
                                 </div>
                                 <div @click="updateTempSettings(device.id, { mode: 'FAN' })"
-                                    :class="{ selected: (device.tempSettings.mode || device.airConditioner.mode) === 'FAN' }">
+                                    :class="{ selected: (device.tempSettings.mode || device.mode) === 'FAN' }">
                                     <i class="fa-solid fa-fan"></i>
                                     <p>送風</p>
                                 </div>
                             </div>
                             <div class="AC">
                                 <div @click="updateTempSettings(device.id, { fan_speed: 'HIGH' })"
-                                    :class="{ selected: (device.tempSettings.fan_speed || device.airConditioner.fanSpeed) === 'HIGH' }">
+                                    :class="{ selected: (device.tempSettings.fan_speed || device.fan_speed) === 'HIGH' }">
                                     <i class="fa-solid fa-wind"></i>
-                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.airConditioner.fanSpeed) !== 'HIGH' }">高</p>
+                                    <p
+                                        :class="{ hidden: (device.tempSettings.fan_speed || device.fan_speed) !== 'HIGH' }">
+                                        高</p>
                                 </div>
                                 <div @click="updateTempSettings(device.id, { fan_speed: 'MEDIUM' })"
-                                    :class="{ selected: (device.tempSettings.fan_speed || device.airConditioner.fanSpeed) === 'MEDIUM' || (device.tempSettings.fan_speed || device.airConditioner.fanSpeed) === 'HIGH' }">
+                                    :class="{ selected: (device.tempSettings.fan_speed || device.fan_speed) === 'MEDIUM' || (device.tempSettings.fan_speed || device.fan_speed) === 'HIGH' }">
                                     <i class="fa-solid fa-wind"></i>
-                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.airConditioner.fanSpeed) !== 'MEDIUM' }">中</p>
+                                    <p
+                                        :class="{ hidden: (device.tempSettings.fan_speed || device.fan_speed) !== 'MEDIUM' }">
+                                        中</p>
                                 </div>
                                 <div @click="updateTempSettings(device.id, { fan_speed: 'LOW' })"
-                                    :class="{ selected: (device.tempSettings.fan_speed || device.airConditioner.fanSpeed) === 'LOW' || (device.tempSettings.fan_speed || device.airConditioner.fanSpeed) === 'MEDIUM' || (device.tempSettings.fan_speed || device.airConditioner.fanSpeed) === 'HIGH' }">
+                                    :class="{ selected: (device.tempSettings.fan_speed || device.fan_speed) === 'LOW' || (device.tempSettings.fan_speed || device.fan_speed) === 'MEDIUM' || (device.tempSettings.fan_speed || device.fan_speed) === 'HIGH' }">
                                     <i class="fa-solid fa-wind"></i>
-                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.airConditioner.fanSpeed) !== 'LOW' }">低</p>
+                                    <p
+                                        :class="{ hidden: (device.tempSettings.fan_speed || device.fan_speed) !== 'LOW' }">
+                                        低</p>
                                 </div>
                             </div>
                             <div class="AC">
                                 <div class="mode">
                                     <span>目標溫度</span>
                                     <i class="fa-solid fa-caret-up"
-                                        @click="updateTempSettings(device.id, { target_temp: (device.tempSettings.target_temp || device.airConditioner.target_temp) + 1 })"></i>
-                                    <p>{{ device.tempSettings.target_temp || device.airConditioner.target_temp }}°C</p>
+                                        @click="updateTempSettings(device.id, { target_temp: (device.tempSettings.target_temp || device.target_temp) + 1 })"></i>
+                                    <p>{{ device.tempSettings.target_temp || device.target_temp }}°C</p>
                                     <i class="fa-solid fa-caret-down"
-                                        @click="updateTempSettings(device.id, { target_temp: (device.tempSettings.target_temp || device.airConditioner.target_temp) - 1 })"></i>
+                                        @click="updateTempSettings(device.id, { target_temp: (device.tempSettings.target_temp || device.target_temp) - 1 })"></i>
                                 </div>
+                            </div>
+                            <div class="current-temp">
+                                <span>當前溫度</span>
+                                <p>{{ device.current_temp.toFixed(1) }}°C</p>
                             </div>
                         </template>
 
@@ -293,30 +366,33 @@ export default {
                             <div class="Air">
                                 <span>設備<br>運轉時間</span>
                                 <div class="time">
-                                    <p>{{ device.airPurifier.operating_time.toFixed(2) }}</p>
+                                    <p>{{ device.operating_time.toFixed(2) }}</p>
                                     <p class="hr">小時</p>
                                 </div>
                             </div>
                             <div class="AC">
                                 <div @click="updateTempSettings(device.id, { fan_speed: 100 })"
-                                    :class="{ selected: (device.tempSettings.fan_speed || device.airPurifier.fan_speed) === 100 }">
+                                    :class="{ selected: (device.tempSettings.fan_speed || device.fan_speed) === 100 }">
                                     <i class="fa-solid fa-wind"></i>
-                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.airPurifier.fan_speed) !== 100 }">高</p>
+                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.fan_speed) !== 100 }">
+                                        高</p>
                                 </div>
                                 <div @click="updateTempSettings(device.id, { fan_speed: 50 })"
-                                    :class="{ selected: (device.tempSettings.fan_speed || device.airPurifier.fan_speed) === 50 || (device.tempSettings.fan_speed || device.airPurifier.fan_speed) === 100 }">
+                                    :class="{ selected: (device.tempSettings.fan_speed || device.fan_speed) === 50 || (device.tempSettings.fan_speed || device.fan_speed) === 100 }">
                                     <i class="fa-solid fa-wind"></i>
-                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.airPurifier.fan_speed) !== 50 }">中</p>
+                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.fan_speed) !== 50 }">
+                                        中</p>
                                 </div>
                                 <div @click="updateTempSettings(device.id, { fan_speed: 25 })"
-                                    :class="{ selected: (device.tempSettings.fan_speed || device.airPurifier.fan_speed) === 25 || (device.tempSettings.fan_speed || device.airPurifier.fan_speed) === 50 || (device.tempSettings.fan_speed || device.airPurifier.fan_speed) === 100 }">
+                                    :class="{ selected: (device.tempSettings.fan_speed || device.fan_speed) === 25 || (device.tempSettings.fan_speed || device.fan_speed) === 50 || (device.tempSettings.fan_speed || device.fan_speed) === 100 }">
                                     <i class="fa-solid fa-wind"></i>
-                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.airPurifier.fan_speed) !== 25 }">低</p>
+                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.fan_speed) !== 25 }">
+                                        低</p>
                                 </div>
                             </div>
                             <div class="Air">
                                 <div class="mode">
-                                    <p>{{ device.airPurifier.air_quality }}</p>
+                                    <p>{{ device.air_quality }}</p>
                                     <span>當前<br>空氣品質</span>
                                 </div>
                             </div>
@@ -327,36 +403,47 @@ export default {
                             <div class="Air">
                                 <span>水箱<br>剩餘容量</span>
                                 <div class="time">
-                                    <p>{{ device.dehumidifier.tank_capacity }}</p>
+                                    <p>{{ device.tank_capacity.toFixed(1) }}</p>
                                     <p class="hr">ml</p>
                                 </div>
                             </div>
                             <div class="AC">
                                 <div @click="updateTempSettings(device.id, { fan_speed: 'HIGH' })"
-                                    :class="{ selected: (device.tempSettings.fan_speed || device.dehumidifier.fanSpeed) === 'HIGH' }">
+                                    :class="{ selected: (device.tempSettings.fan_speed || device.fan_speed) === 'HIGH' }">
                                     <i class="fa-solid fa-wind"></i>
-                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.dehumidifier.fanSpeed) !== 'HIGH' }">高</p>
+                                    <p
+                                        :class="{ hidden: (device.tempSettings.fan_speed || device.fan_speed) !== 'HIGH' }">
+                                        高</p>
                                 </div>
                                 <div @click="updateTempSettings(device.id, { fan_speed: 'MEDIUM' })"
-                                    :class="{ selected: (device.tempSettings.fan_speed || device.dehumidifier.fanSpeed) === 'MEDIUM' || (device.tempSettings.fan_speed || device.dehumidifier.fanSpeed) === 'HIGH' }">
+                                    :class="{ selected: (device.tempSettings.fan_speed || device.fan_speed) === 'MEDIUM' || (device.tempSettings.fan_speed || device.fan_speed) === 'HIGH' }">
                                     <i class="fa-solid fa-wind"></i>
-                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.dehumidifier.fanSpeed) !== 'MEDIUM' }">中</p>
+                                    <p
+                                        :class="{ hidden: (device.tempSettings.fan_speed || device.fan_speed) !== 'MEDIUM' }">
+                                        中</p>
                                 </div>
                                 <div @click="updateTempSettings(device.id, { fan_speed: 'LOW' })"
-                                    :class="{ selected: (device.tempSettings.fan_speed || device.dehumidifier.fanSpeed) === 'LOW' || (device.tempSettings.fan_speed || device.dehumidifier.fanSpeed) === 'MEDIUM' || (device.tempSettings.fan_speed || device.dehumidifier.fanSpeed) === 'HIGH' }">
+                                    :class="{ selected: (device.tempSettings.fan_speed || device.fan_speed) === 'LOW' || (device.tempSettings.fan_speed || device.fan_speed) === 'MEDIUM' || (device.tempSettings.fan_speed || device.fan_speed) === 'HIGH' }">
                                     <i class="fa-solid fa-wind"></i>
-                                    <p :class="{ hidden: (device.tempSettings.fan_speed || device.dehumidifier.fanSpeed) !== 'LOW' }">低</p>
+                                    <p
+                                        :class="{ hidden: (device.tempSettings.fan_speed || device.fan_speed) !== 'LOW' }">
+                                        低</p>
                                 </div>
                             </div>
                             <div class="AC">
                                 <div class="mode">
                                     <span>目標濕度</span>
                                     <i class="fa-solid fa-caret-up"
-                                        @click="updateTempSettings(device.id, { target_humidity: (device.tempSettings.target_humidity || device.dehumidifier.target_humidity) + 1 })"></i>
-                                    <p>{{ device.tempSettings.target_humidity || device.dehumidifier.target_humidity }}%</p>
+                                        @click="updateTempSettings(device.id, { target_humidity: (device.tempSettings.target_humidity || device.target_humidity) + 1 })"></i>
+                                    <p>{{ device.tempSettings.target_humidity || device.target_humidity }}%
+                                    </p>
                                     <i class="fa-solid fa-caret-down"
-                                        @click="updateTempSettings(device.id, { target_humidity: (device.tempSettings.target_humidity || device.dehumidifier.target_humidity) - 1 })"></i>
+                                        @click="updateTempSettings(device.id, { target_humidity: (device.tempSettings.target_humidity || device.target_humidity) - 1 })"></i>
                                 </div>
+                            </div>
+                            <div class="current-humidity">
+                                <span>當前濕度</span>
+                                <p>{{ device.current_humidity.toFixed(1) }}%</p>
                             </div>
                         </template>
 
@@ -365,17 +452,18 @@ export default {
                             <div class="Lamp">
                                 <div class="brightnessRange">
                                     <div class="brightness">
-                                        <span>{{ device.tempSettings.brightness || device.light.brightness }} %</span>
+                                        <span>{{ device.tempSettings.brightness || device.brightness }} %</span>
                                     </div>
                                     <div class="area">
                                         <p>亮度</p>
-                                        <input type="range" min="0" max="100" v-model.number="device.tempSettings.brightness"
+                                        <input type="range" min="0" max="100"
+                                            v-model.number="device.tempSettings.brightness"
                                             @change="updateTempSettings(device.id, { brightness: device.tempSettings.brightness })">
                                     </div>
                                 </div>
                                 <div class="color_tempRange">
                                     <div class="color_temp">
-                                        <span>{{ device.tempSettings.color_temp || device.light.color_temp }}K</span>
+                                        <span>{{ device.tempSettings.color_temp || device.color_temp }}K</span>
                                     </div>
                                     <div class="area">
                                         <p>色溫</p>
@@ -389,10 +477,6 @@ export default {
                     </div>
                 </transition>
             </div>
-
-            <!-- <span>{{ data.name }}</span> -->
-            <!-- </div>
-            </div> -->
         </div>
     </div>
 </template>
@@ -413,7 +497,7 @@ export default {
         overflow-y: auto;
 
         &::-webkit-scrollbar {
-            width: 10px;
+            width: 13px;
 
         }
 
@@ -423,7 +507,7 @@ export default {
         }
 
         &::-webkit-scrollbar-thumb {
-            background: $dark03;
+            background: $black1;
             border-radius: 15px;
 
         }
@@ -440,7 +524,7 @@ export default {
             border-radius: 25px;
             margin-bottom: 15px;
             background-color: $dark02;
-            
+
 
             // flex: 0 0 auto; /* 确保每个项目不会缩小并且保持其内容的宽度 */
             margin-right: 17px;
@@ -451,7 +535,7 @@ export default {
             /* 添加过渡效果 */
             &.expanded {
                 width: 517px;
-                /* 展開後的寬度 */
+                /* 展开后的宽度 */
             }
 
             .switch {
@@ -466,8 +550,8 @@ export default {
 
             i {
                 font-size: 80px;
-                color: $white;
-                margin-left: 35%;
+                color: $dark01;
+                margin-left: 37%;
                 margin-top: 21px;
 
                 &.hidden {
@@ -520,7 +604,7 @@ export default {
                 .AC {
                     width: 95px;
                     height: 120px;
-                    background-color: $white;
+                    background-color: $dark01;
                     margin-right: 12px;
                     border-radius: 20px;
                     padding-top: 10px;
@@ -528,7 +612,7 @@ export default {
                     i {
                         width: 30px;
                         font-size: 25px;
-                        color: $dark02;
+                        color: $dark03;
                         cursor: pointer;
                         margin: 0;
                     }
@@ -566,13 +650,13 @@ export default {
                     .mode {
                         flex-direction: column;
                         align-items: center;
+                        color: $black1;
                         padding-top: 10px;
 
                         i {
                             width: auto;
                             font-size: 25px;
                             cursor: pointer;
-                            color: $black1;
                         }
 
                         p {
@@ -597,7 +681,7 @@ export default {
                 .Air {
                     width: 95px;
                     height: 120px;
-                    background-color: $white;
+                    background-color: $dark01;
                     margin-right: 12px;
                     border-radius: 20px;
                     padding-top: 10px;
@@ -698,7 +782,7 @@ export default {
                 .Lamp {
                     width: 309px;
                     height: 130px;
-                    background-color: $white;
+                    background-color: $dark01;
                     margin-right: 12px;
                     border-radius: 20px;
 
