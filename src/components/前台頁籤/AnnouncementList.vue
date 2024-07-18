@@ -5,7 +5,8 @@ import AnnouncementSearch from '@/components/AnnouncementSearch.vue';
 export default {
     data() {
         return {
-            annArr: []
+            annArr: [],
+            expandedIndex: null // 追蹤當前展開的公告索引
         };
     },
     components: {
@@ -51,14 +52,20 @@ export default {
         },
         //點擊切換expanded的ture/false屬性
         toggleContent(index) {
-            this.annArr[index].expanded = !this.annArr[index].expanded;
+            if (this.expandedIndex === index) {
+                // 如果點擊的是當前展開的公告，則收起
+                this.expandedIndex = null;
+            } else {
+                // 否則，展開新點擊的公告
+                this.expandedIndex = index;
+            }
         },
         handleSearchResults(filteredAnnouncements) {
             this.annArr = filteredAnnouncements.map(item => ({
                 ...item,
-                expanded: false,
                 time: item.publishTime
             }));
+            this.expandedIndex = null; // 重置展開狀態
         }
     },
     mounted() {
@@ -76,13 +83,13 @@ export default {
             <h2>公告</h2>
             <div class="list">
                 <div class="content" v-for="(data, index) in truncatedContent" :key="data.id"
-                    @click="toggleContent(index)" :class="{ expanded: annArr[index].expanded }">
+                    @click="toggleContent(index)" :class="{ expanded: expandedIndex === index }">
                     <div class="up">
                         <span>{{ data.title }}</span>
                         <p class="date">{{ data.time }}</p>
                     </div>
-                    <p>{{ annArr[index].expanded ? data.content : data.truncatedContent }}</p>
-                    <div class="red"></div>
+                    <p class="truncated-content">{{ data.truncatedContent }}</p>
+                    <p class="full-content">{{ data.content }}</p>
                 </div>
             </div>
         </div>
@@ -155,14 +162,15 @@ export default {
                 /* 可选的间距 */
                 //以下為點擊個別公告會展開的參數
                 cursor: pointer;
-                transition: max-height 1s ease;
+                transition: max-height 0.5s ease, padding 0.5s ease;
                 overflow: hidden;
-                max-height: 58px;
+                max-height: 80px;
 
                 /* 初始高度，取决于你希望显示的截断内容的高度 */
                 &.expanded {
                     max-height: 500px;
                     /* 展开后的高度，可以根据内容长度调整 */
+                    padding-bottom: 20px;
                 }
 
                 .up {
@@ -182,16 +190,28 @@ export default {
                     margin-top: 5px;
                     font-size: 14px;
                     margin-left: 10px;
-                    color: $dark03;
                 }
-                .red{
-                    position: absolute;
-                    left: 12px;
-                    top: 18px;
-                    width: 9px;
-                    height: 9px;
-                    border-radius: 5px;
-                    background-color: red;
+
+                .truncated-content {
+                    display: block;
+                    transition: opacity 0.3s ease;
+                }
+
+                .full-content {
+                    display: none;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                &.expanded {
+                    .truncated-content {
+                        display: none;
+                    }
+
+                    .full-content {
+                        display: block;
+                        opacity: 1;
+                    }
                 }
             }
         }
