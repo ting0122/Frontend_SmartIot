@@ -19,6 +19,7 @@ export default {
         searchObj: {
             handler() {
                 this.searchAnnouncements();
+                this.searchAllAnnouncements();
             },
             deep: true,
             
