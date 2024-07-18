@@ -20,7 +20,8 @@ export default {
             handler() {
                 this.searchAnnouncements();
             },
-            deep: true
+            deep: true,
+            
         }
     },
     methods: {
@@ -41,8 +42,24 @@ export default {
             if (!range || !range[0] || !range[1]) return true;
             const publishDate = new Date(date);
             return publishDate >= range[0] && publishDate <= range[1];
-        }
-    }
+        },
+        searchAllAnnouncements() {
+            fetch('http://localhost:8080/announcements')
+                .then(response => response.json())
+                .then(data => {
+                    let filteredAllAnnouncements = data.filter(announcement => {
+                        const titleMatch = this.searchObj.title === "" || announcement.title.includes(this.searchObj.title);
+                        const dateMatch = !this.searchObj.dateRange || this.isDateInRange(announcement.publishTime, this.searchObj.dateRange);
+                        return titleMatch && dateMatch;
+                    });
+                    this.$emit('search', filteredAllAnnouncements);
+                })
+                .catch(error => console.error('搜尋公告失敗：', error));
+        },
+    },
+    props:[
+        "searchTrue"
+    ]
 };
 </script>
 
@@ -55,7 +72,8 @@ export default {
             <div class="start_date">
                 <VueDatePicker v-model="searchObj.dateRange" range format="yyyy-MM-dd" style="width: 260px" />
             </div>
-            <button class="seach_list" @click="searchAnnouncements">搜尋</button>
+            <button v-if="searchTrue" class="seach_list" @click="searchAllAnnouncements">搜尋</button>
+            <button v-else class="seach_list" @click="searchAnnouncements">搜尋</button>
         </div>
     </div>
 </template>

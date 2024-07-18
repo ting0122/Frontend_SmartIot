@@ -226,7 +226,7 @@ export default {
                     <i class="fa-regular fa-snowflake"></i>
                     <p>{{ data.type }}</p> -->
 
-            <div class="outArea" v-for="(data, index) in dataArr" :key="index" :class="{ expanded: data.expanded }">
+            <div class="outArea" v-for="(device, index) in roomDevices" :key="index" :class="{ expanded: device.expanded }">
                 <div class="switch">
                     <Switch v-model:checked="device.status"
                         @update:checked="(status) => updateDeviceStatus(device.id, status)" />

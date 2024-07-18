@@ -260,20 +260,7 @@ export default defineStore("location", {
                     this.searchAllRoom()
                 })
         },
-        //全部公告
-        allAnnouncement() {
-            fetch("http://localhost:8080/rooms", {
-                method: "delete",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(arr),
-            })
-                // .then(res => res.json())
-                .then(data => {
-                    this.searchAllRoom()
-                })
-        },
+        //搜尋歷史紀錄
         searchHistory(i,j,k,l,m){
             const params = new URLSearchParams();
             
@@ -319,16 +306,42 @@ export default defineStore("location", {
                     this.allLogs = this.allLogs.reverse()
                 })
         },
-        getAllAnn() {
+        //刪除公告
+        deleteAnn(i) {
+            let arr = []
+            for (let j = 0; j < i.length; j++) {
+                arr.push(i[j]);
+            }
             fetch(`http://localhost:8080/announcements`, {
-                method: "get",
-                body: JSON.stringify()
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(arr)
+            })
+                // .then(res => res.json())
+                .then(data => {
+                    
+                })
+        },
+        //新增公告
+        createAnn(i,j,k) {
+            let arr = []
+            for (let x = 0; x < k.length; x++) {
+                arr.push(k[x]);
+            }
+            let obj={
+                "title":i,
+                "content":j,
+                "roomIds":arr
+            }
+            fetch(`http://localhost:8080/announcements`, {
+                method: "post",
+                body: JSON.stringify(obj)
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('allAnn', data)
-                    this.allAnn = data
-                    this.allAnn = this.allAnn.reverse()
+                    
                 })
         },
     },

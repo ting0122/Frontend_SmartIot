@@ -190,6 +190,23 @@ export default {
                     }
                 });
             }
+            if (announcement.eventType === '錯誤') {
+                Swal.fire({
+                    title: this.allLogs[index].eventType,
+                    html:`<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                            <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                            <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                            <p><strong>錯誤訊息：</strong>${announcement.detail.message}</p>
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
         }
     }
 };
@@ -201,9 +218,15 @@ export default {
         <div class="down">
             <div class="history" v-for="(data, index) in allLogs" @click="toggleContent(index)"
                 :class="{ expanded: allLogs[index].expanded }">
-
+                <div v-if="data.eventType === '錯誤'" class="box">
+                    <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
+                    <p class="id">編號:{{ data.id }}</p>
+                    <p>{{ data.detail.deviceType }}</p>
+                    <p>{{ data.detail.deviceName }}</p>
+                    <p>{{ data.detail.message }}</p>
+                    <p class="right">{{ data.eventType }}</p>
+                </div>
                 <div v-if="data.eventType === '設備開關'" class="box">
-
                     <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
                     <p class="id">編號:{{ data.id }}</p>
                     <p>{{ data.detail.deviceType }}</p>
