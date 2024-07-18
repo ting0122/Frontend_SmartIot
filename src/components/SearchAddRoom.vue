@@ -70,7 +70,7 @@ export default {
         outline: none;
         padding-left: 13px;
         margin-left: 20px;
-        color: $white;
+        color: $black1;
     }
     input{
         width: 180px;
@@ -81,10 +81,10 @@ export default {
         background: $dark02;
         font-size: 16px;
         padding-left: 13px;
-        color: $white;
+        color: $black1;
     }
     ::placeholder {
-        color: $white;
+        color: $black1;
     }
     button{
         width: 130px;
@@ -93,7 +93,7 @@ export default {
         border: none;
         cursor: pointer;
         background: $dark02;
-        color: $white;
+        color: $black1;
         font-size: 16px;
         margin-left: 20px;
     }

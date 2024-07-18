@@ -104,7 +104,7 @@ export default {
     height: 268px;
     border-radius: 25px;
     // border: 1px solid black;
-    background-color: $dark02;
+    background-color: $black;
     display: flex;
     justify-content: space-between;
     padding-top: 13px;
@@ -134,7 +134,7 @@ export default {
         p {
             font-size: 20px;
             margin-top: 10px;
-            color: $black;
+            color: $black1;
         }
     }
 
@@ -209,6 +209,7 @@ export default {
                     line-height: 30px;
                     margin-left: 10px;
                     color: $black1;
+                    
                 }
 
             }

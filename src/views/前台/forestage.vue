@@ -115,7 +115,7 @@ export default {
             width: 1060px;
             height: 800px;
             // border: 1px solid #b1b1b1;
-            background-color: $black;
+            background-color: $dark02;
             top: 50%;
             left: 50%;
             margin-top: -404px;

@@ -80,14 +80,44 @@ export default {
                 padding-left: 20px;
                 padding-right: 10px;
                 font-size: 16px;
-                color: $white;
+                color: $black1;
                 background-color: $dark02;
                 border: 0;
                 outline: none;
+                line-height: 40px;
             }
 
             ::placeholder {
+                color: $black1;
+            }
+        }
+    }
+}
+
+.start_date {
+    margin-left: 20px;
+    width: 260px;
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $dark02;
+
+    .left {
+        display: flex;
+
+        .name {
+            input {
+                width: 110px;
+                height: 40px;
+                border-radius: 35px;
+                padding-left: 20px;
+                padding-right: 10px;
+                font-size: 16px;
                 color: $white;
+                background-color: $dark02;
+                color: $black1;
+                line-height: 40px;
             }
         }
 
@@ -141,7 +171,5 @@ export default {
 
 
     }
-
-
 }
 </style>

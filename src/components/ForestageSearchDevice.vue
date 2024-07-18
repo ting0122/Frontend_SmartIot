@@ -2,6 +2,7 @@
 export default {
     data() {
         return {
+            showbox: false, // 控制顯示搜尋或刪除的狀態
             searchObj: {
                 name: "",
                 status: "",
@@ -30,6 +31,9 @@ export default {
                     this.$emit('search-results', filteredDevices);
                 })
                 .catch(error => console.error('搜尋設備失敗：', error));
+        },
+        showsearch() {
+            this.showbox = !this.showbox;
         }
     }
 };
@@ -55,8 +59,8 @@ export default {
         </select>
         <button @click="searchDevices">搜尋</button>
         <div class="createAndDeleteButton">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button><i class="fa-solid fa-trash-can"></i></button>
+            <button @click="showsearch" :class="{ chick: !showbox }"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button @click="showsearch" :class="{ chick: showbox }"><i class="fa-solid fa-trash-can"></i></button>
         </div>
     </div>
 </template>
@@ -78,11 +82,12 @@ export default {
         font-size: 16px;
         border: none;
         border-radius: 35px;
-        background: $dark02;
+        background: $white;
         outline: none;
         padding-left: 20px;
         margin-left: 20px;
-        color: $white;
+        color: $dark03;
+
     }
 
     input {
@@ -91,16 +96,17 @@ export default {
         border-radius: 35px;
         border: none;
         outline: none;
-        background: $dark02;
+        background: $white;
         font-size: 16px;
         padding: 0;
         padding-left: 20px;
         color: $white;
+        line-height: 40px;
         margin-left: 83px;
     }
 
     ::placeholder {
-        color: $white;
+        color: $dark03;
     }
 
     button {
@@ -109,9 +115,10 @@ export default {
         border-radius: 35px;
         border: none;
         cursor: pointer;
-        background: $dark02;
-        color: $white;
+        background: $white;
+        color: $dark03;
         font-size: 16px;
+        line-height: 40px;
         margin-left: 20px;
         padding: 0;
     }
@@ -126,13 +133,18 @@ export default {
         button {
             height: 40px;
             width: 40px;
-            background: $dark02;
+            background: $white;
             border-radius: 50%;
             border: none;
             outline: none;
-            color: $white;
+            color: $dark03;
             font-size: 20px;
             line-height: 40px;
+        }
+
+        .chick {
+            color: $white;
+            background: $black;
         }
     }
 }

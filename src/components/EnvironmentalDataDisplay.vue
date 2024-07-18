@@ -50,20 +50,20 @@ export default {
     width: 303px;
     height: 100%;
     border-radius: 25px;
-    background-color: $dark02;
+    background-color: $dark01;
     display: flex;
-    justify-content: space-between;
-
+    justify-content: space-evenly;
+    align-items: center;
+    color: $dark03;
+    // backdrop-filter: blur(5px);
     p {
-        margin: 0 20px 0 40px;
         font-size: 18px;
-        line-height: 104px;
+        color: $black1;
     }
 
     span {
-        margin: 17px 65px 20px 30px;
+        margin: 0 0 7px 0;
         font-size: 45px;
-
     }
 }
 </style>

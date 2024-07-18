@@ -138,7 +138,10 @@ export default {
                 </div>
                 <p class="id">{{ data.id }}</p>
                 <p>{{ data.type }}</p>
-                <i class="fa-regular fa-snowflake"></i>
+                <i class="fa-regular fa-snowflake" v-if="data.type === '冷氣機'"></i>
+                <i class="fa-solid fa-leaf" v-if="data.type === '空氣清淨機'"></i>
+                <i class="fa-solid fa-droplet-slash" v-if="data.type === '除濕機'"></i>
+                <i class="fa-regular fa-lightbulb" v-if="data.type === '燈'"></i>
                 <div class="area">
                     <p>{{ data.area }}-{{ data.truncatedContent }}</p>
                 </div>             
@@ -165,7 +168,7 @@ export default {
 
     .text {
         font-size: 20px;
-        color: $white;
+        color: $black1;
         padding-left: 10px;
         padding-bottom: 6px
     }
@@ -206,7 +209,7 @@ export default {
     }
 
     &::-webkit-scrollbar-thumb {
-        background: $black1;
+        background: $dark03;
         border-radius: 15px;
     }
 
@@ -218,7 +221,7 @@ export default {
     .room {
         width: 282px;
         height: 150px;
-        background: $dark03;
+        background: $white;
         border-radius: 25px;
         margin: 20px 0 0 0;
         position: relative;
@@ -241,7 +244,7 @@ export default {
         }
 
         p {
-            margin: 0px 20px 0 30px;
+            margin: 0px 20px 0 20px;
             font-size: 16px;
         }
 
@@ -259,6 +262,7 @@ export default {
                 line-height: 50px;
                 display: flex;
                 justify-content: center;
+                color:$dark03 ;
             }
         }
         .checkbox-overlay {

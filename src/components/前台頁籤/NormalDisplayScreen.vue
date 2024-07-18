@@ -235,6 +235,7 @@ export default {
             :lights="lights" :airPurifiers="airPurifiers" :dehumidifiers="dehumidifiers"
             @update-air-conditioners="updateAirConditioners" @update-lights="updateLights"
             @update-air-purifiers="updateAirPurifiers" @update-dehumidifiers="updateDehumidifiers" />
+        <ElectricityConsumptionData/>
     </div>
     <div class="right">
         <EnvironmentalData />
@@ -270,14 +271,12 @@ export default {
     display: flex;
     justify-content: space-between;
     height: 15%;
-    // border: 1px solid black;
     padding: 0 50px 0 50px;
 }
 
 .down {
     width: 957px;
     height: 31%;
-    // border: 1px solid black;
     padding: 19px 50px 20px 50px;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -285,7 +284,6 @@ export default {
 
     &::-webkit-scrollbar {
         height: 10px;
-
     }
 
     &::-webkit-scrollbar-button {

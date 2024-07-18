@@ -292,7 +292,7 @@ export default {
     overflow-y: auto;
     // border: 1px solid black;
     border-radius: 0 0 25px 25px;
-    background-color: $dark01;
+    background-color: $dark02;
     padding-top: 10px;
 
     &::-webkit-scrollbar {
@@ -305,7 +305,7 @@ export default {
     }
 
     &::-webkit-scrollbar-thumb {
-        background: $black1;
+        background: $dark03;
         border-radius: 15px;
 
     }
@@ -322,7 +322,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: $dark03;
+        background: $white;
         border-radius: 35px;
 
 
@@ -339,7 +339,7 @@ export default {
                 line-height: 30px;
                 margin-left: 23px;
                 margin-right: 25px;
-                color: $white;
+                color: $dark03;
 
             }
 
@@ -347,7 +347,7 @@ export default {
                 // font-size: 1px;
                 line-height: 30px;
                 margin-right: 18px;
-                color: $white;
+                color: $dark03;
             }
 
             .right {
@@ -355,15 +355,15 @@ export default {
                 margin-left: 8px;
                 padding-left: 28px;
                 // width: 500px;
-                color: $white;
-                border-left: 1px solid $white;
+                color: $black;
+                border-left: 1px solid $dark03;
             }
         }
 
         .date {
             display: block;
             margin-right: 30px;
-            color: $white;
+            color: $dark03;
         }
     }
 }

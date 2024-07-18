@@ -59,7 +59,7 @@ export default {
 .background{
     width: 100%;
     height: 100dvh;
-    background: $black;
+    background: $dark01;
     position: relative;
     .showArea{
         position: absolute;
