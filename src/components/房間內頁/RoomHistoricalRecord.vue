@@ -60,7 +60,7 @@ export default {
     flex-direction: column;
     align-items:end;
     border-radius: 25px;
-    border: 1px solid black;
+    // border: 1px solid black;
     padding-top: 40px;
     position: relative;
     background-color: $dark03;
@@ -82,7 +82,7 @@ export default {
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    border: 1px solid black;
+    // border: 1px solid black;
     border-radius: 0 0 25px 25px;
     background-color: $dark01;
     &::-webkit-scrollbar {

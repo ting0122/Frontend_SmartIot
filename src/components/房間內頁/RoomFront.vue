@@ -173,7 +173,7 @@ export default {
     flex-direction: column;
     align-items: end;
     border-radius: 25px;
-    border: 1px solid black;
+    // border: 1px solid black;
 
     .energy {
         width: 100%;
@@ -219,7 +219,7 @@ export default {
             flex-wrap: wrap;
             justify-content: space-evenly;
             overflow-y: auto;
-            border: 1px solid black;
+            // border: 1px solid black;
             border-radius: 0 0 25px 25px;
 
             &::-webkit-scrollbar {

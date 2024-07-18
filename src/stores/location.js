@@ -60,7 +60,7 @@ export default defineStore("location", {
                     this.localRoomArea = data.area
                     console.log(this.localRoomArea)
                     this.searchDevice(null, null, this.localRoomArea, null)
-                    this.searchHistory(null,null,null,this.localRoomArea)
+                    this.searchHistory(null,null,null,null,this.localRoomArea)
                     console.log('搜尋房間oneRoom', this.oneRoom)
                 })
         },
@@ -274,7 +274,7 @@ export default defineStore("location", {
                     this.searchAllRoom()
                 })
         },
-        searchHistory(i,j,k,l){
+        searchHistory(i,j,k,l,m){
             const params = new URLSearchParams();
             
             if (i) {
@@ -286,11 +286,15 @@ export default defineStore("location", {
             }
             
             if (k) {
-                params.append('date', k);
+                params.append('startDate', k);
             }
             
             if (l) {
-                params.append('roomArea', l);
+                params.append('endDate', l);
+            }
+
+            if (m) {
+                params.append('roomArea', m);
             }
             fetch(`http://localhost:8080/history/search?${params.toString()}`, {
                 method: "get",

@@ -37,6 +37,7 @@ export default {
                     showCloseButton: true,
                     showConfirmButton: false,  //隱藏下方ok按鈕
                     // confirmButtonText: 'OK',
+                    icon:"error",
                     customClass: {
                         popup: 'swal2-custom-popup', // 可以自定義樣式
                     }

@@ -69,7 +69,7 @@ export default {
         margin-left: -750px;
         width: 1500px;
         height: 950px;
-        border: 1px solid black;
+        // border: 1px solid black;
     }
 }
 </style>
