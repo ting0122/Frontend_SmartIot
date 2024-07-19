@@ -1,36 +1,101 @@
 <!-- 前台-故障紀錄-頁面 -->
 <script>
+//sweetalert2提示窗套件
+import Swal from 'sweetalert2';
 import FaultSearch from '@/components/FaultSearch.vue';
-
+import moment from "moment"
 export default {
     data() {
         return {
-            dataArr:[{id:203154,type:"冷氣",mane:"前方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203151,type:"電燈",mane:"右側電燈",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"空氣清淨機",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"}]
+            // dataArr:[{id:203154,type:"冷氣",mane:"前方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203151,type:"電燈",mane:"右側電燈",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"空氣清淨機",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"}]
+            allLogs: []
         };
+    },
+    created() {
+        this.searchHistory(null, null, null, null, 600)
     },
     components: {
         FaultSearch,
-    
-    },
 
+    },
+    methods: {
+        searchHistory(i, j, k, l, m) {
+            const params = new URLSearchParams();
+            if (i) {
+                params.append('deviceName', i);
+            }
+
+            if (j) {
+                params.append('deviceType', j);
+            }
+
+            if (k) {
+                params.append('startDate', k);
+            }
+
+            if (l) {
+                params.append('endDate', l);
+            }
+
+            if (m) {
+                params.append('roomArea', m);
+            }
+            fetch(`http://localhost:8080/history/search?${params.toString()}`, {
+                method: "get",
+                body: JSON.stringify()
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('erLog', data)
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].eventType == "錯誤") {
+                            this.allLogs.push(data[i])
+                        }
+                    }
+                    console.log('allLog', this.allLogs)
+                })
+        },
+        toggleContent(index) {
+            const announcement = this.allLogs[index];
+            if (announcement.eventType === '錯誤') {
+                Swal.fire({
+                    title: this.allLogs[index].eventType,
+                    html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                            <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                            <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                            <p><strong>錯誤訊息：</strong>${announcement.detail.message}</p>
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
+        }
+    }
 };
 </script>
 
 <template>
-    
+
     <div class="down">
         <div class="search">
-            <FaultSearch/>
+            <FaultSearch />
         </div>
         <div class="oo">
-            <div class="outArea" v-for="(data, index) in dataArr" :key="index">
-                <h2>{{ data.mane }}</h2>
-                <div class="box">
-                    <p class="id">{{ data.id }}</p>
-                    <p>{{ data.type }}</p>
+            <div class="outArea" v-for="(data, index) in allLogs" @click="toggleContent(index)"
+                :class="{ expanded: allLogs[index].expanded }">
+                <div v-if="data.eventType === '錯誤'" class="box">
+                    <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
+                    <p class="id">編號:{{ data.id }}</p>
+                    <p>{{ data.detail.deviceType }}</p>
+                    <p>{{ data.detail.deviceName }}</p>
+                    <p>{{ data.detail.message }}</p>
+                    <p class="right">{{ data.eventType }}</p>
                 </div>
-                <p class="right">{{ data.question }}</p>
-                <p class="date">{{ data.date }}</p>
             </div>
 
         </div>
@@ -45,14 +110,16 @@ export default {
 .down {
     width: 900px;
     height: 650px;
-    padding: 41px 0px 16px 50px;  
-    .oo{
-        padding-left: 82px;
+    padding: 41px 0px 16px 50px;
+
+    .oo {
+        padding-left: 50px;
         width: 830px;
         height: 600px;
         // border: 1px solid black;
         overflow-y: auto;
         overflow-x: hidden;
+
         &::-webkit-scrollbar {
             width: 10px;
         }
@@ -72,56 +139,58 @@ export default {
             background: transparent;
             border-radius: 15px;
         }
-        .outArea{
-            position: relative;
+
+        .outArea {
+            width: 750px;
+            height: 57px;
+            margin: 20px auto;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            width: 790px;
-            height: 53px;
-            border-radius: 30px;
-            margin-bottom: 15px;
-            background-color: $white;
-            flex: 0 0 auto; /* 确保每个项目不会缩小并且保持其内容的宽度 */
-          
-            h2{
-                display: block;
-                width: 120px;
-                font-size: 18px;
-                line-height: 52px;
-                margin-left: 23px;
-                color: $dark03;
-                
-            }
-            .box{
-                width: 185px;
+            background: $white;
+            border-radius: 35px;
+
+
+            .box {
+                // width: 305px;
                 height: 30px;
-                border-right: 1px solid $dark03;
                 display: flex;
                 padding-left: 10px;
-                p{
+                cursor: pointer;
+
+                h2 {
+                    display: block;
+                    font-size: 18px;
+                    line-height: 30px;
+                    margin-left: 23px;
+                    margin-right: 25px;
+                    color: $dark03;
+
+                }
+
+                p {
                     // font-size: 1px;
                     line-height: 30px;
                     margin-right: 18px;
                     color: $dark03;
                 }
-            }
-            .right{
-                display: block;
-                margin-left: 28px;
-                width: 258px;
-                color: $black;
-                // border: 1px solid black;
-            }
-            .date{
-                display: block;
-                margin-left: 50px;
-                color: $dark03;
-                
 
+                .right {
+                    display: block;
+                    margin-left: 8px;
+                    padding-left: 28px;
+                    // width: 500px;
+                    color: $black;
+                    border-left: 1px solid $dark03;
+                }
+            }
+
+            .date {
+                display: block;
+                margin-right: 30px;
+                color: $dark03;
             }
         }
-        
-    }  
+    }
 }
-
 </style>
