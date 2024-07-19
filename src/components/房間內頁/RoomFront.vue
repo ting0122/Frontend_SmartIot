@@ -173,19 +173,19 @@ export default {
     flex-direction: column;
     align-items: end;
     border-radius: 25px;
-    border: 1px solid black;
+    // border: 1px solid black;
 
     .energy {
         width: 100%;
         height: 341px;
-        background-color: $dark03;
+        background-color: $white;
         border-radius: 25px;
     }
 
     .headerArea {
         height: 120px;
         width: 100%;
-        background: $dark03;
+        background: $white;
         margin-top: 25px;
         border-radius: 25px;
         position: relative;
@@ -203,7 +203,7 @@ export default {
             align-items: center;
             top: 10px;
             left: 35px;
-            color: $black1;
+            color: $dark03;
 
             p {
                 display: block;
@@ -219,8 +219,9 @@ export default {
             flex-wrap: wrap;
             justify-content: space-evenly;
             overflow-y: auto;
-            border: 1px solid black;
+            // border: 1px solid black;
             border-radius: 0 0 25px 25px;
+            background-color: $dark02;
 
             &::-webkit-scrollbar {
                 width: 10px;
@@ -233,7 +234,7 @@ export default {
             }
 
             &::-webkit-scrollbar-thumb {
-                background: $black1;
+                background: $dark03;
                 border-radius: 15px;
 
             }
@@ -246,7 +247,7 @@ export default {
             .room {
                 width: 282px;
                 height: 150px;
-                background: $dark03;
+                background: $white;
                 border-radius: 25px;
                 margin: 20px 0 0 0;
                 position: relative;
@@ -269,7 +270,7 @@ export default {
                 }
 
                 p {
-                    margin: 0px 20px 0 30px;
+                    margin: 0px 20px 0 20px;
                     font-size: 16px;
                 }
 

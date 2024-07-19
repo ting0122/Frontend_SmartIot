@@ -59,7 +59,7 @@ export default {
 .background{
     width: 100%;
     height: 100dvh;
-    background: $black;
+    background: $dark01;
     position: relative;
     .showArea{
         position: absolute;
@@ -69,7 +69,7 @@ export default {
         margin-left: -750px;
         width: 1500px;
         height: 950px;
-        border: 1px solid black;
+        // border: 1px solid black;
     }
 }
 </style>

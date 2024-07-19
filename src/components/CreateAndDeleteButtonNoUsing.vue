@@ -65,18 +65,18 @@ export default {
         button {
             height: 45px;
             width: 45px;
-            background: $dark02;
+            background: $dark01;
             border-radius: 50%;
             border: none;
             outline: none;
-            color: $white;
+            color: $dark03;
             font-size: 20px;
             line-height: 45px;
         }
 
         .chick {
-            color: $black1;
-            background: salmon;
+            color: $white;
+            background: $black;
         }
     }
 }

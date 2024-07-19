@@ -137,7 +137,7 @@ export default {
         height: 65px;
         border-radius: 30px;
         margin: auto;
-        background-color: $dark03;
+        background-color: $white;
         padding-left: 14px;
 
         .tablink {
@@ -153,10 +153,11 @@ export default {
             color: $black1;
 
             &.active {
-                background-color: $dark01;
+                background-color: $black;
                 width: 120px;
                 height: 45px;
                 border-radius: 50px;
+                color:$white ;
             }
         }
 

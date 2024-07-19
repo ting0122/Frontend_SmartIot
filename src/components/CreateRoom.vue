@@ -37,6 +37,7 @@ export default {
                     showCloseButton: true,
                     showConfirmButton: false,  //隱藏下方ok按鈕
                     // confirmButtonText: 'OK',
+                    icon:"error",
                     customClass: {
                         popup: 'swal2-custom-popup', // 可以自定義樣式
                     }
@@ -78,7 +79,7 @@ export default {
 .createRoom {
     width: 100%;
     height: 100px;
-    background: $dark03;
+    background: $white;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -94,7 +95,7 @@ export default {
         outline: none;
         padding-left: 13px;
         margin-left: 30px;
-        color: $white;
+        color: $black1;
     }
     input{
         width: 180px;
@@ -105,11 +106,12 @@ export default {
         background: $dark02;
         font-size: 16px;
         padding-left: 13px;
-        color: $white;
+        color: $black1;
         margin-left: 30px;
+        line-height: 40px;
     }
     ::placeholder {
-        color: $white;
+        color: $black1;
     }
     button{
         width: 88px;
@@ -118,9 +120,10 @@ export default {
         border: none;
         cursor: pointer;
         background: $dark02;
-        color: $white;
+        color: $black1;
         font-size: 16px;
         margin-left: 30px;
+        line-height: 40px;
     }
 }
 </style>

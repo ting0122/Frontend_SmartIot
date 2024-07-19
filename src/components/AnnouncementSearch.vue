@@ -19,8 +19,10 @@ export default {
         searchObj: {
             handler() {
                 this.searchAnnouncements();
+                this.searchAllAnnouncements();
             },
-            deep: true
+            deep: true,
+            
         }
     },
     methods: {
@@ -41,8 +43,24 @@ export default {
             if (!range || !range[0] || !range[1]) return true;
             const publishDate = new Date(date);
             return publishDate >= range[0] && publishDate <= range[1];
-        }
-    }
+        },
+        searchAllAnnouncements() {
+            fetch('https://backend-smartiot.onrender.com/announcements')
+                .then(response => response.json())
+                .then(data => {
+                    let filteredAllAnnouncements = data.filter(announcement => {
+                        const titleMatch = this.searchObj.title === "" || announcement.title.includes(this.searchObj.title);
+                        const dateMatch = !this.searchObj.dateRange || this.isDateInRange(announcement.publishTime, this.searchObj.dateRange);
+                        return titleMatch && dateMatch;
+                    });
+                    this.$emit('search', filteredAllAnnouncements);
+                })
+                .catch(error => console.error('搜尋公告失敗：', error));
+        },
+    },
+    props:[
+        "searchTrue"
+    ]
 };
 </script>
 
@@ -55,7 +73,8 @@ export default {
             <div class="start_date">
                 <VueDatePicker v-model="searchObj.dateRange" range format="yyyy-MM-dd" style="width: 260px" />
             </div>
-            <button class="seach_list" @click="searchAnnouncements">搜尋</button>
+            <button v-if="searchTrue" class="seach_list" @click="searchAllAnnouncements">搜尋</button>
+            <button v-else class="seach_list" @click="searchAnnouncements">搜尋</button>
         </div>
     </div>
 </template>
@@ -80,14 +99,44 @@ export default {
                 padding-left: 20px;
                 padding-right: 10px;
                 font-size: 16px;
-                color: $white;
+                color: $black1;
                 background-color: $dark02;
                 border: 0;
                 outline: none;
+                line-height: 40px;
             }
 
             ::placeholder {
+                color: $black1;
+            }
+        }
+    }
+}
+
+.start_date {
+    margin-left: 20px;
+    width: 260px;
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $dark02;
+
+    .left {
+        display: flex;
+
+        .name {
+            input {
+                width: 110px;
+                height: 40px;
+                border-radius: 35px;
+                padding-left: 20px;
+                padding-right: 10px;
+                font-size: 16px;
                 color: $white;
+                background-color: $dark02;
+                color: $black1;
+                line-height: 40px;
             }
         }
 
@@ -141,7 +190,5 @@ export default {
 
 
     }
-
-
 }
 </style>

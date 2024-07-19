@@ -190,6 +190,23 @@ export default {
                     }
                 });
             }
+            if (announcement.eventType === '錯誤') {
+                Swal.fire({
+                    title: this.allLogs[index].eventType,
+                    html:`<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                            <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
+                            <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
+                            <p><strong>錯誤訊息：</strong>${announcement.detail.message}</p>
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
         }
     }
 };
@@ -201,9 +218,15 @@ export default {
         <div class="down">
             <div class="history" v-for="(data, index) in allLogs" @click="toggleContent(index)"
                 :class="{ expanded: allLogs[index].expanded }">
-
+                <div v-if="data.eventType === '錯誤'" class="box">
+                    <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
+                    <p class="id">編號:{{ data.id }}</p>
+                    <p>{{ data.detail.deviceType }}</p>
+                    <p>{{ data.detail.deviceName }}</p>
+                    <p>{{ data.detail.message }}</p>
+                    <p class="right">{{ data.eventType }}</p>
+                </div>
                 <div v-if="data.eventType === '設備開關'" class="box">
-
                     <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
                     <p class="id">編號:{{ data.id }}</p>
                     <p>{{ data.detail.deviceType }}</p>
@@ -262,7 +285,7 @@ export default {
     flex-direction: column;
     align-items: end;
     border-radius: 25px;
-    border: 1px solid black;
+    // border: 1px solid black;
 
 }
 
@@ -292,7 +315,7 @@ export default {
     overflow-y: auto;
     // border: 1px solid black;
     border-radius: 0 0 25px 25px;
-    background-color: $dark01;
+    background-color: $dark02;
     padding-top: 10px;
 
     &::-webkit-scrollbar {
@@ -305,7 +328,7 @@ export default {
     }
 
     &::-webkit-scrollbar-thumb {
-        background: $black1;
+        background: $dark03;
         border-radius: 15px;
 
     }
@@ -322,7 +345,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: $dark03;
+        background: $white;
         border-radius: 35px;
 
 
@@ -339,7 +362,7 @@ export default {
                 line-height: 30px;
                 margin-left: 23px;
                 margin-right: 25px;
-                color: $white;
+                color: $dark03;
 
             }
 
@@ -347,7 +370,7 @@ export default {
                 // font-size: 1px;
                 line-height: 30px;
                 margin-right: 18px;
-                color: $white;
+                color: $dark03;
             }
 
             .right {
@@ -355,15 +378,15 @@ export default {
                 margin-left: 8px;
                 padding-left: 28px;
                 // width: 500px;
-                color: $white;
-                border-left: 1px solid $white;
+                color: $black;
+                border-left: 1px solid $dark03;
             }
         }
 
         .date {
             display: block;
             margin-right: 30px;
-            color: $white;
+            color: $dark03;
         }
     }
 }

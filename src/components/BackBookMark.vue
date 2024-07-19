@@ -75,7 +75,7 @@ export default {
     .tabs {
         height: 100%;
         width: 233px;
-        background-color: $dark03;
+        background-color: $white;
         border-radius: 25px;
         display: flex;
         flex-direction: column;
@@ -86,15 +86,17 @@ export default {
         width: 152px;
         height: 70px;
         font-size: 23px;
-        background-color: $dark03;
-        color: $white;
+        background-color: transparent;
+        color: $dark03;
         border: none;
         outline: none;
         cursor: pointer;
         border-radius: 45px;
+        font-weight: 500;
     
         &.active {
-            background-color: $dark02;
+            background-color: $black;
+            color: $white;
         }
     }
     /* 頁籤內容 */
@@ -109,8 +111,8 @@ export default {
         height: 50px;
         border-radius: 25px;
         font-size: 18px;
-        bottom: 0;
-        left: 0;
+        top: 5px;
+        left: 5px;
         background-color:$dark01 ;
         cursor: pointer;
     }

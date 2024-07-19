@@ -50,7 +50,7 @@ export default {
 .slideThree {
     width: 69px;
     height: 34px;
-    background: $black1;
+    background: $dark03;
     position: relative;
     border-radius: 50px;
     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
@@ -58,7 +58,7 @@ export default {
 
     &:before {
         content: 'OFF';
-        color: $white;
+        color: $dark02;
         position: absolute;
         right: 9px;
         z-index: 0;
@@ -69,7 +69,7 @@ export default {
 
     &:after {
         content: 'ON';
-        color: $white;
+        color: greenyellow;
         position: absolute;
         left: 10px;
         z-index: 0;
@@ -86,8 +86,7 @@ export default {
         top: 3px;
         left: 3px;
         z-index: 1;
-        background: $white;
-        background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+        background: $dark02;
         border-radius: 50px;
         transition: all 0.4s ease;
         box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
@@ -100,6 +99,7 @@ export default {
 
         &:checked+label {
             left: 36px;
+            background-color: greenyellow;
         }
     }
 }

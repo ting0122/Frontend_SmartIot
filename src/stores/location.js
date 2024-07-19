@@ -60,7 +60,7 @@ export default defineStore("location", {
                     this.localRoomArea = data.area
                     console.log(this.localRoomArea)
                     this.searchDevice(null, null, this.localRoomArea, null)
-                    this.searchHistory(null,null,null,this.localRoomArea)
+                    this.searchHistory(null,null,null,null,this.localRoomArea)
                     console.log('搜尋房間oneRoom', this.oneRoom)
                 })
         },
@@ -274,7 +274,7 @@ export default defineStore("location", {
                     this.searchAllRoom()
                 })
         },
-        searchHistory(i,j,k,l){
+        searchHistory(i,j,k,l,m){
             const params = new URLSearchParams();
             
             if (i) {
@@ -286,11 +286,15 @@ export default defineStore("location", {
             }
             
             if (k) {
-                params.append('date', k);
+                params.append('startDate', k);
             }
             
             if (l) {
-                params.append('roomArea', l);
+                params.append('endDate', l);
+            }
+
+            if (m) {
+                params.append('roomArea', m);
             }
             fetch(`https://backend-smartiot.onrender.com/history/search?${params.toString()}`, {
                 method: "get",
@@ -318,13 +322,43 @@ export default defineStore("location", {
         getAllAnn() {
             fetch(`https://backend-smartiot.onrender.com/announcements`, {
                 method: "get",
-                body: JSON.stringify()
+                body: JSON.stringify()})},
+        //刪除公告
+        deleteAnn(i) {
+            let arr = []
+            for (let j = 0; j < i.length; j++) {
+                arr.push(i[j]);
+            }
+            fetch(`https://backend-smartiot.onrender.com/announcements`, {
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(arr)
+            })
+                // .then(res => res.json())
+                .then(data => {
+                    
+                })
+        },
+        //新增公告
+        createAnn(i,j,k) {
+            let arr = []
+            for (let x = 0; x < k.length; x++) {
+                arr.push(k[x]);
+            }
+            let obj={
+                "title":i,
+                "content":j,
+                "roomIds":arr
+            }
+            fetch(`https://backend-smartiot.onrender.com/announcements`, {
+                method: "post",
+                body: JSON.stringify(obj)
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('allAnn', data)
-                    this.allAnn = data
-                    this.allAnn = this.allAnn.reverse()
+                    
                 })
         },
     },

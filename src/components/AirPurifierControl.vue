@@ -77,26 +77,26 @@ export default {
                         <div class="time">
                             <i class="fa-regular fa-clock"></i>
                             <p>{{ operating_time.toFixed(2) }}</p>
-                            <P>小時</P>
+                            <p>小時</p>
                         </div>
                     </div>
                     <div class="fan_speed target_temp">
                         <span>風量</span>
                         <div @click="setFanSpeed('自動')" :class="{ selected: fan_speed <= 25 }">
                             <i class="fa-solid fa-a"></i>
-                            <P v-show="fan_speed <= 25">自動</P>
+                            <p v-show="fan_speed <= 25">自動</p>
                         </div>
                         <div @click="setFanSpeed('低')" :class="{ selected: fan_speed > 25 && fan_speed <= 50 }">
                             <i class="fa-solid fa-wind"> </i>
-                            <P v-show="fan_speed > 25 && fan_speed <= 50">低</P>
+                            <p v-show="fan_speed > 25 && fan_speed <= 50">低</p>
                         </div>
                         <div @click="setFanSpeed('中')" :class="{ selected: fan_speed > 50 && fan_speed <= 75 }">
                             <i class="fa-solid fa-wind"></i>
-                            <P v-show="fan_speed > 50 && fan_speed <= 75">中</P>
+                            <p v-show="fan_speed > 50 && fan_speed <= 75">中</p>
                         </div>
                         <div @click="setFanSpeed('高')" :class="{ selected: fan_speed > 75 }">
                             <i class="fa-solid fa-wind"></i>
-                            <P v-show="fan_speed > 75">高</P>
+                            <p v-show="fan_speed > 75">高</p>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@ export default {
     height: 268px;
     border-radius: 25px;
     // border: 1px solid black;
-    background-color: $dark02;
+    background-color: $black;
     display: flex;
     justify-content: space-between;
     padding-top: 13px;
@@ -131,7 +131,7 @@ export default {
         right: 24px;
         top: 15px;
 
-        ::v-deep input[type="checkbox"] {
+        :deep(input[type="checkbox"]) {
             display: none;
         }
     }
@@ -150,7 +150,7 @@ export default {
         p {
             font-size: 20px;
             margin-top: 10px;
-            color: $black;
+            color: $black1;
         }
     }
 
@@ -195,13 +195,13 @@ export default {
 
                     i {
                         font-size: 25px;
-                        color: $dark03;
+                        color: $black;
                         cursor: pointer;
                     }
 
                     p {
                         margin: 0;
-                        color: $dark03;
+                        color: $black;
                         cursor: pointer;
                     }
 

@@ -13,8 +13,8 @@ export default {
         return {
             showCreateRoom: false, // 用於控制顯示 CreateRoom 或 SearchRoom 组件
             isChecked: false,  //處理switch子元件值得同步
-            showCheckbox:false, // 控制顯示 checkbox 的狀態
-            select:[]  //儲存被選中的id
+            showCheckbox: false, // 控制顯示 checkbox 的狀態
+            select: []  //儲存被選中的id
         };
     },
     created() {
@@ -44,7 +44,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['searchRoom', 'createRoom','deleteRooms']),
+        ...mapActions(location, ['searchRoom', 'createRoom', 'deleteRooms']),
         //以下兩個用於切換新增房間及搜尋房間2個元件的顯示
         toggleCreateRoom() {
             this.showCreateRoom = true;
@@ -176,7 +176,7 @@ export default {
         }
 
         &::-webkit-scrollbar-thumb {
-            background: $black1;
+            background: $dark03;
             border-radius: 15px;
 
         }
@@ -185,78 +185,87 @@ export default {
             background: transparent;
             border-radius: 15px;
         }
-
-        .room {
-            width: 282px;
-            height: 150px;
-            background: $dark03;
-            border-radius: 25px;
-            margin: 20px 0 0 0;
-            position: relative;
-
-            .switch {
-                position: absolute;
-                right: 18px;
-                top: 15px;
-            }
-
-            p {
-                margin: 50px 20px 0 30px;
-                font-size: 16px;
-            }
-
-            .area {
-                margin: 0 20px 0 30px;
-                font-size: 20px;
-                font-weight: 600;
-                color: $black1;
-            }
-
-            .checkbox-overlay {
-                position: absolute;
-                z-index: 3;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: $white;
-                border-radius: 25px;
-
-                input[type='checkbox'] {
-                    /* 自定義 checkbox 样式 */
-                    appearance: none;
-                    width: 30px;
-                    height: 30px;
-                    border: 2px solid $white;
-                    border-radius: 3px;
-                    background-color: transparent;
-                    cursor: pointer;
-                    position: relative;
-
-                    &:checked {
-                        background-color: $dark02;
-                        /* 勾選後的背景色 */
-                    }
-
-                    &:checked::after {
-                        content: '';
-                        position: absolute;
-                        top: 4px;
-                        left: 9px;
-                        width: 6px;
-                        height: 12px;
-                        border: solid $white;
-                        border-width: 0 2px 2px 0;
-                        transform: rotate(45deg);
-                    }
-                }
-            }
-        }
     }
 
+    .room {
+        width: 282px;
+        height: 150px;
+        background: $white;
+        border-radius: 25px;
+        margin: 20px 0 0 0;
+        position: relative;
+
+        .switch {
+            position: absolute;
+            right: 18px;
+            top: 15px;
+        }
+
+        p {
+            margin: 50px 20px 0 30px;
+            font-size: 16px;
+        }
+
+        .area {
+            margin: 0 20px 0 30px;
+            font-size: 20px;
+            font-weight: 600;
+            color: $black1;
+        }
+
+        .checkbox-overlay {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $white;
+            border-radius: 25px;
+
+            input[type='checkbox'] {
+                /* 自定義 checkbox 样式 */
+                appearance: none;
+                width: 30px;
+                height: 30px;
+                border: 2px solid $white;
+                border-radius: 3px;
+                background-color: transparent;
+                cursor: pointer;
+                position: relative;
+
+                &:checked {
+                    background-color: $dark02;
+                    /* 勾選後的背景色 */
+                }
+
+                &:checked::after {
+                    content: '';
+                    position: absolute;
+                    top: 4px;
+                    left: 9px;
+                    width: 6px;
+                    height: 12px;
+                    border: solid $white;
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                }
+            }
+
+            // .area {
+            //     margin: 0 20px 0 30px;
+            //     font-size: 20px;
+            //     font-weight: 600;
+            //     color: $black1;
+            //     span{
+            //         color: $black;
+            //     }
+            // }
+        }
+    }
 }
 </style>

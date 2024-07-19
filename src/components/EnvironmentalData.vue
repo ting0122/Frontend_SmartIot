@@ -175,7 +175,7 @@ export default {
             });
 
             // 每3秒更新一次數據
-            const intervalId = setInterval(fetchData, 3000);
+            const intervalId = setInterval(fetchData, 1500);
 
             onUnmounted(() => {
                 clearInterval(intervalId);

@@ -1,9 +1,17 @@
-$dark01:#e2e2e2;
-$dark02:#c4c4c4;
-$dark03:#b0b0b0;
+// $dark01:#e2e2e2;
+// $dark02:#c4c4c4;
+// $dark03:#b0b0b0;
+// $white:#FDFDFB;
+// $black:#878787;
+// $black1:#5b5b5b;
+
+
+$dark01:#e7e6e5;
+$dark02:#d8d9d9;
+$dark03:#71767b;
 $white:#FDFDFB;
-$black:#878787;
-$black1:#5b5b5b;
+$black:#91a6b8;
+$black1:#2d2d2d;
 
 *{
     margin: 0;
@@ -68,14 +76,14 @@ h2{
     }
     .swal2-confirm {
         border-radius: 25px;
-        background-color: $dark03;
+        background-color: $black;
         height: 50px;
         margin-top: 10px;
         font-size: 18px;
     }
     .swal2-cancel {
         border-radius: 25px;
-        background-color: $dark03;
+        background-color: $black;
         height: 50px;
         margin-top: 10px;
         font-size: 18px;

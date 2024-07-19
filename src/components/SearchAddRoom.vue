@@ -32,10 +32,10 @@ export default {
 <template>
     <div class="createRoom">
             <label for=""><input type="text"  placeholder="空間名稱" v-model="this.name"></label>
-            <select name="" id="" v-model="this.area" >
+            <!-- <select name="" id="" v-model="this.area" >
                 <option value="">房間編號</option>
                 <option v-for="(item,index) in allArea" :value=item.area>{{ item.area }}</option>
-            </select>
+            </select> -->
             <select name="" id="" v-model="this.type" >
                 <option value="">空間類型</option>
                 <option value="公司">公司</option>
@@ -46,8 +46,8 @@ export default {
                 <option value="教室">教室</option>
                 <option value="其他">其他</option>
             </select>
-            <button @click="this.searchOnlyRoom(this.name,this.type,this.area,this.status)">添加接收對象</button>      
-            <button @click="this.searchOnlyRoom(this.name,this.type,this.area,this.status)">添加所有空間</button>
+            <button>添加接收對象</button>      
+            <button>添加所有空間</button>
     </div>
 </template>
 
@@ -70,7 +70,7 @@ export default {
         outline: none;
         padding-left: 13px;
         margin-left: 20px;
-        color: $white;
+        color: $black1;
     }
     input{
         width: 180px;
@@ -81,10 +81,10 @@ export default {
         background: $dark02;
         font-size: 16px;
         padding-left: 13px;
-        color: $white;
+        color: $black1;
     }
     ::placeholder {
-        color: $white;
+        color: $black1;
     }
     button{
         width: 130px;
@@ -93,7 +93,7 @@ export default {
         border: none;
         cursor: pointer;
         background: $dark02;
-        color: $white;
+        color: $black1;
         font-size: 16px;
         margin-left: 20px;
     }
