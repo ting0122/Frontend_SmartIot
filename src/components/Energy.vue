@@ -12,6 +12,8 @@ export default {
             isYearlyView: false, // 是否為年視圖
             yearlyData: null, // 年數據
             isLoading: false, // 是否加載中
+            showRoomConsumption: false, // 是否顯示房間耗電量圓餅圖
+            roomConsumptionData: [], // 存儲房間耗電量數據
         };
     },
     mounted() {
@@ -68,26 +70,41 @@ export default {
 
             const option = { // 設置圖表選項
                 title: {
-                    text: this.getChartTitle() // 獲取圖表標題
+                    text: this.getChartTitle(), // 獲取圖表標題
+                    textStyle: {
+                        fontSize: 18 // 增加標題字體大小
+                    }
                 },
                 tooltip: {
                     trigger: 'axis', // 設置提示框觸發類型
                     formatter: function (params) { // 設置提示框格式
-                        const value = params[0].value.toFixed(2); // 獲取值
+                        const value = params[0].value.toFixed(1); // 獲取值
                         if (this.showCarbonComparison) { // 如果顯示碳排放比較
                             return `${params[0].name}<br/>${value} kg CO2e`; // 返回碳排放量
                         } else {
                             return `${params[0].name}<br/>${value} kW`; // 返回電力消耗
                         }
-                    }.bind(this)
+                    }.bind(this),
+                    textStyle: {
+                        fontSize: 14 // 增加提示框字體大小
+                    }
                 },
                 xAxis: {
                     type: 'category', // 設置X軸類型
-                    data: this.getXAxisData() // 獲取X軸數據
+                    data: this.getXAxisData(), // 獲取X軸數據
+                    axisLabel: {
+                        fontSize: 14 // 增加 X 軸標籤字體大小
+                    }
                 },
                 yAxis: {
                     type: 'value', // 設置Y軸類型
-                    name: this.showCarbonComparison ? '碳排放量 (kg CO2e)' : '電力消耗 (kW)' // 獲取Y軸名稱
+                    name: this.showCarbonComparison ? '碳排放量 (kg CO2e)' : '電力消耗 (kW)', // 獲取Y軸名稱
+                    axisLabel: {
+                        fontSize: 14 // 增加 Y 軸標籤字體大小
+                    },
+                    nameTextStyle: {
+                        fontSize: 14 // 增加 Y 軸名稱字體大小
+                    }
                 },
                 series: [{
                     data: this.getSeriesData(), // 獲取數據
@@ -99,8 +116,9 @@ export default {
                         show: true, // 顯示標籤
                         position: 'top', // 設置標籤位置
                         formatter: function (params) { // 設置標籤格式
-                            return params.value.toFixed(2); // 返回值
-                        }
+                            return params.value.toFixed(1); // 返回值
+                        },
+                        fontSize: 14 // 增加數據標籤字體大小
                     }
                 }]
             };
@@ -119,8 +137,29 @@ export default {
             }
         },
         getXAxisData() {
-            if (this.showCarbonComparison) { // 如果顯示碳排放比較
-                return this.isYearlyView ? ['上個月', '本月'] : ['昨天', '今天']; // 返回X軸數據
+            if (this.showCarbonComparison) {
+                if (this.isYearlyView) {
+                    const currentDate = new Date();
+                    const currentMonth = currentDate.getMonth();
+                    const currentYear = currentDate.getFullYear();
+
+                    const lastMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+                    const lastMonthYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+
+                    const lastMonthName = new Date(lastMonthYear, lastMonth, 1).toLocaleString('zh-TW', { month: 'long' });
+                    const currentMonthName = currentDate.toLocaleString('zh-TW', { month: 'long' });
+
+                    return [lastMonthName, currentMonthName];
+                } else {
+                    const today = new Date();
+                    const yesterday = new Date(today);
+                    yesterday.setDate(yesterday.getDate() - 1);
+
+                    const todayString = today.toLocaleDateString('zh-TW', { month: 'short', day: 'numeric' });
+                    const yesterdayString = yesterday.toLocaleDateString('zh-TW', { month: 'short', day: 'numeric' });
+
+                    return [yesterdayString, todayString];
+                }
             } else {
                 return Object.keys(this.chartData);
             }
@@ -169,7 +208,90 @@ export default {
         toggleViewMode() {
             this.isYearlyView = !this.isYearlyView;
             this.fetchData();
-        }
+        },
+        async fetchRoomConsumptionData() {
+            this.isLoading = true;
+            try {
+                const year = new Date().getFullYear();
+                const month = new Date().getMonth() + 1;
+                const url = `http://localhost:8080/power/total?year=${year}&month=${month}`;
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('網絡響應不正確');
+                }
+                this.roomConsumptionData = await response.json();
+                this.initRoomConsumptionChart();
+            } catch (error) {
+                console.error('獲取房間耗電量數據時出錯：', error);
+            } finally {
+                this.isLoading = false;
+            }
+        },
+        initRoomConsumptionChart() {
+            const chartDom = document.getElementById('roomConsumptionChart');
+            if (this.chart) {
+                this.chart.dispose();
+            }
+            this.chart = echarts.init(chartDom);
+
+            const option = {
+                title: {
+                    text: '本月各房間耗電量',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 18 // 增加標題字體大小
+                    }
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function (params) {
+                        return `${params.name}: ${params.value.toFixed(1)} kW (${params.percent.toFixed(2)}%)`;
+                    },
+                    textStyle: {
+                        fontSize: 14 // 增加提示框字體大小
+                    }
+                },
+                series: [
+                    {
+                        name: '房間耗電量',
+                        type: 'pie',
+                        radius: '50%',
+                        data: this.roomConsumptionData.map(item => ({
+                            value: Number(item.consumption.toFixed(2)),
+                            name: item.roomName
+                        })),
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        },
+                        label: {
+                            formatter: '{b}: {c} 度 ({d}%)',
+                            fontSize: 14 // 增加標籤字體大小
+                        },
+                        emphasis: {
+                            label: {
+                                fontSize: 16 // 增加強調時的標籤字體大小
+                            }
+                        }
+                    }
+                ]
+            };
+
+            this.chart.setOption(option);
+        },
+        toggleRoomConsumption() {
+            this.showRoomConsumption = !this.showRoomConsumption;
+            if (this.showRoomConsumption) {
+                this.fetchRoomConsumptionData();
+            } else {
+                this.$nextTick(() => {
+                    this.initChart(); // 使用 $nextTick 確保 DOM 已更新
+                });
+            }
+        },
     },
     computed: {
         carbonDifferenceText() {
@@ -203,18 +325,34 @@ export default {
         <div v-if="isLoading" class="loading-overlay">
             <div class="loading-spinner"></div>
         </div>
-        <div id="energyChart" style="width: 100%; height: 300px;"></div>
-        <button @click="toggleCarbonComparison" :disabled="isLoading">
-            {{ showCarbonComparison ? '顯示電力消耗' : '顯示碳排比較' }}
-        </button>
-        <button @click="toggleViewMode" style="right: 150px;" :disabled="isLoading">
-            {{ isYearlyView ? '切換到月視圖' : '切換到年視圖' }}
-        </button>
-        <p v-if="showCarbonComparison" class="carbon-difference" v-html="carbonDifferenceText"></p>
-        <p v-if="isYearlyView && !showCarbonComparison" class="carbon-emission">
+        <div id="energyChart" v-show="!showRoomConsumption"></div>
+        <div id="roomConsumptionChart" v-show="showRoomConsumption"></div>
+        <div class="button-group">
+            <template v-if="!showRoomConsumption">
+                <button @click="toggleCarbonComparison" :disabled="isLoading">
+                    <i class="fas fa-exchange-alt"></i>
+                    {{ showCarbonComparison ? '顯示電力消耗' : '顯示碳排比較' }}
+                </button>
+                <button @click="toggleViewMode" :disabled="isLoading">
+                    <i class="fas fa-calendar-alt"></i>
+                    {{ isYearlyView ? '切換到月視圖' : '切換到年視圖' }}
+                </button>
+                <button @click="toggleRoomConsumption" :disabled="isLoading">
+                    <i class="fas fa-home"></i>
+                    顯示各房間耗電量
+                </button>
+            </template>
+            <button v-else @click="toggleRoomConsumption" :disabled="isLoading">
+                <i class="fas fa-chart-bar"></i>
+                返回主圖表
+            </button>
+        </div>
+        <p v-if="showCarbonComparison && !showRoomConsumption" class="carbon-difference" v-html="carbonDifferenceText">
+        </p>
+        <p v-if="isYearlyView && !showCarbonComparison && !showRoomConsumption" class="carbon-emission">
             今年總碳排量：<span class="green-text">{{ yearlyTotalCarbonEmission }}</span> 公斤
         </p>
-        <p v-if="!isYearlyView && !showCarbonComparison" class="carbon-emission">
+        <p v-if="!isYearlyView && !showCarbonComparison && !showRoomConsumption" class="carbon-emission">
             本週碳排量：<span class="green-text">{{ weeklyTotalCarbonEmission }}</span> 公斤
         </p>
     </div>
@@ -224,39 +362,72 @@ export default {
 @import '@/assets/main.scss';
 
 .stateDiv {
-    width: 100%;
-    height: 316px;
+    width: 96.8%;
+    height: 400px;
     background-color: $white;
     border-radius: 25px 25px 0 0;
     position: relative;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#energyChart,
+#roomConsumptionChart {
+    width: 100%;
+    height: 400px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 5px;
 }
 
 button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    padding: 5px 10px;
+    padding: 10px 18px;
     background-color: $dark02;
-    color: $white;
+    color: black;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-}
-
-.carbon-difference {
-    text-align: center;
-    margin-top: 10px;
+    transition: all 0.3s ease;
     font-weight: bold;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background-color: darken($dark02, 10%);
+        transform: translateY(-2px);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    i {
+        margin-right: 8px;
+        font-size: 1.1em;
+    }
 }
 
+.carbon-difference,
 .carbon-emission {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
     font-weight: bold;
+    font-size: 1.1em;
 }
 
 .green-text {
     color: #4CAF50;
+    font-weight: bold;
 }
 
 .loading-overlay {
@@ -265,20 +436,21 @@ button {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    border-radius: 25px 25px 0 0;
 }
 
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid $dark02;
-    border-top: 5px solid $white;
+    width: 60px;
+    height: 60px;
+    border: 6px solid $dark02;
+    border-top: 6px solid $white;
     border-radius: 50%;
-    animation: spin 1s linear infinite; // 設置動畫
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -289,10 +461,5 @@ button {
     100% {
         transform: rotate(360deg);
     }
-}
-
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
 }
 </style>

@@ -70,7 +70,7 @@ export default {
             const selectedNames = selectedDevices.map(device => `${device.area}-${device.name}`).join('<br>');
             Swal.fire({
                 title: '確認刪除以下區域?',
-                html: `<p>${selectedNames}<p>`, // 使用 html 属性
+                html: `<p>${selectedNames}<p>`, // 使用 html 屬性
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: '確認刪除',
@@ -116,7 +116,9 @@ export default {
 
 <template>
     <div class="outarr">
-        <Energy />
+        <div class="energy-container">
+            <Energy />
+        </div>
         <!-- 根據 showCreateRoom 的值決定顯示 CreateRoom 或 SearchRoom 组件 -->
         <CreateRoom v-if="showCreateRoom" />
         <SearchRoom v-else />
@@ -150,20 +152,25 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: stretch;
     border-radius: 25px;
-    // border: 1px solid black;
     background-color: $dark02;
 
-    .rooms {
+    .energy-container {
         width: 100%;
-        height: 609px;
+        height: 316px;
+        margin-bottom: 20px;
+    }
+
+    .rooms {
+        flex: 1;
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
         overflow-y: auto;
-        // background-color: $dark01;
-        // border: 1px solid black;
+        background-color: $dark01;
+        border: 1px solid black;
 
         &::-webkit-scrollbar {
             width: 10px;
