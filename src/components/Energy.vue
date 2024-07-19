@@ -119,8 +119,29 @@ export default {
             }
         },
         getXAxisData() {
-            if (this.showCarbonComparison) { // 如果顯示碳排放比較
-                return this.isYearlyView ? ['上個月', '本月'] : ['昨天', '今天']; // 返回X軸數據
+            if (this.showCarbonComparison) {
+                if (this.isYearlyView) {
+                    const currentDate = new Date();
+                    const currentMonth = currentDate.getMonth();
+                    const currentYear = currentDate.getFullYear();
+
+                    const lastMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+                    const lastMonthYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+
+                    const lastMonthName = new Date(lastMonthYear, lastMonth, 1).toLocaleString('zh-TW', { month: 'long' });
+                    const currentMonthName = currentDate.toLocaleString('zh-TW', { month: 'long' });
+
+                    return [lastMonthName, currentMonthName];
+                } else {
+                    const today = new Date();
+                    const yesterday = new Date(today);
+                    yesterday.setDate(yesterday.getDate() - 1);
+
+                    const todayString = today.toLocaleDateString('zh-TW', { month: 'short', day: 'numeric' });
+                    const yesterdayString = yesterday.toLocaleDateString('zh-TW', { month: 'short', day: 'numeric' });
+
+                    return [yesterdayString, todayString];
+                }
             } else {
                 return Object.keys(this.chartData);
             }
