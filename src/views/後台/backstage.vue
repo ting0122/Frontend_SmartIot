@@ -3,7 +3,7 @@
 import BackBookMark from '@/components/BackBookMark.vue';
 import BackSpaceManagement from '@/components/後台內頁/BackSpaceManagement.vue';
 import DeviceManagement from '@/components/後台內頁/DeviceManagement.vue';
-import HistoricalRecord from '@/components/後台內頁/HistoricalRecord.vue';
+// import HistoricalRecord from '@/components/後台內頁/HistoricalRecord.vue';
 import ErrorLog from '@/components/後台內頁/ErrorLog.vue';
 import SendAnnouncement from '@/components/後台內頁/SendAnnouncement.vue';
 export default {
@@ -11,15 +11,15 @@ export default {
         return {
             //這個頁面vue想要幾個內頁
             tabsArray: {
-                buttonName: ["空間管理", "設備管理", "歷史記錄", "錯誤紀錄", "公告列表"],
+                buttonName: ["空間管理", "設備管理", "歷史記錄",  "公告列表"],
                 //tab1、2、3是為了標記插槽名稱
-                tabsNumber: ['tab1', 'tab2', 'tab3', 'tab4','tab5']
+                tabsNumber: ['tab1', 'tab2', 'tab3', 'tab4']
             }
 
         };
     },
     created() {
-        
+    
     },
     mounted() {
 
@@ -31,7 +31,7 @@ export default {
         BackBookMark,  //後台頁籤
         BackSpaceManagement,  //空間管理
         DeviceManagement,  //設備管理
-        HistoricalRecord,  //歷史紀錄
+        
         ErrorLog,  //錯誤紀錄
         SendAnnouncement,  //發布公告
     },
@@ -61,12 +61,9 @@ export default {
                     <DeviceManagement />
                 </template>
                 <template class="tab" v-slot:tab3>
-                    <HistoricalRecord />
-                </template>
-                <template class="tab" v-slot:tab4>
                     <ErrorLog/>
                 </template>
-                <template class="tab" v-slot:tab5>
+                <template class="tab" v-slot:tab4>
                     <SendAnnouncement/>
                 </template>
                 <template #re>

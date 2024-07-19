@@ -1,32 +1,39 @@
 <script>
-
 export default {
     data() {
         return {
             showbox: false, // 控制顯示搜尋或刪除的狀態
-            createObj: {
+            searchObj: {
                 name: "",
-                area: "",
+                status: "",
                 type: ""
             }
         };
     },
-    created() {
-
+    watch: {
+        searchObj: {
+            handler() {
+                this.searchDevices();
+            },
+            deep: true
+        }
     },
-    mounted() {
-
-    },
-    computed: {
-
-    },
-    components: {
-
-    },
-
     methods: {
-        showsearch(){
-            this.showbox=!this.showbox;
+        searchDevices() {
+            fetch('http://localhost:8080/rooms/1')
+                .then(response => response.json())
+                .then(data => {
+                    let filteredDevices = data.devices.filter(device => {
+                        return (this.searchObj.name === "" || device.name.includes(this.searchObj.name)) &&
+                            (this.searchObj.status === "" || device.status === (this.searchObj.status === "使用中")) &&
+                            (this.searchObj.type === "" || device.type === this.searchObj.type);
+                    });
+                    this.$emit('search-results', filteredDevices);
+                })
+                .catch(error => console.error('搜尋設備失敗：', error));
+        },
+        showsearch() {
+            this.showbox = !this.showbox;
         }
     }
 };
@@ -34,32 +41,26 @@ export default {
 
 <template>
     <div class="createRoom">
-        <input type="text" v-model="this.createObj.area" placeholder="設備名稱">
-        <select name="" id="" v-model="this.createObj.type" >
-            <option value="">設備狀態</option>
+        <input type="text" v-model="searchObj.name" placeholder="設備名稱">
+        <select v-model="searchObj.status">
+            <option value="">全部</option>
             <option value="使用中">使用中</option>
             <option value="閒置中">閒置中</option>
         </select>
 
-        <slot name="roomid">
-            <select name="" id="" v-model="this.createObj.type" >
-                <option value="">空間編號</option>
-                <option value="使用中">601</option>
-                <option value="閒置中">602</option>
-            </select>
-        </slot>
+        <slot name="roomid"></slot>
 
-        <select name="" id="" v-model="this.createObj.type" >
+        <select v-model="searchObj.type">
             <option value="">設備類型</option>
-            <option value="公司">冷氣</option>
-            <option value="會議室">電燈</option>
-            <option value="公共區域">空氣清淨機</option>
-            <option value="機房">除濕機</option>
+            <option value="冷氣機">冷氣</option>
+            <option value="燈">電燈</option>
+            <option value="空氣清淨機">空氣清淨機</option>
+            <option value="除濕機">除濕機</option>
         </select>
-        <button @click="this.createRoom()">搜尋</button>
+        <button @click="searchDevices">搜尋</button>
         <div class="createAndDeleteButton">
-            <button @click="showsearch" :class="{chick:!showbox}"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button @click="showsearch" :class="{chick:showbox}"><i class="fa-solid fa-trash-can"></i></button>
+            <button @click="showsearch" :class="{ chick: !showbox }"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button @click="showsearch" :class="{ chick: showbox }"><i class="fa-solid fa-trash-can"></i></button>
         </div>
     </div>
 </template>
@@ -74,8 +75,8 @@ export default {
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    
-    select{
+
+    select {
         width: 125px;
         height: 40px;
         font-size: 16px;
@@ -86,9 +87,10 @@ export default {
         padding-left: 20px;
         margin-left: 20px;
         color: $dark03;
-        
+
     }
-    input{
+
+    input {
         width: 180px;
         height: 40px;
         border-radius: 35px;
@@ -106,7 +108,8 @@ export default {
     ::placeholder {
         color: $dark03;
     }
-    button{
+
+    button {
         width: 88px;
         height: 40px;
         border-radius: 35px;
@@ -119,13 +122,14 @@ export default {
         margin-left: 20px;
         padding: 0;
     }
-    .createAndDeleteButton {  
+
+    .createAndDeleteButton {
         position: absolute;
-        right: 0;   
+        right: 0;
         height: 40px;
         display: flex;
         // margin-right: 36px;
-    
+
         button {
             height: 40px;
             width: 40px;
@@ -137,7 +141,8 @@ export default {
             font-size: 20px;
             line-height: 40px;
         }
-        .chick{
+
+        .chick {
             color: $white;
             background: $black;
         }

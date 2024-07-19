@@ -21,7 +21,7 @@ export default {
         };
     },
     created() {
-        console.log(this.createRoomDevice)
+
     },
     mounted() {
 
@@ -47,7 +47,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['searchDevice', 'deviceStatus','deleteDevice']),
+        ...mapActions(location, ['searchDevice', 'deviceStatus', 'deleteDevice']),
         //以下兩個用於切換新增設備及搜尋設備2個元件的顯示
         toggleCreateDevice() {
             this.showCreateRoom = true;
@@ -85,7 +85,7 @@ export default {
                 if (result.isConfirmed) {
                     // 在這裡處理確認刪除的邏輯
                     // this.deviceArr = this.deviceArr.filter(device => !this.select.includes(device.id));
-                    this.deleteDevice(this.select,true)
+                    this.deleteDevice(this.select, true)
                     this.select = [];
                     Swal.fire({
                         title: '已刪除',

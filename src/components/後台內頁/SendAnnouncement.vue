@@ -13,40 +13,69 @@ import AnnouncementSearch from '@/components/AnnouncementSearch.vue';
 export default {
     data() {
         return {
-            annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
-            sendroomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"},{area:608,roomname:"小兵公司"},{area:609,roomname:"兵公司"},{area:610,roomname:"小小司"},{area:611,roomname:"兵公"},{area:612,roomname:"小小兵公"},{area:613,roomname:"小小"},{area:614,roomname:"司"}],
-            addSendRoomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
+            // annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
+            // sendroomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
+            addSendRoomARR: [{ area: 601, roomname: "南哥公司" }, { area: 602, roomname: "tta公司" }, { area: 603, roomname: "迪卡農公司" }, { area: 604, roomname: "愛迪達公司" }, { area: 605, roomname: "天方夜譚公司" }, { area: 606, roomname: "鵝你媽媽公司" }, { area: 607, roomname: "小小兵公司" }],
             showUseAdd: false, // 使用新增公告時切換搜尋欄位用
             showCheckbox: false, // 控制顯示 checkbox 的狀態
-            select:[], // 儲存被選中的 id
-            announcement:""  //發布公告的內容
+            select: [], // 儲存被選中的 id
+            announcement: "",  //發布公告的內容
+            allAnn:[],
+            searchTrue:true
         };
     },
     created() {
-        
+        // this.getAllAnn()
     },
     mounted() {
-
+        this.fetchAnnouncements();
     },
     computed: {
-        ...mapState(location, ['deviceArr']),
+        // ...mapState(location, ['allAnn']),
     },
     components: {
         CreateAndDeleteButton,
         SearchAddRoom,
         AnnouncementSearch,
 
-    
+
     },
 
     methods: {
+        ...mapActions(location, ['getAllAnn','deleteAnn','createAnn']),
+        async fetchAnnouncements() {
+            try {
+                const response = await fetch('http://localhost:8080/announcements', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': '*/*'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+                }
+                const data = await response.json();
+                // 對公告按發布時間進行排序，最新的在前
+                this.allAnn = data.sort((a, b) => {
+                    const dateA = new Date(a.publishTime);
+                    const dateB = new Date(b.publishTime);
+                    return dateB - dateA;
+                }).map(item => ({
+                    ...item,
+                    expanded: false,
+                    time: item.publishTime
+                }));
+            } catch (error) {
+                console.error('獲取公告時出錯：', error);
+            }
+        },
         //點擊切換expanded的ture/false屬性
         toggleContent(index) {
-        this.annArr[index].expanded = !this.annArr[index].expanded;
+            this.allAnn[index].expanded = !this.allAnn[index].expanded;
         },
         // 控制顯示刪除 checkbox 的狀態
         toggleCheckbox() {
-            this.annArr.forEach(ann => {
+            this.allAnn.forEach(ann => {
                 ann.expanded = false;
             });
             this.showUseAdd = false;
@@ -68,11 +97,11 @@ export default {
                 });
                 return;
             }
-            const selectedDevices = this.annArr.filter(ann => this.select.includes(ann.id));
-            const selectedNames = selectedDevices.map(ann => `${ann.title}-${ann.time}`).join('<br>'); 
+            const selectedDevices = this.allAnn.filter(ann => this.select.includes(ann.id));
+            const selectedNames = selectedDevices.map(ann => `${ann.title}-${ann.time}`).join('<br>');
             Swal.fire({
                 title: '確認刪除以下公告?',
-                html:  `<p>${selectedNames}<p>`, // 使用 html 属性
+                html: `<p>${selectedNames}<p>`, // 使用 html 属性
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: '確認刪除',
@@ -83,12 +112,14 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // 在這裡處理確認刪除的邏輯
-                    this.annArr = this.annArr.filter(ann => !this.select.includes(ann.id));
+                    // this.allAnn = this.allAnn.filter(ann => !this.select.includes(ann.id));
+                    this.deleteAnn(this.select)
+                    this.fetchAnnouncements();
                     this.select = [];
                     Swal.fire({
-                        title:'已刪除',
-                        text:'所選公告已被刪除',
-                        icon:'success',
+                        title: '已刪除',
+                        text: '所選公告已被刪除',
+                        icon: 'success',
                         customClass: {
                             popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
                         },
@@ -119,27 +150,36 @@ export default {
         showSearchAnnouncement() {
             this.showCreateRoom = false;
         },
-        handleSearchClick(){
+        handleSearchClick() {
             this.showCheckbox = false;
-            this.showUseAdd=false;
-        }
-        
-    },
-  
+            this.showUseAdd = false;
+        },
+        handleSearchResults(filteredAllAnnouncements) {
+            this.allAnn = filteredAllAnnouncements.map(item => ({
+                ...item,
+                expanded: false,
+                time: item.publishTime
+            }));
+        },
+    }
 };
 </script>
 
 <template>
     <div class="outarr">
         <div class="announcementSearch">
-            <SearchAddRoom v-if="this.showUseAdd"/>
-            <AnnouncementSearch v-else/>
+            <SearchAddRoom v-if="this.showUseAdd" />
+            <AnnouncementSearch v-else @search="handleSearchResults" :searchTrue="searchTrue"/>
             <div class="button">
-                <button @click="handleSearchClick" :class="{chick:!showCheckbox&&!showUseAdd}"><i class="fa-solid fa-magnifying-glass" ></i></button>
-                <button @click="toggleCheckbox" :class="{chick:showCheckbox}"><i class="fa-solid fa-trash-can" ></i></button>
-                <button @click="showAddAnnouncement" :class="{chick:showUseAdd}"><i class="fa-solid fa-circle-plus" ></i></button>
+                <button @click="handleSearchClick" :class="{ chick: !showCheckbox && !showUseAdd }"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <button @click="toggleCheckbox" :class="{ chick: showCheckbox }"><i
+                        class="fa-solid fa-trash-can"></i></button>
+                <button @click="showAddAnnouncement" :class="{ chick: showUseAdd }"><i
+                        class="fa-solid fa-circle-plus"></i></button>
             </div>
         </div>
+        <!-- 公告發送房間 選擇加入此陣列 -->
         <div class="addSendRoomARR" v-if="this.showUseAdd">
             <p class="t">公告發送房間</p>
             <div class="outarea">
@@ -153,7 +193,7 @@ export default {
             <br>
             <div class="in">
                 <input type="text" class="title">
-                <button class="send">發送公告</button>
+                <button class="send" @click="createAnn()">發送公告</button>
             </div>
             <br>
             <span>公告內容</span>
@@ -163,22 +203,22 @@ export default {
         </div>
         <div class="announcementListArea" v-else>
             <div class="list">
-                <div class="content" v-for="(data, index) in annArr" :key="index" @click="toggleContent(index)"
-                :class="{ expanded: annArr[index].expanded }">
+                <div class="content" v-for="(data, index) in allAnn" :key="index" @click="toggleContent(index)"
+                    :class="{ expanded: allAnn[index].expanded }">
                     <div class="Modify"></div>
                     <div class="up">
                         <span>{{ data.title }}</span>
                         <p class="date">{{ data.time }}</p>
                     </div>
-                    <p>{{ data.content}}</p>
+                    <p>{{ data.content }}</p>
                     <div class="sendrooms">
                         <p class="t">公告發送房間</p>
-                        <div class="sendroom" v-for="(room, index) in sendroomARR" :key="index">
-                            <p>{{ room.area }}-{{ room.roomname }}</p>
+                        <div class="sendroom" v-for="(room, index) in data.roomInfo" :key="index">
+                            <p>{{ room.area }}-{{ room.name }}</p>
                         </div>
                     </div>
                     <div class="checkbox-overlay" v-if="showCheckbox" @click="addToSelect(data.id)">
-                        <input type="checkbox" :checked="select.includes(data.id)"/>
+                        <input type="checkbox" :checked="select.includes(data.id)" />
                     </div>
                 </div>
             </div>
@@ -198,7 +238,8 @@ export default {
     border-radius: 25px;
     // border: 1px solid black;
     background-color: $dark02;
-    .announcementSearch{
+
+    .announcementSearch {
         display: flex;
         justify-content: space-between;
         width: 1078px;
@@ -208,6 +249,7 @@ export default {
         padding-top: 40px;
         padding-left: 80px;
         padding-right: 80px;
+
         button {
             height: 45px;
             width: 45px;
@@ -219,41 +261,46 @@ export default {
             font-size: 20px;
             line-height: 45px;
             margin-top: 12px;
-            margin-left: 20px; 
+            margin-left: 20px;
             cursor: pointer;
         }
-        .chick{
+
+        .chick {
             color: $white;
             background: $black;
         }
-    }  
+    }
+
     .text {
         font-size: 20px;
         color: $white;
         padding-left: 10px;
         padding-bottom: 6px
     }
-    .addSendRoomARR{
-        width:1100px;
+
+    .addSendRoomARR {
+        width: 1100px;
         margin: 0 auto;
         margin-top: 20px;
-     
+
         padding-top: 40px;
         position: relative;
-        
-        .t{
+
+        .t {
             margin: 0;
             position: absolute;
             left: 15px;
             top: 8px;
             font-size: 18px;
-        } 
-        .outarea{
+        }
+
+        .outarea {
             width: 100%;
             height: 170px;
             display: flex;
             flex-wrap: wrap;
             overflow-y: auto;
+
             &::-webkit-scrollbar {
                 width: 12px;
             }
@@ -273,7 +320,8 @@ export default {
                 border-radius: 15px;
                 width: 957px;
             }
-            .sendroom{
+
+            .sendroom {
                 padding: 0 10px;
                 margin-top: 10px;
                 margin-right: 20px;
@@ -281,26 +329,30 @@ export default {
                 height: 40px;
                 border-radius: 20px;
                 background-color: $white;
-                p{
+
+                p {
                     margin: 0;
                     line-height: 40px;
-                    margin:0 10px ;
+                    margin: 0 10px;
                 }
-                            
+
             }
-        }                 
+        }
     }
-    .announcementAddArea{
+
+    .announcementAddArea {
         border-radius: 25px;
         width: 1060px;
         height: 483px;
         border: 1px solid $white;
         padding: 20px 20px 30px 20px;
         margin: 20px auto 40px auto;
-        span{
+
+        span {
             font-size: 18px;
         }
-        .in{
+
+        .in {
             width: 1020px;
             height: 40px;
             display: block;
@@ -308,32 +360,37 @@ export default {
             display: flex;
             justify-content: space-between;
             margin-top: 10px;
-            input{
+
+            input {
                 background-color: transparent;
                 background-color: $white;
                 outline: none;
                 border-width: 0;
                 padding-left: 20px;
             }
-            .title{
+
+            .title {
                 width: 860px;
                 height: 100%;
                 font-size: 18px;
                 border-radius: 30px;
             }
-            button{
+
+            button {
                 width: 120px;
                 height: 100%;
                 font-size: 18px;
                 border-radius: 30px;
                 cursor: pointer;
             }
-            .chick{
+
+            .chick {
                 color: $white;
                 background: $black;
             }
         }
-        textarea{
+
+        textarea {
             display: block;
             resize: none;
             outline: none;
@@ -347,9 +404,10 @@ export default {
             margin-top: 10px;
             border-radius: 20px;
         }
-        
+
     }
-    .announcementListArea{
+
+    .announcementListArea {
         border-radius: 25px;
         width: 1100px;
         height: 700px;
@@ -359,34 +417,37 @@ export default {
         justify-content: space-between;
         padding-top: 10px;
         margin: 50px auto;
-        h2{
+
+        h2 {
             margin: 12px 0 0 30px;
         }
-        .list{
+
+        .list {
             flex-wrap: nowrap;
             overflow-y: auto;
-            overflow-x:hidden;
+            overflow-x: hidden;
+
             &::-webkit-scrollbar {
                 width: 10px;
             }
-    
+
             &::-webkit-scrollbar-button {
                 background: transparent;
             }
-    
+
             &::-webkit-scrollbar-thumb {
                 background: $dark03;
                 border-radius: 15px;
-    
+
             }
-    
+
             &::-webkit-scrollbar-track {
                 background: transparent;
                 border-radius: 15px;
                 width: 957px;
             }
-    
-            .content{
+
+            .content {
                 position: relative;
                 width: 1000px;
                 border-radius: 20px;
@@ -395,14 +456,18 @@ export default {
                 overflow-y: hidden;
                 background-color: $white;
                 margin: 10px 20px;
-                flex: 0 0 auto; /* 确保每个项目不会缩小并且保持其内容的宽度 */
-                margin-top: 10px; /* 可选的间距 */
+                flex: 0 0 auto;
+                /* 确保每个项目不会缩小并且保持其内容的宽度 */
+                margin-top: 10px;
+                /* 可选的间距 */
                 //以下為點擊個別公告會展開的參數
                 cursor: pointer;
                 transition: max-height 1s ease;
                 overflow: hidden;
-                max-height: 75px; /* 初始高度，取决于你希望显示的截断内容的高度 */
-                .Modify{
+                max-height: 75px;
+
+                /* 初始高度，取决于你希望显示的截断内容的高度 */
+                .Modify {
                     position: absolute;
                     z-index: 3;
                     left: 0;
@@ -413,31 +478,38 @@ export default {
                     // background-color:aqua;
                     border-radius: 0 0 20px 20px;
                 }
+
                 &.expanded {
-                    max-height: 500px; /* 展开后的高度，可以根据内容长度调整 */
+                    max-height: 500px;
+                    /* 展开后的高度，可以根据内容长度调整 */
                 }
-                .date{
+
+                .date {
                     margin: 0;
                 }
-                .up{
+
+                .up {
                     display: flex;
                     justify-content: space-between;
                     padding-right: 42px;
                 }
-                span{
+
+                span {
                     font-size: 18px;
                     font-weight: 600;
                     margin-left: 30px;
                     color: $dark03;
                 }
-                p{
+
+                p {
                     margin-top: 5px;
                     font-size: 16px;
                     margin-left: 30px;
                     margin-right: 30px;
                     color: $dark03;
                 }
-                .sendrooms{
+
+                .sendrooms {
                     width: 950px;
                     margin: 0 auto;
                     margin-top: 30px;
@@ -447,14 +519,16 @@ export default {
                     display: flex;
                     flex-wrap: wrap;
                     position: relative;
-                    .t{
+
+                    .t {
                         margin: 0;
                         position: absolute;
                         left: 3px;
                         top: 13px;
                         color: $dark03;
                     }
-                    .sendroom{
+
+                    .sendroom {
                         padding: 0 10px;
                         margin-top: 10px;
                         margin-right: 10px;
@@ -462,15 +536,17 @@ export default {
                         height: 40px;
                         border-radius: 20px;
                         background-color: $dark01;
-                        p{
+
+                        p {
                             margin: 0;
                             line-height: 40px;
-                            margin:0 10px ;
+                            margin: 0 10px;
                             color: $dark03;
                         }
-                        
+
                     }
                 }
+
                 .checkbox-overlay {
                     position: absolute;
                     z-index: 3;
@@ -494,9 +570,12 @@ export default {
                         background-color: transparent;
                         cursor: pointer;
                         position: relative;
+
                         &:checked {
-                            background-color:$black; /* 勾選後的背景色 */
+                            background-color: $black;
+                            /* 勾選後的背景色 */
                         }
+
                         &:checked::after {
                             content: '';
                             position: absolute;
@@ -514,6 +593,4 @@ export default {
         }
     }
 }
-
-
 </style>

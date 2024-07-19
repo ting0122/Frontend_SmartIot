@@ -1,24 +1,26 @@
 <script>
 import location from '@/stores/location';
 import { mapState, mapActions } from 'pinia';
+//sweetalert2提示窗套件
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
             name: "",
             type: "",
             area: "",
-            
+
 
         };
     },
     created() {
-        
+
     },
     mounted() {
 
     },
     computed: {
-        ...mapState(location, ['localRoomId', 'createRoomDevice']),
+        ...mapState(location, ['localRoomId', 'createRoomDevice', 'allArea']),
     },
     components: {
 
@@ -26,6 +28,53 @@ export default {
 
     methods: {
         ...mapActions(location, ['deviceStatus', 'createRoomDeviceSearch']),
+        verify() {
+            if (this.name == "" || this.type == "") {
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>請輸入設備類型、設備名稱</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+                return
+            }
+            this.deviceStatus(null, this.type, this.name, 0, this.localRoomId, true)
+            Swal.fire({
+                title: "新增成功",
+                // text: "That thing is still around?",
+                icon: "success"
+            });
+        },
+        verifyX() {
+            if (this.name == "" || this.type == "") {
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>請輸入設備類型、設備名稱</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+                return
+            }
+            this.deviceStatus(null, this.type, this.name, 0, this.createRoomDevice[0].id, false)
+            Swal.fire({
+                title: "新增成功",
+                // text: "That thing is still around?",
+                icon: "success"
+            });
+        },
+
     },
     props: {
         createRoomDeviceControl: {
@@ -49,18 +98,12 @@ export default {
         <slot name="roomid">
             <select name="" id="" v-model="this.area" @change="createRoomDeviceSearch(null, null, this.area, null)">
                 <option value="">空間編號</option>
-                <option value="601">601</option>
-                <option value="601">602</option>
-                <option value="房間100號">100</option>
-                <option value="房間101號">101</option>
-                <option value="房間103號">103</option>
-                <option value="房間106號">106</option>
+                <option v-for="(item, index) in allArea" :value=item.area>{{ item.area }}</option>
+
             </select>
         </slot>
-        <button v-if="this.createRoomDeviceControl"
-            @click="this.deviceStatus(null, this.type, this.name, 0, this.localRoomId,true)">新增</button>
-        <button v-else
-            @click="this.deviceStatus(null, this.type, this.name, 0, this.createRoomDevice[0].id,false)">新增</button>
+        <button v-if="this.createRoomDeviceControl" @click="verify">新增</button>
+        <button v-else @click="verifyX">新增</button>
     </div>
 </template>
 

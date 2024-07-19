@@ -7,7 +7,7 @@ export default {
     data() {
         return {
             tabsArray: {
-                buttonName: ["設備管理", "歷史記錄", "錯誤紀錄"],
+                buttonName: ["設備管理", "歷史記錄"],
                 //tab1、2、3是為了標記插槽名稱
                 tabsNumber: ['tab1', 'tab2', 'tab3']
             }
@@ -43,9 +43,6 @@ export default {
                     <RoomFront/>
                 </template>
                 <template  v-slot:tab2>
-                    <RoomHistoricalRecord/>
-                </template>
-                <template  v-slot:tab3>
                     <RoomErrorLog/>
                 </template>
             

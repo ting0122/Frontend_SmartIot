@@ -85,7 +85,7 @@ export default {
                 if (result.isConfirmed) {
                     // 在這裡處理確認刪除的邏輯
                     // this.deviceArr = this.deviceArr.filter(device => !this.select.includes(device.id));
-                    this.deleteDevice(this.select,falses)
+                    this.deleteDevice(this.select,false)
                     this.select = [];
                     Swal.fire({
                         title:'已刪除',

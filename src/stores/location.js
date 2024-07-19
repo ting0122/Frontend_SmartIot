@@ -6,11 +6,13 @@ export default defineStore("location", {
         deviceArr: [],
         roomArr: [],
         dataArr: [],
-        createRoomDevice:[],
+        createRoomDevice: [],
         oneRoom: {},
         localRoomId: null,
         localRoomArea: "",
-        allLogs:[]
+        allLogs: [],
+        allArea: [],
+        allAnn:[]
 
 
     }),
@@ -37,6 +39,7 @@ export default defineStore("location", {
                 .then(data => {
                     console.log('搜尋房間data', data)
                     this.roomArr = data
+                    this.allArea = data
                     console.log('搜尋房間roomArr', this.roomArr)
                 })
         },
@@ -57,6 +60,7 @@ export default defineStore("location", {
                     this.localRoomArea = data.area
                     console.log(this.localRoomArea)
                     this.searchDevice(null, null, this.localRoomArea, null)
+                    this.searchHistory(null,null,null,null,this.localRoomArea)
                     console.log('搜尋房間oneRoom', this.oneRoom)
                 })
         },
@@ -96,11 +100,11 @@ export default defineStore("location", {
         //建立房間
         createRoom(i, j, k, l, m) {
             let obj = {
-                id:i,
+                id: i,
                 name: j,
                 area: k,
                 type: l,
-                status:m
+                status: m
             }
             fetch("http://localhost:8080/rooms", {
                 method: "post",
@@ -113,7 +117,7 @@ export default defineStore("location", {
                 .then(data => {
                     console.log(data)
                     this.searchAllRoom()
-                    this.searchDevice(null, null, null, null,false)
+                    this.searchDevice(null, null, null, null, false)
                 })
         },
         //新增/修改設備狀態或欄位
@@ -135,10 +139,10 @@ export default defineStore("location", {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    if(judge){
+                    if (judge) {
                         this.searchRoom(this.localRoomId)
-                    }else{
-                        this.searchDevice(null, null, null, null,false)
+                    } else {
+                        this.searchDevice(null, null, null, null, false)
                         this.searchAllRoom()
                     }
                 })
@@ -177,8 +181,8 @@ export default defineStore("location", {
         },
         //搜尋設備
         searchDevice(i, j, k, l, judge = false) {
-            
-            
+
+
             if (judge) {
                 k = this.localRoomArea;
             }
@@ -214,12 +218,12 @@ export default defineStore("location", {
                 })
         },
         //刪除設備
-        deleteDevice(i,judge = false){
+        deleteDevice(i, judge = false) {
             let arr = []
-            for( let j = 0 ; j < i.length ; j++){
+            for (let j = 0; j < i.length; j++) {
                 arr.push(i[j]);
             }
-            
+
             fetch("http://localhost:8080/devices", {
                 method: "delete",
                 headers: {
@@ -229,12 +233,65 @@ export default defineStore("location", {
             })
                 // .then(res => res.json())
                 .then(data => {
-                    if(judge){
+                    if (judge) {
                         this.searchDevice(null, null, this.localRoomArea, null)
-                    }else{
-                        this.searchDevice(null, null, null, null,false)
+                    } else {
+                        this.searchDevice(null, null, null, null, false)
                     }
-                    
+
+                })
+        },
+        //刪除設備
+        deleteRooms(i) {
+            let arr = []
+            for (let j = 0; j < i.length; j++) {
+                arr.push(i[j]);
+            }
+
+            fetch("http://localhost:8080/rooms", {
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(arr),
+            })
+                // .then(res => res.json())
+                .then(data => {
+                    this.searchAllRoom()
+                })
+        },
+        //搜尋歷史紀錄
+        searchHistory(i,j,k,l,m){
+            const params = new URLSearchParams();
+            
+            if (i) {
+                params.append('deviceName', i);
+            }
+            
+            if (j) {
+                params.append('deviceType', j);
+            }
+            
+            if (k) {
+                params.append('startDate', k);
+            }
+            
+            if (l) {
+                params.append('endDate', l);
+            }
+
+            if (m) {
+                params.append('roomArea', m);
+            }
+            fetch(`http://localhost:8080/history/search?${params.toString()}`, {
+                method: "get",
+                body: JSON.stringify()
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('allLog', data)
+                    this.allLogs = data
+                    this.allLogs = this.allLogs.reverse()
                 })
         },
         getAllLogs() {
@@ -244,11 +301,50 @@ export default defineStore("location", {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('allLog',data)
+                    console.log('allLog', data)
                     this.allLogs = data
+                    this.allLogs = this.allLogs.reverse()
+                })
+        },
+        //刪除公告
+        deleteAnn(i) {
+            let arr = []
+            for (let j = 0; j < i.length; j++) {
+                arr.push(i[j]);
+            }
+            fetch(`http://localhost:8080/announcements`, {
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(arr)
+            })
+                // .then(res => res.json())
+                .then(data => {
+                    
+                })
+        },
+        //新增公告
+        createAnn(i,j,k) {
+            let arr = []
+            for (let x = 0; x < k.length; x++) {
+                arr.push(k[x]);
+            }
+            let obj={
+                "title":i,
+                "content":j,
+                "roomIds":arr
+            }
+            fetch(`http://localhost:8080/announcements`, {
+                method: "post",
+                body: JSON.stringify(obj)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    
                 })
         },
     },
-    
+
 
 });

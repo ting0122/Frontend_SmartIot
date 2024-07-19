@@ -31,6 +31,11 @@ export default {
         },
         updateStatus(status) {
             this.status = status;
+            if (status) {
+                this.brightness = 100;
+            } else {
+                this.brightness = 0;
+            }
             this.updateLights();
         }
     },
@@ -110,7 +115,7 @@ export default {
         right: 24px;
         top: 15px;
 
-        ::v-deep input[type="checkbox"] {
+        :deep(input[type="checkbox"]) {
             display: none;
         }
     }

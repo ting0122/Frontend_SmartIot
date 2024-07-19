@@ -4,7 +4,7 @@ import AirPurifierControl from '@/components/AirPurifierControl.vue';
 import Announcement from '@/components/Announcement.vue';
 import DehumidifierControl from '@/components/DehumidifierControl.vue';
 import DeviceCell from '@/components/DeviceCell.vue';
-import ElectricityConsumptionData from '@/components/ElectricityConsumptionData.vue';
+import EnvironmentalData from '@/components/EnvironmentalData.vue';
 import EnvironmentalDataDisplay from '@/components/EnvironmentalDataDisplay.vue';
 import lampControl from '@/components/lampControl.vue';
 
@@ -22,7 +22,7 @@ export default {
     },
     components: {
         Announcement,  //公告元件
-        ElectricityConsumptionData,  //能源消耗
+        EnvironmentalData,  //環境數據曲線圖
         EnvironmentalDataDisplay,  //即時顯示環境數據
         DeviceCell,  //啟動中設備顯示元件
         ACcontrol,   //冷氣控制元件
@@ -237,6 +237,9 @@ export default {
             @update-air-purifiers="updateAirPurifiers" @update-dehumidifiers="updateDehumidifiers" />
         <ElectricityConsumptionData/>
     </div>
+    <div class="right">
+        <EnvironmentalData />
+    </div>
     <div class="middle">
         <EnvironmentalDataDisplay />
     </div>
@@ -253,6 +256,15 @@ export default {
     justify-content: space-between;
     height: 40%;
     padding: 33px 50px 19px 50px;
+    position: relative; // 添加相對定位
+}
+
+.right {
+    position: absolute;
+    left: 605px;
+    top: 32px;
+    width: 300px;
+    height: 270px;
 }
 
 .middle {

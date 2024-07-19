@@ -14,7 +14,7 @@ export default {
             status: false,
             current_humidity: 0.0,
             target_humidity: 55.0,
-            fan_speed: "中",
+            fan_speed: "MEDIUM",
         };
     },
     components: {
@@ -39,7 +39,7 @@ export default {
                 this.status = this.firstDehumidifier.status;
                 this.current_humidity = this.firstDehumidifier.dehumidifier.current_humidity;
                 this.target_humidity = this.firstDehumidifier.dehumidifier.target_humidity;
-                this.fan_speed = this.mapFanSpeedReverse(this.firstDehumidifier.dehumidifier.fan_speed);
+                this.fan_speed = this.firstDehumidifier.dehumidifier.fanSpeed;
             }
         },
         setFanSpeed(speed) {
@@ -62,28 +62,10 @@ export default {
             const updatedData = {
                 status: this.status,
                 target_humidity: parseFloat(this.target_humidity.toFixed(1)),
-                fan_speed: this.mapFanSpeed(this.fan_speed),
+                fan_speed: this.fan_speed,
             };
             this.$emit('update-dehumidifiers', updatedData);
         },
-        mapFanSpeed(speed) {
-            const speedMap = {
-                '自動': 'AUTO',
-                '低': 'LOW',
-                '中': 'MEDIUM',
-                '高': 'HIGH'
-            };
-            return speedMap[speed] || 'MEDIUM';
-        },
-        mapFanSpeedReverse(speed) {
-            const speedMap = {
-                'AUTO': '自動',
-                'LOW': '低',
-                'MEDIUM': '中',
-                'HIGH': '高'
-            };
-            return speedMap[speed] || '中';
-        }
     }
 };
 </script>
@@ -112,22 +94,22 @@ export default {
                         </div>
                     </div>
                     <div class="fan_speed target_temp">
-                        <span>運轉強度</span>
-                        <div @click="setFanSpeed('自動')" :class="{ selected: fan_speed === '自動' }">
+                        <span>風量</span>
+                        <div @click="setFanSpeed('AUTO')" :class="{ selected: fan_speed === 'AUTO' }">
                             <i class="fa-solid fa-a"></i>
-                            <p>自動</p>
+                            <p>{{ fan_speed === 'AUTO' ? '自動' : '' }}</p>
                         </div>
-                        <div @click="setFanSpeed('低')" :class="{ selected: fan_speed === '低' }">
+                        <div @click="setFanSpeed('LOW')" :class="{ selected: fan_speed === 'LOW' }">
                             <i class="fa-solid fa-wind"></i>
-                            <p>低</p>
+                            <p>{{ fan_speed === 'LOW' ? '低' : '' }}</p>
                         </div>
-                        <div @click="setFanSpeed('中')" :class="{ selected: fan_speed === '中' }">
+                        <div @click="setFanSpeed('MEDIUM')" :class="{ selected: fan_speed === 'MEDIUM' }">
                             <i class="fa-solid fa-wind"></i>
-                            <p>中</p>
+                            <p>{{ fan_speed === 'MEDIUM' ? '中' : '' }}</p>
                         </div>
-                        <div @click="setFanSpeed('高')" :class="{ selected: fan_speed === '高' }">
+                        <div @click="setFanSpeed('HIGH')" :class="{ selected: fan_speed === 'HIGH' }">
                             <i class="fa-solid fa-wind"></i>
-                            <p>高</p>
+                            <p>{{ fan_speed === 'HIGH' ? '高' : '' }}</p>
                         </div>
                     </div>
                 </div>
@@ -164,7 +146,7 @@ export default {
         right: 24px;
         top: 15px;
 
-        ::v-deep input[type="checkbox"] {
+        :deep(input[type="checkbox"]) {
             display: none;
         }
     }
@@ -242,6 +224,7 @@ export default {
                         width: 33px;
                         margin-top: 35px;
                         text-align: center;
+                        cursor: pointer;
                     }
 
                     .time {
@@ -256,6 +239,7 @@ export default {
                             font-size: 27px;
                             color: $black1;
                             cursor: default;
+                            transition: opacity 0.3s;
                         }
 
                         i {

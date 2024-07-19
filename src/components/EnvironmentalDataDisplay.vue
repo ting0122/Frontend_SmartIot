@@ -8,7 +8,7 @@ export default {
     },
     created() {
         this.fetchData();
-        setInterval(this.fetchData, 300000); // 300000 毫秒 = 5 分鐘
+        setInterval(this.fetchData, 300); // 300 毫秒 = 3 秒鐘
     },
     methods: {
         async fetchData() {
