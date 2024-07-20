@@ -119,7 +119,7 @@ export default {
                 //     width: 20px;
                 //     height: 20px;
                 //     color: $white;
-                //     background: transparent; /* 自定义图标颜色 */
+                //     background: transparent; 
                 //     pointer-events: none;
                 // }
                 //原版input樣式

@@ -49,14 +49,14 @@ export default {
     flex-direction: row;
 
     .outArea {
-        width: 221px;
+        width: 228px;
         height: 210px;
         border-radius: 25px;
         margin-bottom: 15px;
         background-color: $dark01;
         flex: 0 0 auto;
         /* 确保每个项目不会缩小并且保持其内容的宽度 */
-        margin-right: 25px;
+        margin-right: 15px;
         /* 可选的间距 */
         text-align: center;
         cursor: pointer;
