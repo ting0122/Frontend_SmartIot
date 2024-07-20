@@ -55,6 +55,9 @@ export default {
                     console.log('allLog', this.allLogs)
                 })
         },
+        formatDate(date) {
+            return moment(new Date(date)).format('YYYY-MM-DD');
+        },
         toggleContent(index) {
             const announcement = this.allLogs[index];
             if (announcement.eventType === '錯誤') {
@@ -89,13 +92,13 @@ export default {
             <div class="outArea" v-for="(data, index) in allLogs" @click="toggleContent(index)"
                 :class="{ expanded: allLogs[index].expanded }">
                 <div v-if="data.eventType === '錯誤'" class="box">
-                    <h2>{{ data.detail.roomArea }}-{{ data.detail.roomName }}</h2>
+                    <h2>{{ data.detail.deviceName }}</h2>
                     <p class="id">編號:{{ data.id }}</p>
                     <p>{{ data.detail.deviceType }}</p>
-                    <p>{{ data.detail.deviceName }}</p>
                     <p>{{ data.detail.message }}</p>
                     <p class="right">{{ data.eventType }}</p>
                 </div>
+                <p class="date">{{ formatDate(data.eventTime) }}</p>
             </div>
 
         </div>
