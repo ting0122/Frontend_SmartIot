@@ -214,7 +214,7 @@ export default {
             try {
                 const year = new Date().getFullYear();
                 const month = new Date().getMonth() + 1;
-                const url = `http://localhost:8080/power/total?year=${year}&month=${month}`;
+                const url = `https://frontend-smartiot.onrender.com/power/total?year=${year}&month=${month}`;
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('網絡響應不正確');

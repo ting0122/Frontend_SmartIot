@@ -40,7 +40,7 @@ export default {
             if (m) {
                 params.append('roomArea', m);
             }
-            fetch(`http://localhost:8080/history/search?${params.toString()}`, {
+            fetch(`https://frontend-smartiot.onrender.com/history/search?${params.toString()}`, {
                 method: "get",
                 body: JSON.stringify()
             })
