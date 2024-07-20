@@ -210,7 +210,7 @@ export default {
     width: 388px;
     height: 260px;
     border-radius: 25px;
-    background-color: $dark02;
+    background-color: $dark01;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -218,25 +218,29 @@ export default {
 
 .buttons {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 10px;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    margin-top: 10px;
 
     button {
         padding: 5px 10px;
         border: none;
-        background-color: $dark01;
-        color: white;
-        border-radius: 5px;
+        background-color: $white;
+        color:$dark03;
+        border-radius: 20px;
         cursor: pointer;
 
         &.active {
-            background-color: $dark01;
-            // color: rgb(221, 60, 138);
+            background-color: $black;
+            color: $white;
         }
 
         &:hover {
             opacity: 0.8;
         }
     }
+}
+.canvas{
+    margin-top: 10px;
 }
 </style>

@@ -73,7 +73,7 @@ export default {
             <div class="start_date">
                 <VueDatePicker v-model="searchObj.dateRange" range format="yyyy-MM-dd" style="width: 260px" />
             </div>
-            <button v-if="searchTrue" class="seach_list" @click="searchAllAnnouncements">搜尋</button>
+            <button v-if="searchTrue" class="seach_list" @click="searchAllAnnouncements">搜尋9</button>
             <button v-else class="seach_list" @click="searchAnnouncements">搜尋</button>
         </div>
     </div>
@@ -100,7 +100,7 @@ export default {
                 padding-right: 10px;
                 font-size: 16px;
                 color: $black1;
-                background-color: $dark02;
+                background-color: $white;
                 border: 0;
                 outline: none;
                 line-height: 40px;
@@ -109,6 +109,17 @@ export default {
             ::placeholder {
                 color: $black1;
             }
+        }
+        .seach_list {
+            width: 88px;
+            height: 40px;
+            border-radius: 35px;
+            border: 0;
+            margin-left: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: $white;
+            color: $black1;
         }
     }
 }
@@ -120,34 +131,34 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $dark02;
+    background-color: $white;
 
-    .left {
-        display: flex;
+    // .left {
+    //     display: flex;
 
-        .name {
-            input {
-                width: 110px;
-                height: 40px;
-                border-radius: 35px;
-                padding-left: 20px;
-                padding-right: 10px;
-                font-size: 16px;
-                color: $white;
-                background-color: $dark02;
-                color: $black1;
-                line-height: 40px;
-            }
-        }
+    //     .name {
+    //         input {
+    //             width: 110px;
+    //             height: 40px;
+    //             border-radius: 35px;
+    //             padding-left: 20px;
+    //             padding-right: 10px;
+    //             font-size: 16px;
+    //             color: $white;
+    //             background-color: $white;
+    //             color: $black1;
+    //             line-height: 40px;
+    //         }
+    //     }
 
-        .start_date {
-            margin-left: 20px;
-            width: 260px;
-            border-radius: 35px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: $dark02;
+    //     .start_date {
+    //         margin-left: 20px;
+    //         width: 260px;
+    //         border-radius: 35px;
+    //         display: flex;
+    //         justify-content: center;
+    //         align-items: center;
+    //         background-color: $white;
 
             // i {
             //     position: absolute;
@@ -174,21 +185,6 @@ export default {
             // ::-webkit-calendar-picker-indicator {
             //     opacity: 0; /* 圖示設為透明 */
             // }
-        }
-
-        .seach_list {
-            width: 88px;
-            height: 40px;
-            border-radius: 35px;
-            border: 0;
-            margin-left: 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: $dark02;
-            color: $white;
-        }
-
-
-    }
+        
 }
 </style>

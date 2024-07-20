@@ -285,6 +285,9 @@ export default {
             <template #roomid>
                 <p></p>
             </template>
+            <template #button>
+                <p></p>
+            </template>
         </ForestageSearchDevice>
 
         <div class="oo">
@@ -355,10 +358,10 @@ export default {
                                         @click="updateTempSettings(device.id, { target_temp: (device.tempSettings.target_temp || device.target_temp) - 1 })"></i>
                                 </div>
                             </div>
-                            <div class="current-temp">
+                            <!-- <div class="current-temp">
                                 <span>當前溫度</span>
                                 <p>{{ device.current_temp.toFixed(1) }}°C</p>
-                            </div>
+                            </div> -->
                         </template>
 
                         <!-- 空氣清淨機控制 -->
@@ -441,10 +444,10 @@ export default {
                                         @click="updateTempSettings(device.id, { target_humidity: (device.tempSettings.target_humidity || device.target_humidity) - 1 })"></i>
                                 </div>
                             </div>
-                            <div class="current-humidity">
+                            <!-- <div class="current-humidity">
                                 <span>當前濕度</span>
                                 <p>{{ device.current_humidity.toFixed(1) }}%</p>
-                            </div>
+                            </div> -->
                         </template>
 
                         <!-- 燈控制 -->
@@ -523,7 +526,7 @@ export default {
             height: 200px;
             border-radius: 25px;
             margin-bottom: 15px;
-            background-color: $dark02;
+            background-color: $white;
 
 
             // flex: 0 0 auto; /* 确保每个项目不会缩小并且保持其内容的宽度 */
@@ -565,12 +568,12 @@ export default {
             }
 
             p {
-                margin: 5px 20px 0 30px;
+                margin: 5px 20px 0 20px;
                 font-size: 16px;
             }
 
             span {
-                margin: 20px 30px 20px 30px;
+                margin: 20px 30px 20px 20px;
                 font-size: 20px;
 
             }

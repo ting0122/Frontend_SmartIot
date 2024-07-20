@@ -58,10 +58,12 @@ export default {
             <option value="除濕機">除濕機</option>
         </select>
         <button @click="searchDevices">搜尋</button>
-        <div class="createAndDeleteButton">
-            <button @click="showsearch" :class="{ chick: !showbox }"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button @click="showsearch" :class="{ chick: showbox }"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
+        <slot name="button">
+            <div class="createAndDeleteButton">
+                <button @click="showsearch" :class="{ chick: !showbox }"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button @click="showsearch" :class="{ chick: showbox }"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+        </slot>
     </div>
 </template>
 

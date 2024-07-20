@@ -47,7 +47,7 @@ export default {
 @import '@/assets/main.scss';
 
 .outArea {
-    width: 303px;
+    width: 311px;
     height: 100%;
     border-radius: 25px;
     background-color: $dark01;
