@@ -26,8 +26,10 @@ export default {
                 const year = new Date().getFullYear(); // 獲取當前年份
                 const month = new Date().getMonth() + 1; // 獲取當前月份
                 let url = this.isYearlyView // 根據是否為年視圖選擇不同的API
-                    ? `http://localhost:8080/power/yearly?year=${year}` // 年視圖的API
-                    : `http://localhost:8080/power/monthly?year=${year}&month=${month}`; // 月視圖的API
+                   // ? `http://localhost:8080/power/yearly?year=${year}` // 年視圖的API
+                   // : `http://localhost:8080/power/monthly?year=${year}&month=${month}`; // 月視圖的API
+                    ? `https://backend-smartiot.onrender.com/power/yearly?year=${year}` // 年視圖的API
+                    : `https://backend-smartiot.onrender.com/power/monthly?year=${year}&month=${month}`; // 月視圖的API
                 const response = await fetch(url); // 發送請求
                 if (!response.ok) { // 檢查響應是否成功
                     throw new Error('網絡響應不正確');
@@ -237,7 +239,7 @@ export default {
             const option = {
                 title: {
                     text: '本月各房間耗電量',
-                    left: 'center',
+                    left: '20px',
                     textStyle: {
                         fontSize: 18 // 增加標題字體大小
                     }
@@ -362,15 +364,22 @@ export default {
 @import '@/assets/main.scss';
 
 .stateDiv {
-    width: 96.8%;
-    height: 400px;
+    // width: 96.8%;
+    height: 280px;
     background-color: $white;
     border-radius: 25px 25px 0 0;
     position: relative;
-    padding: 20px;
+    padding: 39px 0 0 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    p{
+        width: 300px;
+        margin: auto;
+        position: absolute;
+        bottom: 15px;
+        left: 36%;
+    }
 }
 
 #energyChart,
@@ -380,16 +389,20 @@ export default {
 }
 
 .button-group {
+    position: absolute;
+    right: 30px;
+    top: 25px;
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 5px;
+    
 }
 
 button {
-    padding: 10px 18px;
+    padding: 0px 18px;
+    height: 40px;
     background-color: $dark02;
-    color: black;
+    color: $black1;
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -420,7 +433,6 @@ button {
 .carbon-difference,
 .carbon-emission {
     text-align: center;
-    margin-top: 15px;
     font-weight: bold;
     font-size: 1.1em;
 }

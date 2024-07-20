@@ -69,6 +69,17 @@ export default {
         },
         // 彈出 SweetAlert2 的刪除確認彈窗
         showDeleteConfirmation() {
+            if (this.select.length === 0) {
+                Swal.fire({
+                    title: '無選取任何公告',
+                    text: '請選擇至少一個公告進行刪除',
+                    icon: 'info',
+                    customClass: {
+                        popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                    },
+                });
+                return;
+            }
             const selectedDevices = this.deviceArr.filter(device => this.select.includes(device.id));
             const selectedNames = selectedDevices.map(device => `${device.area}-${device.name}`).join('<br>'); 
             Swal.fire({
@@ -124,7 +135,7 @@ export default {
         </CreateDeviceY>
         <SearchDevice v-else />
         <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
-        <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" @delete-click="toggleCheckbox" :showCheckbox="showCheckbox">
+        <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom" @delete-click="toggleCheckbox" v-model:showCheckbox="showCheckbox" v-model:showCreateRoom="showCreateRoom" >
             <template #text>
                 <p class="text">所有設備</p>
             </template>
@@ -161,9 +172,7 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: end;
     border-radius: 25px;
-    // border: 1px solid black;
     background-color: $dark02;
 
     .text {
@@ -290,7 +299,7 @@ export default {
                 cursor: pointer;
                 position: relative;
                 &:checked {
-                    background-color:$dark02; /* 勾選後的背景色 */
+                    background-color:$black; /* 勾選後的背景色 */
                 }
                 &:checked::after {
                     content: '';

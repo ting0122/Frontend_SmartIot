@@ -67,7 +67,7 @@ export default {
                     padding: 0;
                     padding-left: 20px;
                     padding-right: 10px;
-                    color: $white;
+                    color: $dark03;
                     background-color: $white;
                     border: 0;
                     outline:none;

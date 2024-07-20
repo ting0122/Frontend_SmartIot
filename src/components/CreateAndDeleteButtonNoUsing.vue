@@ -21,18 +21,24 @@ export default {
 
     methods: {
         // 按鈕被點擊時通知父層並觸發父層方法
-        handleAddClick() {
-            this.$emit('add-click');
-        },
         handleSearchClick() {
             this.$emit('search-click');
+            this.$emit('update:showCreateRoom', false); 
+            this.$emit('update:showCheckbox', false); // 更新 showCheckbox 的值
         },
         handleDeleteClick() {
             this.$emit('delete-click');
-        }
+            this.$emit('update:showCreateRoom', false); 
+        },
+        handleAddClick() {
+            this.$emit('add-click');
+            this.$emit('update:showCheckbox', false); // 更新 showCheckbox 的值
+            this.$emit('update:showCreateRoom', true);
+        },
     },
     props: [
-        "showCheckbox"
+        "showCheckbox",
+        "showCreateRoom"
     ]
 };
 </script>
@@ -41,10 +47,10 @@ export default {
     <div class="buttonArea">
 
         <div class="createAndDeleteButton">
-            <button @click="handleSearchClick"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button @click="handleSearchClick" :class="{ chick: !showCheckbox && !showCreateRoom }"><i class="fa-solid fa-magnifying-glass"></i></button>
             <button @click="handleDeleteClick" :class="{ chick: showCheckbox }"><i
                     class="fa-solid fa-trash-can"></i></button>
-            <button @click="handleAddClick"><i class="fa-solid fa-circle-plus"></i></button>
+            <button @click="handleAddClick" :class="{ chick:showCreateRoom }"><i class="fa-solid fa-circle-plus"></i></button>
         </div>
     </div>
 </template>
@@ -72,6 +78,7 @@ export default {
             color: $dark03;
             font-size: 20px;
             line-height: 45px;
+            cursor: pointer;
         }
 
         .chick {

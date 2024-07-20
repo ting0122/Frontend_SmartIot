@@ -21,7 +21,8 @@ export default {
             select: [], // 儲存被選中的 id
             announcement: "",  //發布公告的內容
             allAnn:[],
-            searchTrue:true
+            searchTrue:true,
+            
         };
     },
     created() {
@@ -168,7 +169,7 @@ export default {
 <template>
     <div class="outarr">
         <div class="announcementSearch">
-            <SearchAddRoom v-if="this.showUseAdd" />
+            <SearchAddRoom v-if="this.showUseAdd"/>
             <AnnouncementSearch v-else @search="handleSearchResults" :searchTrue="searchTrue"/>
             <div class="button">
                 <button @click="handleSearchClick" :class="{ chick: !showCheckbox && !showUseAdd }"><i
@@ -244,7 +245,7 @@ export default {
         justify-content: space-between;
         width: 1078px;
         height: 85px;
-        background-color: $white;
+        background-color: $dark02;
         border-radius: 25px 25px 0 0;
         padding-top: 40px;
         padding-left: 80px;
@@ -253,7 +254,7 @@ export default {
         button {
             height: 45px;
             width: 45px;
-            background: $dark02;
+            background: $white;
             border-radius: 50%;
             border: none;
             outline: none;
@@ -410,13 +411,13 @@ export default {
     .announcementListArea {
         border-radius: 25px;
         width: 1100px;
-        height: 700px;
+        height: 740px;
         border: 1px solid $dark03;
         // background-color: $dark02;
         display: flex;
         justify-content: space-between;
         padding-top: 10px;
-        margin: 50px auto;
+        margin: 20px auto 20px auto;
 
         h2 {
             margin: 12px 0 0 30px;
@@ -452,7 +453,7 @@ export default {
                 width: 1000px;
                 border-radius: 20px;
                 padding: 10px;
-                padding-top: 30px;
+                padding-top: 23px;
                 overflow-y: hidden;
                 background-color: $white;
                 margin: 10px 20px;
@@ -473,7 +474,7 @@ export default {
                     left: 0;
                     bottom: 0;
                     width: 1030px;
-                    height: 25px;
+                    height: 27px;
                     background-color: $white;
                     // background-color:aqua;
                     border-radius: 0 0 20px 20px;

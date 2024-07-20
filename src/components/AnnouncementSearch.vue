@@ -73,7 +73,7 @@ export default {
             <div class="start_date">
                 <VueDatePicker v-model="searchObj.dateRange" range format="yyyy-MM-dd" style="width: 260px" />
             </div>
-            <button v-if="searchTrue" class="seach_list" @click="searchAllAnnouncements">搜尋9</button>
+            <button v-if="searchTrue" class="seach_list" @click="searchAllAnnouncements">搜尋</button>
             <button v-else class="seach_list" @click="searchAnnouncements">搜尋</button>
         </div>
     </div>
