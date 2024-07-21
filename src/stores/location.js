@@ -12,7 +12,8 @@ export default defineStore("location", {
         localRoomArea: "",
         allLogs: [],
         allArea: [],
-        allAnn:[]
+        allAnn: [],
+        frontLogs: []
 
 
     }),
@@ -60,7 +61,7 @@ export default defineStore("location", {
                     this.localRoomArea = data.area
                     console.log(this.localRoomArea)
                     this.searchDevice(null, null, this.localRoomArea, null)
-                    this.searchHistory(null,null,null,null,this.localRoomArea)
+                    this.searchHistory(null, null, null, null, this.localRoomArea)
                     console.log('搜尋房間oneRoom', this.oneRoom)
                 })
         },
@@ -261,21 +262,21 @@ export default defineStore("location", {
                 })
         },
         //搜尋歷史紀錄
-        searchHistory(i,j,k,l,m){
+        searchHistory(i, j, k, l, m) {
             const params = new URLSearchParams();
-            
+
             if (i) {
                 params.append('deviceName', i);
             }
-            
+
             if (j) {
                 params.append('deviceType', j);
             }
-            
+
             if (k) {
                 params.append('startDate', k);
             }
-            
+
             if (l) {
                 params.append('endDate', l);
             }
@@ -321,19 +322,19 @@ export default defineStore("location", {
             })
                 // .then(res => res.json())
                 .then(data => {
-                    
+
                 })
         },
         //新增公告
-        createAnn(i,j,k) {
+        createAnn(i, j, k) {
             let arr = []
             for (let x = 0; x < k.length; x++) {
                 arr.push(k[x]);
             }
-            let obj={
-                "title":i,
-                "content":j,
-                "roomIds":arr
+            let obj = {
+                "title": i,
+                "content": j,
+                "roomIds": arr
             }
             fetch(`http://localhost:8080/announcements`, {
                 method: "post",
@@ -341,10 +342,46 @@ export default defineStore("location", {
             })
                 .then(res => res.json())
                 .then(data => {
-                    
+
+                })
+        },
+        searchFrontHistory(i, j, k, l, m) {
+            const params = new URLSearchParams();
+            if (i) {
+                params.append('deviceName', i);
+            }
+
+            if (j) {
+                params.append('deviceType', j);
+            }
+
+            if (k) {
+                params.append('startDate', k);
+            }
+
+            if (l) {
+                params.append('endDate', l);
+            }
+
+            if (m) {
+                params.append('roomArea', m);
+            }
+            fetch(`http://localhost:8080/history/search?${params.toString()}`, {
+                method: "get",
+                body: JSON.stringify()
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('erLog', data)
+                    this.frontLogs=[]
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].eventType == "錯誤") {
+                            this.frontLogs.push(data[i])
+                        }
+                    }
+                    console.log('前台錯誤', this.frontLogs)
                 })
         },
     },
-
 
 });
