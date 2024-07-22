@@ -104,6 +104,7 @@ export default {
                 border: 0;
                 outline: none;
                 line-height: 40px;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
             }
 
             ::placeholder {
@@ -120,6 +121,7 @@ export default {
             cursor: pointer;
             background-color: $white;
             color: $black1;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
         }
     }
 }
@@ -132,7 +134,7 @@ export default {
     justify-content: center;
     align-items: center;
     background-color: $white;
-
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     // .left {
     //     display: flex;
 

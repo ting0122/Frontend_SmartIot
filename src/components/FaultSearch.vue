@@ -73,6 +73,7 @@ export default {
                     outline:none;
                     font-size: 16px;
                     line-height: 40px;
+                    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
                 }
                 ::placeholder {
                     color: $dark03;
@@ -98,7 +99,7 @@ export default {
                     background-color: $white;
                     border: 0;
                     outline:none;
-                    
+                    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
                 }
             }
             .start_date{
@@ -110,7 +111,7 @@ export default {
                 justify-content: center;
                 align-items: center;  
                 background-color: $white;
-
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
                 // i {
                 //     position: absolute;
                 //     right: 10px;
@@ -151,6 +152,7 @@ export default {
                 background-color: $white;
                 color: $dark03;
                 line-height: 40px;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
             }
          
             

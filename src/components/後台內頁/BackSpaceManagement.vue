@@ -166,6 +166,7 @@ export default {
     align-items: stretch;
     border-radius: 25px;
     background-color: $dark02;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 
     .energy-container {
         width: 100%;

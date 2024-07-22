@@ -174,6 +174,7 @@ export default {
     flex-direction: column;
     border-radius: 25px;
     background-color: $dark02;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 
     .text {
         font-size: 20px;

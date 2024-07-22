@@ -135,6 +135,7 @@ export default {
         padding-left: 13px;
         margin-left: 20px;
         color: $black1;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     }
     input{
         width: 180px;
@@ -146,6 +147,7 @@ export default {
         font-size: 16px;
         padding-left: 13px;
         color: $black1;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     }
     ::placeholder {
         color: $black1;
@@ -160,6 +162,7 @@ export default {
         color: $black1;
         font-size: 16px;
         margin-left: 20px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     }
 }
 </style>

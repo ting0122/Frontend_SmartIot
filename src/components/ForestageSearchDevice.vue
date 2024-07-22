@@ -89,6 +89,7 @@ export default {
         padding-left: 20px;
         margin-left: 20px;
         color: $dark03;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 
     }
 
@@ -105,6 +106,7 @@ export default {
         color: $dark03;
         line-height: 40px;
         margin-left: 83px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     }
 
     ::placeholder {
@@ -123,6 +125,7 @@ export default {
         line-height: 40px;
         margin-left: 20px;
         padding: 0;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     }
 
     .createAndDeleteButton {

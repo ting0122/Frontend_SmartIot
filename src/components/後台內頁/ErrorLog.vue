@@ -285,7 +285,7 @@ export default {
     flex-direction: column;
     align-items: end;
     border-radius: 25px;
-    // border: 1px solid black;
+    // box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 
 }
 
@@ -317,6 +317,7 @@ export default {
     border-radius: 0 0 25px 25px;
     background-color: $dark02;
     padding-top: 10px;
+    box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.1);
 
     &::-webkit-scrollbar {
         width: 10px;

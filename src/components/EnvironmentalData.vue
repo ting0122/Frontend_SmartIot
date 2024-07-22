@@ -211,6 +211,7 @@ export default {
     height: 260px;
     border-radius: 25px;
     background-color: $dark01;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     padding: 10px;
     display: flex;
     flex-direction: column;
