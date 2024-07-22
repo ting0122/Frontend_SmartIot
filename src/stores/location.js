@@ -376,6 +376,7 @@ export default defineStore("location", {
             if (m) {
                 params.append('roomArea', m);
             }
+            console.log(i,j,k,l,m)
             fetch(`http://localhost:8080/history/search?${params.toString()}`, {
                 method: "get",
                 body: JSON.stringify()

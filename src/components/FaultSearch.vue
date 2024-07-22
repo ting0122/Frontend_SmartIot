@@ -51,10 +51,10 @@ export default {
                 <input type="text" v-model="this.deviceName" placeholder="設備名稱">
             </div>
             <div class="state">
-                <select name="" id="" v-model="this.roomArea">
-                    <option value="所有類別" selected>所有類別</option>
-                    <option value="冷氣">冷氣</option>
-                    <option value="電燈">電燈</option>
+                <select name="" id="" v-model="this.deviceType">
+                    <option value="">所有類別</option>
+                    <option value="冷氣機">冷氣</option>
+                    <option value="燈">電燈</option>
                     <option value="空氣清淨機">空氣清淨機</option>
                     <option value="除濕機">除濕機</option>
                 </select>
@@ -64,7 +64,7 @@ export default {
                 <!-- <input type="date"  class="date"> -->
                 <!-- <i class="fa-regular fa-calendar"></i> -->
             </div>
-            <button @click="searchFuntion" class="seach_list">搜尋</button>
+            <button @click="this.searchFuntion()" class="seach_list">搜尋</button>
 
         </div>
 
@@ -165,11 +165,11 @@ export default {
             
             }
             .seach_list{
-                width: 60px;
+                width: 75px;
                 height: 40px;
                 border-radius: 35px;
                 padding: 0;
-                padding-left: 20px;
+                padding-left: 10px;
                 padding-right: 10px;
                 color: $dark03;
                 background-color: $white;

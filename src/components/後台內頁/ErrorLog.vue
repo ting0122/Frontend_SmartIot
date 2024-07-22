@@ -57,9 +57,9 @@ export default {
                         html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
                                 <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
                                 <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
-                                <p><strong>模式:</strong>${announcement.detail.mode}</p>
-                                <p><strong>風量:</strong>${announcement.detail.fan_speed}</p>
-                                <p><strong>溫度:</strong>${announcement.detail.target_temp}</p>
+                                <p><strong>模式:</strong>${announcement.detail.mode ? announcement.detail.mode : '未更改'}</p>
+                                <p><strong>風量:</strong>${announcement.detail.fan_speed ? announcement.detail.fan_speed : '未更改'}</p>
+                                <p><strong>溫度:</strong>${announcement.detail.target_temp ? announcement.detail.target_temp : '未更改'}</p>
                                 <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
                                 <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
                         // text: announcement.content,
@@ -77,8 +77,8 @@ export default {
                         html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
                                 <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
                                 <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
-                                <p><strong>亮度:</strong>${announcement.detail.brightness}</p>
-                                <p><strong>色溫:</strong>${announcement.detail.color_temp}</p>
+                                <p><strong>亮度:</strong>${announcement.detail.brightness ? announcement.detail.brightness : '未更改'}</p>
+                                <p><strong>色溫:</strong>${announcement.detail.color_temp ? announcement.detail.color_temp : '未更改'}</p>
                                 <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
                                 <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
                         // text: announcement.content,
@@ -96,8 +96,8 @@ export default {
                         html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
                                 <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
                                 <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
-                                <p><strong>濕度:</strong>${announcement.detail.target_humidity}</p>
-                                <p><strong>風量:</strong>${announcement.detail.fan_speed}</p>
+                                <p><strong>濕度:</strong>${announcement.detail.target_humidity ? announcement.detail.target_humidity : '未更改'}</p>
+                                <p><strong>風量:</strong>${announcement.detail.fan_speed ? announcement.detail.fan_speed : '未更改'}</p>
                                 <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
                                 <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
                         // text: announcement.content,
@@ -115,7 +115,7 @@ export default {
                         html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
                                 <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
                                 <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
-                                <p><strong>風量:</strong>${announcement.detail.fan_speed}</p>
+                                <p><strong>風量:</strong>${announcement.detail.fan_speed ? announcement.detail.fan_speed : '未更改'}</p>
                                 <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
                                 <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
                         // text: announcement.content,
