@@ -153,6 +153,7 @@ export default {
             // this.showUseAdd = true;
             this.showUseAdd = !this.showUseAdd;
             this.showCheckbox = false;
+            this.fetchRooms()
         },
         showSearchAnnouncement() {
             this.showCreateRoom = false;
@@ -160,6 +161,7 @@ export default {
         handleSearchClick() {
             this.showCheckbox = false;
             this.showUseAdd = false;
+            this.fetchRooms()
         },
         handleSearchResults(filteredAllAnnouncements) {
             this.allAnn = filteredAllAnnouncements.map(item => ({
