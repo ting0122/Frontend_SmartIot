@@ -26,7 +26,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['getAllLogs','searchHistory']),
+        ...mapActions(location, ['getAllLogs', 'searcHHistory']),
         formatDate(date) {
             return moment(new Date(date)).format('YYYY-MM-DD HH:mm:ss');
         },
@@ -40,7 +40,7 @@ export default {
                             <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
                             <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
                             <p><strong>操作：</strong>${announcement.detail.status}</p>
-                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                     // text: announcement.content,
                     showCloseButton: true,
                     showConfirmButton: false,  //隱藏下方ok按鈕
@@ -61,7 +61,7 @@ export default {
                                 <p><strong>風量:</strong>${announcement.detail.fan_speed}</p>
                                 <p><strong>溫度:</strong>${announcement.detail.target_temp}</p>
                                 <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
-                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                         // text: announcement.content,
                         showCloseButton: true,
                         showConfirmButton: false,  //隱藏下方ok按鈕
@@ -80,7 +80,7 @@ export default {
                                 <p><strong>亮度:</strong>${announcement.detail.brightness}</p>
                                 <p><strong>色溫:</strong>${announcement.detail.color_temp}</p>
                                 <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
-                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                         // text: announcement.content,
                         showCloseButton: true,
                         showConfirmButton: false,  //隱藏下方ok按鈕
@@ -99,7 +99,7 @@ export default {
                                 <p><strong>濕度:</strong>${announcement.detail.target_humidity}</p>
                                 <p><strong>風量:</strong>${announcement.detail.fan_speed}</p>
                                 <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
-                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                         // text: announcement.content,
                         showCloseButton: true,
                         showConfirmButton: false,  //隱藏下方ok按鈕
@@ -117,7 +117,7 @@ export default {
                                 <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
                                 <p><strong>風量:</strong>${announcement.detail.fan_speed}</p>
                                 <p><strong>開關狀態:</strong>${announcement.detail.status}</p>
-                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                                <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                         // text: announcement.content,
                         showCloseButton: true,
                         showConfirmButton: false,  //隱藏下方ok按鈕
@@ -134,7 +134,7 @@ export default {
                     html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
                             <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
                             <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
-                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                     // text: announcement.content,
                     showCloseButton: true,
                     showConfirmButton: false,  //隱藏下方ok按鈕
@@ -150,7 +150,7 @@ export default {
                     html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
                             <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
                             <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
-                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                     // text: announcement.content,
                     showCloseButton: true,
                     showConfirmButton: false,  //隱藏下方ok按鈕
@@ -165,7 +165,7 @@ export default {
                     title: this.allLogs[index].eventType,
                     html: `<p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
                             <p><strong>類型：</strong>${announcement.detail.roomType}</p>
-                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                     // text: announcement.content,
                     showCloseButton: true,
                     showConfirmButton: false,  //隱藏下方ok按鈕
@@ -180,7 +180,7 @@ export default {
                     title: this.allLogs[index].eventType,
                     html: ` <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
                             <p><strong>類型：</strong>${announcement.detail.roomType}</p>
-                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                     // text: announcement.content,
                     showCloseButton: true,
                     showConfirmButton: false,  //隱藏下方ok按鈕
@@ -193,11 +193,11 @@ export default {
             if (announcement.eventType === '錯誤') {
                 Swal.fire({
                     title: this.allLogs[index].eventType,
-                    html:`<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
+                    html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
                             <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
                             <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
                             <p><strong>錯誤訊息：</strong>${announcement.detail.message}</p>
-                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD hh:mm:ss")}</p>`,
+                            <p><strong>時間：</strong>${moment(new Date(announcement.eventTime)).format("YYYY-MM-DD HH:mm:ss")}</p>`,
                     // text: announcement.content,
                     showCloseButton: true,
                     showConfirmButton: false,  //隱藏下方ok按鈕
