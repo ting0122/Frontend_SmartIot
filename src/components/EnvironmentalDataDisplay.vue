@@ -51,6 +51,7 @@ export default {
     height: 100%;
     border-radius: 25px;
     background-color: $dark01;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-evenly;
     align-items: center;

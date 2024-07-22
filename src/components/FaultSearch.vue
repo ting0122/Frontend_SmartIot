@@ -74,20 +74,98 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/main.scss';
 
-.search_big_area {
-    width: 800px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-bottom: 15px;
-    padding-left: 82px;
-
-    .left {
+    .search_big_area{
+        width: 800px;
+        height: 100%;
         display: flex;
-
-        .name {
-            input {
-                width: 110px;
+        align-items: center;
+        padding-bottom: 15px;
+        padding-left: 82px;
+        .left{
+            display: flex;
+            .name{
+                input{
+                    width: 110px;
+                    height: 40px;
+                    border-radius: 35px;
+                    padding: 0;
+                    padding-left: 20px;
+                    padding-right: 10px;
+                    color: $dark03;
+                    background-color: $white;
+                    border: 0;
+                    outline:none;
+                    font-size: 16px;
+                    line-height: 40px;
+                    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+                }
+                ::placeholder {
+                    color: $dark03;
+                    
+                }
+            }
+            .state{
+                margin-left: 20px;
+                i{
+                    font-style: normal;
+                    margin-left: 10px;
+                    font-size: 16px;
+                    color: $dark03;
+                    
+                }
+                select{
+                    width: 100px;
+                    height: 40px;
+                    border-radius: 35px;
+                    padding-left: 10px;
+                    color: $dark03;
+                    font-size: 16px;
+                    background-color: $white;
+                    border: 0;
+                    outline:none;
+                    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+                }
+            }
+            .start_date{
+                margin-left: 20px;
+                width: 260px;
+                height: 40px;
+                border-radius: 35px;
+                display: flex;
+                justify-content: center;
+                align-items: center;  
+                background-color: $white;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+                // i {
+                //     position: absolute;
+                //     right: 10px;
+                //     top: 50%;
+                //     transform: translateY(-50%);
+                //     width: 20px;
+                //     height: 20px;
+                //     color: $white;
+                //     background: transparent; 
+                //     pointer-events: none;
+                // }
+                //原版input樣式
+                // .date{
+                //     width: 300px;
+                //     height: 35px;
+                //     border-radius: 30px;
+                //     padding-left: 9px;
+                //     padding-right: 10px;
+                //     color: $white;
+                //     background-color: $dark02;
+                //     border: 0;
+                //     outline:none; 
+                // }
+                // ::-webkit-calendar-picker-indicator {
+                //     opacity: 0; /* 圖示設為透明 */
+                // }
+            
+            }
+            .seach_list{
+                width: 60px;
                 height: 40px;
                 border-radius: 35px;
                 padding: 0;
@@ -99,6 +177,7 @@ export default {
                 outline: none;
                 font-size: 16px;
                 line-height: 40px;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
             }
 
             ::placeholder {
@@ -249,5 +328,5 @@ export default {
         }
 
     }
-}
+
 </style>

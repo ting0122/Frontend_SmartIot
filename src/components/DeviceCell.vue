@@ -54,6 +54,7 @@ export default {
         border-radius: 25px;
         margin-bottom: 15px;
         background-color: $dark01;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
         flex: 0 0 auto;
         /* 确保每个项目不会缩小并且保持其内容的宽度 */
         margin-right: 15px;

@@ -81,6 +81,7 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     }
     .tablink {
         width: 152px;

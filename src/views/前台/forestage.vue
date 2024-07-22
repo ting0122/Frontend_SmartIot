@@ -47,7 +47,7 @@ export default {
 <template>
     <div class="background">
         <div class="goBackstage">
-            <RouterLink :to="'/BackStage'">去後台</RouterLink>
+            <RouterLink :to="'/BackStage'" class="t">去後台</RouterLink>
         </div>
         <div class="ipad">
             <div class="showArea">
@@ -96,6 +96,9 @@ export default {
         font-size: 30px;
         top: 20px;
         left: 20px;
+        .t{
+            color:transparent;
+        }
     }
     .ipad {
         position: fixed;

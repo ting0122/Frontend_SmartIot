@@ -103,6 +103,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     border-radius: 25px 25px 0 0;
+    
 
     .date {
         margin-left: 30px;

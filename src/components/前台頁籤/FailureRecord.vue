@@ -158,7 +158,7 @@ export default {
             align-items: center;
             background: $white;
             border-radius: 35px;
-
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 
             .box {
                 // width: 305px;

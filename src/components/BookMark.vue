@@ -138,6 +138,7 @@ export default {
         border-radius: 30px;
         margin: auto;
         background-color: $white;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
         padding-left: 14px;
 
         .tablink {

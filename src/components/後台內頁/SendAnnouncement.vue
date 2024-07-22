@@ -239,6 +239,7 @@ export default {
     border-radius: 25px;
     // border: 1px solid black;
     background-color: $dark02;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 
     .announcementSearch {
         display: flex;
@@ -264,6 +265,7 @@ export default {
             margin-top: 12px;
             margin-left: 20px;
             cursor: pointer;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
         }
 
         .chick {

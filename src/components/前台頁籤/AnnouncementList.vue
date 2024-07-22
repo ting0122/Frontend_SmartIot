@@ -165,6 +165,7 @@ export default {
                 max-height: 58px;
                 padding-top: 10px;
                 padding-bottom: 10px;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 
                 /* 初始高度，取决于你希望显示的截断内容的高度 */
                 &.expanded {

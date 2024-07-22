@@ -187,6 +187,7 @@ export default {
     flex-direction: column;
     align-items: end;
     border-radius: 25px;
+    
     // border: 1px solid black;
 
     .energy {
