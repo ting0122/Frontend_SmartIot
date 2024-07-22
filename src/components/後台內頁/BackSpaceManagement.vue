@@ -66,6 +66,17 @@ export default {
         },
         // 彈出 SweetAlert2 的刪除確認彈窗
         showDeleteConfirmation() {
+            if (this.select.length === 0) {
+                Swal.fire({
+                    title: '無選取任何公告',
+                    text: '請選擇至少一個公告進行刪除',
+                    icon: 'info',
+                    customClass: {
+                        popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                    },
+                });
+                return;
+            }
             const selectedDevices = this.roomArr.filter(device => this.select.includes(device.id));
             const selectedNames = selectedDevices.map(device => `${device.area}-${device.name}`).join('<br>');
             Swal.fire({
@@ -120,15 +131,15 @@ export default {
             <Energy />
         </div>
         <!-- 根據 showCreateRoom 的值決定顯示 CreateRoom 或 SearchRoom 组件 -->
-        <CreateRoom v-if="showCreateRoom" />
+        <CreateRoom v-if="showCreateRoom" v-model:showCreateRoom="showCreateRoom"/>
         <SearchRoom v-else />
         <!-- 監聽 CreateAndDeleteButton 组件的 add-click 事件 -->
         <CreateAndDeleteButton @add-click="toggleCreateRoom" @search-click="toggleSearchRoom"
-            @delete-click="toggleCheckbox" :showCheckbox="showCheckbox" />
+            @delete-click="toggleCheckbox" v-model:showCheckbox="showCheckbox" v-model:showCreateRoom="showCreateRoom"/>
         <div class="rooms">
             <div class="room" v-for="(data, index) in truncatedContent" :key="index" @click="addToSelect(data.id)">
                 <div class="switch">
-                    <Switch v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)" />
+                    <Switch v-model:checked="data.status" @update:checked="updateDeviceStatus(index, $event)"/>
                 </div>
                 <p>{{ data.area }}-{{ data.type }}</p>
                 <div class="area">
@@ -169,8 +180,8 @@ export default {
         flex-wrap: wrap;
         justify-content: space-evenly;
         overflow-y: auto;
-        background-color: $dark01;
-        border: 1px solid black;
+        background-color: $dark02;
+        border-radius: 20px;
 
         &::-webkit-scrollbar {
             width: 10px;
@@ -246,7 +257,7 @@ export default {
                 position: relative;
 
                 &:checked {
-                    background-color: $dark02;
+                    background-color: $black;
                     /* 勾選後的背景色 */
                 }
 

@@ -69,6 +69,17 @@ export default {
         },
         // 彈出 SweetAlert2 的刪除確認彈窗
         showDeleteConfirmation() {
+            if (this.select.length === 0) {
+                Swal.fire({
+                    title: '無選取任何公告',
+                    text: '請選擇至少一個公告進行刪除',
+                    icon: 'info',
+                    customClass: {
+                        popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                    },
+                });
+                return;
+            }
             const selectedDevices = this.deviceArr.filter(device => this.select.includes(device.id));
             const selectedNames = selectedDevices.map(device => `${device.area}-${device.name}`).join('<br>');
             Swal.fire({
@@ -139,7 +150,7 @@ export default {
             </SearchDevice>
             <div class="botton">
                 <CreateAndDeleteButtonNoUsing @add-click="toggleCreateDevice" @search-click="toggleSearchDevice"
-                    @delete-click="toggleCheckbox" :showCheckbox="showCheckbox" />
+                    @delete-click="toggleCheckbox" v-model:showCheckbox="showCheckbox" v-model:showCreateRoom="showCreateRoom" />
             </div>
             <div class="out">
                 <div class="room" v-for="(data, index) in truncatedContent" :key="index" @click="addToSelect(data.id)">
@@ -148,7 +159,10 @@ export default {
                     </div>
                     <p class="id">{{ data.id }}</p>
                     <p>{{ data.type }}</p>
-                    <i class="fa-regular fa-snowflake"></i>
+                    <i class="fa-regular fa-snowflake" v-if="data.type === '冷氣機'"></i>
+                    <i class="fa-solid fa-leaf" v-if="data.type === '空氣清淨機'"></i>
+                    <i class="fa-solid fa-droplet-slash" v-if="data.type === '除濕機'"></i>
+                    <i class="fa-regular fa-lightbulb" v-if="data.type === '燈'"></i>
                     <div class="area">
                         <p>{{ data.name }}</p>
                     </div>
@@ -317,7 +331,7 @@ export default {
                         position: relative;
 
                         &:checked {
-                            background-color: $dark02;
+                            background-color: $black;
                             /* 勾選後的背景色 */
                         }
 

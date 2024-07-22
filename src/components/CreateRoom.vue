@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 export default {
     data() {
         return {
-            
                 name: "",
                 area: "",
                 type: ""

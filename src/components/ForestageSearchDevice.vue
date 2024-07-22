@@ -102,7 +102,7 @@ export default {
         font-size: 16px;
         padding: 0;
         padding-left: 20px;
-        color: $white;
+        color: $dark03;
         line-height: 40px;
         margin-left: 83px;
     }

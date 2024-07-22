@@ -126,7 +126,7 @@ export default {
         font-size: 16px;
         border: none;
         border-radius: 35px;
-        background: $dark02;
+        background: $dark01;
         outline: none;
         padding-left: 13px;
         margin-left: 30px;
@@ -139,7 +139,7 @@ export default {
         border-radius: 35px;
         border: none;
         outline: none;
-        background: $dark02;
+        background: $dark01;
         font-size: 16px;
         padding-left: 13px;
         color: $black1;
@@ -156,7 +156,7 @@ export default {
         border-radius: 35px;
         border: none;
         cursor: pointer;
-        background: $dark02;
+        background: $dark01;
         color: $black1;
         font-size: 16px;
         margin-left: 30px;
