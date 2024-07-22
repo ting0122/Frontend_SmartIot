@@ -8,26 +8,24 @@ export default {
         return {
             name: "",
             type: "",
-            area: "",
-            status: null
         };
-    },
-    created() {
-        this.searchAllRoom();
-    },
-    mounted() {
-
     },
     computed: {
         ...mapState(location, ['allArea', 'annRoom']),
     },
-    components: {
-
-    },
-
     methods: {
-        ...mapActions(location, ['searchAllRoom', 'searchAnnRoom','addAllroom']),
-        
+        ...mapActions(location, ['searchAllRoom', 'searchAnnRoom', 'addAllroom']),
+        search() {
+            this.$emit('search', this.name, this.type);
+        },
+    },
+    watch: {
+        name() {
+            this.search();
+        },
+        type() {
+            this.search();
+        }
     }
 };
 </script>
@@ -45,8 +43,6 @@ export default {
             <option value="教室">教室</option>
             <option value="其他">其他</option>
         </select>
-        <button @click="searchAnnRoom(this.name, this.type, this.area, this.status)">搜尋寄送對象</button>
-        <button @click="addAllroom">添加所有空間</button>
     </div>
 </template>
 
@@ -60,7 +56,7 @@ export default {
     padding-bottom: 15px;
 
     select {
-        width: 100px;
+        width: 110px;
         height: 40px;
         font-size: 16px;
         border: none;
