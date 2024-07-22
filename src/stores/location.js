@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-
+import Swal from 'sweetalert2'
 // pinia用
 export default defineStore("location", {
     state: () => ({
@@ -13,7 +13,11 @@ export default defineStore("location", {
         allLogs: [],
         allArea: [],
         allAnn: [],
-        frontLogs: []
+        frontLogs: [],
+        annRoom: [],
+        selectedArr: [],
+        selectedIds: [],
+        addAllRoom: []
 
 
     }),
@@ -93,9 +97,9 @@ export default defineStore("location", {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     this.roomArr = data
-                    console.log(this.roomArr)
+                    console.log('搜尋房間', this.roomArr)
                 })
         },
         //建立房間
@@ -336,13 +340,19 @@ export default defineStore("location", {
                 "content": j,
                 "roomIds": arr
             }
+
             fetch(`http://localhost:8080/announcements`, {
                 method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify(obj)
             })
                 .then(res => res.json())
                 .then(data => {
-
+                    this.selectedArr=[]
+                    this.selectedIds=[]
+                    this.addAllRoom=[]
                 })
         },
         searchFrontHistory(i, j, k, l, m) {
@@ -373,7 +383,7 @@ export default defineStore("location", {
                 .then(res => res.json())
                 .then(data => {
                     console.log('erLog', data)
-                    this.frontLogs=[]
+                    this.frontLogs = []
                     for (let i = 0; i < data.length; i++) {
                         if (data[i].eventType == "錯誤") {
                             this.frontLogs.push(data[i])
@@ -382,6 +392,127 @@ export default defineStore("location", {
                     console.log('前台錯誤', this.frontLogs)
                 })
         },
+        //用於新增公告選擇房間
+        searchAnnRoom(i, j, k, l) {
+
+            const params = new URLSearchParams();
+            //this.name 
+            if (i) {
+                params.append('name', i);
+            }
+            //this.type
+            if (j) {
+                params.append('type', j);
+            }
+            //this.area
+            if (k) {
+                params.append('area', k);
+            }
+            //this.status
+            if (l !== null) {
+                params.append('status', l);
+            }
+            fetch(`http://localhost:8080/rooms/search?${params.toString()}`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify()
+            })
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data)
+                    this.annRoom = data
+                    console.log('搜尋房間', this.annRoom)
+                    this.searchAndShowResults()
+                })
+        },
+        searchAndShowResults() {
+            console.log('搜索方法被调用');  // 调试信息，确保方法被调用
+            // console.log('搜索参数:', name, type, area, status);  // 调试信息，打印搜索参数
+            try {
+                // const results = this.annRoom;
+                console.log('搜索结果:', this.annRoom);
+
+                // 处理搜索结果
+                if (this.annRoom && this.annRoom.length > 0) {
+                    const resultHtml = this.annRoom.map(item =>
+                        `<div>
+                            <input type="checkbox" id="room-${item.id}" value="${item.id}">
+                            <label class="large-text" for="room-${item.id}" >${item.area || '未提供'} - ${item.name || '未提供'}</label>
+                        </div>`
+                    ).join('');
+
+                    Swal.fire({
+                        title: '搜尋結果',
+                        html: resultHtml,
+                        icon: 'info',
+                        confirmButtonText: '確認',
+                        customClass: {
+                            popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                        },
+                        preConfirm: () => {
+                            this.annRoom.forEach(item => {
+                                const checkbox = Swal.getPopup().querySelector(`#room-${item.id}`);
+                                if (checkbox.checked) {
+                                    if (!this.selectedIds.includes(item.id)) {
+                                        this.selectedIds.push(item.id);
+                                        this.selectedArr.push(item)
+                                    }
+                                }
+                                console.log(this.selectedArr)
+                            });
+                            return this.selectedIds;
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            console.log('選中的房间ID:', result.value);
+                            // 選中房間的ID
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: '無結果',
+                        text: '未找到符合條件的空間',
+                        icon: 'warning',
+                        confirmButtonText: '確認',
+                        customClass: {
+                            popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                        },
+                    });
+                }
+            } catch (error) {
+                console.error(error);
+                Swal.fire({
+                    title: '錯誤',
+                    text: '搜尋過程中發生錯誤',
+                    icon: 'error',
+                    confirmButtonText: '確認',
+                    customClass: {
+                        popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
+                    },
+                });
+            }
+        },
+        addAllroom() {
+            fetch(`http://localhost:8080/rooms`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify()
+            })
+                .then(res => res.json())
+                .then(data => {
+                    this.addAllRoom = data
+                    this.addAllRoom.forEach(item => {
+                        if (!this.selectedIds.includes(item.id)) {
+                            this.selectedIds.push(item.id);
+                        }
+                    })
+                    this.selectedArr = this.addAllRoom
+                })
+        }
     },
 
 });

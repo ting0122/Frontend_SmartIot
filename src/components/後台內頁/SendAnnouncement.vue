@@ -19,9 +19,11 @@ export default {
             showUseAdd: false, // 使用新增公告時切換搜尋欄位用
             showCheckbox: false, // 控制顯示 checkbox 的狀態
             select: [], // 儲存被選中的 id
-            announcement: "",  //發布公告的內容
+            content: "",  //發布公告的內容
             allAnn:[],
             searchTrue:true,
+            title:"",
+            
             
         };
     },
@@ -32,7 +34,7 @@ export default {
         this.fetchAnnouncements();
     },
     computed: {
-        // ...mapState(location, ['allAnn']),
+        ...mapState(location, ['selectedArr']),
     },
     components: {
         CreateAndDeleteButton,
@@ -43,7 +45,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['getAllAnn','deleteAnn','createAnn']),
+        ...mapActions(location, ['getAllAnn','deleteAnn','createAnn','selectedIds']),
         async fetchAnnouncements() {
             try {
                 const response = await fetch('http://localhost:8080/announcements', {
@@ -162,6 +164,30 @@ export default {
                 time: item.publishTime
             }));
         },
+        verifyX() {
+            if (this.title == "" || this.content == "" || this.selectedArr.length<=0) {
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>標題、內容、發送對象不可為空</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+                return
+            }
+            this.createAnn(this.title,this.content,this.selectedIds)
+            Swal.fire({
+                title: "新增成功",
+                // text: "That thing is still around?",
+                icon: "success"
+            });
+            this.fetchAnnouncements()
+        },
     }
 };
 </script>
@@ -184,8 +210,8 @@ export default {
         <div class="addSendRoomARR" v-if="this.showUseAdd">
             <p class="t">公告發送房間</p>
             <div class="outarea">
-                <div class="sendroom" v-for="(room, index) in sendroomARR" :key="index">
-                    <p>{{ room.area }}-{{ room.roomname }}</p>
+                <div class="sendroom" v-for="(room, index) in selectedArr" :key="index">
+                    <p>{{ room.area }}-{{ room.name }}</p>
                 </div>
             </div>
         </div>
@@ -193,13 +219,13 @@ export default {
             <span>公告標題</span>
             <br>
             <div class="in">
-                <input type="text" class="title">
-                <button class="send" @click="createAnn()">發送公告</button>
+                <input type="text" class="title" v-model="this.title">
+                <button class="send" @click="this.verifyX()">發送公告</button>
             </div>
             <br>
             <span>公告內容</span>
             <br>
-            <textarea v-model="announcement">
+            <textarea v-model="this.content">
             </textarea>
         </div>
         <div class="announcementListArea" v-else>
