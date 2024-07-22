@@ -13,7 +13,7 @@ import AnnouncementSearch from '@/components/AnnouncementSearch.vue';
 export default {
     data() {
         return {
-            // annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
+            // annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關��排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
             // sendroomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
             addSendRoomARR: [{ area: 601, roomname: "南哥公司" }, { area: 602, roomname: "tta公司" }, { area: 603, roomname: "迪卡農公司" }, { area: 604, roomname: "愛迪達公司" }, { area: 605, roomname: "天方夜譚公司" }, { area: 606, roomname: "鵝你媽媽公司" }, { area: 607, roomname: "小小兵公司" }],
             showUseAdd: false, // 使用新增公告時切換搜尋欄位用
@@ -23,6 +23,8 @@ export default {
             allAnn:[],
             searchTrue:true,
             title:"",
+            rooms: [],
+            selectedRooms: [],
             
             
         };
@@ -32,6 +34,7 @@ export default {
     },
     mounted() {
         this.fetchAnnouncements();
+        this.fetchRooms();
     },
     computed: {
         ...mapState(location, ['selectedArr']),
@@ -164,11 +167,35 @@ export default {
                 time: item.publishTime
             }));
         },
-        verifyX() {
-            if (this.title == "" || this.content == "" || this.selectedArr.length<=0) {
+        async fetchRooms() {
+            try {
+                const response = await fetch('http://localhost:8080/rooms', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': '*/*'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+                }
+                this.rooms = await response.json();
+            } catch (error) {
+                console.error('獲取房間時出錯：', error);
+            }
+        },
+        toggleRoomSelection(roomId) {
+            const index = this.selectedRooms.indexOf(roomId);
+            if (index === -1) {
+                this.selectedRooms.push(roomId);
+            } else {
+                this.selectedRooms.splice(index, 1);
+            }
+        },
+        async verifyX() {
+            if (this.title == "" || this.content == "") {
                 Swal.fire({
                     title: "新增失敗",
-                    html: `<p>標題、內容、發送對象不可為空</p>`,
+                    html: `<p>標題、內容不可為空</p>`,
                     // text: announcement.content,
                     showCloseButton: true,
                     showConfirmButton: false,  //隱藏下方ok按鈕
@@ -178,15 +205,45 @@ export default {
                         popup: 'swal2-custom-popup', // 可以自定義樣式
                     }
                 });
-                return
+                return;
             }
-            this.createAnn(this.title,this.content,this.selectedIds)
-            Swal.fire({
-                title: "新增成功",
-                // text: "That thing is still around?",
-                icon: "success"
-            });
-            this.fetchAnnouncements()
+            try {
+                const response = await fetch('http://localhost:8080/announcements', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': '*/*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: this.title,
+                        content: this.content,
+                        roomIds: this.selectedRooms.length > 0 ? this.selectedRooms : []
+                    })
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+                }
+                const result = await response.json();
+                console.log('公告發送成功：', result);
+                Swal.fire({
+                    title: "新增成功",
+                    // text: "That thing is still around?",
+                    icon: "success"
+                });
+                this.fetchAnnouncements();
+            } catch (error) {
+                console.error('發送公告時出錯：', error);
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>發送公告時出錯</p>`,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
         },
     }
 };
@@ -210,7 +267,13 @@ export default {
         <div class="addSendRoomARR" v-if="this.showUseAdd">
             <p class="t">公告發送房間</p>
             <div class="outarea">
-                <div class="sendroom" v-for="(room, index) in selectedArr" :key="index">
+                <div 
+                    v-for="room in rooms" 
+                    :key="room.id" 
+                    class="sendroom" 
+                    :class="{ selected: selectedRooms.includes(room.id) }"
+                    @click="toggleRoomSelection(room.id)"
+                >
                     <p>{{ room.area }}-{{ room.name }}</p>
                 </div>
             </div>
@@ -358,6 +421,13 @@ export default {
                 height: 40px;
                 border-radius: 20px;
                 background-color: $white;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &.selected {
+                    background-color: $dark03;
+                    color: $white;
+                }
 
                 p {
                     margin: 0;
