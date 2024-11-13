@@ -18,15 +18,6 @@ export default {
 
         };
     },
-    created() {
-
-    },
-    mounted() {
-
-    },
-    computed: {
-
-    },
     components: {
         BookMark,
         NormalDisplayScreen,
@@ -39,7 +30,6 @@ export default {
         toggleButton() {
             this.buttonState = !this.buttonState;
         }
-
     }
 };
 </script>
@@ -68,15 +58,9 @@ export default {
                     <template v-slot:tab4>
                         <AnnouncementList />
                     </template>
-
-
                 </BookMark>
-
-
             </div>
         </div>
-
-
     </div>
 
 
