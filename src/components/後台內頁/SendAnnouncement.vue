@@ -13,15 +13,20 @@ import AnnouncementSearch from '@/components/AnnouncementSearch.vue';
 export default {
     data() {
         return {
-            // annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
+            // annArr:[{id:1,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場毒，以下是相關安排和注意事項，請大家務必配合因近期果蠅眾多，營運團隊將進行場",time:"2024-06-03",expanded: false},{id:2,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:3,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:4,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:5,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:6,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:7,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:8,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:9,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:10,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false},{id:11,title:"除果蠅公告",content:"因近期果蠅眾多，營運團隊將進行場域除蟲消毒，以下是相關安排和注意事項，請大家務必配合",time:"2024-06-03",expanded: false}],
             // sendroomARR:[{area:601,roomname:"南哥公司"},{area:602,roomname:"tta公司"},{area:603,roomname:"迪卡農公司"},{area:604,roomname:"愛迪達公司"},{area:605,roomname:"天方夜譚公司"},{area:606,roomname:"鵝你媽媽公司"},{area:607,roomname:"小小兵公司"}],
             addSendRoomARR: [{ area: 601, roomname: "南哥公司" }, { area: 602, roomname: "tta公司" }, { area: 603, roomname: "迪卡農公司" }, { area: 604, roomname: "愛迪達公司" }, { area: 605, roomname: "天方夜譚公司" }, { area: 606, roomname: "鵝你媽媽公司" }, { area: 607, roomname: "小小兵公司" }],
             showUseAdd: false, // 使用新增公告時切換搜尋欄位用
             showCheckbox: false, // 控制顯示 checkbox 的狀態
             select: [], // 儲存被選中的 id
-            announcement: "",  //發布公告的內容
+            content: "",  //發布公告的內容
             allAnn:[],
             searchTrue:true,
+            title:"",
+            rooms: [],
+            selectedRooms: [],
+            filteredRooms: [],
+            
             
         };
     },
@@ -30,9 +35,10 @@ export default {
     },
     mounted() {
         this.fetchAnnouncements();
+        this.fetchRooms();
     },
     computed: {
-        // ...mapState(location, ['allAnn']),
+        ...mapState(location, ['selectedArr']),
     },
     components: {
         CreateAndDeleteButton,
@@ -43,7 +49,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(location, ['getAllAnn','deleteAnn','createAnn']),
+        ...mapActions(location, ['getAllAnn','deleteAnn','createAnn','selectedIds']),
         async fetchAnnouncements() {
             try {
                 const response = await fetch('http://localhost:8080/announcements', {
@@ -147,6 +153,7 @@ export default {
             // this.showUseAdd = true;
             this.showUseAdd = !this.showUseAdd;
             this.showCheckbox = false;
+            this.fetchRooms()
         },
         showSearchAnnouncement() {
             this.showCreateRoom = false;
@@ -154,6 +161,7 @@ export default {
         handleSearchClick() {
             this.showCheckbox = false;
             this.showUseAdd = false;
+            this.fetchRooms()
         },
         handleSearchResults(filteredAllAnnouncements) {
             this.allAnn = filteredAllAnnouncements.map(item => ({
@@ -162,6 +170,92 @@ export default {
                 time: item.publishTime
             }));
         },
+        async fetchRooms() {
+            try {
+                const response = await fetch('http://localhost:8080/rooms', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': '*/*'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+                }
+                this.rooms = await response.json();
+                this.filteredRooms = this.rooms;
+            } catch (error) {
+                console.error('獲取房間時出錯：', error);
+            }
+        },
+        toggleRoomSelection(roomId) {
+            const index = this.selectedRooms.indexOf(roomId);
+            if (index === -1) {
+                this.selectedRooms.push(roomId);
+            } else {
+                this.selectedRooms.splice(index, 1);
+            }
+        },
+        async verifyX() {
+            if (this.title == "" || this.content == "") {
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>標題、內容不可為空</p>`,
+                    // text: announcement.content,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    // confirmButtonText: 'OK',
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+                return;
+            }
+            try {
+                const response = await fetch('http://localhost:8080/announcements', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': '*/*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: this.title,
+                        content: this.content,
+                        roomIds: this.selectedRooms.length > 0 ? this.selectedRooms : []
+                    })
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP 錯誤！狀態: ${response.status}`);
+                }
+                const result = await response.json();
+                console.log('公告發送成功：', result);
+                Swal.fire({
+                    title: "新增成功",
+                    // text: "That thing is still around?",
+                    icon: "success"
+                });
+                this.fetchAnnouncements();
+            } catch (error) {
+                console.error('發送公告時出錯：', error);
+                Swal.fire({
+                    title: "新增失敗",
+                    html: `<p>發送公告時出錯</p>`,
+                    showCloseButton: true,
+                    showConfirmButton: false,  //隱藏下方ok按鈕
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-custom-popup', // 可以自定義樣式
+                    }
+                });
+            }
+        },
+        handleSearch(name, type) {
+            this.filteredRooms = this.rooms.filter(room => {
+                const nameMatch = !name || room.name.toLowerCase().includes(name.toLowerCase());
+                const typeMatch = !type || room.type === type;
+                return nameMatch && typeMatch;
+            });
+        },
     }
 };
 </script>
@@ -169,7 +263,7 @@ export default {
 <template>
     <div class="outarr">
         <div class="announcementSearch">
-            <SearchAddRoom v-if="this.showUseAdd"/>
+            <SearchAddRoom v-if="this.showUseAdd" @search="handleSearch"/>
             <AnnouncementSearch v-else @search="handleSearchResults" :searchTrue="searchTrue"/>
             <div class="button">
                 <button @click="handleSearchClick" :class="{ chick: !showCheckbox && !showUseAdd }"><i
@@ -184,8 +278,14 @@ export default {
         <div class="addSendRoomARR" v-if="this.showUseAdd">
             <p class="t">公告發送房間</p>
             <div class="outarea">
-                <div class="sendroom" v-for="(room, index) in sendroomARR" :key="index">
-                    <p>{{ room.area }}-{{ room.roomname }}</p>
+                <div 
+                    v-for="room in filteredRooms" 
+                    :key="room.id" 
+                    class="sendroom" 
+                    :class="{ selected: selectedRooms.includes(room.id) }"
+                    @click="toggleRoomSelection(room.id)"
+                >
+                    <p>{{ room.area }}-{{ room.name }}</p>
                 </div>
             </div>
         </div>
@@ -193,13 +293,13 @@ export default {
             <span>公告標題</span>
             <br>
             <div class="in">
-                <input type="text" class="title">
-                <button class="send" @click="createAnn()">發送公告</button>
+                <input type="text" class="title" v-model="this.title">
+                <button class="send" @click="this.verifyX()">發送公告</button>
             </div>
             <br>
             <span>公告內容</span>
             <br>
-            <textarea v-model="announcement">
+            <textarea v-model="this.content">
             </textarea>
         </div>
         <div class="announcementListArea" v-else>
@@ -332,6 +432,13 @@ export default {
                 height: 40px;
                 border-radius: 20px;
                 background-color: $white;
+                cursor: pointer;
+                transition: background-color 0.3s;
+
+                &.selected {
+                    background-color: $dark03;
+                    color: $white;
+                }
 
                 p {
                     margin: 0;

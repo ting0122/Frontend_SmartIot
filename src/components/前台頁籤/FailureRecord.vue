@@ -1,6 +1,8 @@
 <!-- 前台-故障紀錄-頁面 -->
 <script>
 //sweetalert2提示窗套件
+import location from '@/stores/location';
+import { mapState, mapActions } from 'pinia';
 import Swal from 'sweetalert2';
 import FaultSearch from '@/components/FaultSearch.vue';
 import moment from "moment"
@@ -8,61 +10,65 @@ export default {
     data() {
         return {
             // dataArr:[{id:203154,type:"冷氣",mane:"前方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203151,type:"電燈",mane:"右側電燈",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"空氣清淨機",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"},{id:203157,type:"冷氣",mane:"後方的冷氣",question:"網路連線中斷",date:"2024-06-02"}]
-            allLogs: []
+            
         };
     },
     created() {
-        this.searchHistory(null, null, null, null, 600)
+        this.searchFrontHistory(null, null, null, null, 600)
     },
     components: {
         FaultSearch,
 
     },
+    computed: {
+        ...mapState(location, ['frontLogs']),
+    },
     methods: {
-        searchHistory(i, j, k, l, m) {
-            const params = new URLSearchParams();
-            if (i) {
-                params.append('deviceName', i);
-            }
+        ...mapActions(location, ['searchFrontHistory']),
+        // searchFrontHistory(i, j, k, l, m) {
+        //     const params = new URLSearchParams();
+        //     if (i) {
+        //         params.append('deviceName', i);
+        //     }
 
-            if (j) {
-                params.append('deviceType', j);
-            }
+        //     if (j) {
+        //         params.append('deviceType', j);
+        //     }
 
-            if (k) {
-                params.append('startDate', k);
-            }
+        //     if (k) {
+        //         params.append('startDate', k);
+        //     }
 
-            if (l) {
-                params.append('endDate', l);
-            }
+        //     if (l) {
+        //         params.append('endDate', l);
+        //     }
 
-            if (m) {
-                params.append('roomArea', m);
-            }
-            fetch(`http://localhost:8080/history/search?${params.toString()}`, {
-                method: "get",
-                body: JSON.stringify()
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log('erLog', data)
-                    for (let i = 0; i < data.length; i++) {
-                        if (data[i].eventType == "錯誤") {
-                            this.allLogs.push(data[i])
-                        }
-                    }
-                    console.log('allLog', this.allLogs)
-                })
-        },
+        //     if (m) {
+        //         params.append('roomArea', m);
+        //     }
+        //     fetch(`http://localhost:8080/history/search?${params.toString()}`, {
+        //         method: "get",
+        //         body: JSON.stringify()
+        //     })
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             console.log('erLog', data)
+        //             for (let i = 0; i < data.length; i++) {
+        //                 if (data[i].eventType == "錯誤") {
+        //                     this.frontLogs.push(data[i])
+        //                 }
+        //             }
+        //             console.log('allLog', this.frontLogs)
+        //         })
+        // },
         formatDate(date) {
             return moment(new Date(date)).format('YYYY-MM-DD');
         },
         toggleContent(index) {
-            const announcement = this.allLogs[index];
+            const announcement = this.frontLogs[index];
             if (announcement.eventType === '錯誤') {
                 Swal.fire({
-                    title: this.allLogs[index].eventType,
+                    title: this.frontLogs[index].eventType,
                     html: `<p><strong>設備名稱：</strong>${announcement.detail.deviceName}</p>
                             <p><strong>設備類型：</strong>${announcement.detail.deviceType}</p>
                             <p><strong>所在位置：</strong>${announcement.detail.roomArea}-${announcement.detail.roomName}</p>
@@ -89,8 +95,8 @@ export default {
             <FaultSearch />
         </div>
         <div class="oo">
-            <div class="outArea" v-for="(data, index) in allLogs" @click="toggleContent(index)"
-                :class="{ expanded: allLogs[index].expanded }">
+            <div class="outArea" v-for="(data, index) in frontLogs" @click="toggleContent(index)"
+                :class="{ expanded: frontLogs[index].expanded }">
                 <div v-if="data.eventType === '錯誤'" class="box">
                     <h2>{{ data.detail.deviceName }}</h2>
                     <p class="id">編號:{{ data.id }}</p>

@@ -71,8 +71,8 @@ export default {
         showDeleteConfirmation() {
             if (this.select.length === 0) {
                 Swal.fire({
-                    title: '無選取任何公告',
-                    text: '請選擇至少一個公告進行刪除',
+                    title: '無選取任何設備',
+                    text: '請選擇至少一個設備進行刪除',
                     icon: 'info',
                     customClass: {
                         popup: 'swal2-custom-popup DeviceManagement-custom-popup', // 自定義樣式
